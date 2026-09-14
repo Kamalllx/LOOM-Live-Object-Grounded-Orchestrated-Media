@@ -1,0 +1,17 @@
+﻿{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "verified-cut",
+  "type": "object",
+  "required": ["schema_version", "session_id", "status", "final_threads"],
+  "properties": {
+    "schema_version": { "type": "string" },
+    "session_id": { "type": "string" },
+    "status": { "type": "string", "enum": ["approved", "fallback"] },
+    "pass_count": { "type": "integer" },
+    "critic_score": { "type": "object" },
+    "final_threads": { "type": "array" },
+    "redaction_masks": { "type": "array" },
+    "explainer_clips": { "type": "array" },
+    "quiz": { "type": "array" }
+  }
+}

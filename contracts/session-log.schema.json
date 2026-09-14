@@ -1,0 +1,13 @@
+﻿{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "session-log",
+  "type": "object",
+  "required": ["schema_version", "session_id", "learner_id", "events"],
+  "properties": {
+    "schema_version": { "type": "string" },
+    "session_id": { "type": "string" },
+    "learner_id": { "type": "string" },
+    "events": { "type": "array" },
+    "mastery_updates": { "type": "array" }
+  }
+}

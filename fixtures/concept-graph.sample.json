@@ -1,0 +1,30 @@
+﻿{
+  "schema_version": "1.0",
+  "video_id": "vid_00123",
+  "duration_seconds": 612.4,
+  "objects": [
+    {
+      "object_id": "obj_001",
+      "label": "beaker",
+      "confidence": 0.98,
+      "instances": [
+        { "start": 14.2, "end": 22.5, "bbox": [0.31, 0.42, 0.12, 0.18] }
+      ]
+    }
+  ],
+  "transcript": [
+    { "start": 12.0, "end": 15.4, "speaker": "narrator", "text": "Combine the two solutions slowly." }
+  ],
+  "on_screen_text": [
+    { "start": 20.1, "end": 25.0, "text": "NaOH + HCl -> NaCl + H2O" }
+  ],
+  "concept_nodes": [
+    {
+      "node_id": "c_01",
+      "object_ids": ["obj_001"],
+      "transcript_refs": [{ "start": 12.0, "end": 15.4 }],
+      "on_screen_text_refs": [{ "start": 20.1, "end": 25.0 }],
+      "label": "acid-base neutralization"
+    }
+  ]
+}

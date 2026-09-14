@@ -1,0 +1,18 @@
+﻿{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "candidate-cut",
+  "type": "object",
+  "required": ["schema_version", "session_id", "video_id", "learner_id", "threads"],
+  "properties": {
+    "schema_version": { "type": "string" },
+    "session_id": { "type": "string" },
+    "video_id": { "type": "string" },
+    "learner_id": { "type": "string" },
+    "pass_number": { "type": "integer" },
+    "threads": { "type": "array" },
+    "redaction_requests": { "type": "array" },
+    "explainer_requests": { "type": "array" },
+    "quiz": { "type": "array" },
+    "agent_trace": { "type": "array" }
+  }
+}
