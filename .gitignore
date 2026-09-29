@@ -1,4 +1,4 @@
-.venv/
+/.venv/
 .env
 __pycache__/
 *.pyc
@@ -7,7 +7,7 @@ node_modules/
 .DS_Store
 
 # large / regenerable media (rebuild with scripts/make_demo_video.py)
-media/
+/media/
 
 # runtime state and caches
 data/cache/
@@ -25,8 +25,36 @@ weights/
 
 # folders excluded from iCloud sync (renamed *.nosync, symlinked back under the original name)
 *.nosync
-.venv
-media
+/.venv
+/media
 node_modules
 .next
 data/cache
+
+# ---- from feature/delivery (services/delivery/web) ----
+# Dependencies
+node_modules*/
+
+# Next.js build output
+.next-dev/
+out/
+
+# Local environment and secrets
+.env.*
+!.env.example
+
+# Runtime learner/session data
+services/delivery/**/data/
+services/delivery/**/logs/
+
+# TypeScript and tool caches
+*.tsbuildinfo
+*.log
+*.pid
+
+# Local editor and OS files
+.vscode/
+.idea/
+*.code-workspace
+Thumbs.db
+

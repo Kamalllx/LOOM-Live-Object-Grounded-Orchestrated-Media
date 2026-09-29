@@ -1,0 +1,33 @@
+{
+  "name": "@loom/delivery",
+  "version": "0.1.0",
+  "private": true,
+  "description": "LOOM Person 4 \u2014 Delivery, Memory & Infra. Next.js player for verified-cut.json.",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "typecheck": "tsc --noEmit",
+    "infra:up": "docker compose -f infra/docker-compose.yml up -d",
+    "infra:down": "docker compose -f infra/docker-compose.yml down",
+    "infra:logs": "docker compose -f infra/docker-compose.yml logs -f"
+  },
+  "dependencies": {
+    "next": "15.5.4",
+    "react": "19.1.1",
+    "react-dom": "19.1.1"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4.1.13",
+    "@types/node": "^22.15.0",
+    "@types/react": "^19.1.0",
+    "@types/react-dom": "^19.1.0",
+    "tailwindcss": "^4.1.13",
+    "typescript": "^5.9.2"
+  },
+  "optionalDependencies": {
+    "mongodb": "^6.9.0",
+    "redis": "^4.7.0"
+  }
+}
