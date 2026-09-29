@@ -120,15 +120,3 @@ The browser keeps a fast copy of mastery in `localStorage` under
 `loom:mastery:<learner_id>`. The server memory layer in `src/lib/memory/` uses
 the file driver by default and supports MongoDB with `MEMORY_DRIVER=mongo`.
 Person 2 reads Contract A(2) from `GET /api/learner/<learnerId>`.
-
----
-
-
-## Known limits (state these before someone asks)
-
-- Mask overlays use `fallback_bbox` and a CSS blur. Real matte videos from
-  Person 3 will need compositing with `mix-blend-mode` in `VideoStage`.
-- Bounding boxes assume a 16:9 source, matching `object-contain` in an
-  `aspect-video` container.
-- One checked-in demo video and fixture are used locally. S3 media delivery and
-   production identity/authentication remain future deployment work.
