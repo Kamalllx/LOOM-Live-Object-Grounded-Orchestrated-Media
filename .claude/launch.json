@@ -14,10 +14,10 @@
       "port": 8100
     },
     {
-      "name": "loom-web",
+      "name": "loom-player",
       "runtimeExecutable": "npm",
-      "runtimeArgs": ["run", "dev", "--prefix", "services/delivery/web"],
-      "port": 3000
+      "runtimeArgs": ["run", "dev", "--prefix", "services/delivery/player"],
+      "port": 3001
     }
   ]
 }

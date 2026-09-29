@@ -15,7 +15,7 @@ Manya Ravishankar · Rana Adiba · Kamal Karteek U · Jeevika R
 | Perception & concept graph | `services/perception/` (`asr/`, `ocr/`, `sam/`, `graph-fusion/`, `pipeline.py`) | Member 1 | Contract A `concept-graph.json` |
 | Agent mesh & personalization | `services/agent-mesh/` (`orchestrator/`, `agents/*`, `plugins/`) | Member 2 | Contract B `candidate-cut.json` |
 | Verification, safety & generation | `services/verification/` (`guardian/`, `animator/`, `critic/`, `loop.py`) | Member 3 | Contract C `verified-cut.json` |
-| Delivery, memory & infra | `services/delivery/` (`api/server.py`, `memory/`, `web/`) | Member 4 | Contract D `session-log.json` |
+| Delivery, memory & infra | `services/delivery/` (`api/server.py`, `memory/`, `player/` integrated player, `web/` delivery web app) | Member 4 | Contract D `session-log.json` |
 | Shared | `packages/shared-types/loom_shared/` (LLM client, A2A, contracts, events) · `contracts/` · `fixtures/` | all | |
 
 Scripts: `scripts/make_demo_video.py` (demo lesson + ground truth), `scripts/run_session.py`,
@@ -29,7 +29,7 @@ brew install ffmpeg tesseract pango pkg-config
 python3.11 -m venv .venv && .venv/bin/pip install jsonschema pydantic fastapi "uvicorn[standard]" httpx python-dotenv \
   opencv-python-headless numpy pillow pytesseract openai-whisper transformers accelerate google-genai groq \
   python-multipart yt-dlp manim
-(cd services/delivery/web && npm install)
+(cd services/delivery/player && npm install)
 cp .env.example .env    # then paste GROQ_API_KEY (and/or GEMINI_API_KEY); LLM_PROVIDER=groq
 .venv/bin/python scripts/warmup.py   # once after reboot; add --all before ingesting new videos (slow the first time)
 ```
@@ -38,11 +38,11 @@ cp .env.example .env    # then paste GROQ_API_KEY (and/or GEMINI_API_KEY); LLM_P
 
 ```bash
 .venv/bin/python -m uvicorn server:app --app-dir services/delivery/api --port 8000      # all agents + API
-npm run dev --prefix services/delivery/web                                              # player on :3000
+npm run dev --prefix services/delivery/player                                           # player on :3001
 .venv/bin/python -m uvicorn school_policy_agent:app --app-dir services/agent-mesh/plugins --port 8100   # optional 3rd-party agent
 ```
 
-Open http://localhost:3000, pick a viewer (Alex / Priya / Parent + child), press **Watch**.
+Open http://localhost:3001, pick a viewer (Alex / Priya / Parent + child), press **Watch**.
 Add any video from the library page (upload or link); perception runs once per video.
 
 Ingest from the command line: `.venv/bin/python services/perception/pipeline.py --source <file|url> --video-id vid_x`.

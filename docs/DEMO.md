@@ -10,10 +10,10 @@
 2. Start the backend, the player and (optionally) the third-party agent — each in its own terminal:
    ```bash
    .venv/bin/python -m uvicorn server:app --app-dir services/delivery/api --port 8000
-   npm run dev --prefix services/delivery/web
+   npm run dev --prefix services/delivery/player
    .venv/bin/python -m uvicorn school_policy_agent:app --app-dir services/agent-mesh/plugins --port 8100
    ```
-3. Check `curl localhost:8000/api/health` returns `{"ok": true ...}` and open http://localhost:3000.
+3. Check `curl localhost:8000/api/health` returns `{"ok": true ...}` and open http://localhost:3001.
 4. Warm the caches (so the live demo never waits on the LLM):
    ```bash
    for l in learner_alex learner_priya learner_family; do .venv/bin/python scripts/run_session.py vid_demo_neutralization $l; done
