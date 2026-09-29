@@ -5,10 +5,6 @@
 Consumes Contract C (`verified-cut.json`), plays it back with client-side
 redaction and explainers, and produces Contract D (`session-log.json`).
 
-Nothing here costs money and nothing here waits on Person 1, 2, or 3. The cut is
-read from a fixture; the video is a local file; the session log is written to
-disk by a local route.
-
 ---
 
 ## Run it
