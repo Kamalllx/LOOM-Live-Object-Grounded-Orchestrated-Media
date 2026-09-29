@@ -9,14 +9,7 @@ interface Props {
   onClose: () => void;
 }
 
-/**
- * A generated explainer, shown over the paused main video.
- *
- * Person 3's Animator renders these with Manim and uploads them to S3. Until
- * that exists, `resolveMediaUrl` points at `public/media/`, and if the file
- * isn't there we show the card with its cache state rather than a broken
- * <video>. The session event fires either way, so Contract D stays honest.
- */
+
 export default function ExplainerOverlay({ clip, onClose }: Props) {
   const [playable, setPlayable] = useState(true);
   const src = resolveMediaUrl(clip.clip_url);

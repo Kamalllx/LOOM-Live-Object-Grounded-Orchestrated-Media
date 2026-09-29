@@ -7,20 +7,10 @@ import {
   type StoredSessionSummary,
 } from "./types";
 
-/**
- * Mongo driver for the container in `infra/docker-compose.yml`.
- *
- * `mongodb` is an OPTIONAL dependency: the import is dynamic and the specifier
- * is held in a variable, so TypeScript and the bundler don't try to resolve it
- * at build time. That means `npm install` stays small and the app still builds
- * on a machine that has never run `npm i mongodb`.
- */
+
 export class MongoMemoryStore implements MemoryStore {
   readonly driver = "mongo" as const;
 
-  // `any` is confined to this file on purpose — the driver types aren't
-  // installed by default, and MemoryStore gives every caller real types.
-  /* eslint-disable @typescript-eslint/no-explicit-any */
   private client: any = null;
 
   constructor(
@@ -31,7 +21,7 @@ export class MongoMemoryStore implements MemoryStore {
   private async db(): Promise<any> {
     if (!this.client) {
       const specifier = "mongodb";
-      const { MongoClient } = (await import(/* webpackIgnore: true */ specifier)) as any;
+      const { MongoClient } = (await import( specifier)) as any;
       this.client = new MongoClient(this.uri);
       await this.client.connect();
     }
@@ -42,8 +32,6 @@ export class MongoMemoryStore implements MemoryStore {
     const db = await this.db();
     const doc = await db.collection("learner_memory").findOne({ learner_id: learnerId });
     if (!doc) return emptyLearner(learnerId);
-
-    // Drop Mongo's _id so the document can be returned as-is over HTTP.
     const { _id, ...rest } = doc;
     void _id;
     return rest as LearnerMemory;

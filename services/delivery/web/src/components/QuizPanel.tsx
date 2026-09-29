@@ -15,13 +15,7 @@ interface Props {
   onSubmit: (answers: QuizAnswer[]) => void;
 }
 
-/**
- * Assessment, one question at a time.
- *
- * Only questions that arrived with `options` + `answer_index` can be graded;
- * anything else is shown read-only and skipped, because guessing at an answer
- * would put a fabricated `correct` value into Contract D.
- */
+
 export default function QuizPanel({ quiz, onSubmit }: Props) {
   const [answers, setAnswers] = useState<Record<number, number>>({});
   const gradable = quiz.filter((q) => q.options && q.answer_index !== undefined);

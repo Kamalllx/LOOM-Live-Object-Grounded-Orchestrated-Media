@@ -16,7 +16,7 @@ const SESSION_EVENT_TYPES = new Set<SessionEventType>([
   "session_end",
 ]);
 
-/** Contract D sink: validate, persist, fold mastery into learner memory. */
+
 export async function POST(request: Request) {
   if (!isAuthorized(request)) {
     return NextResponse.json({ error: "Unauthorized." }, { status: 401 });
@@ -53,8 +53,6 @@ export async function POST(request: Request) {
       mastery_graph: memory.mastery_graph,
     });
   } catch (error) {
-    // A memory backend that is down must not lose the learner's session — the
-    // client still holds the log and can download it.
     const message = error instanceof Error ? error.message : String(error);
     return NextResponse.json(
       { ok: false, error: `Could not write to the ${getMemoryStore().driver} store.`, detail: message },
@@ -63,7 +61,7 @@ export async function POST(request: Request) {
   }
 }
 
-/** Mirrors `/contracts/session-log.schema.json` for the fields we depend on. */
+
 function validateSessionLog(log: SessionLog): string[] {
   const problems: string[] = [];
 

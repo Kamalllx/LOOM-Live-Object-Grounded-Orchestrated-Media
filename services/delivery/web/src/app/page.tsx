@@ -1,11 +1,7 @@
 import LoomPlayer from "@/components/LoomPlayer";
 import { loadVerifiedCut } from "@/lib/loadVerifiedCut";
 
-/**
- * Server Component: reads Contract C on the server, hands the parsed object to
- * the client player. If the fixture is missing or malformed we say exactly what
- * went wrong instead of rendering a broken player.
- */
+
 export default async function Page() {
   try {
     const cut = await loadVerifiedCut();

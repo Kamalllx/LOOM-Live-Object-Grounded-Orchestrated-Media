@@ -13,13 +13,7 @@ interface Props {
   onExplainer: (clip: ExplainerClip) => void;
 }
 
-/**
- * The concept track — the one screen element that makes LOOM legible.
- *
- * A normal scrubber shows time. This shows what the pipeline decided: where the
- * curated threads are (teal), where safety hid something (rose), and where a
- * generated explainer is waiting (violet). Clicking anywhere seeks.
- */
+
 export default function Timeline({
   duration,
   currentTime,
@@ -54,7 +48,7 @@ export default function Timeline({
         }}
         className="relative h-14 w-full cursor-pointer rounded-lg border border-line bg-surface"
       >
-        {/* Curated threads */}
+
         {threads.map((t) => (
           <div
             key={t.thread_id}
@@ -64,7 +58,7 @@ export default function Timeline({
           />
         ))}
 
-        {/* Redactions */}
+
         {masks.map((m) => (
           <div
             key={m.object_id}
@@ -74,7 +68,7 @@ export default function Timeline({
           />
         ))}
 
-        {/* Explainer anchors — clickable dots that don't trigger a seek. */}
+
         {explainers.map((clip) =>
           clip.anchor_seconds === undefined ? null : (
             <button
@@ -93,7 +87,7 @@ export default function Timeline({
           ),
         )}
 
-        {/* Playhead */}
+
         <div
           className="pointer-events-none absolute inset-y-0 w-0.5 bg-text"
           style={{ left: pct(currentTime) }}

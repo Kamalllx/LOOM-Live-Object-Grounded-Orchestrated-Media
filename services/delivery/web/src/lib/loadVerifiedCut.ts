@@ -2,15 +2,7 @@ import { readFile } from "node:fs/promises";
 import path from "node:path";
 import type { VerifiedCut } from "./types";
 
-/**
- * Loads Contract C. This runs on the server (React Server Component), so the
- * fixture never has to sit in `public/` and never ships to the browser raw.
- *
- * Fixture-first: today it reads `fixtures/verified-cut.sample.json`.
- * When Person 3's service is live, set VERIFIED_CUT_URL in `.env.local` and
- * nothing else in the app changes. That swap IS the weekly integration
- * checkpoint for the Contract C boundary.
- */
+
 export async function loadVerifiedCut(): Promise<VerifiedCut> {
   const remote = process.env.VERIFIED_CUT_URL;
 
@@ -33,14 +25,7 @@ async function fetchRemote(url: string): Promise<string> {
   return res.text();
 }
 
-/**
- * A deliberately small runtime guard instead of a schema library.
- *
- * It checks the fields the player actually reads, and it exists so that a
- * malformed upstream document fails HERE with a readable message rather than
- * as `undefined is not iterable` three components deep. Swap in `ajv` against
- * `/contracts/verified-cut.schema.json` once CI validation is set up.
- */
+
 export function assertVerifiedCut(data: unknown): VerifiedCut {
   const problems: string[] = [];
   const d = data as Partial<VerifiedCut>;
@@ -65,8 +50,6 @@ export function assertVerifiedCut(data: unknown): VerifiedCut {
   if (problems.length > 0) {
     throw new Error(`verified-cut.json does not match Contract C:\n- ${problems.join("\n- ")}`);
   }
-
-  // Sort by time once, here, so no component has to think about ordering.
   const cut = {
     ...(data as VerifiedCut),
     redaction_masks: d.redaction_masks ?? [],

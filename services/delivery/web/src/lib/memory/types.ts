@@ -1,13 +1,13 @@
 import type { MasteryUpdate, SessionLog } from "@/lib/types";
 
-/** One concept's mastery for one learner. Same shape as Contract A(2). */
+
 export interface MasteryEntry {
   concept_id: string;
   level: number;
   last_seen: string; // ISO 8601
 }
 
-/** What we persist per learner. Serializes directly into learner-profile.json. */
+
 export interface LearnerMemory {
   learner_id: string;
   mastery_graph: MasteryEntry[];
@@ -22,18 +22,12 @@ export interface StoredSessionSummary {
   event_count: number;
 }
 
-/**
- * The only surface the rest of the app knows about.
- *
- * Two implementations ship: `file` (default, zero setup) and `mongo` (the
- * container in infra/). Swapping between them is an env var — no caller
- * changes — which is the whole point of putting an interface here.
- */
+
 export interface MemoryStore {
   readonly driver: "file" | "mongo";
   getLearner(learnerId: string): Promise<LearnerMemory>;
   applyMasteryUpdates(learnerId: string, updates: MasteryUpdate[]): Promise<LearnerMemory>;
-  /** Returns true only when this session_id was stored for the first time. */
+
   saveSessionLog(log: SessionLog): Promise<boolean>;
   listSessions(learnerId: string, limit?: number): Promise<StoredSessionSummary[]>;
 }
@@ -48,11 +42,7 @@ export function emptyLearner(learnerId: string): LearnerMemory {
   };
 }
 
-/**
- * Merge rule, shared by both drivers so they can never disagree:
- * a mastery update overwrites that concept's level and refreshes `last_seen`;
- * concepts not mentioned are left exactly as they were.
- */
+
 export function mergeMastery(
   current: LearnerMemory,
   updates: MasteryUpdate[],

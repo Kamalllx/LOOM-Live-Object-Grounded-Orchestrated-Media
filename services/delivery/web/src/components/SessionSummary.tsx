@@ -11,7 +11,7 @@ interface Props {
   onRestart: () => void;
 }
 
-/** End of session: what we recorded, and the Contract D document itself. */
+
 export default function SessionSummary({ log, quizTotal, savedTo, saveError, onRestart }: Props) {
   const masteryUpdates = log.mastery_updates ?? [];
   const quizAnswers = log.events.filter((event) => event.type === "quiz_answered");

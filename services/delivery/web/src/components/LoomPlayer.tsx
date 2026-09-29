@@ -16,7 +16,7 @@ import SessionSummary from "./SessionSummary";
 import Timeline from "./Timeline";
 import VideoStage from "./VideoStage";
 
-/** Single local video for now, as agreed — swap the path when there are many. */
+
 const DEMO_VIDEO = "/media/c_01.mp4";
 
 type Phase = "watching" | "quiz" | "done";
@@ -45,15 +45,8 @@ export default function LoomPlayer({ cut }: { cut: VerifiedCut }) {
   const loggerKeyRef = useRef(`${cut.session_id}:${learnerId}`);
   const sessionStartKeyRef = useRef<string | null>(null);
 
-  /**
-   * One logger per session, held in a ref so that high-frequency events don't
-   * cause re-renders. `useState(() => ...)` would also work; a ref keeps the
-   * intent obvious: this object is written to, not rendered from.
-   */
-  const loggerRef = useRef<SessionLogger>(new SessionLogger(cut.session_id, learnerId));
 
-  // If the demo video is missing, fall back to the longest timestamp in the cut
-  // so the timeline still lays out correctly.
+  const loggerRef = useRef<SessionLogger>(new SessionLogger(cut.session_id, learnerId));
   const fallbackDuration = useMemo(() => {
     const ends = [
       ...cut.final_threads.map((t) => t.end),
@@ -94,15 +87,13 @@ export default function LoomPlayer({ cut }: { cut: VerifiedCut }) {
     return () => controller.abort();
   }, [learnerId]);
 
-  /* ----------------------------------------------------------------- */
-  /* Playback + event capture                                          */
-  /* ----------------------------------------------------------------- */
+
+
+
 
   function handleTimeUpdate(t: number) {
     setCurrentTime(t);
     const logger = loggerRef.current;
-
-    // First time the playhead crosses into a curated thread.
     for (const thread of cut.final_threads) {
       if (isActiveAt(t, thread.start, thread.end)) {
         logger.logOnce(`thread:${thread.thread_id}`, "thread_entered", t, {
@@ -111,8 +102,6 @@ export default function LoomPlayer({ cut }: { cut: VerifiedCut }) {
         });
       }
     }
-
-    // First time each redaction is actually shown to this learner.
     for (const mask of cut.redaction_masks) {
       if (isActiveAt(t, mask.start, mask.end)) {
         logger.logOnce(`mask:${mask.object_id}`, "mask_applied", t, {
@@ -155,9 +144,9 @@ export default function LoomPlayer({ cut }: { cut: VerifiedCut }) {
     void videoRef.current?.play();
   }
 
-  /* ----------------------------------------------------------------- */
-  /* Ending the session — this is what produces Contract D             */
-  /* ----------------------------------------------------------------- */
+
+
+
 
   function endSession() {
     videoRef.current?.pause();
@@ -204,17 +193,14 @@ export default function LoomPlayer({ cut }: { cut: VerifiedCut }) {
     });
     setSessionLog(log);
     setPhase("done");
-
-    // Server tier: persists the log and folds mastery_updates into learner
-    // memory. If it fails, the download button in the summary is still there.
     const receipt = await postSessionLog(log);
     setSavedTo(receipt.ok ? (receipt.stored ?? null) : null);
     setSaveError(receipt.ok ? null : (receipt.error ?? "Could not reach the server."));
   }
 
-  /* ----------------------------------------------------------------- */
-  /* Render                                                             */
-  /* ----------------------------------------------------------------- */
+
+
+
 
   const activeThread = cut.final_threads.find((t) => isActiveAt(currentTime, t.start, t.end));
 

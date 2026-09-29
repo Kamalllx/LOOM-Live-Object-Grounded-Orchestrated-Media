@@ -6,10 +6,7 @@ import type { LearnerMemory, MemoryStore } from "./types";
 
 export type { LearnerMemory, MemoryStore, MasteryEntry } from "./types";
 
-/**
- * One store per process. Stashed on globalThis so Next's dev-mode hot reload
- * doesn't open a new Mongo connection on every file save.
- */
+
 const globalForMemory = globalThis as unknown as { loomMemoryStore?: MemoryStore };
 
 export function getMemoryStore(): MemoryStore {
@@ -30,7 +27,7 @@ export function getMemoryStore(): MemoryStore {
   return store;
 }
 
-/** Cached read. The cache is a no-op unless REDIS_URL is set. */
+
 export async function getLearnerMemory(learnerId: string): Promise<LearnerMemory> {
   const cached = await cacheGet<LearnerMemory>(learnerKey(learnerId));
   if (cached) return cached;
@@ -40,13 +37,7 @@ export async function getLearnerMemory(learnerId: string): Promise<LearnerMemory
   return memory;
 }
 
-/**
- * The single path from Contract D into learner memory.
- *
- * `session-log.json` carries `mastery_updates`; this stores the log, folds
- * those updates into the learner's mastery graph, and invalidates the cached
- * profile so Person 2 can't read a stale one on the next session.
- */
+
 export async function ingestSessionLog(log: SessionLog): Promise<LearnerMemory> {
   const store = getMemoryStore();
   const isNewSession = await store.saveSessionLog(log);
@@ -63,7 +54,7 @@ export async function ingestSessionLog(log: SessionLog): Promise<LearnerMemory> 
   return memory;
 }
 
-/** Contract A(2) — what Person 2's personalizer reads before the next session. */
+
 export function toLearnerProfile(memory: LearnerMemory) {
   return {
     schema_version: "1.0",

@@ -6,7 +6,7 @@ interface RouteContext {
   params: Promise<{ learnerId: string }>;
 }
 
-/** Contract A(2) profile endpoint consumed by the personalization service. */
+
 export async function GET(request: Request, { params }: RouteContext) {
   if (!isAuthorized(request)) {
     return NextResponse.json({ error: "Unauthorized." }, { status: 401 });

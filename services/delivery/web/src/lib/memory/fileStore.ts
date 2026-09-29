@@ -9,13 +9,7 @@ import {
   type StoredSessionSummary,
 } from "./types";
 
-/**
- * Default driver: plain JSON files under `data/`.
- *
- * No Docker, no install, and the mastery graph is a file you can open and read
- * out loud during a demo. Good enough until concurrency matters — writes are
- * last-write-wins, which is fine for one learner at a time.
- */
+
 export class FileMemoryStore implements MemoryStore {
   readonly driver = "file" as const;
 
@@ -32,7 +26,6 @@ export class FileMemoryStore implements MemoryStore {
       const raw = await readFile(this.learnerFile(learnerId), "utf8");
       return JSON.parse(raw) as LearnerMemory;
     } catch {
-      // Unknown learner is not an error — it's a learner with no history yet.
       return emptyLearner(learnerId);
     }
   }
@@ -82,7 +75,6 @@ export class FileMemoryStore implements MemoryStore {
           event_count: log.events?.length ?? 0,
         });
       } catch {
-        // A half-written file shouldn't break the listing.
       }
     }
 
@@ -94,7 +86,7 @@ export class FileMemoryStore implements MemoryStore {
   }
 }
 
-/** Ids come from upstream data, so never let them shape a path. */
+
 function safe(id: string): string {
   return id.replace(/[^a-zA-Z0-9_-]/g, "_");
 }

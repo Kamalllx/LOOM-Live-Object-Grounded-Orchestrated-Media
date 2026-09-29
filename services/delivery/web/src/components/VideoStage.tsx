@@ -16,17 +16,7 @@ interface Props {
   onEnded: () => void;
 }
 
-/**
- * The video plus the client-side redaction layer.
- *
- * "Client-side compositing" here means: the source video is never re-encoded.
- * We overlay each active mask's region on top of the frame in the browser, so
- * the same file can be safe for one learner and unredacted for another.
- *
- * Positioning assumes a 16:9 source (the container is aspect-video and the
- * video is object-contain), which holds for the demo video. For mixed aspect
- * ratios, read videoWidth/videoHeight and letterbox the overlay to match.
- */
+
 const VideoStage = forwardRef<HTMLVideoElement, Props>(function VideoStage(
   { src, masks, currentTime, onTimeUpdate, onLoadedMetadata, onPlay, onPause, onSeeked, onEnded },
   ref,
@@ -61,7 +51,7 @@ const VideoStage = forwardRef<HTMLVideoElement, Props>(function VideoStage(
         />
       )}
 
-      {/* Redaction layer — pointer-events-none so it never eats clicks. */}
+
       <div className="pointer-events-none absolute inset-0">
         {activeMasks.map((mask) => {
           const box = mask.fallback_bbox;

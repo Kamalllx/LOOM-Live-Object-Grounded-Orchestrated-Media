@@ -1,17 +1,3 @@
-# LOOM — local infrastructure for the delivery service.
-#
-# Both images are free and open source, and everything stays on your machine.
-# The player runs fine WITHOUT this stack (MEMORY_DRIVER=file is the default) —
-# bring it up when you want to demo real persistence.
-#
-#   cd services/delivery/infra
-#   docker compose up -d        # start
-#   docker compose ps           # check
-#   docker compose down         # stop, keeps data
-#   docker compose down -v      # stop and wipe the volumes
-#
-# Ports are deliberately non-default (27018 / 6380) so this never collides with
-# a Mongo or Redis someone already has running.
 
 name: loom-delivery
 
@@ -28,8 +14,6 @@ services:
       MONGO_INITDB_DATABASE: loom
     volumes:
       - mongo-data:/data/db
-      # Runs once, only when the volume is empty. Creates the collections and
-      # indexes the memory store expects.
       - ./mongo-init:/docker-entrypoint-initdb.d:ro
     healthcheck:
       test: ["CMD", "mongosh", "--quiet", "--eval", "db.adminCommand('ping')"]
@@ -44,8 +28,6 @@ services:
     restart: unless-stopped
     ports:
       - "6380:6379"
-    # appendonly keeps the cache across restarts; drop it if you want a cold
-    # cache every time.
     command: ["redis-server", "--appendonly", "yes"]
     volumes:
       - redis-data:/data
@@ -54,9 +36,6 @@ services:
       interval: 10s
       timeout: 5s
       retries: 5
-
-  # Optional web UI for inspecting the mastery graph during a demo.
-  # Start it with:  docker compose --profile tools up -d
   mongo-express:
     image: mongo-express:1.0.2
     container_name: loom-mongo-express

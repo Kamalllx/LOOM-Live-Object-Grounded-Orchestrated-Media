@@ -1,13 +1,6 @@
 @import "tailwindcss";
 
-/*
-  LOOM delivery theme.
 
-  The four accents are lifted straight from the team's pipeline diagram, so a
-  colour in the player always means the same thing it means in the architecture
-  doc: teal = a curated thread, rose = a safety redaction, violet = a generated
-  explainer, amber = assessment.
-*/
 @theme {
   --color-ink: #101419;
   --color-surface: #171C24;
@@ -36,7 +29,7 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-/* Visible keyboard focus everywhere, without hunting for it per component. */
+
 :focus-visible {
   outline: 2px solid var(--color-thread);
   outline-offset: 2px;
