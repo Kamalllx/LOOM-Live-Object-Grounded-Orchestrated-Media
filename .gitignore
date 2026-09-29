@@ -1,0 +1,28 @@
+# Dependencies
+node_modules*/
+
+# Next.js build output
+.next/
+.next-dev/
+out/
+
+# Local environment and secrets
+.env
+.env.*
+!.env.example
+
+# Runtime learner/session data
+services/delivery/**/data/
+services/delivery/**/logs/
+
+# TypeScript and tool caches
+*.tsbuildinfo
+*.log
+*.pid
+
+# Local editor and OS files
+.vscode/
+.idea/
+*.code-workspace
+Thumbs.db
+.DS_Store
