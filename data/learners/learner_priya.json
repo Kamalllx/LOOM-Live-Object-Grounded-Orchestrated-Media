@@ -1,0 +1,15 @@
+{
+  "schema_version": "1.0",
+  "learner_id": "learner_priya",
+  "mastery_graph": [],
+  "display_name": "Priya",
+  "persona": "Beginner - new to this topic",
+  "preferences": {
+    "pace": "detailed",
+    "language": "en",
+    "prior_knowledge": 0.2
+  },
+  "family_safety_profile": {
+    "redaction_level": "off"
+  }
+}

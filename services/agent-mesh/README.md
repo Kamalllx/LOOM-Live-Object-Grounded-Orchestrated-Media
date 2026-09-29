@@ -1,4 +1,4 @@
-﻿# Agent Mesh & Personalization
+# Agent Mesh & Personalization
 
 Owner: Person 2
 Consumes: /contracts/concept-graph.schema.json, /contracts/learner-profile.schema.json

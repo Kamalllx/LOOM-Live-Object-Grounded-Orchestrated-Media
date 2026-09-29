@@ -1,12 +1,37 @@
-﻿{
+{
   "schema_version": "1.0",
   "session_id": "sess_88a1",
   "learner_id": "learner_al91",
   "events": [
-    { "type": "explainer_shown", "timestamp": 41.2, "payload": { "concept_node_id": "c_01" } },
-    { "type": "quiz_answered", "timestamp": 610.0, "payload": { "concept_node_id": "c_01", "correct": true } }
+    {
+      "type": "object_tapped",
+      "timestamp": 17.0,
+      "payload": {
+        "object_id": "obj_001",
+        "concept_node_id": "c_01"
+      }
+    },
+    {
+      "type": "explainer_shown",
+      "timestamp": 41.2,
+      "payload": {
+        "concept_node_id": "c_01"
+      }
+    },
+    {
+      "type": "quiz_answered",
+      "timestamp": 610.0,
+      "payload": {
+        "concept_node_id": "c_01",
+        "correct": true
+      }
+    }
   ],
   "mastery_updates": [
-    { "concept_id": "c_01", "new_level": 0.7 }
-  ]
+    {
+      "concept_id": "c_01",
+      "new_level": 0.7
+    }
+  ],
+  "video_id": "vid_00123"
 }

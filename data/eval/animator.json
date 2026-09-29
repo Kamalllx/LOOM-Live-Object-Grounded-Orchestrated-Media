@@ -1,0 +1,141 @@
+{
+  "explainers": 12,
+  "render_success_rate": 1.0,
+  "first_attempt_compile_rate": 1.0,
+  "mean_attempts": 1.0,
+  "median_render_s": 14.1,
+  "critic_pass_rate_first_draft": 0.583,
+  "runs": [
+    {
+      "concept": "Personal Protective Equipment (PPE)",
+      "level": "beginner",
+      "ok": true,
+      "attempts": 1,
+      "render_s": 14.1,
+      "factuality": 1.0,
+      "critic_pass": true,
+      "issues": []
+    },
+    {
+      "concept": "Personal Protective Equipment (PPE)",
+      "level": "expert",
+      "ok": true,
+      "attempts": 1,
+      "render_s": 12.5,
+      "factuality": 1.0,
+      "critic_pass": true,
+      "issues": []
+    },
+    {
+      "concept": "Acid Dissociation",
+      "level": "beginner",
+      "ok": true,
+      "attempts": 1,
+      "render_s": 9.9,
+      "factuality": 1.0,
+      "critic_pass": true,
+      "issues": []
+    },
+    {
+      "concept": "Acid Dissociation",
+      "level": "expert",
+      "ok": true,
+      "attempts": 1,
+      "render_s": 15.7,
+      "factuality": 0.75,
+      "critic_pass": false,
+      "issues": [
+        "explainer c_02: 'A beaker filled with water (H\u2082O) is shown.': Source does not state the beaker contains only water"
+      ]
+    },
+    {
+      "concept": "Base Dissociation",
+      "level": "beginner",
+      "ok": true,
+      "attempts": 1,
+      "render_s": 10.1,
+      "factuality": 1.0,
+      "critic_pass": true,
+      "issues": []
+    },
+    {
+      "concept": "Base Dissociation",
+      "level": "expert",
+      "ok": true,
+      "attempts": 1,
+      "render_s": 13.3,
+      "factuality": 1.0,
+      "critic_pass": true,
+      "issues": []
+    },
+    {
+      "concept": "Neutralization Reaction",
+      "level": "beginner",
+      "ok": true,
+      "attempts": 1,
+      "render_s": 14.5,
+      "factuality": 0.8,
+      "critic_pass": false,
+      "issues": [
+        "explainer c_04: 'Neutralization turns acid and base into harmless salt and water.': Source does not claim the products are harmless; 'harmless' overstates"
+      ]
+    },
+    {
+      "concept": "Neutralization Reaction",
+      "level": "expert",
+      "ok": true,
+      "attempts": 1,
+      "render_s": 17.5,
+      "factuality": 1.0,
+      "critic_pass": true,
+      "issues": []
+    },
+    {
+      "concept": "Indicator and pH Neutral Point",
+      "level": "beginner",
+      "ok": true,
+      "attempts": 1,
+      "render_s": 9.1,
+      "factuality": 0.333,
+      "critic_pass": false,
+      "issues": [
+        "explainer c_05: 'An indicator is red in acidic solution and turns green when the pH reaches\u202f7.': Source does not mention indicator colors; claim adds unsupported detail; 'Adding base (OH\u207b) raises the pH until the ind"
+      ]
+    },
+    {
+      "concept": "Indicator and pH Neutral Point",
+      "level": "expert",
+      "ok": true,
+      "attempts": 1,
+      "render_s": 14.7,
+      "factuality": 0.75,
+      "critic_pass": false,
+      "issues": [
+        "explainer c_05: 'An indicator is added to an acidic solution.': Source does not state the indicator is added to an acidic solution"
+      ]
+    },
+    {
+      "concept": "Safe Handling of Broken Glass",
+      "level": "beginner",
+      "ok": true,
+      "attempts": 1,
+      "render_s": 9.7,
+      "factuality": 1.0,
+      "critic_pass": true,
+      "issues": []
+    },
+    {
+      "concept": "Safe Handling of Broken Glass",
+      "level": "expert",
+      "ok": true,
+      "attempts": 1,
+      "render_s": 17.8,
+      "factuality": 0.667,
+      "critic_pass": false,
+      "issues": [
+        "explainer c_06: 'Always inform your teacher immediately after the incident.': Adds 'Always' and 'immediately' which overstates the source wording"
+      ],
+      "note": "judge re-run: first attempt hit an LLM rate limit (judge unavailable), not an explainer defect"
+    }
+  ]
+}

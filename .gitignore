@@ -1,13 +1,45 @@
+/.venv/
+.env
+__pycache__/
+*.pyc
+node_modules/
+.next/
+.DS_Store
+
+# large / regenerable media (rebuild with scripts/make_demo_video.py)
+/media/
+
+# runtime state and caches
+data/cache/
+data/sessions/
+data/models/
+data/*.log
+data/eval/*.log
+data/eval/_*.json
+
+# rendered paper previews
+docs/paper/page-*.jpg
+
+# model weights downloaded by the (unused) YOLO-World experiment
+weights/
+
+# folders excluded from iCloud sync (renamed *.nosync, symlinked back under the original name)
+*.nosync
+/.venv
+/media
+node_modules
+.next
+data/cache
+
+# ---- from feature/delivery (services/delivery/web) ----
 # Dependencies
 node_modules*/
 
 # Next.js build output
-.next/
 .next-dev/
 out/
 
 # Local environment and secrets
-.env
 .env.*
 !.env.example
 
@@ -25,4 +57,4 @@ services/delivery/**/logs/
 .idea/
 *.code-workspace
 Thumbs.db
-.DS_Store
+

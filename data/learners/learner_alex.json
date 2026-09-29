@@ -1,0 +1,15 @@
+{
+  "schema_version": "1.0",
+  "learner_id": "learner_alex",
+  "mastery_graph": [],
+  "display_name": "Alex",
+  "persona": "Expert - already knows the basics",
+  "preferences": {
+    "pace": "condensed",
+    "language": "en",
+    "prior_knowledge": 0.85
+  },
+  "family_safety_profile": {
+    "redaction_level": "off"
+  }
+}

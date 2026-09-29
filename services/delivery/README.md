@@ -120,3 +120,23 @@ The browser keeps a fast copy of mastery in `localStorage` under
 `loom:mastery:<learner_id>`. The server memory layer in `src/lib/memory/` uses
 the file driver by default and supports MongoDB with `MEMORY_DRIVER=mongo`.
 Person 2 reads Contract A(2) from `GET /api/learner/<learnerId>`.
+
+---
+
+## Integrated player and gateway (end-to-end run)
+
+Alongside the delivery web app above, `services/delivery` also contains the pieces that run LOOM end to end
+against the real pipeline:
+
+- `api/server.py` — the gateway: hosts every A2A agent (mesh + verification), the sessions / ingest / learner
+  API, live event streams (SSE) and `/media`.
+- `memory/store.py` — file-backed learner mastery graphs and session logs (Contracts A2 and D).
+- `player/` — the integrated Next.js player (port 3001): live Critic-loop panel, verified-thread playback,
+  client-side masks, tap-to-learn Manim explainers, quiz → mastery update, video ingest, A2A agents page.
+
+```bash
+.venv/bin/python -m uvicorn server:app --app-dir services/delivery/api --port 8000
+npm run dev --prefix services/delivery/player      # http://localhost:3001
+```
+
+See the top-level README and `docs/DEMO.md` for setup and the demo script.

@@ -1,6 +1,7 @@
-﻿{
+{
   "$schema": "http://json-schema.org/draft-07/schema#",
   "title": "candidate-cut",
+  "description": "Contract B. Producer: agent-mesh. Consumer: verification.",
   "type": "object",
   "required": ["schema_version", "session_id", "video_id", "learner_id", "threads"],
   "properties": {
@@ -8,11 +9,75 @@
     "session_id": { "type": "string" },
     "video_id": { "type": "string" },
     "learner_id": { "type": "string" },
-    "pass_number": { "type": "integer" },
-    "threads": { "type": "array" },
-    "redaction_requests": { "type": "array" },
-    "explainer_requests": { "type": "array" },
-    "quiz": { "type": "array" },
-    "agent_trace": { "type": "array" }
+    "pass_number": { "type": "integer", "minimum": 1 },
+    "threads": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["thread_id", "start", "end"],
+        "properties": {
+          "thread_id": { "type": "string" },
+          "concept_node_ids": { "type": "array", "items": { "type": "string" } },
+          "action": { "type": "string", "enum": ["keep", "expand", "condense", "skip"] },
+          "start": { "type": "number", "minimum": 0 },
+          "end": { "type": "number", "minimum": 0 },
+          "note": { "type": "string" }
+        }
+      }
+    },
+    "redaction_requests": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["object_id"],
+        "properties": {
+          "object_id": { "type": "string" },
+          "reason": { "type": "string" }
+        }
+      }
+    },
+    "explainer_requests": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["concept_node_id"],
+        "properties": {
+          "concept_node_id": { "type": "string" },
+          "trigger": { "type": "string", "enum": ["tap", "auto"] },
+          "anchor_time": { "type": "number", "description": "Where an auto explainer is inserted" },
+          "level": { "type": "string", "enum": ["beginner", "intermediate", "expert"] }
+        }
+      }
+    },
+    "quiz": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["question", "concept_node_id"],
+        "properties": {
+          "question": { "type": "string" },
+          "concept_node_id": { "type": "string" },
+          "options": { "type": "array", "items": { "type": "string" } },
+          "answer_index": { "type": "integer", "minimum": 0 }
+        }
+      }
+    },
+    "agent_trace": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["agent"],
+        "properties": {
+          "agent": { "type": "string" },
+          "version": { "type": "string" },
+          "note": { "type": "string" }
+        }
+      }
+    },
+    "revision_feedback": {
+      "type": "array",
+      "description": "Critic issues this pass was asked to fix (pass_number > 1)",
+      "items": { "type": "string" }
+    }
   }
 }

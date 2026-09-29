@@ -1,17 +1,255 @@
-﻿{
+{
   "$schema": "http://json-schema.org/draft-07/schema#",
   "title": "verified-cut",
+  "description": "Contract C. Producer: verification. Consumer: delivery.",
   "type": "object",
-  "required": ["schema_version", "session_id", "status", "final_threads"],
+  "required": [
+    "schema_version",
+    "session_id",
+    "status",
+    "final_threads"
+  ],
+  "definitions": {
+    "bbox": {
+      "type": "array",
+      "items": {
+        "type": "number",
+        "minimum": 0,
+        "maximum": 1
+      },
+      "minItems": 4,
+      "maxItems": 4
+    }
+  },
   "properties": {
-    "schema_version": { "type": "string" },
-    "session_id": { "type": "string" },
-    "status": { "type": "string", "enum": ["approved", "fallback"] },
-    "pass_count": { "type": "integer" },
-    "critic_score": { "type": "object" },
-    "final_threads": { "type": "array" },
-    "redaction_masks": { "type": "array" },
-    "explainer_clips": { "type": "array" },
-    "quiz": { "type": "array" }
+    "schema_version": {
+      "type": "string"
+    },
+    "session_id": {
+      "type": "string"
+    },
+    "video_id": {
+      "type": "string"
+    },
+    "video_url": {
+      "type": "string"
+    },
+    "learner_id": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "approved",
+        "fallback"
+      ]
+    },
+    "pass_count": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "critic_score": {
+      "type": "object",
+      "properties": {
+        "factuality": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "coherence": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "safety": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        }
+      }
+    },
+    "final_threads": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "thread_id",
+          "start",
+          "end"
+        ],
+        "properties": {
+          "thread_id": {
+            "type": "string"
+          },
+          "start": {
+            "type": "number",
+            "minimum": 0
+          },
+          "end": {
+            "type": "number",
+            "minimum": 0
+          },
+          "concept_node_ids": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "action": {
+            "type": "string"
+          },
+          "label": {
+            "type": "string",
+            "description": "Human-readable thread name for the timeline"
+          }
+        }
+      }
+    },
+    "redaction_masks": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "object_id",
+          "start",
+          "end"
+        ],
+        "properties": {
+          "object_id": {
+            "type": "string"
+          },
+          "mask_url": {
+            "type": "string"
+          },
+          "start": {
+            "type": "number",
+            "minimum": 0
+          },
+          "end": {
+            "type": "number",
+            "minimum": 0
+          },
+          "bbox": {
+            "$ref": "#/definitions/bbox"
+          },
+          "style": {
+            "type": "string",
+            "enum": [
+              "blur",
+              "solid",
+              "pixelate"
+            ]
+          },
+          "reason": {
+            "type": "string"
+          },
+          "fallback_bbox": {
+            "$ref": "#/definitions/bbox",
+            "description": "Region to blur with CSS when no matte video is available (same as bbox)"
+          }
+        }
+      }
+    },
+    "explainer_clips": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "concept_node_id",
+          "clip_url"
+        ],
+        "properties": {
+          "concept_node_id": {
+            "type": "string"
+          },
+          "clip_url": {
+            "type": "string"
+          },
+          "cached": {
+            "type": "boolean"
+          },
+          "trigger": {
+            "type": "string",
+            "enum": [
+              "tap",
+              "auto"
+            ]
+          },
+          "anchor_time": {
+            "type": "number"
+          },
+          "anchor_seconds": {
+            "type": "number",
+            "description": "Where in the main video the explainer belongs (same as anchor_time)"
+          },
+          "title": {
+            "type": "string"
+          },
+          "duration_seconds": {
+            "type": "number",
+            "minimum": 0
+          }
+        }
+      }
+    },
+    "quiz": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "question",
+          "concept_node_id"
+        ],
+        "properties": {
+          "question": {
+            "type": "string"
+          },
+          "concept_node_id": {
+            "type": "string"
+          },
+          "options": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "answer_index": {
+            "type": "integer",
+            "minimum": 0
+          }
+        }
+      }
+    },
+    "loop_trace": {
+      "type": "array",
+      "description": "One entry per verification pass, for the loop-status UI and evaluation",
+      "items": {
+        "type": "object",
+        "required": [
+          "pass_number",
+          "approved"
+        ],
+        "properties": {
+          "pass_number": {
+            "type": "integer"
+          },
+          "approved": {
+            "type": "boolean"
+          },
+          "scores": {
+            "type": "object"
+          },
+          "issues": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "latency_ms": {
+            "type": "number"
+          }
+        }
+      }
+    }
   }
 }

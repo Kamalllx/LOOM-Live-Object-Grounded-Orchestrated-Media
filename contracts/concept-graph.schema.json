@@ -1,15 +1,109 @@
-﻿{
+{
   "$schema": "http://json-schema.org/draft-07/schema#",
   "title": "concept-graph",
+  "description": "Contract A. Producer: perception. Consumer: agent-mesh, verification.",
   "type": "object",
   "required": ["schema_version", "video_id", "objects", "transcript", "concept_nodes"],
+  "definitions": {
+    "time_ref": {
+      "type": "object",
+      "required": ["start", "end"],
+      "properties": {
+        "start": { "type": "number", "minimum": 0 },
+        "end": { "type": "number", "minimum": 0 }
+      }
+    },
+    "bbox": {
+      "description": "Normalized [x, y, w, h], top-left origin, all in 0..1",
+      "type": "array",
+      "items": { "type": "number", "minimum": 0, "maximum": 1 },
+      "minItems": 4,
+      "maxItems": 4
+    }
+  },
   "properties": {
     "schema_version": { "type": "string" },
     "video_id": { "type": "string" },
-    "duration_seconds": { "type": "number" },
-    "objects": { "type": "array" },
-    "transcript": { "type": "array" },
-    "on_screen_text": { "type": "array" },
-    "concept_nodes": { "type": "array" }
+    "video_url": { "type": "string", "description": "Playable URL of the source video" },
+    "duration_seconds": { "type": "number", "minimum": 0 },
+    "objects": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["object_id", "label", "instances"],
+        "properties": {
+          "object_id": { "type": "string" },
+          "label": { "type": "string" },
+          "confidence": { "type": "number", "minimum": 0, "maximum": 1 },
+          "safety_tags": { "type": "array", "items": { "type": "string" } },
+          "instances": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": ["start", "end", "bbox"],
+              "properties": {
+                "start": { "type": "number", "minimum": 0 },
+                "end": { "type": "number", "minimum": 0 },
+                "bbox": { "$ref": "#/definitions/bbox" },
+                "track": {
+                  "description": "Optional per-frame boxes for smooth tracking",
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "required": ["t", "bbox"],
+                    "properties": {
+                      "t": { "type": "number" },
+                      "bbox": { "$ref": "#/definitions/bbox" }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "transcript": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["start", "end", "text"],
+        "properties": {
+          "start": { "type": "number", "minimum": 0 },
+          "end": { "type": "number", "minimum": 0 },
+          "speaker": { "type": "string" },
+          "text": { "type": "string" }
+        }
+      }
+    },
+    "on_screen_text": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["start", "end", "text"],
+        "properties": {
+          "start": { "type": "number", "minimum": 0 },
+          "end": { "type": "number", "minimum": 0 },
+          "text": { "type": "string" },
+          "bbox": { "$ref": "#/definitions/bbox" }
+        }
+      }
+    },
+    "concept_nodes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["node_id", "label", "object_ids"],
+        "properties": {
+          "node_id": { "type": "string" },
+          "label": { "type": "string" },
+          "summary": { "type": "string" },
+          "object_ids": { "type": "array", "items": { "type": "string" } },
+          "transcript_refs": { "type": "array", "items": { "$ref": "#/definitions/time_ref" } },
+          "on_screen_text_refs": { "type": "array", "items": { "$ref": "#/definitions/time_ref" } },
+          "prerequisites": { "type": "array", "items": { "type": "string" } }
+        }
+      }
+    }
   }
 }

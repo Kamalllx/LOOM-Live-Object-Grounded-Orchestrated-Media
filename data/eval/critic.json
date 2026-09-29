@@ -1,0 +1,289 @@
+{
+  "detection_rate": 1.0,
+  "faults": 13,
+  "false_rejections": 0,
+  "controls": 6,
+  "by_family": {
+    "F1": "2/2",
+    "F2": "3/3",
+    "F3": "5/5",
+    "F4": "1/1",
+    "F5": "1/1",
+    "F6": "1/1"
+  },
+  "cases": [
+    {
+      "case": "control: clean parent+child cut",
+      "expected": "approve",
+      "caught": true,
+      "approved": true,
+      "codes": [],
+      "scores": {
+        "factuality": 1.0,
+        "coherence": 1.0,
+        "safety": 1.0
+      },
+      "latency_ms": 0
+    },
+    {
+      "case": "control: true explainer claim 1",
+      "expected": "approve",
+      "caught": true,
+      "approved": true,
+      "codes": [],
+      "scores": {
+        "factuality": 1.0,
+        "coherence": 1.0,
+        "safety": 1.0
+      },
+      "latency_ms": 0
+    },
+    {
+      "case": "control: true explainer claim 2",
+      "expected": "approve",
+      "caught": true,
+      "approved": true,
+      "codes": [],
+      "scores": {
+        "factuality": 1.0,
+        "coherence": 1.0,
+        "safety": 1.0
+      },
+      "latency_ms": 0
+    },
+    {
+      "case": "control: true explainer claim 3",
+      "expected": "approve",
+      "caught": true,
+      "approved": true,
+      "codes": [],
+      "scores": {
+        "factuality": 1.0,
+        "coherence": 1.0,
+        "safety": 1.0
+      },
+      "latency_ms": 0
+    },
+    {
+      "case": "control: true explainer claim 4",
+      "expected": "approve",
+      "caught": true,
+      "approved": true,
+      "codes": [],
+      "scores": {
+        "factuality": 1.0,
+        "coherence": 1.0,
+        "safety": 1.0
+      },
+      "latency_ms": 0
+    },
+    {
+      "case": "control: true explainer claim 5",
+      "expected": "approve",
+      "caught": true,
+      "approved": true,
+      "codes": [],
+      "scores": {
+        "factuality": 1.0,
+        "coherence": 1.0,
+        "safety": 1.0
+      },
+      "latency_ms": 0
+    },
+    {
+      "case": "F1 hazard mask removed",
+      "expected": "unmasked_hazard",
+      "caught": true,
+      "approved": false,
+      "codes": [
+        "unmasked_hazard"
+      ],
+      "scores": {
+        "factuality": 1.0,
+        "coherence": 1.0,
+        "safety": 0.0
+      },
+      "latency_ms": 0
+    },
+    {
+      "case": "F1b hazard mask cut short",
+      "expected": "unmasked_hazard",
+      "caught": true,
+      "approved": false,
+      "codes": [
+        "unmasked_hazard"
+      ],
+      "scores": {
+        "factuality": 1.0,
+        "coherence": 1.0,
+        "safety": 0.5
+      },
+      "latency_ms": 0
+    },
+    {
+      "case": "F2 wrong quiz answer (q1)",
+      "expected": "quiz_unsupported",
+      "caught": true,
+      "approved": false,
+      "codes": [
+        "quiz_unsupported"
+      ],
+      "scores": {
+        "factuality": 0.667,
+        "coherence": 1.0,
+        "safety": 1.0
+      },
+      "latency_ms": 0
+    },
+    {
+      "case": "F2 wrong quiz answer (q2)",
+      "expected": "quiz_unsupported",
+      "caught": true,
+      "approved": false,
+      "codes": [
+        "quiz_unsupported"
+      ],
+      "scores": {
+        "factuality": 0.667,
+        "coherence": 1.0,
+        "safety": 1.0
+      },
+      "latency_ms": 0
+    },
+    {
+      "case": "F2 wrong quiz answer (q3)",
+      "expected": "quiz_unsupported",
+      "caught": true,
+      "approved": false,
+      "codes": [
+        "quiz_unsupported"
+      ],
+      "scores": {
+        "factuality": 0.667,
+        "coherence": 1.0,
+        "safety": 1.0
+      },
+      "latency_ms": 0
+    },
+    {
+      "case": "F3 false explainer claim 1",
+      "expected": "explainer_unfaithful",
+      "caught": true,
+      "approved": false,
+      "codes": [
+        "explainer_unfaithful"
+      ],
+      "scores": {
+        "factuality": 0.833,
+        "coherence": 1.0,
+        "safety": 1.0
+      },
+      "latency_ms": 0
+    },
+    {
+      "case": "F3 false explainer claim 2",
+      "expected": "explainer_unfaithful",
+      "caught": true,
+      "approved": false,
+      "codes": [
+        "explainer_unfaithful"
+      ],
+      "scores": {
+        "factuality": 0.833,
+        "coherence": 1.0,
+        "safety": 1.0
+      },
+      "latency_ms": 0
+    },
+    {
+      "case": "F3 false explainer claim 3",
+      "expected": "explainer_unfaithful",
+      "caught": true,
+      "approved": false,
+      "codes": [
+        "explainer_unfaithful"
+      ],
+      "scores": {
+        "factuality": 0.833,
+        "coherence": 1.0,
+        "safety": 1.0
+      },
+      "latency_ms": 0
+    },
+    {
+      "case": "F3 false explainer claim 4",
+      "expected": "explainer_unfaithful",
+      "caught": true,
+      "approved": false,
+      "codes": [
+        "explainer_unfaithful"
+      ],
+      "scores": {
+        "factuality": 0.833,
+        "coherence": 1.0,
+        "safety": 1.0
+      },
+      "latency_ms": 0
+    },
+    {
+      "case": "F3 false explainer claim 5",
+      "expected": "explainer_unfaithful",
+      "caught": true,
+      "approved": false,
+      "codes": [
+        "explainer_unfaithful"
+      ],
+      "scores": {
+        "factuality": 0.833,
+        "coherence": 1.0,
+        "safety": 1.0
+      },
+      "latency_ms": 0
+    },
+    {
+      "case": "F4 thread ends mid-sentence",
+      "expected": "cut_mid_sentence",
+      "caught": true,
+      "approved": false,
+      "codes": [
+        "cut_mid_sentence"
+      ],
+      "scores": {
+        "factuality": 1.0,
+        "coherence": 0.85,
+        "safety": 1.0
+      },
+      "latency_ms": 0
+    },
+    {
+      "case": "F5 prerequisite dropped for beginner",
+      "expected": "missing_prerequisite",
+      "caught": true,
+      "approved": false,
+      "codes": [
+        "missing_prerequisite"
+      ],
+      "scores": {
+        "factuality": 1.0,
+        "coherence": 0.7,
+        "safety": 1.0
+      },
+      "latency_ms": 0
+    },
+    {
+      "case": "F6 overlapping threads",
+      "expected": "overlapping_threads",
+      "caught": true,
+      "approved": false,
+      "codes": [
+        "overlapping_threads"
+      ],
+      "scores": {
+        "factuality": 1.0,
+        "coherence": 0.75,
+        "safety": 1.0
+      },
+      "latency_ms": 0
+    }
+  ]
+}

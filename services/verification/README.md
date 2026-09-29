@@ -1,4 +1,4 @@
-﻿# Verification, Safety & Generation
+# Verification, Safety & Generation
 
 Owner: Person 3
 Consumes: /contracts/candidate-cut.schema.json

@@ -1,4 +1,4 @@
-﻿# Guardian Agent
+# Guardian Agent
 
 Decides per-object redaction.
 

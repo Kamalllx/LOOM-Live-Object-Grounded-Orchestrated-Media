@@ -1,13 +1,38 @@
-﻿{
+{
   "$schema": "http://json-schema.org/draft-07/schema#",
   "title": "learner-profile",
+  "description": "Contract A(2). Producer: delivery/memory. Consumer: agent-mesh, verification.",
   "type": "object",
   "required": ["schema_version", "learner_id", "mastery_graph"],
   "properties": {
     "schema_version": { "type": "string" },
     "learner_id": { "type": "string" },
-    "mastery_graph": { "type": "array" },
-    "preferences": { "type": "object" },
-    "family_safety_profile": { "type": "object" }
+    "display_name": { "type": "string" },
+    "mastery_graph": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["concept_id", "level"],
+        "properties": {
+          "concept_id": { "type": "string" },
+          "level": { "type": "number", "minimum": 0, "maximum": 1 },
+          "last_seen": { "type": "string" }
+        }
+      }
+    },
+    "preferences": {
+      "type": "object",
+      "properties": {
+        "pace": { "type": "string", "enum": ["condensed", "standard", "detailed"] },
+        "language": { "type": "string" }
+      }
+    },
+    "family_safety_profile": {
+      "type": "object",
+      "properties": {
+        "redaction_level": { "type": "string", "enum": ["off", "standard", "strict"] },
+        "blocked_tags": { "type": "array", "items": { "type": "string" } }
+      }
+    }
   }
 }
