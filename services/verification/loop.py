@@ -15,11 +15,12 @@ When the budget (LOOM_LOOP_BUDGET, default 3) is spent, the viewer gets the last
 video + learner, or a conservative baseline - never an unchecked cut.
 """
 import json
+import subprocess
 import time
 from concurrent.futures import ThreadPoolExecutor
 
 from loom_shared import a2a, contracts, events
-from loom_shared.config import LOOP_BUDGET, SESSIONS_DIR
+from loom_shared.config import LOOP_BUDGET, MEDIA_DIR, SESSIONS_DIR
 
 REGISTRY = a2a.Registry()
 LAST_VERIFIED = SESSIONS_DIR / "_last_verified"
@@ -59,20 +60,40 @@ def _perceive(candidate, graph, profile, extra_redactions, explainer_feedback, s
     return guard, explainers, failures
 
 
+def _clip_seconds(clip_url):
+    path = MEDIA_DIR / clip_url.removeprefix("/media/")
+    try:
+        out = subprocess.run(["ffprobe", "-v", "error", "-show_entries", "format=duration", "-of", "csv=p=0", str(path)],
+                             capture_output=True, text=True, timeout=10).stdout.strip()
+        return round(float(out), 2)
+    except (ValueError, OSError, subprocess.SubprocessError):
+        return None
+
+
 def _verified_cut(candidate, graph, status, pass_count, verdict, masks, explainers, trace):
+    labels = {n["node_id"]: n["label"] for n in graph["concept_nodes"]}
+    threads = []
+    for t in candidate["threads"]:
+        th = {k: t[k] for k in ("thread_id", "start", "end", "concept_node_ids", "action") if k in t}
+        th["label"] = ", ".join(labels[c] for c in t.get("concept_node_ids", []) if c in labels) or t["thread_id"]
+        threads.append(th)
+    # Additive fields requested by the delivery web app (services/delivery/web/CONTRACT-NOTES.md):
+    # masks carry fallback_bbox, explainers carry anchor_seconds / title / duration_seconds.
+    masks = [dict(m, fallback_bbox=m["bbox"]) if "bbox" in m else m for m in masks]
+    clips = [{"concept_node_id": cid, "clip_url": ex["clip_url"], "cached": ex.get("cached", False), "trigger": "auto",
+              "anchor_time": ex.get("anchor_time"), "anchor_seconds": ex.get("anchor_time"),
+              "title": labels.get(cid, cid), "duration_seconds": _clip_seconds(ex["clip_url"])}
+             for cid, ex in explainers.items()]
     doc = {
         "schema_version": "1.0", "session_id": candidate["session_id"], "video_id": candidate["video_id"],
         "video_url": graph.get("video_url"), "learner_id": candidate["learner_id"], "status": status,
         "pass_count": pass_count, "critic_score": verdict["scores"],
-        "final_threads": [{k: t[k] for k in ("thread_id", "start", "end", "concept_node_ids", "action") if k in t}
-                          for t in candidate["threads"]],
+        "final_threads": threads,
         "redaction_masks": masks,
-        "explainer_clips": [{"concept_node_id": cid, "clip_url": ex["clip_url"], "cached": ex.get("cached", False),
-                             "trigger": "auto", "anchor_time": ex.get("anchor_time")} for cid, ex in explainers.items()],
+        "explainer_clips": [{k: v for k, v in c.items() if v is not None} for c in clips],
         "quiz": candidate.get("quiz", []),
         "loop_trace": trace,
     }
-    doc["explainer_clips"] = [{k: v for k, v in c.items() if v is not None} for c in doc["explainer_clips"]]
     return contracts.validate("verified-cut", doc)
 
 

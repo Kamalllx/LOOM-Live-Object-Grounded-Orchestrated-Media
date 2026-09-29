@@ -14,3 +14,4 @@ Log every breaking change here: which schema, what changed, who approved it.
 - 2026-09-29 — verified-cut — optional `video_id`, `video_url`, `learner_id`, `redaction_masks[].bbox` / `.style` / `.reason`, `explainer_clips[].trigger` / `.anchor_time`, `loop_trace`. Media URLs are served over HTTP (`/media/...`) instead of `s3://` so browsers can play them. — pending team review
 - 2026-09-29 — session-log — optional `video_id`; `events[].type` enumerated. — pending team review
 - 2026-09-29 — fixtures — made consistent with each other and with the LOOM film: `obj_004` (broken glass, 40–46 s) now exists in the concept-graph fixture. — pending team review
+- 2026-09-30 — verified-cut — optional `final_threads[].label`, `redaction_masks[].fallback_bbox`, `explainer_clips[].anchor_seconds` / `.title` / `.duration_seconds`, as requested in services/delivery/web/CONTRACT-NOTES.md; the verification service now fills them. Additive, no version bump. — pending team review
