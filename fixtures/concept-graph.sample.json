@@ -1,4 +1,4 @@
-﻿{
+{
   "schema_version": "1.0",
   "video_id": "vid_00123",
   "duration_seconds": 612.4,
@@ -8,23 +8,87 @@
       "label": "beaker",
       "confidence": 0.98,
       "instances": [
-        { "start": 14.2, "end": 22.5, "bbox": [0.31, 0.42, 0.12, 0.18] }
+        {
+          "start": 14.2,
+          "end": 22.5,
+          "bbox": [
+            0.31,
+            0.42,
+            0.12,
+            0.18
+          ]
+        }
+      ],
+      "safety_tags": []
+    },
+    {
+      "object_id": "obj_004",
+      "label": "broken glass",
+      "confidence": 0.91,
+      "safety_tags": [
+        "sharp_object",
+        "injury_risk"
+      ],
+      "instances": [
+        {
+          "start": 40.0,
+          "end": 46.0,
+          "bbox": [
+            0.52,
+            0.62,
+            0.3,
+            0.22
+          ]
+        }
       ]
     }
   ],
   "transcript": [
-    { "start": 12.0, "end": 15.4, "speaker": "narrator", "text": "Combine the two solutions slowly." }
+    {
+      "start": 12.0,
+      "end": 15.4,
+      "speaker": "narrator",
+      "text": "Combine the two solutions slowly."
+    }
   ],
   "on_screen_text": [
-    { "start": 20.1, "end": 25.0, "text": "NaOH + HCl -> NaCl + H2O" }
+    {
+      "start": 20.1,
+      "end": 25.0,
+      "text": "NaOH + HCl -> NaCl + H2O"
+    }
   ],
   "concept_nodes": [
     {
       "node_id": "c_01",
-      "object_ids": ["obj_001"],
-      "transcript_refs": [{ "start": 12.0, "end": 15.4 }],
-      "on_screen_text_refs": [{ "start": 20.1, "end": 25.0 }],
-      "label": "acid-base neutralization"
+      "object_ids": [
+        "obj_001"
+      ],
+      "transcript_refs": [
+        {
+          "start": 12.0,
+          "end": 15.4
+        }
+      ],
+      "on_screen_text_refs": [
+        {
+          "start": 20.1,
+          "end": 25.0
+        }
+      ],
+      "label": "acid-base neutralization",
+      "summary": "An acid (HCl) and a base (NaOH) react to form a salt (NaCl) and water."
+    },
+    {
+      "node_id": "c_02",
+      "label": "lab glassware safety",
+      "object_ids": [
+        "obj_004"
+      ],
+      "transcript_refs": [],
+      "on_screen_text_refs": [],
+      "summary": "Handling and disposing of broken glassware safely."
     }
-  ]
+  ],
+  "video_url": "/media/vid_00123.mp4"
 }

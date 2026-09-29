@@ -1,0 +1,19 @@
+{
+  "schema_version": "1.0",
+  "learner_id": "learner_family",
+  "mastery_graph": [],
+  "display_name": "Parent + child",
+  "persona": "Co-viewing with a young child",
+  "preferences": {
+    "pace": "standard",
+    "language": "en",
+    "prior_knowledge": 0.4
+  },
+  "family_safety_profile": {
+    "redaction_level": "standard",
+    "blocked_tags": [
+      "sharp_object",
+      "injury_risk"
+    ]
+  }
+}

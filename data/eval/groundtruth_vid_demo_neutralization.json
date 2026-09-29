@@ -1,0 +1,164 @@
+{
+  "video_id": "vid_demo_neutralization",
+  "segments": [
+    {
+      "id": "s0_title",
+      "start": 0.0,
+      "end": 7.8,
+      "source": "title_card",
+      "objects": []
+    },
+    {
+      "id": "s1_safety_gear",
+      "start": 7.8,
+      "end": 17.69,
+      "source": "pexels_8534101.mp4",
+      "objects": []
+    },
+    {
+      "id": "s2_pour",
+      "start": 17.69,
+      "end": 31.88,
+      "source": "pexels_8544763.mp4",
+      "objects": [
+        "beaker"
+      ]
+    },
+    {
+      "id": "s3_stir_formula",
+      "start": 31.88,
+      "end": 46.25,
+      "source": "pexels_8392756.mp4",
+      "objects": [
+        "beaker"
+      ]
+    },
+    {
+      "id": "s4_indicator",
+      "start": 46.25,
+      "end": 55.45,
+      "source": "pexels_8486033.mp4",
+      "objects": [
+        "test tube",
+        "flask"
+      ]
+    },
+    {
+      "id": "s5_broken_glass",
+      "start": 55.45,
+      "end": 64.58,
+      "source": "pexels_31637076.mp4",
+      "objects": [
+        "glass jar",
+        "broken glass"
+      ]
+    },
+    {
+      "id": "s6_summary",
+      "start": 64.58,
+      "end": 74.53,
+      "source": "title_card",
+      "objects": []
+    }
+  ],
+  "on_screen_text": [
+    {
+      "start": 0.0,
+      "end": 7.8,
+      "text": "Acid-Base Neutralization",
+      "bbox": [
+        0.1,
+        0.4,
+        0.8,
+        0.15
+      ]
+    },
+    {
+      "start": 31.88,
+      "end": 46.25,
+      "text": "NaOH + HCl -> NaCl + H2O",
+      "bbox": [
+        0.474,
+        0.044,
+        0.49,
+        0.11
+      ]
+    },
+    {
+      "start": 46.25,
+      "end": 55.45,
+      "text": "pH 7 = neutral",
+      "bbox": [
+        0.688,
+        0.044,
+        0.276,
+        0.119
+      ]
+    },
+    {
+      "start": 64.58,
+      "end": 74.53,
+      "text": "Acid + Base -> Salt + Water",
+      "bbox": [
+        0.1,
+        0.4,
+        0.8,
+        0.15
+      ]
+    }
+  ],
+  "hazards": [
+    {
+      "label": "broken glass",
+      "segment": "s5_broken_glass",
+      "start": 55.45,
+      "end": 64.58,
+      "note": "shards visible after the jar lands (~0.8s in)"
+    }
+  ],
+  "narration": [
+    {
+      "start": 0.0,
+      "end": 7.2,
+      "text": "Welcome. In this short lesson, we will learn what happens when an acid meets a base. This reaction is called neutralization."
+    },
+    {
+      "start": 7.8,
+      "end": 17.09,
+      "text": "Before any experiment, a chemist puts on protective gear: a lab coat, gloves, and safety goggles. Acids and bases can burn the skin and the eyes."
+    },
+    {
+      "start": 17.69,
+      "end": 31.28,
+      "text": "Here we pour a solution into a beaker. An acid, like hydrochloric acid, releases hydrogen ions in water. A base, like sodium hydroxide, releases hydroxide ions. Combine the two solutions slowly."
+    },
+    {
+      "start": 31.88,
+      "end": 45.65,
+      "text": "As we stir, each hydrogen ion joins a hydroxide ion to form a molecule of water. The sodium and chloride ions that remain form table salt. So sodium hydroxide plus hydrochloric acid gives sodium chloride and water."
+    },
+    {
+      "start": 46.25,
+      "end": 54.85,
+      "text": "An indicator tells us when the reaction is complete. When exactly enough base has been added, the solution reaches p H seven, which is neutral."
+    },
+    {
+      "start": 55.45,
+      "end": 63.98,
+      "text": "Accidents can happen. If a glass container breaks, never pick up the shards with your hands. Tell your teacher, and use a brush and a dustpan."
+    },
+    {
+      "start": 64.58,
+      "end": 73.93,
+      "text": "To summarize: an acid plus a base gives a salt plus water. This is neutralization, and it is used in everything from antacid tablets to treating acidic soil."
+    }
+  ],
+  "duration_seconds": 74.57,
+  "sources": {
+    "pexels_8534101.mp4": "https://www.pexels.com/video/8534101/",
+    "pexels_8544763.mp4": "https://www.pexels.com/video/8544763/",
+    "pexels_8392756.mp4": "https://www.pexels.com/video/8392756/",
+    "pexels_8486033.mp4": "https://www.pexels.com/video/8486033/",
+    "pexels_31637076.mp4": "https://www.pexels.com/video/31637076/"
+  }
+}

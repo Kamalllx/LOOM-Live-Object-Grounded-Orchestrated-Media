@@ -1,0 +1,119 @@
+{
+  "asr": {
+    "wer": 0.0155,
+    "ref_words": 193,
+    "segments": 12
+  },
+  "ocr": {
+    "items": [
+      {
+        "truth": "Acid-Base Neutralization",
+        "read": "Acid-Base Neutralization",
+        "char_similarity": 1.0,
+        "temporal_iou": 0.975
+      },
+      {
+        "truth": "NaOH + HCl -> NaCl + H2O",
+        "read": "NaOH + HCl \u2192 NaCl + H2O",
+        "char_similarity": 1.0,
+        "temporal_iou": 0.942
+      },
+      {
+        "truth": "pH 7 = neutral",
+        "read": "pH 7 = neutral",
+        "char_similarity": 1.0,
+        "temporal_iou": 0.87
+      },
+      {
+        "truth": "Acid + Base -> Salt + Water",
+        "read": "Acid + Base -> Salt + Water",
+        "char_similarity": 1.0,
+        "temporal_iou": 0.915
+      }
+    ],
+    "recall_at_0.8": 1.0,
+    "mean_temporal_iou": 0.925,
+    "extra_items": 2
+  },
+  "grounding": {
+    "hazard_truth_window": [
+      [
+        56.25,
+        64.58
+      ]
+    ],
+    "ablation": {
+      "detector_only": {
+        "tracks": 53,
+        "hazard_tracks": 12,
+        "hazard_labels": [
+          "broken glass",
+          "knife",
+          "open flame"
+        ],
+        "precision": 0.128,
+        "recall": 0.723,
+        "f1": 0.217,
+        "false_block_s": 41.0,
+        "missed_s": 2.3,
+        "source": "recomputed from cached detections with the pipeline's tracking code"
+      },
+      "+clip_verify_generic": {
+        "tracks": 22,
+        "hazard_tracks": 4,
+        "hazard_labels": [
+          "broken glass",
+          "knife",
+          "open flame"
+        ],
+        "precision": 0.273,
+        "recall": 0.723,
+        "f1": 0.396,
+        "false_block_s": 16.0,
+        "missed_s": 2.3,
+        "source": "development run 2026-09-29 on the same cached detections (hazard intervals after merging)"
+      },
+      "+clip_verify_hazard_lookalikes (LOOM)": {
+        "tracks": 19,
+        "hazard_tracks": 1,
+        "hazard_labels": [
+          "broken glass"
+        ],
+        "precision": 1.0,
+        "recall": 0.602,
+        "f1": 0.752,
+        "false_block_s": 0.0,
+        "missed_s": 3.3,
+        "source": "development run 2026-09-29 on the same cached detections; equals the shipped concept graph"
+      }
+    },
+    "meta": {
+      "asr": "whisper-large-v3-turbo (Groq)",
+      "grounding": "grounding-dino-tiny + IoU tracking + CLIP verification",
+      "grounding_stats": {
+        "tracks_raw": 53,
+        "tracks_verified": 19
+      },
+      "ocr": "tesseract",
+      "object_phrases": [
+        "lab coat",
+        "gloves",
+        "safety goggles",
+        "beaker",
+        "brush",
+        "dust pan",
+        "broken glass",
+        "knife",
+        "open flame"
+      ],
+      "timings_s": {
+        "ingest": 0.0,
+        "asr": 1.0,
+        "ocr": 13.4,
+        "grounding": 15.4,
+        "fusion": 3.6
+      }
+    },
+    "note": "mask padding is applied later by the Guardian; these are raw grounding intervals"
+  }
+}

@@ -1,4 +1,4 @@
-﻿# OCR
+# OCR
 
 On-screen text extraction.
 

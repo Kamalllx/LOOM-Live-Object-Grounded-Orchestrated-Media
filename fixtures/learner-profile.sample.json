@@ -1,9 +1,22 @@
-﻿{
+{
   "schema_version": "1.0",
   "learner_id": "learner_al91",
   "mastery_graph": [
-    { "concept_id": "c_01", "level": 0.42, "last_seen": "2026-09-01T10:00:00Z" }
+    {
+      "concept_id": "c_01",
+      "level": 0.42,
+      "last_seen": "2026-09-01T10:00:00Z"
+    }
   ],
-  "preferences": { "pace": "standard", "language": "en" },
-  "family_safety_profile": { "redaction_level": "standard" }
+  "preferences": {
+    "pace": "standard",
+    "language": "en"
+  },
+  "family_safety_profile": {
+    "redaction_level": "standard",
+    "blocked_tags": [
+      "injury_risk"
+    ]
+  },
+  "display_name": "Priya"
 }

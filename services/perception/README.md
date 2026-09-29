@@ -1,4 +1,4 @@
-﻿# Perception & Concept Graph
+# Perception & Concept Graph
 
 Owner: Person 1
 Consumes: raw video/audio

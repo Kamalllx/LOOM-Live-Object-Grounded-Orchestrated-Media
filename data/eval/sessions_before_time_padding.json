@@ -1,0 +1,205 @@
+{
+  "runs": [
+    {
+      "learner": "learner_alex",
+      "run": "first",
+      "status": "approved",
+      "pass_count": 1,
+      "scores": {
+        "factuality": 1.0,
+        "coherence": 1.0,
+        "safety": 1.0
+      },
+      "threads": 7,
+      "source_kept_s": 58.5,
+      "source_ratio": 0.784,
+      "explainers": 0,
+      "explainer_s": 0.0,
+      "masks": 0,
+      "quiz": 3,
+      "time_to_first_frame_s": 0.3,
+      "loop_trace": [
+        {
+          "pass_number": 1,
+          "approved": true,
+          "scores": {
+            "factuality": 1.0,
+            "coherence": 1.0,
+            "safety": 1.0
+          },
+          "issues": []
+        }
+      ]
+    },
+    {
+      "learner": "learner_alex",
+      "run": "repeat",
+      "status": "approved",
+      "pass_count": 1,
+      "scores": {
+        "factuality": 1.0,
+        "coherence": 1.0,
+        "safety": 1.0
+      },
+      "threads": 7,
+      "source_kept_s": 58.5,
+      "source_ratio": 0.784,
+      "explainers": 0,
+      "explainer_s": 0.0,
+      "masks": 0,
+      "quiz": 3,
+      "time_to_first_frame_s": 0.1,
+      "loop_trace": [
+        {
+          "pass_number": 1,
+          "approved": true,
+          "scores": {
+            "factuality": 1.0,
+            "coherence": 1.0,
+            "safety": 1.0
+          },
+          "issues": []
+        }
+      ]
+    },
+    {
+      "learner": "learner_priya",
+      "run": "first",
+      "status": "approved",
+      "pass_count": 1,
+      "scores": {
+        "factuality": 1.0,
+        "coherence": 1.0,
+        "safety": 1.0
+      },
+      "threads": 8,
+      "source_kept_s": 74.6,
+      "source_ratio": 1.0,
+      "explainers": 4,
+      "explainer_s": 78.2,
+      "masks": 0,
+      "quiz": 3,
+      "time_to_first_frame_s": 3.9,
+      "loop_trace": [
+        {
+          "pass_number": 1,
+          "approved": true,
+          "scores": {
+            "factuality": 1.0,
+            "coherence": 1.0,
+            "safety": 1.0
+          },
+          "issues": []
+        }
+      ]
+    },
+    {
+      "learner": "learner_priya",
+      "run": "repeat",
+      "status": "approved",
+      "pass_count": 1,
+      "scores": {
+        "factuality": 1.0,
+        "coherence": 1.0,
+        "safety": 1.0
+      },
+      "threads": 8,
+      "source_kept_s": 74.6,
+      "source_ratio": 1.0,
+      "explainers": 4,
+      "explainer_s": 78.2,
+      "masks": 0,
+      "quiz": 3,
+      "time_to_first_frame_s": 0.1,
+      "loop_trace": [
+        {
+          "pass_number": 1,
+          "approved": true,
+          "scores": {
+            "factuality": 1.0,
+            "coherence": 1.0,
+            "safety": 1.0
+          },
+          "issues": []
+        }
+      ]
+    },
+    {
+      "learner": "learner_family",
+      "run": "first",
+      "status": "approved",
+      "pass_count": 1,
+      "scores": {
+        "factuality": 1.0,
+        "coherence": 1.0,
+        "safety": 1.0
+      },
+      "threads": 8,
+      "source_kept_s": 74.6,
+      "source_ratio": 1.0,
+      "explainers": 0,
+      "explainer_s": 0.0,
+      "masks": 1,
+      "quiz": 3,
+      "time_to_first_frame_s": 0.1,
+      "loop_trace": [
+        {
+          "pass_number": 1,
+          "approved": true,
+          "scores": {
+            "factuality": 1.0,
+            "coherence": 1.0,
+            "safety": 1.0
+          },
+          "issues": []
+        }
+      ],
+      "redaction_vs_truth": {
+        "precision": 1.0,
+        "recall": 0.602,
+        "f1": 0.752,
+        "false_block_s": 0.0,
+        "missed_s": 3.3
+      }
+    },
+    {
+      "learner": "learner_family",
+      "run": "repeat",
+      "status": "approved",
+      "pass_count": 1,
+      "scores": {
+        "factuality": 1.0,
+        "coherence": 1.0,
+        "safety": 1.0
+      },
+      "threads": 8,
+      "source_kept_s": 74.6,
+      "source_ratio": 1.0,
+      "explainers": 0,
+      "explainer_s": 0.0,
+      "masks": 1,
+      "quiz": 3,
+      "time_to_first_frame_s": 0.1,
+      "loop_trace": [
+        {
+          "pass_number": 1,
+          "approved": true,
+          "scores": {
+            "factuality": 1.0,
+            "coherence": 1.0,
+            "safety": 1.0
+          },
+          "issues": []
+        }
+      ],
+      "redaction_vs_truth": {
+        "precision": 1.0,
+        "recall": 0.602,
+        "f1": 0.752,
+        "false_block_s": 0.0,
+        "missed_s": 3.3
+      }
+    }
+  ],
+  "note": "Caches (LLM responses, rendered explainers, Critic verdicts) were populated by earlier runs; fresh-generation cost is measured in animator.json."
+}
