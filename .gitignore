@@ -58,3 +58,6 @@ services/delivery/**/logs/
 *.code-workspace
 Thumbs.db
 
+
+# local editor / tool config
+.claude/
