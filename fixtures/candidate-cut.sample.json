@@ -5,19 +5,17 @@
   "learner_id": "learner_al91",
   "pass_number": 1,
   "threads": [
-    { "thread_id": "t1", "concept_node_ids": ["c_01"], "action": "expand", "start": 12.0, "end": 25.0 }
+    { "thread_id": "t1", "concept_node_ids": ["c_01"], "action": "review", "start": 12.0, "end": 25.0 }
   ],
-  "redaction_requests": [
-    { "object_id": "obj_004", "reason": "flagged by family_safety_profile" }
-  ],
-  "explainer_requests": [
-    { "concept_node_id": "c_01", "trigger": "tap" }
-  ],
+  "redaction_requests": [],
+  "explainer_requests": [],
   "quiz": [
-    { "question": "What are the products of this reaction?", "concept_node_id": "c_01" }
+    { "question": "What is the main idea of acid-base neutralization?", "concept_node_id": "c_01" }
   ],
   "agent_trace": [
     { "agent": "curator", "version": "1.0" },
-    { "agent": "pedagogy", "version": "1.0" }
+    { "agent": "pedagogy", "version": "1.0" },
+    { "agent": "personalizer", "version": "1.0" },
+    { "agent": "assessment", "version": "1.0" }
   ]
 }
