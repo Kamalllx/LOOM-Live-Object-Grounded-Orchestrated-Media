@@ -1,0 +1,39 @@
+{
+  "name": "loom-film",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "studio": "remotion studio",
+    "render": "remotion render LoomFilm out/loom-film.mp4 --gl=angle",
+    "render:scene": "remotion render --gl=angle",
+    "still": "remotion still --gl=angle",
+    "gen:footage": "node scripts/gen-veo.mjs",
+    "gen:sfx": "node scripts/gen-sfx.mjs",
+    "gen:vo": "node scripts/gen-vo.mjs",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@react-three/drei": "^10.7.9",
+    "@react-three/fiber": "^9.8.1",
+    "@react-three/postprocessing": "^3.1.3",
+    "@remotion/cli": "^4.0.529",
+    "@remotion/google-fonts": "^4.0.529",
+    "@remotion/media": "^4.0.529",
+    "@remotion/noise": "^4.0.529",
+    "@remotion/three": "^4.0.529",
+    "postprocessing": "^6.39.5",
+    "react": "^19.3.0",
+    "react-dom": "^19.3.0",
+    "remotion": "^4.0.529",
+    "three": "^0.186.1"
+  },
+  "devDependencies": {
+    "@types/react": "^19.3.0",
+    "@types/three": "^0.186.0",
+    "typescript": "^7.0.2"
+  },
+  "allowScripts": {
+    "esbuild@0.28.1": true
+  }
+}
