@@ -1,0 +1,175 @@
+{
+  "s01": [
+    {
+      "file": "audio/vo/s01_01.wav",
+      "text": "One lesson. Three viewers.",
+      "seconds": 2.806667
+    },
+    {
+      "file": "audio/vo/s01_02.wav",
+      "text": "The expert is bored within a minute.",
+      "seconds": 2.166667
+    },
+    {
+      "file": "audio/vo/s01_03.wav",
+      "text": "The beginner is lost by minute two.",
+      "seconds": 1.846667
+    },
+    {
+      "file": "audio/vo/s01_04.wav",
+      "text": "And a parent, watching with their child, can't remove the one moment they didn't want.",
+      "seconds": 4.726667
+    }
+  ],
+  "s02": [
+    {
+      "file": "audio/vo/s02_01.wav",
+      "text": "Every tool we have treats a video as one solid block.",
+      "seconds": 3.702667
+    },
+    {
+      "file": "audio/vo/s02_02.wav",
+      "text": "You can add a quiz, generate a script, add captions, or plan a path around it.",
+      "seconds": 4.982667
+    },
+    {
+      "file": "audio/vo/s02_03.wav",
+      "text": "But nothing reaches inside the frame.",
+      "seconds": 1.782667
+    }
+  ],
+  "s03": [
+    {
+      "file": "audio/vo/s03_01.wav",
+      "text": "So what if a video wasn't a block — but a set of threads?",
+      "seconds": 3.510667
+    },
+    {
+      "file": "audio/vo/s03_02.wav",
+      "text": "This is LOOM. Live, object-grounded, orchestrated media.",
+      "seconds": 3.574667
+    }
+  ],
+  "s04": [
+    {
+      "file": "audio/vo/s04_01.wav",
+      "text": "First, LOOM perceives.",
+      "seconds": 2.102667
+    },
+    {
+      "file": "audio/vo/s04_02.wav",
+      "text": "SAM 3.1 finds and tracks every object on screen.",
+      "seconds": 4.150667
+    },
+    {
+      "file": "audio/vo/s04_03.wav",
+      "text": "Speech is transcribed, and on-screen text is read.",
+      "seconds": 2.998667
+    },
+    {
+      "file": "audio/vo/s04_04.wav",
+      "text": "All three are fused into one concept graph: this beaker, at fourteen seconds, while the narrator says 'combine slowly', under this equation.",
+      "seconds": 7.670667
+    }
+  ],
+  "s05": [
+    {
+      "file": "audio/vo/s05_01.wav",
+      "text": "Then a team of specialist agents gets to work.",
+      "seconds": 2.294667
+    },
+    {
+      "file": "audio/vo/s05_02.wav",
+      "text": "The Curator cuts the graph into short threads.",
+      "seconds": 2.486667
+    },
+    {
+      "file": "audio/vo/s05_03.wav",
+      "text": "Pedagogy matches them to what this learner already knows.",
+      "seconds": 3.318667
+    },
+    {
+      "file": "audio/vo/s05_04.wav",
+      "text": "The Personalizer assembles the cut, and Assessment writes the checks.",
+      "seconds": 3.382667
+    },
+    {
+      "file": "audio/vo/s05_05.wav",
+      "text": "They speak the open Agent-to-Agent protocol — so a school's own agent can join the team.",
+      "seconds": 4.470667
+    }
+  ],
+  "s06": [
+    {
+      "file": "audio/vo/s06_01.wav",
+      "text": "Before anything is shown, a Critic checks it.",
+      "seconds": 3.126667
+    },
+    {
+      "file": "audio/vo/s06_02.wav",
+      "text": "Perceive. Plan. Act. Verify.",
+      "seconds": 3.446667
+    },
+    {
+      "file": "audio/vo/s06_03.wav",
+      "text": "If the cut fails, it goes around again — but only within a fixed budget, and then falls back to the last verified version.",
+      "seconds": 5.750667
+    },
+    {
+      "file": "audio/vo/s06_04.wav",
+      "text": "Nothing reaches a viewer unchecked.",
+      "seconds": 1.974667
+    }
+  ],
+  "s07": [
+    {
+      "file": "audio/vo/s07_01.wav",
+      "text": "Now the viewer can tap anything in the frame.",
+      "seconds": 2.294667
+    },
+    {
+      "file": "audio/vo/s07_02.wav",
+      "text": "The Animator writes a short Manim animation for that exact concept — and caches it for the next learner.",
+      "seconds": 4.918667
+    },
+    {
+      "file": "audio/vo/s07_03.wav",
+      "text": "And when one object isn't right for a young viewer, the Guardian masks just that object.",
+      "seconds": 5.238667
+    },
+    {
+      "file": "audio/vo/s07_04.wav",
+      "text": "The rest of the lesson keeps playing.",
+      "seconds": 1.846667
+    }
+  ],
+  "s08": [
+    {
+      "file": "audio/vo/s08_01.wav",
+      "text": "Same threads. A different weave for every viewer.",
+      "seconds": 2.806667
+    },
+    {
+      "file": "audio/vo/s08_02.wav",
+      "text": "The expert gets the ninety-second version. The beginner gets the full walkthrough, with explainers. The parent keeps the rest of the video.",
+      "seconds": 6.134667
+    },
+    {
+      "file": "audio/vo/s08_03.wav",
+      "text": "And every session updates a mastery graph, so the next one starts in the right place.",
+      "seconds": 4.598667
+    }
+  ],
+  "s09": [
+    {
+      "file": "audio/vo/s09_01.wav",
+      "text": "LOOM.",
+      "seconds": 0.694667
+    },
+    {
+      "file": "audio/vo/s09_02.wav",
+      "text": "Personalization, inside the frame.",
+      "seconds": 2.230667
+    }
+  ]
+}
