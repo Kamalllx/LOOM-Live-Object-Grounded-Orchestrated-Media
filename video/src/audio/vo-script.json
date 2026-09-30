@@ -1,0 +1,54 @@
+{
+  "voice": { "languageCode": "en-US", "name": "en-US-Chirp3-HD-Charon", "speakingRate": 1.1 },
+  "scenes": {
+    "s01": [
+      "One lesson. Three viewers.",
+      "The expert is bored within a minute.",
+      "The beginner is lost by minute two.",
+      "And a parent, watching with their child, can't remove the one moment they didn't want."
+    ],
+    "s02": [
+      "Every tool we have treats a video as one solid block.",
+      "You can add a quiz, generate a script, add captions, or plan a path around it.",
+      "But nothing reaches inside the frame."
+    ],
+    "s03": [
+      "So what if a video wasn't a block — but a set of threads?",
+      "This is LOOM. Live, object-grounded, orchestrated media."
+    ],
+    "s04": [
+      "First, LOOM perceives.",
+      "SAM 3.1 finds and tracks every object on screen.",
+      "Speech is transcribed, and on-screen text is read.",
+      "All three are fused into one concept graph: this beaker, at fourteen seconds, while the narrator says 'combine slowly', under this equation."
+    ],
+    "s05": [
+      "Then a team of specialist agents gets to work.",
+      "The Curator cuts the graph into short threads.",
+      "Pedagogy matches them to what this learner already knows.",
+      "The Personalizer assembles the cut, and Assessment writes the checks.",
+      "They speak the open Agent-to-Agent protocol — so a school's own agent can join the team."
+    ],
+    "s06": [
+      "Before anything is shown, a Critic checks it.",
+      "Perceive. Plan. Act. Verify.",
+      "If the cut fails, it goes around again — but only within a fixed budget, and then falls back to the last verified version.",
+      "Nothing reaches a viewer unchecked."
+    ],
+    "s07": [
+      "Now the viewer can tap anything in the frame.",
+      "The Animator writes a short Manim animation for that exact concept — and caches it for the next learner.",
+      "And when one object isn't right for a young viewer, the Guardian masks just that object.",
+      "The rest of the lesson keeps playing."
+    ],
+    "s08": [
+      "Same threads. A different weave for every viewer.",
+      "The expert gets the ninety-second version. The beginner gets the full walkthrough, with explainers. The parent keeps the rest of the video.",
+      "And every session updates a mastery graph, so the next one starts in the right place."
+    ],
+    "s09": [
+      "LOOM.",
+      "Personalization, inside the frame."
+    ]
+  }
+}
