@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="595" viewBox="0 0 1440 595" role="img" aria-labelledby="title desc">
+<title id="title">From video to concept graph</title><desc id="desc">Perception runs once per lesson; individual stages can report degraded results.</desc>
+<defs><linearGradient id="bg" x2="1" y2="1"><stop stop-color="#101827"/><stop offset="1" stop-color="#16142a"/></linearGradient><marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0L8 4L0 8" fill="#7893aa"/></marker></defs>
+<rect width="1440" height="595" rx="26" fill="url(#bg)"/>
+<text x="62" y="75" fill="#f4f8ff" font-family="Segoe UI,Arial,sans-serif" font-size="36" font-weight="700">From video to concept graph</text>
+<text x="62" y="111" fill="#aec0d2" font-family="Segoe UI,Arial,sans-serif" font-size="20">Perception runs once per lesson; individual stages can report degraded results.</text>
+<rect x="62.0" y="145" width="424.0" height="142" rx="16" fill="#1c293c" stroke="#66e4c1" stroke-width="1.5"/>
+<rect x="80.0" y="165" width="6" height="25" rx="3" fill="#66e4c1"/>
+<text x="98.0" y="186" fill="#f4f8ff" font-family="Segoe UI,Arial,sans-serif" font-weight="700" font-size="21">01  PREPARE</text>
+<text x="82.0" y="221" fill="#c0d0df" font-family="Segoe UI,Arial,sans-serif" font-size="16">Normalize media and detect shots</text>
+<text x="82.0" y="246" fill="#c0d0df" font-family="Segoe UI,Arial,sans-serif" font-size="16">Sample frames and audio</text>
+<path d="M489.0 216h15" stroke="#7893aa" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="508.0" y="145" width="424.0" height="142" rx="16" fill="#1c293c" stroke="#9bb8ff" stroke-width="1.5"/>
+<rect x="526.0" y="165" width="6" height="25" rx="3" fill="#9bb8ff"/>
+<text x="544.0" y="186" fill="#f4f8ff" font-family="Segoe UI,Arial,sans-serif" font-weight="700" font-size="21">02  READ</text>
+<text x="528.0" y="221" fill="#c0d0df" font-family="Segoe UI,Arial,sans-serif" font-size="16">Transcribe speech with timestamps</text>
+<text x="528.0" y="246" fill="#c0d0df" font-family="Segoe UI,Arial,sans-serif" font-size="16">OCR and selective formula re-read</text>
+<path d="M935.0 216h15" stroke="#7893aa" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="954.0" y="145" width="424.0" height="142" rx="16" fill="#1c293c" stroke="#d2a7ff" stroke-width="1.5"/>
+<rect x="972.0" y="165" width="6" height="25" rx="3" fill="#d2a7ff"/>
+<text x="990.0" y="186" fill="#f4f8ff" font-family="Segoe UI,Arial,sans-serif" font-weight="700" font-size="21">03  FIND</text>
+<text x="974.0" y="221" fill="#c0d0df" font-family="Segoe UI,Arial,sans-serif" font-size="16">Propose vocabulary and add hazards</text>
+<text x="974.0" y="246" fill="#c0d0df" font-family="Segoe UI,Arial,sans-serif" font-size="16">Detect objects and track boxes</text>
+<path d="M720 291v25" stroke="#7893aa" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="62.0" y="325" width="424.0" height="142" rx="16" fill="#1c293c" stroke="#9bb8ff" stroke-width="1.5"/>
+<rect x="80.0" y="345" width="6" height="25" rx="3" fill="#9bb8ff"/>
+<text x="98.0" y="366" fill="#f4f8ff" font-family="Segoe UI,Arial,sans-serif" font-weight="700" font-size="21">04  VERIFY</text>
+<text x="82.0" y="401" fill="#c0d0df" font-family="Segoe UI,Arial,sans-serif" font-size="16">SigLIP2 and crop checks</text>
+<text x="82.0" y="426" fill="#c0d0df" font-family="Segoe UI,Arial,sans-serif" font-size="16">Retain uncertain hazards cautiously</text>
+<path d="M489.0 396h15" stroke="#7893aa" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="508.0" y="325" width="424.0" height="142" rx="16" fill="#1c293c" stroke="#d2a7ff" stroke-width="1.5"/>
+<rect x="526.0" y="345" width="6" height="25" rx="3" fill="#d2a7ff"/>
+<text x="544.0" y="366" fill="#f4f8ff" font-family="Segoe UI,Arial,sans-serif" font-weight="700" font-size="21">05  CONNECT</text>
+<text x="528.0" y="401" fill="#c0d0df" font-family="Segoe UI,Arial,sans-serif" font-size="16">Fuse evidence into concepts</text>
+<text x="528.0" y="426" fill="#c0d0df" font-family="Segoe UI,Arial,sans-serif" font-size="16">Review safety and verify quiz items</text>
+<path d="M935.0 396h15" stroke="#7893aa" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="954.0" y="325" width="424.0" height="142" rx="16" fill="#1c293c" stroke="#ffbd85" stroke-width="1.5"/>
+<rect x="972.0" y="345" width="6" height="25" rx="3" fill="#ffbd85"/>
+<text x="990.0" y="366" fill="#f4f8ff" font-family="Segoe UI,Arial,sans-serif" font-weight="700" font-size="21">06  SEGMENT</text>
+<text x="974.0" y="401" fill="#c0d0df" font-family="Segoe UI,Arial,sans-serif" font-size="16">SAM 2.1 mask refinement</text>
+<text x="974.0" y="426" fill="#c0d0df" font-family="Segoe UI,Arial,sans-serif" font-size="16">Graph, tracks and mask data</text>
+<text x="62" y="565" fill="#a7bbcc" font-family="Segoe UI,Arial,sans-serif" font-size="16">A missed object cannot be recovered by downstream checks; segmentation can fall back to boxes.</text></svg>
