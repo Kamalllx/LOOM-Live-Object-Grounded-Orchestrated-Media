@@ -1,0 +1,340 @@
+/* LOOM for YouTube. Everything is scoped under #loom-root, #loom-modal, .loom-pop or .loom-layer so YouTube's own styles are untouched. */
+
+/* Dock: make room for the panel instead of covering the video (off in fullscreen). */
+html.loom-docked:not(.loom-fs) body { margin-right: 372px !important; }
+html.loom-docked.loom-collapsed:not(.loom-fs) body { margin-right: 44px !important; }
+#movie_player.loom-pointer, #movie_player.loom-pointer .html5-video-container, #movie_player.loom-pointer video { cursor: pointer !important; }
+
+#loom-root, #loom-modal, .loom-pop {
+  /* glass */
+  --glass: rgba(10, 26, 36, .78);
+  --glass-solid: rgba(10, 26, 36, .94);
+  --edge: rgba(214, 240, 255, .14);
+  --edge-soft: rgba(214, 240, 255, .08);
+  --well: rgba(214, 240, 255, .05);
+  --well-hi: rgba(214, 240, 255, .10);
+  --shadow: 0 30px 80px -30px rgba(0, 0, 0, .7);
+  /* text */
+  --ink: #F3F6F4; --dim: #A9BEC6; --faint: #6D8791;
+  /* accents: one meaning each */
+  --peach: #FFB38A; --on-peach: #2B1408;   /* primary actions */
+  --sky: #7CC7FF;                           /* objects, hover */
+  --mint: #6EF2C4;                          /* agents, answers, correct */
+  --lilac: #C3A6FF;                         /* explainers, animation */
+  --coral: #FF5C7A;                         /* masks, wrong */
+  --ease: cubic-bezier(.16, 1, .3, 1);
+  font: 13px/1.5 "Bahnschrift", "Segoe UI Variable", "Segoe UI", system-ui, sans-serif;
+  color: var(--ink);
+  letter-spacing: 0;
+  -webkit-font-smoothing: antialiased;
+}
+#loom-root *, #loom-modal *, .loom-pop * { box-sizing: border-box; }
+#loom-root button, #loom-modal button, .loom-pop button, #loom-root input, .loom-pop input, #loom-root textarea { font: inherit; color: inherit; }
+#loom-root :focus-visible, #loom-modal :focus-visible, .loom-pop :focus-visible { outline: 2px solid var(--peach); outline-offset: 2px; }
+
+/* ---------- panel ---------- */
+#loom-root .loom-panel {
+  position: fixed; top: 64px; right: 10px; bottom: 10px; width: 352px; z-index: 2100;
+  display: flex; flex-direction: column; overflow: hidden;
+  background: var(--glass); -webkit-backdrop-filter: blur(22px) saturate(1.4); backdrop-filter: blur(22px) saturate(1.4);
+  border: 1px solid var(--edge); border-radius: 18px; box-shadow: var(--shadow);
+  transition: transform .4s var(--ease), opacity .3s var(--ease);
+}
+html.loom-fs #loom-root .loom-panel { top: 10px; z-index: 2147483000; }
+#loom-root.loom-collapsed .loom-panel { transform: translateX(calc(100% + 24px)); opacity: 0; pointer-events: none; }
+
+#loom-root .loom-tab {
+  position: fixed; right: 0; top: 50%; z-index: 2100; transform: translateY(-50%) translateX(110%);
+  display: flex; flex-direction: column; align-items: center; gap: 8px;
+  width: 38px; padding: 14px 0; border: 1px solid var(--edge); border-right: 0; border-radius: 18px 0 0 18px;
+  background: var(--glass); -webkit-backdrop-filter: blur(22px) saturate(1.4); backdrop-filter: blur(22px) saturate(1.4);
+  color: var(--ink); cursor: pointer; writing-mode: vertical-rl; font-weight: 600; letter-spacing: .14em;
+  box-shadow: var(--shadow); transition: transform .4s var(--ease), background .25s var(--ease);
+}
+html.loom-fs #loom-root .loom-tab { z-index: 2147483000; }
+#loom-root.loom-collapsed .loom-tab { transform: translateY(-50%); }
+#loom-root .loom-tab:hover { background: var(--glass-solid); }
+
+#loom-root .loom-head { display: flex; align-items: center; justify-content: space-between; padding: 14px 14px 10px; }
+#loom-root .loom-brand { display: flex; align-items: center; gap: 9px; font-size: 15px; letter-spacing: .14em; }
+#loom-root .loom-logo-dot { width: 10px; height: 10px; border-radius: 50%; background: conic-gradient(var(--peach), var(--lilac), var(--sky), var(--mint), var(--peach)); box-shadow: 0 0 12px rgba(255, 179, 138, .55); writing-mode: horizontal-tb; }
+#loom-root .loom-status { font-size: 11px; letter-spacing: 0; padding: 2px 9px; border-radius: 99px; background: var(--well); color: var(--dim); border: 1px solid var(--edge-soft); }
+#loom-root .loom-status.ok { color: var(--mint); }
+#loom-root .loom-status.warn { color: var(--peach); }
+#loom-root .loom-status.bad { color: var(--coral); }
+
+#loom-root .loom-icon, #loom-modal .loom-icon, .loom-pop .loom-icon {
+  width: 30px; height: 30px; display: grid; place-items: center; flex: none; border-radius: 99px;
+  border: 1px solid var(--edge); background: var(--well); color: var(--ink); cursor: pointer; font-size: 18px; line-height: 1;
+  transition: background .25s var(--ease), border-color .25s var(--ease);
+}
+#loom-root .loom-icon:hover, #loom-modal .loom-icon:hover, .loom-pop .loom-icon:hover { background: var(--well-hi); border-color: var(--dim); }
+
+#loom-root .loom-tabs { display: flex; gap: 4px; margin: 0 14px 10px; padding: 3px; border-radius: 99px; background: var(--well); border: 1px solid var(--edge-soft); }
+#loom-root .loom-tabs button { flex: 1; padding: 6px 8px; border-radius: 99px; border: 0; background: transparent; color: var(--dim); cursor: pointer; transition: background .3s var(--ease), color .3s var(--ease); }
+#loom-root .loom-tabs button:hover:not(:disabled) { color: var(--ink); }
+#loom-root .loom-tabs button.on { background: var(--well-hi); color: var(--ink); box-shadow: inset 0 0 0 1px var(--edge); }
+#loom-root .loom-tabs button:disabled { color: var(--faint); cursor: default; }
+#loom-root .loom-tabs [data-role="libcount"]:not(:empty) { display: inline-block; min-width: 18px; padding: 0 5px; margin-left: 4px; border-radius: 99px; background: var(--lilac); color: #1d1238; font-size: 11px; font-weight: 700; }
+
+#loom-root .loom-body { flex: 1; overflow-y: auto; overscroll-behavior: contain; padding: 2px 14px 12px; scrollbar-width: thin; scrollbar-color: var(--edge) transparent; }
+#loom-root .loom-pane { display: none; }
+#loom-root .loom-pane.on { display: block; animation: loom-in .35s var(--ease); }
+
+#loom-root .loom-card { background: var(--well); border: 1px solid var(--edge-soft); border-radius: 14px; padding: 12px; margin: 0 0 10px; }
+#loom-root .loom-card h3 { margin: 0 0 6px; font-size: 15px; font-weight: 600; }
+#loom-root .loom-card h4 { margin: 0 0 8px; font-size: 13px; font-weight: 600; display: flex; justify-content: space-between; align-items: baseline; gap: 8px; }
+#loom-root .loom-card p { margin: 0 0 8px; }
+#loom-root .loom-alert { border-color: rgba(255, 92, 122, .45); }
+#loom-root .loom-cmd { display: block; margin: 0 0 10px; padding: 8px 10px; border-radius: 10px; background: rgba(0, 0, 0, .25); border: 1px solid var(--edge-soft); font: 12px ui-monospace, Consolas, monospace; color: var(--peach); user-select: all; }
+
+#loom-root .loom-muted, .loom-pop .loom-muted { color: var(--dim); }
+#loom-root .loom-small, .loom-pop .loom-small { font-size: 11.5px; }
+#loom-root .loom-strong, .loom-pop .loom-strong { font-weight: 600; }
+#loom-root .loom-good, .loom-pop .loom-good { color: var(--mint); }
+#loom-root .loom-bad, .loom-pop .loom-bad, #loom-modal .loom-bad { color: var(--coral); }
+#loom-root .loom-warn { color: var(--peach); }
+#loom-root .loom-accent { color: var(--mint); }
+#loom-root .coral { color: var(--coral); }
+#loom-root .loom-kicker, #loom-modal .loom-kicker, .loom-pop .loom-kicker { display: block; font-size: 10.5px; text-transform: uppercase; letter-spacing: .12em; color: var(--faint); }
+#loom-modal .loom-kicker.lilac { color: var(--lilac); }
+
+/* buttons */
+#loom-root .loom-btn, #loom-modal .loom-btn, .loom-pop .loom-btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+  padding: 8px 14px; border-radius: 99px; border: 1px solid var(--edge); background: var(--well-hi); color: var(--ink); cursor: pointer; font-weight: 600;
+  transition: transform .25s var(--ease), filter .25s var(--ease), background .25s var(--ease), box-shadow .3s var(--ease);
+}
+#loom-root .loom-btn:hover:not(:disabled), #loom-modal .loom-btn:hover, .loom-pop .loom-btn:hover:not(:disabled) { filter: brightness(1.1); }
+#loom-root .loom-btn:active:not(:disabled), #loom-modal .loom-btn:active, .loom-pop .loom-btn:active:not(:disabled) { transform: scale(.97); }
+#loom-root .loom-btn:disabled, .loom-pop .loom-btn:disabled { opacity: .45; cursor: default; }
+#loom-root .loom-btn.wide { width: 100%; margin-top: 4px; }
+#loom-root .loom-btn.small { padding: 4px 10px; font-size: 12px; font-weight: 500; }
+#loom-root .loom-btn.primary, #loom-modal .loom-btn.primary, .loom-pop .loom-btn.primary { background: var(--peach); border-color: var(--peach); color: var(--on-peach); box-shadow: 0 8px 24px -10px rgba(255, 179, 138, .7); }
+#loom-root .loom-btn.mint, .loom-pop .loom-btn.mint { background: rgba(110, 242, 196, .12); border-color: rgba(110, 242, 196, .6); color: var(--mint); }
+#loom-root .loom-btn.lilac, .loom-pop .loom-btn.lilac { background: rgba(195, 166, 255, .12); border-color: rgba(195, 166, 255, .6); color: var(--lilac); }
+#loom-root .loom-btn.lilac.wide, .loom-pop .loom-btn.lilac.wide { background: var(--lilac); color: #1d1238; }
+#loom-root .loom-btn.ghost, .loom-pop .loom-btn.ghost { background: transparent; border-color: var(--edge); color: var(--ink); }
+#loom-root .loom-link, .loom-pop .loom-link { border: 0; background: none; padding: 0; color: var(--peach); cursor: pointer; text-decoration: underline; text-underline-offset: 2px; }
+#loom-root .loom-link:hover, .loom-pop .loom-link:hover { color: var(--ink); }
+
+/* chips & tags */
+#loom-root .loom-chips, .loom-pop .loom-chips { display: flex; flex-wrap: wrap; gap: 6px; margin: 6px 0; }
+#loom-root .loom-chipbtn, .loom-pop .loom-chipbtn {
+  padding: 4px 11px; border-radius: 99px; border: 1px solid var(--edge); background: var(--well); color: var(--ink); cursor: pointer; font-size: 12px; text-align: left;
+  transition: border-color .25s var(--ease), background .25s var(--ease);
+}
+#loom-root .loom-chipbtn:hover, .loom-pop .loom-chipbtn:hover { border-color: var(--peach); background: var(--well-hi); }
+#loom-root .loom-chipbtn.sky { border-color: rgba(124, 199, 255, .5); color: var(--sky); }
+#loom-root .loom-chipbtn.sky:hover { background: rgba(124, 199, 255, .12); border-color: var(--sky); }
+#loom-root .loom-chipbtn.masked::after { content: " · masked"; color: var(--coral); }
+#loom-root .loom-chipbtn.ghost { color: var(--dim); }
+#loom-root .loom-tag, .loom-pop .loom-tag { display: inline-block; padding: 2px 9px; border-radius: 99px; font-size: 11px; font-weight: 600; border: 1px solid currentColor; margin-bottom: 6px; }
+#loom-root .loom-tag.mint, .loom-pop .loom-tag.mint { color: var(--mint); }
+#loom-root .loom-tag.lilac, .loom-pop .loom-tag.lilac { color: var(--lilac); }
+#loom-root .loom-tag.coral, .loom-pop .loom-tag.coral { color: var(--coral); margin-bottom: 0; }
+
+/* working states */
+#loom-root .loom-working, #loom-modal .loom-working, .loom-pop .loom-working { display: flex; align-items: center; gap: 8px; color: var(--dim); padding: 4px 0; }
+#loom-root .loom-spin, #loom-modal .loom-spin, .loom-pop .loom-spin { width: 14px; height: 14px; flex: none; border-radius: 50%; border: 2px solid var(--edge); border-top-color: var(--mint); animation: loom-spin .8s linear infinite; }
+#loom-root .loom-spin.lilac, #loom-modal .loom-spin.lilac, .loom-pop .loom-spin.lilac { border-top-color: var(--lilac); }
+#loom-root .loom-spin.sky, .loom-pop .loom-spin.sky { border-top-color: var(--sky); }
+
+/* processing stages */
+#loom-root .loom-stages { list-style: none; margin: 8px 0 0; padding: 0; }
+#loom-root .loom-stages li { display: grid; grid-template-columns: 14px 110px 1fr; gap: 6px; align-items: baseline; padding: 3px 0; font-size: 12px; }
+#loom-root .loom-stages li::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--faint); align-self: center; }
+#loom-root .loom-stages li.done::before { background: var(--mint); }
+#loom-root .loom-stages li.run::before { background: var(--peach); animation: loom-pulse 1.2s ease-in-out infinite; }
+#loom-root .loom-stages li.fail::before { background: var(--coral); }
+#loom-root .loom-stages span { color: var(--dim); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+/* viewer picker */
+#loom-root .loom-learners { display: grid; gap: 6px; margin: 8px 0 10px; }
+#loom-root .loom-learner { display: grid; gap: 1px; text-align: left; padding: 9px 12px; border-radius: 14px; border: 1px solid var(--edge-soft); background: var(--well); cursor: pointer; transition: border-color .3s var(--ease), background .3s var(--ease); }
+#loom-root .loom-learner:hover { border-color: var(--edge); background: var(--well-hi); }
+#loom-root .loom-learner.on { border-color: var(--peach); background: rgba(255, 179, 138, .08); box-shadow: inset 3px 0 0 var(--peach); }
+#loom-root .loom-learner span { color: var(--dim); font-size: 12px; }
+#loom-root .loom-learner em { font-style: normal; font-size: 11px; color: var(--faint); }
+
+/* cut summary */
+#loom-root .loom-cut-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; margin-bottom: 10px; }
+#loom-root .loom-scores { display: grid; gap: 4px; margin-bottom: 10px; }
+#loom-root .loom-scores div { display: grid; grid-template-columns: 86px 1fr 34px; align-items: center; gap: 8px; font-size: 11.5px; color: var(--dim); }
+#loom-root .loom-scores i { height: 6px; border-radius: 99px; background: rgba(0, 0, 0, .3); overflow: hidden; }
+#loom-root .loom-scores b { display: block; height: 100%; border-radius: 99px; background: var(--mint); }
+#loom-root .loom-scores em { font-style: normal; text-align: right; color: var(--ink); font-variant-numeric: tabular-nums; }
+#loom-root .loom-tl { position: relative; height: 16px; border-radius: 99px; cursor: pointer; margin: 6px 0 4px; overflow: hidden;
+  background: repeating-linear-gradient(135deg, rgba(214, 240, 255, .10) 0 4px, rgba(214, 240, 255, .03) 4px 8px); border: 1px solid var(--edge-soft); }
+#loom-root .loom-tl .keep { position: absolute; top: 0; bottom: 0; background: rgba(110, 242, 196, .5); }
+#loom-root .loom-tl .mask { position: absolute; top: 9px; bottom: 0; background: var(--coral); }
+#loom-root .loom-tl .head { position: absolute; top: -2px; bottom: -2px; width: 2px; margin-left: -1px; background: var(--ink); box-shadow: 0 0 6px var(--ink); left: 0; }
+#loom-root .loom-legend { display: flex; gap: 12px; font-size: 11px; color: var(--dim); margin-bottom: 8px; }
+#loom-root .loom-legend span::before { content: ""; display: inline-block; width: 10px; height: 6px; border-radius: 3px; margin-right: 5px; vertical-align: middle; }
+#loom-root .loom-legend .k::before { background: var(--mint); }
+#loom-root .loom-legend .s::before { background: repeating-linear-gradient(135deg, var(--faint) 0 2px, transparent 2px 4px); }
+#loom-root .loom-legend .m::before { background: var(--coral); }
+#loom-root .loom-toggles { display: grid; gap: 4px; }
+#loom-root .loom-toggles label { display: flex; align-items: center; gap: 8px; cursor: pointer; font-size: 12.5px; }
+#loom-root .loom-toggles input { accent-color: var(--peach); width: 15px; height: 15px; }
+#loom-root .loom-line { display: grid; grid-template-columns: auto 1fr auto; gap: 8px; align-items: center; padding: 6px 0; border-top: 1px dashed var(--edge-soft); font-size: 12px; }
+#loom-root .loom-line:first-of-type { border-top: 0; }
+#loom-root .loom-time { font: 11px ui-monospace, Consolas, monospace; color: var(--dim); }
+
+/* ask */
+#loom-root .loom-ask textarea { width: 100%; resize: vertical; min-height: 64px; padding: 9px 11px; border-radius: 12px; border: 1px solid var(--edge); background: rgba(0, 0, 0, .22); outline: none; transition: border-color .25s var(--ease); }
+#loom-root .loom-ask textarea:focus, #loom-root .loom-quizbar input:focus, .loom-pop input:focus { border-color: var(--peach); }
+#loom-root textarea::placeholder, #loom-root input::placeholder, .loom-pop input::placeholder { color: var(--faint); }
+#loom-root .loom-actions, .loom-pop .loom-actions { display: flex; gap: 6px; margin-top: 8px; flex-wrap: wrap; }
+#loom-root .loom-actions .loom-btn, .loom-pop .loom-actions .loom-btn { flex: 1 1 auto; }
+#loom-root .loom-actions.small .loom-btn, .loom-pop .loom-actions.small .loom-btn { flex: 0 1 auto; }
+#loom-root .loom-hint:empty { display: none; }
+#loom-root .loom-hint { margin: 6px 0 0; color: var(--peach); font-size: 12px; }
+#loom-root .loom-selected { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; margin-bottom: 4px; }
+#loom-root .loom-objchip, .loom-pop .loom-objchip { display: inline-flex; align-items: center; gap: 6px; padding: 3px 10px; border-radius: 99px; background: rgba(195, 166, 255, .12); border: 1px solid rgba(195, 166, 255, .6); color: var(--lilac); font-weight: 600; }
+#loom-root .loom-objchip { padding-right: 4px; }
+#loom-root .loom-objchip i, .loom-pop .loom-objchip i { width: 8px; height: 8px; border-radius: 50%; background: var(--lilac); box-shadow: 0 0 8px var(--lilac); }
+#loom-root .loom-objchip button { width: 20px; height: 20px; border-radius: 50%; border: 0; background: rgba(195, 166, 255, .2); color: var(--lilac); cursor: pointer; line-height: 1; }
+#loom-root .loom-objchip button:hover { background: var(--lilac); color: #1d1238; }
+
+#loom-root .loom-result { animation: loom-in .35s var(--ease); }
+#loom-root .loom-result header { display: grid; grid-template-columns: 1fr auto; gap: 2px 8px; margin-bottom: 8px; }
+#loom-root .loom-result header .loom-kicker, #loom-root .loom-result header h4 { grid-column: 1; margin: 0; }
+#loom-root .loom-result header .loom-icon { grid-column: 2; grid-row: 1 / span 2; width: 26px; height: 26px; font-size: 16px; }
+#loom-root .loom-result.answer { box-shadow: inset 3px 0 0 var(--mint); }
+#loom-root .loom-result.animate { box-shadow: inset 3px 0 0 var(--lilac); }
+#loom-root .loom-result.quiz { box-shadow: inset 3px 0 0 var(--peach); }
+#loom-root .loom-answer, .loom-pop .loom-answer { white-space: pre-wrap; font-size: 13.5px; line-height: 1.55; margin: 0 0 8px; }
+#loom-root .loom-jumped, .loom-pop .loom-jumped { font-size: 12px; color: var(--dim); margin-bottom: 8px; }
+#loom-root .loom-cites, .loom-pop .loom-cites { display: grid; gap: 5px; margin: 8px 0; }
+#loom-root .loom-cite, .loom-pop .loom-cite {
+  display: grid; grid-template-columns: auto 1fr; gap: 8px; align-items: baseline; text-align: left; padding: 6px 10px;
+  border-radius: 12px; border: 1px solid var(--edge-soft); background: rgba(0, 0, 0, .18); cursor: pointer; transition: border-color .25s var(--ease);
+}
+#loom-root .loom-cite:hover, .loom-pop .loom-cite:hover { border-color: var(--mint); }
+#loom-root .loom-cite b, .loom-pop .loom-cite b { color: var(--mint); white-space: nowrap; font-size: 12px; }
+#loom-root .loom-cite span, .loom-pop .loom-cite span { color: var(--dim); font-size: 11.5px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+#loom-root .loom-trace, .loom-pop .loom-trace { font: 10.5px/1.5 ui-monospace, Consolas, monospace; color: var(--faint); margin: 8px 0 0; padding-top: 6px; border-top: 1px dashed var(--edge-soft); }
+
+/* explainer progress */
+#loom-root .loom-stepper, .loom-pop .loom-stepper { list-style: none; display: flex; gap: 3px; margin: 4px 0 8px; padding: 0; }
+#loom-root .loom-stepper li, .loom-pop .loom-stepper li { flex: 1; text-align: center; font-size: 10px; color: var(--faint); padding-top: 8px; position: relative; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+#loom-root .loom-stepper li::before, .loom-pop .loom-stepper li::before { content: ""; position: absolute; left: 0; right: 0; top: 0; height: 4px; border-radius: 99px; background: rgba(0, 0, 0, .3); }
+#loom-root .loom-stepper li.done, .loom-pop .loom-stepper li.done { color: var(--ink); }
+#loom-root .loom-stepper li.done::before, .loom-pop .loom-stepper li.done::before { background: var(--lilac); }
+#loom-root .loom-stepper li.run, .loom-pop .loom-stepper li.run { color: var(--lilac); font-weight: 600; }
+#loom-root .loom-stepper li.run::before, .loom-pop .loom-stepper li.run::before { background: linear-gradient(90deg, var(--lilac), rgba(195, 166, 255, .2), var(--lilac)); background-size: 200% 100%; animation: loom-flow 1.4s linear infinite; }
+
+/* quiz */
+#loom-root .loom-q { padding: 8px 0; border-top: 1px dashed var(--edge-soft); }
+#loom-root .loom-q:first-of-type { border-top: 0; padding-top: 0; }
+#loom-root .loom-stem { font-weight: 500; }
+#loom-root .loom-opts { display: grid; gap: 5px; }
+#loom-root .loom-opt { text-align: left; padding: 7px 11px; border-radius: 12px; border: 1px solid var(--edge-soft); background: rgba(0, 0, 0, .18); cursor: pointer; transition: border-color .25s var(--ease), background .25s var(--ease); }
+#loom-root .loom-opt:hover:not(:disabled) { border-color: var(--peach); }
+#loom-root .loom-opt:disabled { cursor: default; }
+#loom-root .loom-opt.picked { border-color: var(--peach); }
+#loom-root .loom-opt.right { border-color: var(--mint); background: rgba(110, 242, 196, .12); color: var(--mint); }
+#loom-root .loom-opt.wrong { border-color: var(--coral); background: rgba(255, 92, 122, .12); color: var(--coral); }
+#loom-root .loom-q-result { margin-top: 6px; }
+#loom-root .loom-q-result p { margin: 0 0 4px; }
+#loom-root .loom-score:empty { display: none; }
+#loom-root .loom-score { font-weight: 600; color: var(--peach); margin: 6px 0 0; }
+
+/* library */
+#loom-root .loom-lib { display: grid; grid-template-columns: auto 1fr; gap: 10px; align-items: start; width: 100%; text-align: left; cursor: pointer; transition: border-color .3s var(--ease), transform .25s var(--ease); }
+#loom-root button.loom-lib:hover { border-color: var(--lilac); }
+#loom-root button.loom-lib:active { transform: scale(.99); }
+#loom-root .loom-lib.rendering { display: block; cursor: default; border-style: dashed; border-color: rgba(195, 166, 255, .5); }
+#loom-root .loom-lib b { display: block; }
+#loom-root .loom-lib em { display: block; font-style: normal; color: var(--dim); font-size: 12px; }
+#loom-root .loom-lib small { display: block; color: var(--lilac); font-size: 11px; margin-top: 2px; }
+#loom-root .loom-play { width: 34px; height: 34px; border-radius: 50%; background: var(--lilac); position: relative; box-shadow: 0 0 16px -4px var(--lilac); }
+#loom-root .loom-play::after { content: ""; position: absolute; left: 13px; top: 10px; border-left: 11px solid #1d1238; border-top: 7px solid transparent; border-bottom: 7px solid transparent; }
+
+/* quiz bar (always visible) */
+#loom-root .loom-quizbar { padding: 10px 14px 14px; border-top: 1px solid var(--edge-soft); }
+#loom-root .loom-quizbar label { display: block; font-size: 10.5px; text-transform: uppercase; letter-spacing: .12em; color: var(--dim); margin-bottom: 5px; }
+#loom-root .loom-row { display: flex; gap: 6px; }
+#loom-root .loom-quizbar input { flex: 1; min-width: 0; padding: 7px 12px; border-radius: 99px; border: 1px solid var(--edge); background: rgba(0, 0, 0, .22); outline: none; transition: border-color .25s var(--ease); }
+#loom-root .loom-quizbar input:disabled { opacity: .55; }
+
+/* ---------- click popover ---------- */
+.loom-pop {
+  position: fixed; z-index: 2147483300; width: 340px; max-width: calc(100vw - 16px); max-height: calc(100vh - 16px); overflow-y: auto;
+  padding: 12px 14px 14px; border-radius: 18px;
+  background: var(--glass); -webkit-backdrop-filter: blur(22px) saturate(1.4); backdrop-filter: blur(22px) saturate(1.4);
+  border: 1px solid var(--edge); box-shadow: var(--shadow); scrollbar-width: thin; scrollbar-color: var(--edge) transparent;
+  animation: loom-pop .3s var(--ease);
+}
+.loom-pop header { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+.loom-pop header .loom-icon { margin-left: auto; width: 26px; height: 26px; font-size: 16px; }
+.loom-pop .loom-pop-q { margin: 10px 0 8px; font-size: 14.5px; line-height: 1.35; }
+.loom-pop .loom-pop-q b { color: var(--sky); font-weight: 600; }
+.loom-pop form { margin: 0; }
+.loom-pop input { width: 100%; padding: 9px 13px; border-radius: 12px; border: 1px solid var(--edge); background: rgba(0, 0, 0, .25); outline: none; transition: border-color .25s var(--ease); }
+.loom-pop .loom-pop-hint { margin: 6px 0 0; font-size: 11px; color: var(--faint); }
+.loom-pop .loom-pop-body:not(:empty) { margin-top: 10px; padding-top: 10px; border-top: 1px solid var(--edge-soft); }
+.loom-pop .loom-pop-body p { margin: 0 0 8px; }
+
+/* ---------- overlay inside #movie_player ---------- */
+.loom-layer { position: absolute; inset: 0; z-index: 35; pointer-events: none; overflow: hidden; }
+.loom-layer .loom-canvas { position: absolute; inset: 0; width: 100%; height: 100%; }
+.loom-layer .loom-hover-label {
+  position: absolute; left: 0; top: 0; max-width: 260px; padding: 4px 12px; border-radius: 99px;
+  background: rgba(10, 26, 36, .82); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px);
+  border: 1px solid rgba(124, 199, 255, .7); color: #7CC7FF; box-shadow: 0 0 18px -4px rgba(124, 199, 255, .7);
+  font: 600 12.5px/1.3 "Bahnschrift", "Segoe UI Variable", system-ui, sans-serif; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  opacity: 0; transition: opacity .25s cubic-bezier(.16, 1, .3, 1); will-change: transform;
+}
+.loom-layer .loom-hover-label.on { opacity: 1; }
+.loom-layer .loom-chip {
+  position: absolute; left: 0; top: 0; display: none; align-items: center; flex-wrap: wrap; gap: 6px; max-width: 280px;
+  padding: 3px 4px 3px 10px; border-radius: 14px; background: rgba(255, 92, 122, .92); color: #fff;
+  font: 12px/1.35 "Bahnschrift", "Segoe UI Variable", system-ui, sans-serif; pointer-events: auto;
+  box-shadow: 0 6px 20px -6px rgba(255, 92, 122, .8); will-change: transform;
+}
+.loom-layer .loom-chip.on { display: flex; }
+.loom-layer .loom-chip button { border: 0; border-radius: 99px; padding: 1px 8px; background: rgba(10, 26, 36, .35); color: #fff; font: inherit; font-weight: 600; cursor: pointer; }
+.loom-layer .loom-chip button:hover { background: rgba(10, 26, 36, .6); }
+.loom-layer .loom-chip em { display: none; flex-basis: 100%; font-style: normal; font-size: 11.5px; padding: 0 6px 3px 0; opacity: .95; }
+.loom-layer .loom-chip.open em { display: block; }
+.loom-layer .loom-toast {
+  position: absolute; left: 50%; top: 14px; max-width: min(80%, 560px); transform: translate(-50%, -8px); opacity: 0;
+  padding: 8px 16px; border-radius: 99px; background: rgba(10, 26, 36, .82); -webkit-backdrop-filter: blur(16px); backdrop-filter: blur(16px);
+  border: 1px solid rgba(214, 240, 255, .14); color: #F3F6F4;
+  font: 13px/1.4 "Bahnschrift", "Segoe UI Variable", system-ui, sans-serif; text-align: center;
+  transition: opacity .3s cubic-bezier(.16, 1, .3, 1), transform .3s cubic-bezier(.16, 1, .3, 1);
+}
+.loom-layer .loom-toast.on { opacity: 1; transform: translate(-50%, 0); }
+
+/* ---------- explainer modal ---------- */
+#loom-modal { position: fixed; inset: 0; z-index: 2147483600; display: grid; place-items: center; padding: 24px; background: rgba(2, 10, 14, .62); -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); animation: loom-fade .3s var(--ease); }
+#loom-modal .loom-modal-box {
+  width: min(900px, 94vw); max-height: 92vh; overflow-y: auto; padding: 16px 18px; border-radius: 18px;
+  background: var(--glass); -webkit-backdrop-filter: blur(22px) saturate(1.4); backdrop-filter: blur(22px) saturate(1.4);
+  border: 1px solid var(--edge); box-shadow: var(--shadow); animation: loom-pop .4s var(--ease);
+}
+#loom-modal header { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; margin-bottom: 12px; }
+#loom-modal h2 { margin: 2px 0; font-size: 20px; font-weight: 600; }
+#loom-modal .loom-muted { color: var(--dim); margin: 0; }
+#loom-modal .loom-bad a { color: var(--peach); }
+#loom-modal .loom-icon { width: 34px; height: 34px; font-size: 20px; }
+#loom-modal .loom-modal-video { aspect-ratio: 16 / 9; display: grid; place-items: center; border-radius: 14px; background: #000; overflow: hidden; border: 1px solid var(--edge-soft); }
+#loom-modal video { width: 100%; height: 100%; display: block; background: #000; }
+#loom-modal .loom-story { margin-top: 10px; color: var(--dim); }
+#loom-modal .loom-story summary { cursor: pointer; color: var(--lilac); }
+#loom-modal .loom-story ol { margin: 6px 0 0; padding-left: 20px; }
+#loom-modal footer { display: flex; justify-content: flex-end; margin-top: 12px; }
+
+@keyframes loom-spin { to { transform: rotate(360deg); } }
+@keyframes loom-pulse { 50% { opacity: .35; } }
+@keyframes loom-flow { to { background-position: -200% 0; } }
+@keyframes loom-in { from { opacity: 0; transform: translateY(6px); } }
+@keyframes loom-fade { from { opacity: 0; } }
+@keyframes loom-pop { from { opacity: 0; transform: translateY(6px) scale(.97); } }
+
+@media (prefers-reduced-motion: reduce) {
+  #loom-root, #loom-root *, #loom-modal, #loom-modal *, .loom-pop, .loom-pop *, .loom-layer * { animation: none !important; transition: none !important; }
+  #loom-root .loom-spin, #loom-modal .loom-spin, .loom-pop .loom-spin { border-color: var(--mint); }
+}

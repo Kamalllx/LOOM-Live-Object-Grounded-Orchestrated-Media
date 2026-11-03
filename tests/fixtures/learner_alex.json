@@ -1,0 +1,21 @@
+{
+  "schema_version": "2.0",
+  "learner_id": "learner_alex",
+  "display_name": "Alex",
+  "persona": "Expert - wants the new idea without the setup",
+  "preferences": {
+    "pace": "condensed",
+    "language": "en",
+    "prior_knowledge": 0.85,
+    "explainers": "tap_only",
+    "never_skip": false
+  },
+  "safety_profile": {
+    "redaction_level": "off",
+    "blocked_tags": [],
+    "allowed_tags": [],
+    "parent_lock": false
+  },
+  "mastery": [],
+  "learner_state_sha": "sha256:4f20dcd094ed2190c4dcc1fbadaa5ec5a7ad194b5a0a9476f1663f76c34371a7"
+}

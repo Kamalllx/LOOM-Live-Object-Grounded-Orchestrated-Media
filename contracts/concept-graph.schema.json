@@ -1,0 +1,926 @@
+{
+  "$defs": {
+    "ConceptEvidence": {
+      "additionalProperties": false,
+      "properties": {
+        "object_ids": {
+          "default": [],
+          "items": {
+            "pattern": "^o_\\d{3,}$",
+            "type": "string"
+          },
+          "title": "Object Ids",
+          "type": "array"
+        },
+        "segment_ids": {
+          "default": [],
+          "items": {
+            "pattern": "^s_\\d{3,}$",
+            "type": "string"
+          },
+          "title": "Segment Ids",
+          "type": "array"
+        },
+        "text_ids": {
+          "default": [],
+          "items": {
+            "pattern": "^x_\\d{3,}$",
+            "type": "string"
+          },
+          "title": "Text Ids",
+          "type": "array"
+        }
+      },
+      "title": "ConceptEvidence",
+      "type": "object"
+    },
+    "ConceptNode": {
+      "additionalProperties": false,
+      "properties": {
+        "canonical_key": {
+          "anyOf": [
+            {
+              "pattern": "^concept:[a-z0-9_]+$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Canonical Key"
+        },
+        "difficulty": {
+          "enum": [
+            "beginner",
+            "intermediate",
+            "expert"
+          ],
+          "title": "Difficulty",
+          "type": "string"
+        },
+        "evidence": {
+          "$ref": "#/$defs/ConceptEvidence"
+        },
+        "label": {
+          "minLength": 1,
+          "title": "Label",
+          "type": "string"
+        },
+        "node_id": {
+          "pattern": "^c_\\d{2,}$",
+          "title": "Node Id",
+          "type": "string"
+        },
+        "prerequisites": {
+          "default": [],
+          "items": {
+            "pattern": "^c_\\d{2,}$",
+            "type": "string"
+          },
+          "title": "Prerequisites",
+          "type": "array"
+        },
+        "summary": {
+          "minLength": 1,
+          "title": "Summary",
+          "type": "string"
+        }
+      },
+      "required": [
+        "node_id",
+        "label",
+        "summary",
+        "evidence",
+        "difficulty"
+      ],
+      "title": "ConceptNode",
+      "type": "object"
+    },
+    "FrameInfo": {
+      "additionalProperties": false,
+      "properties": {
+        "content_rect": {
+          "default": [
+            0.0,
+            0.0,
+            1.0,
+            1.0
+          ],
+          "maxItems": 4,
+          "minItems": 4,
+          "prefixItems": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "number"
+            },
+            {
+              "type": "number"
+            },
+            {
+              "type": "number"
+            }
+          ],
+          "title": "Content Rect",
+          "type": "array"
+        },
+        "fps": {
+          "exclusiveMinimum": 0,
+          "title": "Fps",
+          "type": "number"
+        },
+        "height": {
+          "exclusiveMinimum": 0,
+          "title": "Height",
+          "type": "integer"
+        },
+        "width": {
+          "exclusiveMinimum": 0,
+          "title": "Width",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "width",
+        "height",
+        "fps"
+      ],
+      "title": "FrameInfo",
+      "type": "object"
+    },
+    "GraphObject": {
+      "additionalProperties": false,
+      "properties": {
+        "instances": {
+          "items": {
+            "$ref": "#/$defs/ObjectInstance"
+          },
+          "minItems": 1,
+          "title": "Instances",
+          "type": "array"
+        },
+        "is_hazard_class": {
+          "default": false,
+          "title": "Is Hazard Class",
+          "type": "boolean"
+        },
+        "label": {
+          "minLength": 1,
+          "title": "Label",
+          "type": "string"
+        },
+        "object_id": {
+          "pattern": "^o_\\d{3,}$",
+          "title": "Object Id",
+          "type": "string"
+        },
+        "phrase_source": {
+          "enum": [
+            "hazard_class",
+            "vlm",
+            "transcript"
+          ],
+          "title": "Phrase Source",
+          "type": "string"
+        },
+        "safety": {
+          "$ref": "#/$defs/SafetyRecord"
+        }
+      },
+      "required": [
+        "object_id",
+        "label",
+        "phrase_source",
+        "instances",
+        "safety"
+      ],
+      "title": "GraphObject",
+      "type": "object"
+    },
+    "ObjectInstance": {
+      "additionalProperties": false,
+      "properties": {
+        "end": {
+          "minimum": 0.0,
+          "title": "End",
+          "type": "number"
+        },
+        "instance_id": {
+          "pattern": "^o_\\d{3,}_\\d+$",
+          "title": "Instance Id",
+          "type": "string"
+        },
+        "score": {
+          "maximum": 1.0,
+          "minimum": 0.0,
+          "title": "Score",
+          "type": "number"
+        },
+        "shot_id": {
+          "pattern": "^sh_\\d{2,}$",
+          "title": "Shot Id",
+          "type": "string"
+        },
+        "start": {
+          "minimum": 0.0,
+          "title": "Start",
+          "type": "number"
+        },
+        "track": {
+          "items": {
+            "$ref": "#/$defs/TrackSample"
+          },
+          "minItems": 1,
+          "title": "Track",
+          "type": "array"
+        },
+        "verification": {
+          "$ref": "#/$defs/Verification"
+        }
+      },
+      "required": [
+        "instance_id",
+        "shot_id",
+        "start",
+        "end",
+        "score",
+        "track",
+        "verification"
+      ],
+      "title": "ObjectInstance",
+      "type": "object"
+    },
+    "PerceptionMeta": {
+      "additionalProperties": false,
+      "properties": {
+        "degraded": {
+          "default": [],
+          "items": {
+            "maxLength": 200,
+            "minLength": 1,
+            "type": "string"
+          },
+          "title": "Degraded",
+          "type": "array"
+        },
+        "models": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "default": {},
+          "title": "Models",
+          "type": "object"
+        },
+        "pipeline_version": {
+          "title": "Pipeline Version",
+          "type": "string"
+        },
+        "segmentation_tier": {
+          "enum": [
+            "boxes",
+            "sam2",
+            "sam3",
+            "fixture"
+          ],
+          "title": "Segmentation Tier",
+          "type": "string"
+        },
+        "stage_hashes": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "default": {},
+          "title": "Stage Hashes",
+          "type": "object"
+        },
+        "timings_s": {
+          "additionalProperties": {
+            "type": "number"
+          },
+          "default": {},
+          "title": "Timings S",
+          "type": "object"
+        }
+      },
+      "required": [
+        "pipeline_version",
+        "segmentation_tier"
+      ],
+      "title": "PerceptionMeta",
+      "type": "object"
+    },
+    "QuizQuestion": {
+      "additionalProperties": false,
+      "properties": {
+        "answer_index": {
+          "maximum": 3,
+          "minimum": 0,
+          "title": "Answer Index",
+          "type": "integer"
+        },
+        "concept_node_id": {
+          "pattern": "^c_\\d{2,}$",
+          "title": "Concept Node Id",
+          "type": "string"
+        },
+        "evidence_segment_ids": {
+          "items": {
+            "pattern": "^s_\\d{3,}$",
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Evidence Segment Ids",
+          "type": "array"
+        },
+        "level": {
+          "enum": [
+            "beginner",
+            "intermediate",
+            "expert"
+          ],
+          "title": "Level",
+          "type": "string"
+        },
+        "options": {
+          "items": {
+            "type": "string"
+          },
+          "maxItems": 4,
+          "minItems": 4,
+          "title": "Options",
+          "type": "array"
+        },
+        "question_id": {
+          "pattern": "^q_[a-z0-9_]+$",
+          "title": "Question Id",
+          "type": "string"
+        },
+        "rationale": {
+          "title": "Rationale",
+          "type": "string"
+        },
+        "stem": {
+          "minLength": 1,
+          "title": "Stem",
+          "type": "string"
+        },
+        "verified_by": {
+          "title": "Verified By",
+          "type": "string"
+        }
+      },
+      "required": [
+        "question_id",
+        "concept_node_id",
+        "level",
+        "stem",
+        "options",
+        "answer_index",
+        "rationale",
+        "evidence_segment_ids",
+        "verified_by"
+      ],
+      "title": "QuizQuestion",
+      "type": "object"
+    },
+    "SafetyRecord": {
+      "additionalProperties": false,
+      "description": "Per-object ingest-time safety review (FR-PER-09). Anything not `reviewed` is treated as unsafe downstream.",
+      "properties": {
+        "child_unsafe": {
+          "default": false,
+          "title": "Child Unsafe",
+          "type": "boolean"
+        },
+        "disagreement": {
+          "default": false,
+          "title": "Disagreement",
+          "type": "boolean"
+        },
+        "models": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "default": {},
+          "title": "Models",
+          "type": "object"
+        },
+        "reasons": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "default": {},
+          "title": "Reasons",
+          "type": "object"
+        },
+        "severity": {
+          "default": 0.0,
+          "maximum": 1.0,
+          "minimum": 0.0,
+          "title": "Severity",
+          "type": "number"
+        },
+        "status": {
+          "enum": [
+            "reviewed",
+            "partial",
+            "unreviewed"
+          ],
+          "title": "Status",
+          "type": "string"
+        },
+        "tags": {
+          "default": [],
+          "items": {
+            "enum": [
+              "sharp_object",
+              "injury_risk",
+              "fire_or_explosion",
+              "weapon",
+              "blood_or_gore",
+              "nudity",
+              "drugs_or_alcohol",
+              "hazardous_chemical",
+              "disturbing"
+            ],
+            "type": "string"
+          },
+          "title": "Tags",
+          "type": "array"
+        }
+      },
+      "required": [
+        "status"
+      ],
+      "title": "SafetyRecord",
+      "type": "object"
+    },
+    "Sentence": {
+      "additionalProperties": false,
+      "properties": {
+        "end": {
+          "minimum": 0.0,
+          "title": "End",
+          "type": "number"
+        },
+        "seg_id": {
+          "pattern": "^s_\\d{3,}$",
+          "title": "Seg Id",
+          "type": "string"
+        },
+        "speaker": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Speaker"
+        },
+        "start": {
+          "minimum": 0.0,
+          "title": "Start",
+          "type": "number"
+        },
+        "text": {
+          "minLength": 1,
+          "title": "Text",
+          "type": "string"
+        },
+        "words": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/Word"
+          },
+          "title": "Words",
+          "type": "array"
+        }
+      },
+      "required": [
+        "seg_id",
+        "start",
+        "end",
+        "text"
+      ],
+      "title": "Sentence",
+      "type": "object"
+    },
+    "Shot": {
+      "additionalProperties": false,
+      "properties": {
+        "end": {
+          "minimum": 0.0,
+          "title": "End",
+          "type": "number"
+        },
+        "keyframes": {
+          "default": [],
+          "items": {
+            "minimum": 0.0,
+            "type": "number"
+          },
+          "title": "Keyframes",
+          "type": "array"
+        },
+        "shot_id": {
+          "pattern": "^sh_\\d{2,}$",
+          "title": "Shot Id",
+          "type": "string"
+        },
+        "start": {
+          "minimum": 0.0,
+          "title": "Start",
+          "type": "number"
+        }
+      },
+      "required": [
+        "shot_id",
+        "start",
+        "end"
+      ],
+      "title": "Shot",
+      "type": "object"
+    },
+    "SourceInfo": {
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "enum": [
+            "upload",
+            "path",
+            "youtube"
+          ],
+          "title": "Kind",
+          "type": "string"
+        },
+        "ref": {
+          "title": "Ref",
+          "type": "string"
+        },
+        "youtube_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Youtube Id"
+        }
+      },
+      "required": [
+        "kind",
+        "ref"
+      ],
+      "title": "SourceInfo",
+      "type": "object"
+    },
+    "TextSpan": {
+      "additionalProperties": false,
+      "properties": {
+        "bbox": {
+          "maxItems": 4,
+          "minItems": 4,
+          "prefixItems": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "number"
+            },
+            {
+              "type": "number"
+            },
+            {
+              "type": "number"
+            }
+          ],
+          "title": "Bbox",
+          "type": "array"
+        },
+        "confidence": {
+          "maximum": 1.0,
+          "minimum": 0.0,
+          "title": "Confidence",
+          "type": "number"
+        },
+        "end": {
+          "minimum": 0.0,
+          "title": "End",
+          "type": "number"
+        },
+        "reader": {
+          "enum": [
+            "rapidocr",
+            "glm-ocr"
+          ],
+          "title": "Reader",
+          "type": "string"
+        },
+        "start": {
+          "minimum": 0.0,
+          "title": "Start",
+          "type": "number"
+        },
+        "text": {
+          "minLength": 1,
+          "title": "Text",
+          "type": "string"
+        },
+        "text_id": {
+          "pattern": "^x_\\d{3,}$",
+          "title": "Text Id",
+          "type": "string"
+        }
+      },
+      "required": [
+        "text_id",
+        "start",
+        "end",
+        "text",
+        "bbox",
+        "confidence",
+        "reader"
+      ],
+      "title": "TextSpan",
+      "type": "object"
+    },
+    "ThreadRoleAssignment": {
+      "additionalProperties": false,
+      "properties": {
+        "gist": {
+          "title": "Gist",
+          "type": "string"
+        },
+        "role": {
+          "enum": [
+            "intro",
+            "setup",
+            "core",
+            "safety",
+            "summary"
+          ],
+          "title": "Role",
+          "type": "string"
+        },
+        "segment_ids": {
+          "items": {
+            "pattern": "^s_\\d{3,}$",
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Segment Ids",
+          "type": "array"
+        }
+      },
+      "required": [
+        "segment_ids",
+        "role",
+        "gist"
+      ],
+      "title": "ThreadRoleAssignment",
+      "type": "object"
+    },
+    "TrackSample": {
+      "additionalProperties": false,
+      "properties": {
+        "bbox": {
+          "maxItems": 4,
+          "minItems": 4,
+          "prefixItems": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "number"
+            },
+            {
+              "type": "number"
+            },
+            {
+              "type": "number"
+            }
+          ],
+          "title": "Bbox",
+          "type": "array"
+        },
+        "mask": {
+          "anyOf": [
+            {
+              "pattern": "^rle:\\d+x\\d+:\\S+$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Mask"
+        },
+        "t": {
+          "minimum": 0.0,
+          "title": "T",
+          "type": "number"
+        }
+      },
+      "required": [
+        "t",
+        "bbox"
+      ],
+      "title": "TrackSample",
+      "type": "object"
+    },
+    "Verification": {
+      "additionalProperties": false,
+      "properties": {
+        "siglip_margin": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Siglip Margin"
+        },
+        "status": {
+          "enum": [
+            "verified",
+            "unverified"
+          ],
+          "title": "Status",
+          "type": "string"
+        },
+        "vlm": {
+          "default": "not_run",
+          "enum": [
+            "confirmed",
+            "rejected",
+            "not_run",
+            "failed"
+          ],
+          "title": "Vlm",
+          "type": "string"
+        }
+      },
+      "required": [
+        "status"
+      ],
+      "title": "Verification",
+      "type": "object"
+    },
+    "Word": {
+      "additionalProperties": false,
+      "properties": {
+        "end": {
+          "minimum": 0.0,
+          "title": "End",
+          "type": "number"
+        },
+        "start": {
+          "minimum": 0.0,
+          "title": "Start",
+          "type": "number"
+        },
+        "w": {
+          "title": "W",
+          "type": "string"
+        }
+      },
+      "required": [
+        "w",
+        "start",
+        "end"
+      ],
+      "title": "Word",
+      "type": "object"
+    }
+  },
+  "$id": "https://loom.local/contracts/concept-graph.schema.json",
+  "additionalProperties": false,
+  "properties": {
+    "concept_nodes": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/ConceptNode"
+      },
+      "title": "Concept Nodes",
+      "type": "array"
+    },
+    "duration_seconds": {
+      "exclusiveMinimum": 0,
+      "title": "Duration Seconds",
+      "type": "number"
+    },
+    "frame": {
+      "$ref": "#/$defs/FrameInfo"
+    },
+    "graph_sha": {
+      "anyOf": [
+        {
+          "pattern": "^sha256:[0-9a-f]{64}$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Graph Sha"
+    },
+    "objects": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/GraphObject"
+      },
+      "title": "Objects",
+      "type": "array"
+    },
+    "on_screen_text": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/TextSpan"
+      },
+      "title": "On Screen Text",
+      "type": "array"
+    },
+    "perception_meta": {
+      "$ref": "#/$defs/PerceptionMeta"
+    },
+    "quiz_bank": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/QuizQuestion"
+      },
+      "title": "Quiz Bank",
+      "type": "array"
+    },
+    "schema_version": {
+      "default": "2.0",
+      "pattern": "^2\\.\\d+$",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "shots": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/Shot"
+      },
+      "title": "Shots",
+      "type": "array"
+    },
+    "source": {
+      "$ref": "#/$defs/SourceInfo"
+    },
+    "thread_roles": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/ThreadRoleAssignment"
+      },
+      "title": "Thread Roles",
+      "type": "array"
+    },
+    "title": {
+      "title": "Title",
+      "type": "string"
+    },
+    "transcript": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/Sentence"
+      },
+      "title": "Transcript",
+      "type": "array"
+    },
+    "video_id": {
+      "pattern": "^[a-z0-9][a-z0-9_]*$",
+      "title": "Video Id",
+      "type": "string"
+    },
+    "video_url": {
+      "title": "Video Url",
+      "type": "string"
+    }
+  },
+  "required": [
+    "video_id",
+    "title",
+    "source",
+    "video_url",
+    "duration_seconds",
+    "frame",
+    "perception_meta"
+  ],
+  "title": "ConceptGraph",
+  "type": "object",
+  "x-loom-schema-version": "2.0"
+}

@@ -1,0 +1,29 @@
+{
+  "$id": "https://loom.local/contracts/health.schema.json",
+  "additionalProperties": false,
+  "description": "Liveness only: the process is up. It says nothing about models — that is `/api/ready`.",
+  "properties": {
+    "alive": {
+      "const": true,
+      "default": true,
+      "title": "Alive",
+      "type": "boolean"
+    },
+    "uptime_s": {
+      "minimum": 0,
+      "title": "Uptime S",
+      "type": "number"
+    },
+    "version": {
+      "title": "Version",
+      "type": "string"
+    }
+  },
+  "required": [
+    "version",
+    "uptime_s"
+  ],
+  "title": "Health",
+  "type": "object",
+  "x-loom-schema-version": "2.0"
+}

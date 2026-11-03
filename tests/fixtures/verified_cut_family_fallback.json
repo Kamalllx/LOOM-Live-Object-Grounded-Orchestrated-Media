@@ -1,0 +1,250 @@
+{
+  "schema_version": "2.0",
+  "session_id": "sess_fixturefamily",
+  "video_id": "acid_base_neutralization_d752a6",
+  "learner_id": "learner_family",
+  "status": "fallback",
+  "fallback_reason": "judge and safety models unavailable: conservative full-lesson cut, every object masked",
+  "pass_count": 3,
+  "cache_hit": false,
+  "critic_score": {
+    "safety": 1.0,
+    "coherence": 1.0,
+    "factuality": 1.0,
+    "completeness": 1.0
+  },
+  "final_threads": [
+    {
+      "thread_id": "t1",
+      "start": 0.0,
+      "end": 5.9,
+      "action": "keep",
+      "label": "Introduction",
+      "rationale": "mastery 0.40 (prior knowledge): keep at standard pace",
+      "source": "pedagogy"
+    },
+    {
+      "thread_id": "t2",
+      "start": 5.9,
+      "end": 14.4,
+      "action": "keep",
+      "label": "Personal Protective Equipment",
+      "rationale": "mastery 0.40 (prior knowledge): keep at standard pace",
+      "source": "pedagogy"
+    },
+    {
+      "thread_id": "t3",
+      "start": 14.4,
+      "end": 27.533,
+      "action": "keep",
+      "label": "Acid Dissociation",
+      "rationale": "mastery 0.40 (prior knowledge): keep at standard pace",
+      "source": "pedagogy"
+    },
+    {
+      "thread_id": "t4",
+      "start": 27.533,
+      "end": 39.633,
+      "action": "keep",
+      "label": "Neutralization Reaction",
+      "rationale": "mastery 0.40 (prior knowledge): keep at standard pace",
+      "source": "pedagogy"
+    },
+    {
+      "thread_id": "t5",
+      "start": 39.633,
+      "end": 48.033,
+      "action": "keep",
+      "label": "Indicator and Neutral pH",
+      "rationale": "mastery 0.40 (prior knowledge): keep at standard pace",
+      "source": "pedagogy"
+    },
+    {
+      "thread_id": "t6",
+      "start": 48.033,
+      "end": 58.333,
+      "action": "keep",
+      "label": "Safe Handling of Broken Glass",
+      "rationale": "mastery 0.40 (prior knowledge): keep at standard pace",
+      "source": "pedagogy"
+    },
+    {
+      "thread_id": "t7",
+      "start": 58.333,
+      "end": 68.733,
+      "action": "keep",
+      "label": "Neutralization Reaction",
+      "rationale": "mastery 0.40 (prior knowledge): keep at standard pace",
+      "source": "pedagogy"
+    }
+  ],
+  "skipped": [],
+  "redaction_masks": [
+    {
+      "mask_id": "m_o_001_0",
+      "object_id": "o_001",
+      "label": "gloves",
+      "start": 5.4,
+      "end": 14.9,
+      "track_url": "/media/masks/acid_base_neutralization_d752a6/o_001_0.json",
+      "fallback_bbox": [
+        0.23,
+        0.24000000000000002,
+        0.5599999999999999,
+        0.44
+      ],
+      "style": "blur",
+      "reason": "safety review incomplete - extra masking applied",
+      "source": "guardian",
+      "enforced": true
+    },
+    {
+      "mask_id": "m_o_002_0",
+      "object_id": "o_002",
+      "label": "lab coat",
+      "start": 13.9,
+      "end": 28.033,
+      "track_url": "/media/masks/acid_base_neutralization_d752a6/o_002_0.json",
+      "fallback_bbox": [
+        0.51,
+        0.0,
+        0.49,
+        0.83
+      ],
+      "style": "blur",
+      "reason": "safety review incomplete - extra masking applied",
+      "source": "guardian",
+      "enforced": true
+    },
+    {
+      "mask_id": "m_o_003_0",
+      "object_id": "o_003",
+      "label": "microscope",
+      "start": 13.9,
+      "end": 28.033,
+      "track_url": "/media/masks/acid_base_neutralization_d752a6/o_003_0.json",
+      "fallback_bbox": [
+        0.0,
+        0.010000000000000002,
+        0.43,
+        0.88
+      ],
+      "style": "blur",
+      "reason": "safety review incomplete - extra masking applied",
+      "source": "guardian",
+      "enforced": true
+    },
+    {
+      "mask_id": "m_o_004_0",
+      "object_id": "o_004",
+      "label": "beaker",
+      "start": 27.033,
+      "end": 40.133,
+      "track_url": "/media/masks/acid_base_neutralization_d752a6/o_004_0.json",
+      "fallback_bbox": [
+        0.12,
+        0.0,
+        0.47000000000000003,
+        1.0
+      ],
+      "style": "blur",
+      "reason": "safety review incomplete - extra masking applied",
+      "source": "guardian",
+      "enforced": true
+    },
+    {
+      "mask_id": "m_o_004_1",
+      "object_id": "o_004",
+      "label": "beaker",
+      "start": 39.133,
+      "end": 48.533,
+      "track_url": "/media/masks/acid_base_neutralization_d752a6/o_004_1.json",
+      "fallback_bbox": [
+        0.38,
+        0.23,
+        0.31,
+        0.76
+      ],
+      "style": "blur",
+      "reason": "safety review incomplete - extra masking applied",
+      "source": "guardian",
+      "enforced": true
+    },
+    {
+      "mask_id": "m_o_005_0",
+      "object_id": "o_005",
+      "label": "measuring cylinder",
+      "start": 27.033,
+      "end": 40.133,
+      "track_url": "/media/masks/acid_base_neutralization_d752a6/o_005_0.json",
+      "fallback_bbox": [
+        0.58,
+        0.0,
+        0.42000000000000004,
+        1.0
+      ],
+      "style": "blur",
+      "reason": "safety review incomplete - extra masking applied",
+      "source": "guardian",
+      "enforced": true
+    },
+    {
+      "mask_id": "m_o_006_0",
+      "object_id": "o_006",
+      "label": "volumetric flask",
+      "start": 39.133,
+      "end": 48.533,
+      "track_url": "/media/masks/acid_base_neutralization_d752a6/o_006_0.json",
+      "fallback_bbox": [
+        0.0,
+        0.0,
+        0.3,
+        1.0
+      ],
+      "style": "blur",
+      "reason": "safety review incomplete - extra masking applied",
+      "source": "guardian",
+      "enforced": true
+    },
+    {
+      "mask_id": "m_o_007_0",
+      "object_id": "o_007",
+      "label": "broken glass",
+      "start": 47.533,
+      "end": 58.833,
+      "track_url": "/media/masks/acid_base_neutralization_d752a6/o_007_0.json",
+      "fallback_bbox": [
+        0.26,
+        0.010000000000000002,
+        0.5499999999999999,
+        0.88
+      ],
+      "style": "blur",
+      "reason": "safety review incomplete - extra masking applied",
+      "source": "guardian",
+      "enforced": true
+    }
+  ],
+  "explainer_clips": [],
+  "tap_targets": [],
+  "quiz": [],
+  "loop_trace": [
+    {
+      "pass_number": 1,
+      "approved": false,
+      "scores": {
+        "safety": 1.0,
+        "coherence": 1.0,
+        "factuality": 1.0,
+        "completeness": 1.0
+      },
+      "issues": [],
+      "actions": [],
+      "latency_ms": 820
+    }
+  ],
+  "degraded": [
+    "fallback: judge and safety models unavailable: conservative full-lesson cut, every object masked"
+  ],
+  "created_at": "2026-10-29T00:00:00Z"
+}

@@ -1,0 +1,19 @@
+{
+  "name": "@loom/contracts",
+  "version": "2.0.0",
+  "private": true,
+  "description": "LOOM data contracts v2 - TypeScript types generated from the Pydantic models (do not edit src/index.ts by hand).",
+  "type": "module",
+  "types": "src/index.ts",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "generate": "cd ../.. && uv run loom contracts export",
+    "typecheck": "tsc --noEmit -p tsconfig.json"
+  },
+  "devDependencies": {
+    "json-schema-to-typescript": "^15.0.4",
+    "typescript": "^5.9.3"
+  }
+}

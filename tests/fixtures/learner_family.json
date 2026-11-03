@@ -1,0 +1,24 @@
+{
+  "schema_version": "2.0",
+  "learner_id": "learner_family",
+  "display_name": "Parent + child",
+  "persona": "Co-viewing with a young child",
+  "preferences": {
+    "pace": "standard",
+    "language": "en",
+    "prior_knowledge": 0.4,
+    "explainers": "tap_only",
+    "never_skip": false
+  },
+  "safety_profile": {
+    "redaction_level": "standard",
+    "blocked_tags": [
+      "sharp_object",
+      "injury_risk"
+    ],
+    "allowed_tags": [],
+    "parent_lock": true
+  },
+  "mastery": [],
+  "learner_state_sha": "sha256:b05d83b4cbfb74336989e548d51162757134b3aa9045049922bd058f61d9358f"
+}

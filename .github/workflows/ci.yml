@@ -1,0 +1,31 @@
+# CPU-only CI: lint, types, unit + contract tests, generated contracts, TS types (spec/06 S0).
+# Lives in remake/ and takes effect when remake/ is the repository root (git setup deferred, see CLAUDE.md).
+name: ci
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  python:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+        with:
+          python-version: "3.12"
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+      - run: uv sync --no-group perception   # CPU CI: no torch/CUDA wheels; GPU tests skip
+      - run: uv run ruff format --check loom tests setup
+      - run: uv run ruff check loom tests setup
+      - run: uv run mypy
+      - run: npm ci --no-fund --no-audit
+        working-directory: packages/contracts-ts
+      - run: uv run loom contracts export --check
+      - run: npx tsc --noEmit -p tsconfig.json
+        working-directory: packages/contracts-ts
+      - run: uv run pytest tests/unit tests/contract
+        env:
+          LOOM_OFFLINE: "1"

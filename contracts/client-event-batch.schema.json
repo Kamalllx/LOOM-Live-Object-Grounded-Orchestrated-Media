@@ -1,0 +1,68 @@
+{
+  "$defs": {
+    "ClientSessionEvent": {
+      "additionalProperties": false,
+      "description": "What the client may post (server stamps `server_ts`).",
+      "properties": {
+        "client_ts": {
+          "minimum": 0,
+          "title": "Client Ts",
+          "type": "number"
+        },
+        "payload": {
+          "additionalProperties": true,
+          "default": {},
+          "title": "Payload",
+          "type": "object"
+        },
+        "seq": {
+          "minimum": 0,
+          "title": "Seq",
+          "type": "integer"
+        },
+        "type": {
+          "enum": [
+            "play",
+            "pause",
+            "seek",
+            "thread_complete",
+            "object_tapped",
+            "explainer_shown",
+            "explainer_skipped",
+            "mask_shown",
+            "mask_revealed",
+            "quiz_answered",
+            "session_end"
+          ],
+          "title": "Type",
+          "type": "string"
+        }
+      },
+      "required": [
+        "seq",
+        "type",
+        "client_ts"
+      ],
+      "title": "ClientSessionEvent",
+      "type": "object"
+    }
+  },
+  "$id": "https://loom.local/contracts/client-event-batch.schema.json",
+  "additionalProperties": false,
+  "properties": {
+    "events": {
+      "items": {
+        "$ref": "#/$defs/ClientSessionEvent"
+      },
+      "maxItems": 500,
+      "title": "Events",
+      "type": "array"
+    }
+  },
+  "required": [
+    "events"
+  ],
+  "title": "ClientEventBatch",
+  "type": "object",
+  "x-loom-schema-version": "2.0"
+}

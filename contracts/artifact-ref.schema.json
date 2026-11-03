@@ -1,0 +1,36 @@
+{
+  "$id": "https://loom.local/contracts/artifact-ref.schema.json",
+  "additionalProperties": false,
+  "description": "`{\"$ref\": \"loom://graph/<video_id>@<sha>\", \"view\": \"mesh\"}` — passed instead of inline graphs.",
+  "properties": {
+    "$ref": {
+      "pattern": "^loom://[a-z_]+/[A-Za-z0-9_\\-]+(@sha256:[0-9a-f]{64})?$",
+      "title": "$Ref",
+      "type": "string"
+    },
+    "view": {
+      "anyOf": [
+        {
+          "enum": [
+            "mesh",
+            "safety",
+            "player",
+            "full"
+          ],
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "View"
+    }
+  },
+  "required": [
+    "$ref"
+  ],
+  "title": "ArtifactRef",
+  "type": "object",
+  "x-loom-schema-version": "2.0"
+}

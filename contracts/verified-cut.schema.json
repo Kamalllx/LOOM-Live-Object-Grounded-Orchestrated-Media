@@ -1,0 +1,707 @@
+{
+  "$defs": {
+    "CriticIssue": {
+      "additionalProperties": false,
+      "properties": {
+        "code": {
+          "enum": [
+            "unmasked_hazard",
+            "explainer_unfaithful",
+            "layout_failed",
+            "judge_unavailable",
+            "quiz_unsupported",
+            "quiz_missing",
+            "explainer_missing",
+            "explainer_unavailable",
+            "plugin_unavailable",
+            "cut_mid_sentence",
+            "missing_prerequisite",
+            "overlapping_threads",
+            "out_of_order",
+            "empty_cut",
+            "too_short",
+            "anchor_outside_cut",
+            "quiz_concept_not_in_cut"
+          ],
+          "title": "Code",
+          "type": "string"
+        },
+        "concept_node_id": {
+          "anyOf": [
+            {
+              "pattern": "^c_\\d{2,}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Concept Node Id"
+        },
+        "detail": {
+          "default": "",
+          "title": "Detail",
+          "type": "string"
+        },
+        "feedback": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Feedback"
+        },
+        "object_id": {
+          "anyOf": [
+            {
+              "pattern": "^o_\\d{3,}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Object Id"
+        },
+        "question_id": {
+          "anyOf": [
+            {
+              "pattern": "^q_[a-z0-9_]+$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Question Id"
+        },
+        "source": {
+          "anyOf": [
+            {
+              "pattern": "^(pedagogy|personalizer|curator|assessment|guardian|critic|plugin:[a-z0-9][a-z0-9_-]*)$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Source"
+        },
+        "thread_id": {
+          "anyOf": [
+            {
+              "pattern": "^t\\d+$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Thread Id"
+        }
+      },
+      "required": [
+        "code"
+      ],
+      "title": "CriticIssue",
+      "type": "object"
+    },
+    "CriticScore": {
+      "additionalProperties": false,
+      "properties": {
+        "coherence": {
+          "maximum": 1.0,
+          "minimum": 0.0,
+          "title": "Coherence",
+          "type": "number"
+        },
+        "completeness": {
+          "maximum": 1.0,
+          "minimum": 0.0,
+          "title": "Completeness",
+          "type": "number"
+        },
+        "factuality": {
+          "maximum": 1.0,
+          "minimum": 0.0,
+          "title": "Factuality",
+          "type": "number"
+        },
+        "safety": {
+          "maximum": 1.0,
+          "minimum": 0.0,
+          "title": "Safety",
+          "type": "number"
+        }
+      },
+      "required": [
+        "safety",
+        "coherence",
+        "factuality",
+        "completeness"
+      ],
+      "title": "CriticScore",
+      "type": "object"
+    },
+    "ExplainerClip": {
+      "additionalProperties": false,
+      "properties": {
+        "anchor_seconds": {
+          "minimum": 0.0,
+          "title": "Anchor Seconds",
+          "type": "number"
+        },
+        "clip_url": {
+          "title": "Clip Url",
+          "type": "string"
+        },
+        "concept_node_id": {
+          "pattern": "^c_\\d{2,}$",
+          "title": "Concept Node Id",
+          "type": "string"
+        },
+        "content_hash": {
+          "pattern": "^sha256:[0-9a-f]{64}$",
+          "title": "Content Hash",
+          "type": "string"
+        },
+        "duration_seconds": {
+          "exclusiveMinimum": 0,
+          "title": "Duration Seconds",
+          "type": "number"
+        },
+        "storyboard": {
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Storyboard",
+          "type": "array"
+        },
+        "title": {
+          "title": "Title",
+          "type": "string"
+        },
+        "trigger": {
+          "enum": [
+            "auto",
+            "tap"
+          ],
+          "title": "Trigger",
+          "type": "string"
+        },
+        "verified_by": {
+          "title": "Verified By",
+          "type": "string"
+        }
+      },
+      "required": [
+        "concept_node_id",
+        "trigger",
+        "anchor_seconds",
+        "clip_url",
+        "content_hash",
+        "title",
+        "duration_seconds",
+        "storyboard",
+        "verified_by"
+      ],
+      "title": "ExplainerClip",
+      "type": "object"
+    },
+    "FinalThread": {
+      "additionalProperties": false,
+      "properties": {
+        "action": {
+          "enum": [
+            "keep",
+            "condense",
+            "expand"
+          ],
+          "title": "Action",
+          "type": "string"
+        },
+        "end": {
+          "minimum": 0.0,
+          "title": "End",
+          "type": "number"
+        },
+        "label": {
+          "title": "Label",
+          "type": "string"
+        },
+        "rationale": {
+          "title": "Rationale",
+          "type": "string"
+        },
+        "source": {
+          "default": "pedagogy",
+          "pattern": "^(pedagogy|personalizer|curator|assessment|guardian|critic|plugin:[a-z0-9][a-z0-9_-]*)$",
+          "title": "Source",
+          "type": "string"
+        },
+        "start": {
+          "minimum": 0.0,
+          "title": "Start",
+          "type": "number"
+        },
+        "thread_id": {
+          "pattern": "^t\\d+$",
+          "title": "Thread Id",
+          "type": "string"
+        }
+      },
+      "required": [
+        "thread_id",
+        "start",
+        "end",
+        "action",
+        "label",
+        "rationale"
+      ],
+      "title": "FinalThread",
+      "type": "object"
+    },
+    "LoopAction": {
+      "additionalProperties": false,
+      "properties": {
+        "action": {
+          "enum": [
+            "force_mask",
+            "rerender",
+            "redraft",
+            "drop_artifact",
+            "revise_cut",
+            "reselect_quiz",
+            "drop_request",
+            "block"
+          ],
+          "title": "Action",
+          "type": "string"
+        },
+        "issue_code": {
+          "enum": [
+            "unmasked_hazard",
+            "explainer_unfaithful",
+            "layout_failed",
+            "judge_unavailable",
+            "quiz_unsupported",
+            "quiz_missing",
+            "explainer_missing",
+            "explainer_unavailable",
+            "plugin_unavailable",
+            "cut_mid_sentence",
+            "missing_prerequisite",
+            "overlapping_threads",
+            "out_of_order",
+            "empty_cut",
+            "too_short",
+            "anchor_outside_cut",
+            "quiz_concept_not_in_cut"
+          ],
+          "title": "Issue Code",
+          "type": "string"
+        },
+        "result": {
+          "default": "applied",
+          "enum": [
+            "applied",
+            "failed",
+            "skipped"
+          ],
+          "title": "Result",
+          "type": "string"
+        },
+        "target": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Target"
+        }
+      },
+      "required": [
+        "issue_code",
+        "action"
+      ],
+      "title": "LoopAction",
+      "type": "object"
+    },
+    "LoopPass": {
+      "additionalProperties": false,
+      "properties": {
+        "actions": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/LoopAction"
+          },
+          "title": "Actions",
+          "type": "array"
+        },
+        "approved": {
+          "title": "Approved",
+          "type": "boolean"
+        },
+        "issues": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/CriticIssue"
+          },
+          "title": "Issues",
+          "type": "array"
+        },
+        "latency_ms": {
+          "minimum": 0,
+          "title": "Latency Ms",
+          "type": "integer"
+        },
+        "pass_number": {
+          "minimum": 1,
+          "title": "Pass Number",
+          "type": "integer"
+        },
+        "scores": {
+          "$ref": "#/$defs/CriticScore"
+        }
+      },
+      "required": [
+        "pass_number",
+        "approved",
+        "scores",
+        "latency_ms"
+      ],
+      "title": "LoopPass",
+      "type": "object"
+    },
+    "PlayerQuizItem": {
+      "additionalProperties": false,
+      "description": "Quiz item as sent to clients: no answer, no rationale (graded server-side).",
+      "properties": {
+        "options": {
+          "items": {
+            "type": "string"
+          },
+          "maxItems": 4,
+          "minItems": 4,
+          "title": "Options",
+          "type": "array"
+        },
+        "question_id": {
+          "pattern": "^q_[a-z0-9_]+$",
+          "title": "Question Id",
+          "type": "string"
+        },
+        "stem": {
+          "title": "Stem",
+          "type": "string"
+        }
+      },
+      "required": [
+        "question_id",
+        "stem",
+        "options"
+      ],
+      "title": "PlayerQuizItem",
+      "type": "object"
+    },
+    "RedactionMask": {
+      "additionalProperties": false,
+      "properties": {
+        "end": {
+          "minimum": 0.0,
+          "title": "End",
+          "type": "number"
+        },
+        "enforced": {
+          "default": false,
+          "title": "Enforced",
+          "type": "boolean"
+        },
+        "fallback_bbox": {
+          "maxItems": 4,
+          "minItems": 4,
+          "prefixItems": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "number"
+            },
+            {
+              "type": "number"
+            },
+            {
+              "type": "number"
+            }
+          ],
+          "title": "Fallback Bbox",
+          "type": "array"
+        },
+        "label": {
+          "title": "Label",
+          "type": "string"
+        },
+        "mask_id": {
+          "pattern": "^m_o_\\d{3,}_\\d+$",
+          "title": "Mask Id",
+          "type": "string"
+        },
+        "object_id": {
+          "pattern": "^o_\\d{3,}$",
+          "title": "Object Id",
+          "type": "string"
+        },
+        "reason": {
+          "minLength": 1,
+          "title": "Reason",
+          "type": "string"
+        },
+        "source": {
+          "pattern": "^(pedagogy|personalizer|curator|assessment|guardian|critic|plugin:[a-z0-9][a-z0-9_-]*)$",
+          "title": "Source",
+          "type": "string"
+        },
+        "start": {
+          "minimum": 0.0,
+          "title": "Start",
+          "type": "number"
+        },
+        "style": {
+          "default": "blur",
+          "enum": [
+            "blur",
+            "pixelate",
+            "solid"
+          ],
+          "title": "Style",
+          "type": "string"
+        },
+        "track_url": {
+          "title": "Track Url",
+          "type": "string"
+        }
+      },
+      "required": [
+        "mask_id",
+        "object_id",
+        "label",
+        "start",
+        "end",
+        "track_url",
+        "fallback_bbox",
+        "reason",
+        "source"
+      ],
+      "title": "RedactionMask",
+      "type": "object"
+    },
+    "TapTarget": {
+      "additionalProperties": false,
+      "properties": {
+        "concept_node_id": {
+          "pattern": "^c_\\d{2,}$",
+          "title": "Concept Node Id",
+          "type": "string"
+        },
+        "object_id": {
+          "pattern": "^o_\\d{3,}$",
+          "title": "Object Id",
+          "type": "string"
+        }
+      },
+      "required": [
+        "object_id",
+        "concept_node_id"
+      ],
+      "title": "TapTarget",
+      "type": "object"
+    },
+    "VerifiedSkip": {
+      "additionalProperties": false,
+      "properties": {
+        "end": {
+          "minimum": 0.0,
+          "title": "End",
+          "type": "number"
+        },
+        "rationale": {
+          "title": "Rationale",
+          "type": "string"
+        },
+        "source": {
+          "default": "pedagogy",
+          "pattern": "^(pedagogy|personalizer|curator|assessment|guardian|critic|plugin:[a-z0-9][a-z0-9_-]*)$",
+          "title": "Source",
+          "type": "string"
+        },
+        "start": {
+          "minimum": 0.0,
+          "title": "Start",
+          "type": "number"
+        }
+      },
+      "required": [
+        "start",
+        "end",
+        "rationale"
+      ],
+      "title": "VerifiedSkip",
+      "type": "object"
+    }
+  },
+  "$id": "https://loom.local/contracts/verified-cut.schema.json",
+  "additionalProperties": false,
+  "properties": {
+    "cache_hit": {
+      "default": false,
+      "title": "Cache Hit",
+      "type": "boolean"
+    },
+    "created_at": {
+      "format": "date-time",
+      "title": "Created At",
+      "type": "string"
+    },
+    "critic_score": {
+      "$ref": "#/$defs/CriticScore"
+    },
+    "degraded": {
+      "default": [],
+      "items": {
+        "maxLength": 200,
+        "minLength": 1,
+        "type": "string"
+      },
+      "title": "Degraded",
+      "type": "array"
+    },
+    "explainer_clips": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/ExplainerClip"
+      },
+      "title": "Explainer Clips",
+      "type": "array"
+    },
+    "fallback_reason": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Fallback Reason"
+    },
+    "final_threads": {
+      "items": {
+        "$ref": "#/$defs/FinalThread"
+      },
+      "title": "Final Threads",
+      "type": "array"
+    },
+    "learner_id": {
+      "pattern": "^[a-z0-9][a-z0-9_]*$",
+      "title": "Learner Id",
+      "type": "string"
+    },
+    "loop_trace": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/LoopPass"
+      },
+      "title": "Loop Trace",
+      "type": "array"
+    },
+    "pass_count": {
+      "minimum": 0,
+      "title": "Pass Count",
+      "type": "integer"
+    },
+    "quiz": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/PlayerQuizItem"
+      },
+      "title": "Quiz",
+      "type": "array"
+    },
+    "redaction_masks": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/RedactionMask"
+      },
+      "title": "Redaction Masks",
+      "type": "array"
+    },
+    "schema_version": {
+      "default": "2.0",
+      "pattern": "^2\\.\\d+$",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "session_id": {
+      "pattern": "^sess_[a-z0-9]+$",
+      "title": "Session Id",
+      "type": "string"
+    },
+    "skipped": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/VerifiedSkip"
+      },
+      "title": "Skipped",
+      "type": "array"
+    },
+    "status": {
+      "enum": [
+        "approved",
+        "fallback"
+      ],
+      "title": "Status",
+      "type": "string"
+    },
+    "tap_targets": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/TapTarget"
+      },
+      "title": "Tap Targets",
+      "type": "array"
+    },
+    "video_id": {
+      "pattern": "^[a-z0-9][a-z0-9_]*$",
+      "title": "Video Id",
+      "type": "string"
+    }
+  },
+  "required": [
+    "session_id",
+    "video_id",
+    "learner_id",
+    "status",
+    "pass_count",
+    "critic_score",
+    "final_threads",
+    "created_at"
+  ],
+  "title": "VerifiedCut",
+  "type": "object",
+  "x-loom-schema-version": "2.0"
+}

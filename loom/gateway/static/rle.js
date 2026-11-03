@@ -1,0 +1,74 @@
+// Exact-shape masks: decode LOOM's "rle:<h>x<w>:<COCO compressed counts>" strings into alpha canvases.
+// Shared by the web player and the YouTube extension (copied verbatim into extension/rle.js).
+const cache = new Map();
+
+function countsFromString(s) {
+  const cnts = [];
+  let p = 0;
+  while (p < s.length) {
+    let x = 0, k = 0, more = 1, c = 0;
+    while (more) {
+      c = s.charCodeAt(p) - 48;
+      x |= (c & 0x1f) << (5 * k);
+      more = c & 0x20;
+      p++; k++;
+      if (!more && (c & 0x10)) x |= -1 << (5 * k);
+    }
+    if (cnts.length > 2) x += cnts[cnts.length - 2];
+    cnts.push(x);
+  }
+  return cnts;
+}
+
+/** -> {h, w, data: Uint8Array row-major 0/1} */
+export function decodeRle(value) {
+  // counts use the alphabet "0".."o", which contains ":" - split only at the first two colons
+  const i1 = value.indexOf(":"), i2 = value.indexOf(":", i1 + 1);
+  const size = value.slice(i1 + 1, i2), counts = value.slice(i2 + 1);
+  const [h, w] = size.split("x").map(Number);
+  const runs = countsFromString(counts);
+  const data = new Uint8Array(h * w);
+  let idx = 0, v = 0;
+  for (const run of runs) {
+    if (v) for (let i = idx; i < idx + run; i++) { const col = (i / h) | 0, row = i - col * h; data[row * w + col] = 1; }
+    idx += run; v ^= 1;
+  }
+  return { h, w, data };
+}
+
+/** Cached {fill, edge, m} canvases for one mask string; fill = solid alpha, edge = 2px outline. */
+export function maskCanvases(value) {
+  let hit = cache.get(value);
+  if (hit) return hit;
+  const m = decodeRle(value);
+  const fill = document.createElement("canvas"), edge = document.createElement("canvas");
+  fill.width = edge.width = m.w; fill.height = edge.height = m.h;
+  const fi = new ImageData(m.w, m.h), ei = new ImageData(m.w, m.h);
+  for (let y = 0; y < m.h; y++) for (let x = 0; x < m.w; x++) {
+    const i = y * m.w + x;
+    if (!m.data[i]) continue;
+    fi.data[i * 4 + 3] = 255;
+    const inside = x > 0 && y > 0 && x < m.w - 1 && y < m.h - 1 && m.data[i - 1] && m.data[i + 1] && m.data[i - m.w] && m.data[i + m.w];
+    if (!inside) { ei.data[i * 4] = 255; ei.data[i * 4 + 1] = 255; ei.data[i * 4 + 2] = 255; ei.data[i * 4 + 3] = 255; }
+  }
+  fill.getContext("2d").putImageData(fi, 0, 0);
+  edge.getContext("2d").putImageData(ei, 0, 0);
+  hit = { fill, edge, m };
+  if (cache.size > 600) cache.delete(cache.keys().next().value);
+  cache.set(value, hit);
+  return hit;
+}
+
+/** Is the picture-normalized point (u, v) inside the mask? */
+export function hit(value, u, v) {
+  const { m } = maskCanvases(value);
+  const x = Math.floor(u * m.w), y = Math.floor(v * m.h);
+  return x >= 0 && y >= 0 && x < m.w && y < m.h && m.data[y * m.w + x] === 1;
+}
+
+/** Nearest track sample at time t (masks are sampled at 5 fps). */
+export function sampleAt(track, t) {
+  let best = null, bd = Infinity;
+  for (const s of track) { const d = Math.abs(s.t - t); if (d < bd) { bd = d; best = s; } }
+  return bd <= 0.6 ? best : null;
+}

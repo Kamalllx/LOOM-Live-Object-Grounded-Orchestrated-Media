@@ -1,0 +1,137 @@
+{
+  "schema_version": "2.0",
+  "session_id": "sess_fixturealex",
+  "video_id": "acid_base_neutralization_d752a6",
+  "learner_id": "learner_alex",
+  "status": "approved",
+  "fallback_reason": null,
+  "pass_count": 1,
+  "cache_hit": false,
+  "critic_score": {
+    "safety": 1.0,
+    "coherence": 1.0,
+    "factuality": 1.0,
+    "completeness": 1.0
+  },
+  "final_threads": [
+    {
+      "thread_id": "t2",
+      "start": 5.9,
+      "end": 14.4,
+      "action": "keep",
+      "label": "Personal Protective Equipment",
+      "rationale": "safety threads are never skipped",
+      "source": "pedagogy"
+    },
+    {
+      "thread_id": "t4",
+      "start": 27.533,
+      "end": 34.08,
+      "action": "condense",
+      "label": "Neutralization Reaction",
+      "rationale": "core never skipped: condensed (0.85 >= 0.60)",
+      "source": "pedagogy"
+    },
+    {
+      "thread_id": "t5",
+      "start": 39.633,
+      "end": 47.62,
+      "action": "condense",
+      "label": "Indicator and Neutral pH",
+      "rationale": "core never skipped: condensed (0.85 >= 0.60)",
+      "source": "pedagogy"
+    },
+    {
+      "thread_id": "t6",
+      "start": 48.033,
+      "end": 58.333,
+      "action": "keep",
+      "label": "Safe Handling of Broken Glass",
+      "rationale": "safety threads are never skipped",
+      "source": "pedagogy"
+    }
+  ],
+  "skipped": [
+    {
+      "start": 0.0,
+      "end": 5.9,
+      "rationale": "intro skipped: prior knowledge 0.85 >= 0.80 (condensed pace)",
+      "source": "pedagogy"
+    },
+    {
+      "start": 14.4,
+      "end": 27.533,
+      "rationale": "setup skipped: prior knowledge 0.85 >= 0.80; prerequisites of c_04 assumed known",
+      "source": "pedagogy"
+    },
+    {
+      "start": 58.333,
+      "end": 68.733,
+      "rationale": "summary skipped: prior knowledge 0.85 >= 0.80",
+      "source": "pedagogy"
+    }
+  ],
+  "redaction_masks": [],
+  "explainer_clips": [],
+  "tap_targets": [
+    {
+      "object_id": "o_001",
+      "concept_node_id": "c_01"
+    },
+    {
+      "object_id": "o_003",
+      "concept_node_id": "c_02"
+    },
+    {
+      "object_id": "o_004",
+      "concept_node_id": "c_04"
+    },
+    {
+      "object_id": "o_004",
+      "concept_node_id": "c_05"
+    },
+    {
+      "object_id": "o_007",
+      "concept_node_id": "c_06"
+    }
+  ],
+  "quiz": [
+    {
+      "question_id": "q_c04_e_1",
+      "stem": "After neutralizing hydrochloric acid with sodium hydroxide, what happens to the salt formed?",
+      "options": [
+        "It stays dissolved in the water",
+        "It falls out as a solid",
+        "It escapes as a gas",
+        "It turns back into acid"
+      ]
+    },
+    {
+      "question_id": "q_c05_e_1",
+      "stem": "Why is an indicator used during neutralization?",
+      "options": [
+        "To show when the reaction is complete",
+        "To speed up the reaction",
+        "To make the salt dissolve",
+        "To cool the solution"
+      ]
+    }
+  ],
+  "loop_trace": [
+    {
+      "pass_number": 1,
+      "approved": true,
+      "scores": {
+        "safety": 1.0,
+        "coherence": 1.0,
+        "factuality": 1.0,
+        "completeness": 1.0
+      },
+      "issues": [],
+      "actions": [],
+      "latency_ms": 820
+    }
+  ],
+  "degraded": [],
+  "created_at": "2026-10-29T00:00:00Z"
+}

@@ -1,0 +1,164 @@
+{
+  "schema_version": "2.0",
+  "session_id": "sess_fixturefamily",
+  "video_id": "acid_base_neutralization_d752a6",
+  "learner_id": "learner_family",
+  "status": "approved",
+  "fallback_reason": null,
+  "pass_count": 1,
+  "cache_hit": false,
+  "critic_score": {
+    "safety": 1.0,
+    "coherence": 1.0,
+    "factuality": 1.0,
+    "completeness": 1.0
+  },
+  "final_threads": [
+    {
+      "thread_id": "t1",
+      "start": 0.0,
+      "end": 5.9,
+      "action": "keep",
+      "label": "Introduction",
+      "rationale": "mastery 0.40 (prior knowledge): keep at standard pace",
+      "source": "pedagogy"
+    },
+    {
+      "thread_id": "t2",
+      "start": 5.9,
+      "end": 14.4,
+      "action": "keep",
+      "label": "Personal Protective Equipment",
+      "rationale": "mastery 0.40 (prior knowledge): keep at standard pace",
+      "source": "pedagogy"
+    },
+    {
+      "thread_id": "t3",
+      "start": 14.4,
+      "end": 27.533,
+      "action": "keep",
+      "label": "Acid Dissociation",
+      "rationale": "mastery 0.40 (prior knowledge): keep at standard pace",
+      "source": "pedagogy"
+    },
+    {
+      "thread_id": "t4",
+      "start": 27.533,
+      "end": 39.633,
+      "action": "keep",
+      "label": "Neutralization Reaction",
+      "rationale": "mastery 0.40 (prior knowledge): keep at standard pace",
+      "source": "pedagogy"
+    },
+    {
+      "thread_id": "t5",
+      "start": 39.633,
+      "end": 48.033,
+      "action": "keep",
+      "label": "Indicator and Neutral pH",
+      "rationale": "mastery 0.40 (prior knowledge): keep at standard pace",
+      "source": "pedagogy"
+    },
+    {
+      "thread_id": "t6",
+      "start": 48.033,
+      "end": 58.333,
+      "action": "keep",
+      "label": "Safe Handling of Broken Glass",
+      "rationale": "mastery 0.40 (prior knowledge): keep at standard pace",
+      "source": "pedagogy"
+    },
+    {
+      "thread_id": "t7",
+      "start": 58.333,
+      "end": 68.733,
+      "action": "keep",
+      "label": "Neutralization Reaction",
+      "rationale": "mastery 0.40 (prior knowledge): keep at standard pace",
+      "source": "pedagogy"
+    }
+  ],
+  "skipped": [],
+  "redaction_masks": [
+    {
+      "mask_id": "m_o_007_0",
+      "object_id": "o_007",
+      "label": "broken glass",
+      "start": 47.533,
+      "end": 58.833,
+      "track_url": "/media/masks/acid_base_neutralization_d752a6/o_007_0.json",
+      "fallback_bbox": [
+        0.26,
+        0.010000000000000002,
+        0.5499999999999999,
+        0.88
+      ],
+      "style": "blur",
+      "reason": "blocked tag sharp_object",
+      "source": "guardian",
+      "enforced": true
+    }
+  ],
+  "explainer_clips": [],
+  "tap_targets": [
+    {
+      "object_id": "o_001",
+      "concept_node_id": "c_01"
+    },
+    {
+      "object_id": "o_003",
+      "concept_node_id": "c_02"
+    },
+    {
+      "object_id": "o_004",
+      "concept_node_id": "c_04"
+    },
+    {
+      "object_id": "o_004",
+      "concept_node_id": "c_05"
+    },
+    {
+      "object_id": "o_007",
+      "concept_node_id": "c_06"
+    }
+  ],
+  "quiz": [
+    {
+      "question_id": "q_c04_i_1",
+      "stem": "What forms when a hydrogen ion joins a hydroxide ion?",
+      "options": [
+        "Water",
+        "Table salt",
+        "Hydrochloric acid",
+        "Sodium hydroxide"
+      ]
+    },
+    {
+      "question_id": "q_c06_b_1",
+      "stem": "What should you do if glassware breaks?",
+      "options": [
+        "Tell your teacher and use a brush and dustpan",
+        "Pick up the pieces with your hands",
+        "Leave it on the floor",
+        "Wash it down the sink"
+      ]
+    }
+  ],
+  "loop_trace": [
+    {
+      "pass_number": 1,
+      "approved": true,
+      "scores": {
+        "safety": 1.0,
+        "coherence": 1.0,
+        "factuality": 1.0,
+        "completeness": 1.0
+      },
+      "issues": [],
+      "actions": [],
+      "latency_ms": 820
+    }
+  ],
+  "degraded": [],
+  "created_at": "2026-10-29T00:00:00Z"
+}

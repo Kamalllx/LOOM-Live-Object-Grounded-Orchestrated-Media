@@ -1,0 +1,54 @@
+{
+  "$id": "https://loom.local/contracts/event.schema.json",
+  "additionalProperties": false,
+  "properties": {
+    "channel": {
+      "pattern": "^(sess|ingest|tap|job|system)_[A-Za-z0-9_]+$|^system$",
+      "title": "Channel",
+      "type": "string"
+    },
+    "data": {
+      "additionalProperties": true,
+      "title": "Data",
+      "type": "object"
+    },
+    "id": {
+      "minimum": 1,
+      "title": "Id",
+      "type": "integer"
+    },
+    "kind": {
+      "enum": [
+        "ingest_stage",
+        "session_start",
+        "agent_call",
+        "agent_done",
+        "candidate_ready",
+        "loop_phase",
+        "render_progress",
+        "gpu_lease",
+        "delivered",
+        "degraded",
+        "error",
+        "agent_note"
+      ],
+      "title": "Kind",
+      "type": "string"
+    },
+    "ts": {
+      "format": "date-time",
+      "title": "Ts",
+      "type": "string"
+    }
+  },
+  "required": [
+    "id",
+    "channel",
+    "ts",
+    "kind",
+    "data"
+  ],
+  "title": "Event",
+  "type": "object",
+  "x-loom-schema-version": "2.0"
+}

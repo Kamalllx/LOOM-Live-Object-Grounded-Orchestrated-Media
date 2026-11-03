@@ -1,0 +1,177 @@
+{
+  "$defs": {
+    "InstanceTimes": {
+      "additionalProperties": false,
+      "properties": {
+        "end": {
+          "minimum": 0.0,
+          "title": "End",
+          "type": "number"
+        },
+        "instance_id": {
+          "pattern": "^o_\\d{3,}_\\d+$",
+          "title": "Instance Id",
+          "type": "string"
+        },
+        "shot_id": {
+          "pattern": "^sh_\\d{2,}$",
+          "title": "Shot Id",
+          "type": "string"
+        },
+        "start": {
+          "minimum": 0.0,
+          "title": "Start",
+          "type": "number"
+        }
+      },
+      "required": [
+        "instance_id",
+        "shot_id",
+        "start",
+        "end"
+      ],
+      "title": "InstanceTimes",
+      "type": "object"
+    },
+    "ObjectSummary": {
+      "additionalProperties": false,
+      "properties": {
+        "instances": {
+          "items": {
+            "$ref": "#/$defs/InstanceTimes"
+          },
+          "title": "Instances",
+          "type": "array"
+        },
+        "is_hazard_class": {
+          "title": "Is Hazard Class",
+          "type": "boolean"
+        },
+        "label": {
+          "title": "Label",
+          "type": "string"
+        },
+        "object_id": {
+          "pattern": "^o_\\d{3,}$",
+          "title": "Object Id",
+          "type": "string"
+        },
+        "safety": {
+          "$ref": "#/$defs/SafetySummary"
+        }
+      },
+      "required": [
+        "object_id",
+        "label",
+        "is_hazard_class",
+        "instances",
+        "safety"
+      ],
+      "title": "ObjectSummary",
+      "type": "object"
+    },
+    "SafetySummary": {
+      "additionalProperties": false,
+      "properties": {
+        "child_unsafe": {
+          "default": false,
+          "title": "Child Unsafe",
+          "type": "boolean"
+        },
+        "severity": {
+          "default": 0.0,
+          "maximum": 1.0,
+          "minimum": 0.0,
+          "title": "Severity",
+          "type": "number"
+        },
+        "status": {
+          "enum": [
+            "reviewed",
+            "partial",
+            "unreviewed"
+          ],
+          "title": "Status",
+          "type": "string"
+        },
+        "tags": {
+          "default": [],
+          "items": {
+            "enum": [
+              "sharp_object",
+              "injury_risk",
+              "fire_or_explosion",
+              "weapon",
+              "blood_or_gore",
+              "nudity",
+              "drugs_or_alcohol",
+              "hazardous_chemical",
+              "disturbing"
+            ],
+            "type": "string"
+          },
+          "title": "Tags",
+          "type": "array"
+        }
+      },
+      "required": [
+        "status"
+      ],
+      "title": "SafetySummary",
+      "type": "object"
+    }
+  },
+  "$id": "https://loom.local/contracts/graph-view-safety.schema.json",
+  "additionalProperties": false,
+  "properties": {
+    "duration_seconds": {
+      "title": "Duration Seconds",
+      "type": "number"
+    },
+    "graph_sha": {
+      "anyOf": [
+        {
+          "pattern": "^sha256:[0-9a-f]{64}$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Graph Sha"
+    },
+    "objects": {
+      "items": {
+        "$ref": "#/$defs/ObjectSummary"
+      },
+      "title": "Objects",
+      "type": "array"
+    },
+    "schema_version": {
+      "default": "2.0",
+      "pattern": "^2\\.\\d+$",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "video_id": {
+      "pattern": "^[a-z0-9][a-z0-9_]*$",
+      "title": "Video Id",
+      "type": "string"
+    },
+    "view": {
+      "const": "safety",
+      "default": "safety",
+      "title": "View",
+      "type": "string"
+    }
+  },
+  "required": [
+    "video_id",
+    "graph_sha",
+    "duration_seconds",
+    "objects"
+  ],
+  "title": "SafetyGraphView",
+  "type": "object",
+  "x-loom-schema-version": "2.0"
+}

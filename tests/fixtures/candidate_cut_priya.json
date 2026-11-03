@@ -1,0 +1,163 @@
+{
+  "schema_version": "2.0",
+  "session_id": "sess_fixturepriya",
+  "video_id": "acid_base_neutralization_d752a6",
+  "graph_sha": "sha256:adc07ad3845ceca50efbb300880ab7f4d1c1ecf4af6764c65067d71c3135c7cd",
+  "learner_id": "learner_priya",
+  "learner_state_sha": "sha256:918780d2a742ab99ab22e24044a1ca4f9cd71fff143297dca84836d236f5d117",
+  "pass_number": 1,
+  "threads": [
+    {
+      "thread_id": "t1",
+      "concept_node_ids": [],
+      "role": "intro",
+      "action": "keep",
+      "start": 0.0,
+      "end": 5.9,
+      "source_end": 5.9,
+      "rationale": "mastery 0.20 (prior knowledge): keep at standard pace",
+      "source": "pedagogy"
+    },
+    {
+      "thread_id": "t2",
+      "concept_node_ids": [
+        "c_01"
+      ],
+      "role": "safety",
+      "action": "keep",
+      "start": 5.9,
+      "end": 14.4,
+      "source_end": 14.4,
+      "rationale": "mastery 0.20 (prior knowledge): keep at standard pace",
+      "source": "pedagogy"
+    },
+    {
+      "thread_id": "t3",
+      "concept_node_ids": [
+        "c_02",
+        "c_03"
+      ],
+      "role": "setup",
+      "action": "keep",
+      "start": 14.4,
+      "end": 27.533,
+      "source_end": 27.533,
+      "rationale": "mastery 0.20 (prior knowledge): keep at standard pace",
+      "source": "pedagogy"
+    },
+    {
+      "thread_id": "t4",
+      "concept_node_ids": [
+        "c_04"
+      ],
+      "role": "core",
+      "action": "expand",
+      "start": 27.533,
+      "end": 39.633,
+      "source_end": 39.633,
+      "rationale": "mastery 0.20 < 0.35: expand with an explainer",
+      "source": "pedagogy"
+    },
+    {
+      "thread_id": "t5",
+      "concept_node_ids": [
+        "c_05"
+      ],
+      "role": "core",
+      "action": "expand",
+      "start": 39.633,
+      "end": 48.033,
+      "source_end": 48.033,
+      "rationale": "mastery 0.20 < 0.35: expand with an explainer",
+      "source": "pedagogy"
+    },
+    {
+      "thread_id": "t6",
+      "concept_node_ids": [
+        "c_06"
+      ],
+      "role": "safety",
+      "action": "keep",
+      "start": 48.033,
+      "end": 58.333,
+      "source_end": 58.333,
+      "rationale": "mastery 0.20 (prior knowledge): keep at standard pace",
+      "source": "pedagogy"
+    },
+    {
+      "thread_id": "t7",
+      "concept_node_ids": [
+        "c_04"
+      ],
+      "role": "summary",
+      "action": "keep",
+      "start": 58.333,
+      "end": 68.733,
+      "source_end": 68.733,
+      "rationale": "mastery 0.20 (prior knowledge): keep at standard pace",
+      "source": "pedagogy"
+    }
+  ],
+  "skipped": [],
+  "explainer_requests": [
+    {
+      "concept_node_id": "c_04",
+      "trigger": "auto",
+      "level": "beginner",
+      "anchor_time": 68.733
+    },
+    {
+      "concept_node_id": "c_05",
+      "trigger": "auto",
+      "level": "beginner",
+      "anchor_time": 48.033
+    }
+  ],
+  "redaction_requests": [],
+  "quiz": [
+    {
+      "question_id": "q_c04_b_1"
+    },
+    {
+      "question_id": "q_c05_b_1"
+    },
+    {
+      "question_id": "q_c02_b_1"
+    }
+  ],
+  "agent_trace": [
+    {
+      "agent": "loom-curator",
+      "version": "2.0",
+      "skill": "build_threads",
+      "latency_ms": 12,
+      "status": "ok",
+      "degraded": []
+    },
+    {
+      "agent": "loom-pedagogy",
+      "version": "2.0",
+      "skill": "plan_threads",
+      "latency_ms": 3,
+      "status": "ok",
+      "degraded": []
+    },
+    {
+      "agent": "loom-personalizer",
+      "version": "2.0",
+      "skill": "assemble_cut",
+      "latency_ms": 4,
+      "status": "ok",
+      "degraded": []
+    },
+    {
+      "agent": "loom-assessment",
+      "version": "2.0",
+      "skill": "select_quiz",
+      "latency_ms": 2,
+      "status": "ok",
+      "degraded": []
+    }
+  ],
+  "degraded": []
+}

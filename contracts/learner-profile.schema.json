@@ -1,0 +1,214 @@
+{
+  "$defs": {
+    "MasteryEntry": {
+      "additionalProperties": false,
+      "properties": {
+        "concept_key": {
+          "pattern": "^([a-z0-9][a-z0-9_]*/c_\\d{2,}|concept:[a-z0-9_]+)$",
+          "title": "Concept Key",
+          "type": "string"
+        },
+        "evidence_count": {
+          "minimum": 0,
+          "title": "Evidence Count",
+          "type": "integer"
+        },
+        "last_seen": {
+          "format": "date-time",
+          "title": "Last Seen",
+          "type": "string"
+        },
+        "level": {
+          "maximum": 1.0,
+          "minimum": 0.0,
+          "title": "Level",
+          "type": "number"
+        }
+      },
+      "required": [
+        "concept_key",
+        "level",
+        "last_seen",
+        "evidence_count"
+      ],
+      "title": "MasteryEntry",
+      "type": "object"
+    },
+    "Preferences": {
+      "additionalProperties": false,
+      "properties": {
+        "explainers": {
+          "default": "auto",
+          "enum": [
+            "auto",
+            "tap_only",
+            "off"
+          ],
+          "title": "Explainers",
+          "type": "string"
+        },
+        "language": {
+          "default": "en",
+          "title": "Language",
+          "type": "string"
+        },
+        "never_skip": {
+          "default": false,
+          "title": "Never Skip",
+          "type": "boolean"
+        },
+        "pace": {
+          "default": "standard",
+          "enum": [
+            "condensed",
+            "standard",
+            "detailed"
+          ],
+          "title": "Pace",
+          "type": "string"
+        },
+        "prior_knowledge": {
+          "default": 0.4,
+          "maximum": 1.0,
+          "minimum": 0.0,
+          "title": "Prior Knowledge",
+          "type": "number"
+        }
+      },
+      "title": "Preferences",
+      "type": "object"
+    },
+    "SafetyProfile": {
+      "additionalProperties": false,
+      "properties": {
+        "allowed_tags": {
+          "default": [],
+          "items": {
+            "enum": [
+              "sharp_object",
+              "injury_risk",
+              "fire_or_explosion",
+              "weapon",
+              "blood_or_gore",
+              "nudity",
+              "drugs_or_alcohol",
+              "hazardous_chemical",
+              "disturbing"
+            ],
+            "type": "string"
+          },
+          "title": "Allowed Tags",
+          "type": "array"
+        },
+        "blocked_tags": {
+          "default": [],
+          "items": {
+            "enum": [
+              "sharp_object",
+              "injury_risk",
+              "fire_or_explosion",
+              "weapon",
+              "blood_or_gore",
+              "nudity",
+              "drugs_or_alcohol",
+              "hazardous_chemical",
+              "disturbing"
+            ],
+            "type": "string"
+          },
+          "title": "Blocked Tags",
+          "type": "array"
+        },
+        "parent_lock": {
+          "default": false,
+          "title": "Parent Lock",
+          "type": "boolean"
+        },
+        "redaction_level": {
+          "default": "off",
+          "enum": [
+            "off",
+            "standard",
+            "strict"
+          ],
+          "title": "Redaction Level",
+          "type": "string"
+        }
+      },
+      "title": "SafetyProfile",
+      "type": "object"
+    }
+  },
+  "$id": "https://loom.local/contracts/learner-profile.schema.json",
+  "additionalProperties": false,
+  "properties": {
+    "display_name": {
+      "minLength": 1,
+      "title": "Display Name",
+      "type": "string"
+    },
+    "learner_id": {
+      "pattern": "^[a-z0-9][a-z0-9_]*$",
+      "title": "Learner Id",
+      "type": "string"
+    },
+    "learner_state_sha": {
+      "anyOf": [
+        {
+          "pattern": "^sha256:[0-9a-f]{64}$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Learner State Sha"
+    },
+    "mastery": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/MasteryEntry"
+      },
+      "title": "Mastery",
+      "type": "array"
+    },
+    "persona": {
+      "default": "",
+      "title": "Persona",
+      "type": "string"
+    },
+    "preferences": {
+      "$ref": "#/$defs/Preferences",
+      "default": {
+        "explainers": "auto",
+        "language": "en",
+        "never_skip": false,
+        "pace": "standard",
+        "prior_knowledge": 0.4
+      }
+    },
+    "safety_profile": {
+      "$ref": "#/$defs/SafetyProfile",
+      "default": {
+        "allowed_tags": [],
+        "blocked_tags": [],
+        "parent_lock": false,
+        "redaction_level": "off"
+      }
+    },
+    "schema_version": {
+      "default": "2.0",
+      "pattern": "^2\\.\\d+$",
+      "title": "Schema Version",
+      "type": "string"
+    }
+  },
+  "required": [
+    "learner_id",
+    "display_name"
+  ],
+  "title": "LearnerProfile",
+  "type": "object",
+  "x-loom-schema-version": "2.0"
+}

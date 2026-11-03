@@ -1,0 +1,131 @@
+# LOOM remake - configuration skeleton (copy to loom.toml). Every value here is referenced by the spec.
+# Models: spec/03-local-ai.md · thresholds: spec/04-features.md · ports: spec/02-architecture.md
+
+[runtime]
+offline = true                      # LOOM_OFFLINE: HF offline, link ingest disabled, loopback-only model hosts
+data_dir = "data"
+max_seconds = 600                   # LOOM_MAX_SECONDS: ingest trims longer videos
+gateway_port = 8000
+web_port = 3001
+plugin_allowlist = ["127.0.0.1", "localhost"]
+min_free_disk_gb = 5.0              # /api/ready fails below this
+warn_free_disk_gb = 20.0            # loom doctor warns below this
+
+[ollama]
+host = "http://127.0.0.1:11434"
+default_num_ctx = 8192
+keep_alive = "10m"
+ready_poll_s = 10.0                 # /api/ready re-checks model presence this often (FR-OPS-01: <= 30 s)
+probe_timeout_s = 3.0
+
+[models.brain]
+tag = "qwen3.5:9b"
+fallback = "qwen3.5:4b"
+num_ctx = 6144                      # S0 spike: at 8192 the model spills 0.79 GB to CPU; 6144 fits (5.58 GB)
+temperature = 0.2
+seed = 7
+think = false                       # per-prompt override: manim_draft, manim_repair, concept_fuse -> true
+timeout_s = 120
+
+[models.judge]
+tag = "gemma4:e4b"
+fallback = "gemma4:e4b-it-qat"
+temperature = 0.0
+seed = 7
+think = false
+timeout_s = 90
+
+[models.safety]
+tag = "granite4.1-guardian:8b-q4_K_M"  # S0 spike: Q6_K (8.13 GB) spills 2 GB to CPU; q4_K_M same accuracy, 4x faster
+fallback_role = "judge"             # if Guardian cannot be driven reliably (S0 spike)
+temperature = 0.0
+timeout_s = 60
+
+[models.embed]
+tag = "qwen3-embedding:0.6b"
+batch = 64
+
+[models.ocr]
+tag = "glm-ocr:q8_0"
+max_tokens = 256                    # S0 spike: one crop is one line; cap runaway generation
+reread_below_confidence = 0.85
+
+[perception]
+segmentation_tier = "sam2"          # boxes | sam2 | sam3
+sample_fps = 2.0
+hazard_window_fps = 4.0
+frame_width = 960
+chunk_seconds = 60
+chunk_overlap_seconds = 1.0
+asr_model = "large-v3-turbo"
+detector = "IDEA-Research/grounding-dino-base"
+segmenter = "facebook/sam2.1-hiera-base-plus"
+verifier = "google/siglip2-base-patch16-224"
+box_threshold = 0.30
+text_threshold = 0.25
+siglip_margin = 0.10
+hazard_classes = ["broken glass", "knife", "blade", "scissors", "needle", "open flame", "fire",
+                  "blood", "gun", "cigarette", "pills", "syringe"]
+
+[perception.lookalikes]
+"broken glass" = ["glass beaker", "ice", "plastic wrap", "glass bottle", "crystal"]
+"knife" = ["spatula", "ruler", "pen", "spoon"]
+"open flame" = ["lamp", "orange light", "heater coil", "candle holder"]
+"needle" = ["pipette", "thermometer", "pen", "wire"]
+
+[safety]
+taxonomy = ["sharp_object", "injury_risk", "fire_or_explosion", "weapon", "blood_or_gore", "nudity",
+            "drugs_or_alcohol", "hazardous_chemical", "disturbing"]
+standard_threshold = 0.5
+strict_threshold = 0.2
+mask_pad = 0.04
+mask_dilate_diag = 0.03
+time_pad_s = 0.5                    # one sampling interval at 2 fps
+
+[pedagogy]
+skip = 0.80
+condense = 0.60
+keep = 0.35
+pace_shift = { condensed = -0.10, standard = 0.0, detailed = 0.10 }
+prereq_mastery = 0.35
+
+[personalizer]
+condense_ratio = 0.5
+condense_min_s = 6.0
+formula_hold_s = 3.0
+too_short_ratio = 0.30
+
+[assessment]
+max_questions = 3
+correct_gain = 0.35
+wrong_decay = 0.75
+explainer_gain = 0.05
+exposure_gain = 0.03
+
+[critic]
+factuality = 0.80
+coherence = 0.80
+safety = 1.0
+evidence_top_k = 5
+
+[loop]
+budget = 3
+tap_budget = 2
+
+[animator]
+version = "2.0"
+max_repairs = 2
+render_timeout_s = 120
+render_quality = "-qm"
+sandbox_memory_mb = 2048
+max_source_lines = 250
+tts = ["kokoro", "piper", "sapi"]
+voice = "af_heart"
+
+[a2a]
+default_timeout_s = 30.0
+retries = 1                         # idempotent skills only
+
+[gpu]
+max_vram_gb = 7.5
+priorities = { tap_explainer = 0, session = 1, ingest = 2, prerender = 3 }

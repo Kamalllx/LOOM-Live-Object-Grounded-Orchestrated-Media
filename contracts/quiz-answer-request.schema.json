@@ -1,0 +1,18 @@
+{
+  "$id": "https://loom.local/contracts/quiz-answer-request.schema.json",
+  "additionalProperties": false,
+  "properties": {
+    "option_index": {
+      "maximum": 3,
+      "minimum": 0,
+      "title": "Option Index",
+      "type": "integer"
+    }
+  },
+  "required": [
+    "option_index"
+  ],
+  "title": "QuizAnswerRequest",
+  "type": "object",
+  "x-loom-schema-version": "2.0"
+}

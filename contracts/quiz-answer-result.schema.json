@@ -1,0 +1,37 @@
+{
+  "$id": "https://loom.local/contracts/quiz-answer-result.schema.json",
+  "additionalProperties": false,
+  "properties": {
+    "correct": {
+      "title": "Correct",
+      "type": "boolean"
+    },
+    "correct_index": {
+      "maximum": 3,
+      "minimum": 0,
+      "title": "Correct Index",
+      "type": "integer"
+    },
+    "evidence": {
+      "items": {
+        "pattern": "^s_\\d{3,}$",
+        "type": "string"
+      },
+      "title": "Evidence",
+      "type": "array"
+    },
+    "rationale": {
+      "title": "Rationale",
+      "type": "string"
+    }
+  },
+  "required": [
+    "correct",
+    "correct_index",
+    "rationale",
+    "evidence"
+  ],
+  "title": "QuizAnswerResult",
+  "type": "object",
+  "x-loom-schema-version": "2.0"
+}

@@ -1,0 +1,175 @@
+{
+  "$defs": {
+    "AgentCapabilities": {
+      "additionalProperties": false,
+      "properties": {
+        "pushNotifications": {
+          "default": false,
+          "title": "Pushnotifications",
+          "type": "boolean"
+        },
+        "streaming": {
+          "default": false,
+          "title": "Streaming",
+          "type": "boolean"
+        }
+      },
+      "title": "AgentCapabilities",
+      "type": "object"
+    },
+    "AgentSkill": {
+      "additionalProperties": false,
+      "properties": {
+        "description": {
+          "title": "Description",
+          "type": "string"
+        },
+        "id": {
+          "pattern": "^[a-z][a-z0-9_]*$",
+          "title": "Id",
+          "type": "string"
+        },
+        "name": {
+          "title": "Name",
+          "type": "string"
+        },
+        "tags": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Tags",
+          "type": "array"
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "description"
+      ],
+      "title": "AgentSkill",
+      "type": "object"
+    },
+    "LoomCardExtension": {
+      "additionalProperties": false,
+      "properties": {
+        "graph_view": {
+          "anyOf": [
+            {
+              "enum": [
+                "mesh",
+                "safety",
+                "player",
+                "full"
+              ],
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Graph View"
+        },
+        "input_contract": {
+          "title": "Input Contract",
+          "type": "string"
+        },
+        "output_contract": {
+          "title": "Output Contract",
+          "type": "string"
+        },
+        "trust": {
+          "enum": [
+            "first_party",
+            "plugin"
+          ],
+          "title": "Trust",
+          "type": "string"
+        }
+      },
+      "required": [
+        "input_contract",
+        "output_contract",
+        "trust"
+      ],
+      "title": "LoomCardExtension",
+      "type": "object"
+    }
+  },
+  "$id": "https://loom.local/contracts/agent-card.schema.json",
+  "additionalProperties": true,
+  "properties": {
+    "capabilities": {
+      "$ref": "#/$defs/AgentCapabilities",
+      "default": {
+        "pushNotifications": false,
+        "streaming": false
+      }
+    },
+    "defaultInputModes": {
+      "default": [
+        "application/json"
+      ],
+      "items": {
+        "type": "string"
+      },
+      "title": "Defaultinputmodes",
+      "type": "array"
+    },
+    "defaultOutputModes": {
+      "default": [
+        "application/json"
+      ],
+      "items": {
+        "type": "string"
+      },
+      "title": "Defaultoutputmodes",
+      "type": "array"
+    },
+    "description": {
+      "title": "Description",
+      "type": "string"
+    },
+    "name": {
+      "pattern": "^[a-z][a-z0-9-]*$",
+      "title": "Name",
+      "type": "string"
+    },
+    "protocolVersion": {
+      "default": "0.3.0",
+      "title": "Protocolversion",
+      "type": "string"
+    },
+    "skills": {
+      "items": {
+        "$ref": "#/$defs/AgentSkill"
+      },
+      "minItems": 1,
+      "title": "Skills",
+      "type": "array"
+    },
+    "url": {
+      "title": "Url",
+      "type": "string"
+    },
+    "version": {
+      "title": "Version",
+      "type": "string"
+    },
+    "x-loom": {
+      "$ref": "#/$defs/LoomCardExtension"
+    }
+  },
+  "required": [
+    "name",
+    "description",
+    "url",
+    "version",
+    "skills",
+    "x-loom"
+  ],
+  "title": "AgentCard",
+  "type": "object",
+  "x-loom-schema-version": "2.0"
+}

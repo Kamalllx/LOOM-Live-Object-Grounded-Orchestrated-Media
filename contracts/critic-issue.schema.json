@@ -1,0 +1,117 @@
+{
+  "$id": "https://loom.local/contracts/critic-issue.schema.json",
+  "additionalProperties": false,
+  "properties": {
+    "code": {
+      "enum": [
+        "unmasked_hazard",
+        "explainer_unfaithful",
+        "layout_failed",
+        "judge_unavailable",
+        "quiz_unsupported",
+        "quiz_missing",
+        "explainer_missing",
+        "explainer_unavailable",
+        "plugin_unavailable",
+        "cut_mid_sentence",
+        "missing_prerequisite",
+        "overlapping_threads",
+        "out_of_order",
+        "empty_cut",
+        "too_short",
+        "anchor_outside_cut",
+        "quiz_concept_not_in_cut"
+      ],
+      "title": "Code",
+      "type": "string"
+    },
+    "concept_node_id": {
+      "anyOf": [
+        {
+          "pattern": "^c_\\d{2,}$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Concept Node Id"
+    },
+    "detail": {
+      "default": "",
+      "title": "Detail",
+      "type": "string"
+    },
+    "feedback": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Feedback"
+    },
+    "object_id": {
+      "anyOf": [
+        {
+          "pattern": "^o_\\d{3,}$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Object Id"
+    },
+    "question_id": {
+      "anyOf": [
+        {
+          "pattern": "^q_[a-z0-9_]+$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Question Id"
+    },
+    "source": {
+      "anyOf": [
+        {
+          "pattern": "^(pedagogy|personalizer|curator|assessment|guardian|critic|plugin:[a-z0-9][a-z0-9_-]*)$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Source"
+    },
+    "thread_id": {
+      "anyOf": [
+        {
+          "pattern": "^t\\d+$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Thread Id"
+    }
+  },
+  "required": [
+    "code"
+  ],
+  "title": "CriticIssue",
+  "type": "object",
+  "x-loom-schema-version": "2.0"
+}

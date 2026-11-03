@@ -1,0 +1,360 @@
+{
+  "$defs": {
+    "AgentTraceEntry": {
+      "additionalProperties": false,
+      "properties": {
+        "agent": {
+          "title": "Agent",
+          "type": "string"
+        },
+        "degraded": {
+          "default": [],
+          "items": {
+            "maxLength": 200,
+            "minLength": 1,
+            "type": "string"
+          },
+          "title": "Degraded",
+          "type": "array"
+        },
+        "latency_ms": {
+          "minimum": 0,
+          "title": "Latency Ms",
+          "type": "integer"
+        },
+        "skill": {
+          "title": "Skill",
+          "type": "string"
+        },
+        "status": {
+          "enum": [
+            "ok",
+            "degraded",
+            "failed"
+          ],
+          "title": "Status",
+          "type": "string"
+        },
+        "version": {
+          "title": "Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "agent",
+        "version",
+        "skill",
+        "latency_ms",
+        "status"
+      ],
+      "title": "AgentTraceEntry",
+      "type": "object"
+    },
+    "CandidateThread": {
+      "additionalProperties": false,
+      "properties": {
+        "action": {
+          "enum": [
+            "keep",
+            "condense",
+            "expand"
+          ],
+          "title": "Action",
+          "type": "string"
+        },
+        "concept_node_ids": {
+          "default": [],
+          "items": {
+            "pattern": "^c_\\d{2,}$",
+            "type": "string"
+          },
+          "title": "Concept Node Ids",
+          "type": "array"
+        },
+        "end": {
+          "minimum": 0.0,
+          "title": "End",
+          "type": "number"
+        },
+        "rationale": {
+          "minLength": 1,
+          "title": "Rationale",
+          "type": "string"
+        },
+        "role": {
+          "enum": [
+            "intro",
+            "setup",
+            "core",
+            "safety",
+            "summary"
+          ],
+          "title": "Role",
+          "type": "string"
+        },
+        "source": {
+          "default": "pedagogy",
+          "pattern": "^(pedagogy|personalizer|curator|assessment|guardian|critic|plugin:[a-z0-9][a-z0-9_-]*)$",
+          "title": "Source",
+          "type": "string"
+        },
+        "source_end": {
+          "minimum": 0.0,
+          "title": "Source End",
+          "type": "number"
+        },
+        "start": {
+          "minimum": 0.0,
+          "title": "Start",
+          "type": "number"
+        },
+        "thread_id": {
+          "pattern": "^t\\d+$",
+          "title": "Thread Id",
+          "type": "string"
+        }
+      },
+      "required": [
+        "thread_id",
+        "role",
+        "action",
+        "start",
+        "end",
+        "source_end",
+        "rationale"
+      ],
+      "title": "CandidateThread",
+      "type": "object"
+    },
+    "ExplainerRequest": {
+      "additionalProperties": false,
+      "properties": {
+        "anchor_time": {
+          "minimum": 0.0,
+          "title": "Anchor Time",
+          "type": "number"
+        },
+        "concept_node_id": {
+          "pattern": "^c_\\d{2,}$",
+          "title": "Concept Node Id",
+          "type": "string"
+        },
+        "level": {
+          "enum": [
+            "beginner",
+            "intermediate",
+            "expert"
+          ],
+          "title": "Level",
+          "type": "string"
+        },
+        "trigger": {
+          "enum": [
+            "auto",
+            "tap"
+          ],
+          "title": "Trigger",
+          "type": "string"
+        }
+      },
+      "required": [
+        "concept_node_id",
+        "trigger",
+        "level",
+        "anchor_time"
+      ],
+      "title": "ExplainerRequest",
+      "type": "object"
+    },
+    "QuizRef": {
+      "additionalProperties": false,
+      "properties": {
+        "question_id": {
+          "pattern": "^q_[a-z0-9_]+$",
+          "title": "Question Id",
+          "type": "string"
+        }
+      },
+      "required": [
+        "question_id"
+      ],
+      "title": "QuizRef",
+      "type": "object"
+    },
+    "RedactionRequest": {
+      "additionalProperties": false,
+      "properties": {
+        "object_id": {
+          "pattern": "^o_\\d{3,}$",
+          "title": "Object Id",
+          "type": "string"
+        },
+        "reason": {
+          "minLength": 1,
+          "title": "Reason",
+          "type": "string"
+        },
+        "source": {
+          "pattern": "^(pedagogy|personalizer|curator|assessment|guardian|critic|plugin:[a-z0-9][a-z0-9_-]*)$",
+          "title": "Source",
+          "type": "string"
+        }
+      },
+      "required": [
+        "object_id",
+        "reason",
+        "source"
+      ],
+      "title": "RedactionRequest",
+      "type": "object"
+    },
+    "SkippedThread": {
+      "additionalProperties": false,
+      "properties": {
+        "end": {
+          "minimum": 0.0,
+          "title": "End",
+          "type": "number"
+        },
+        "rationale": {
+          "minLength": 1,
+          "title": "Rationale",
+          "type": "string"
+        },
+        "source": {
+          "default": "pedagogy",
+          "pattern": "^(pedagogy|personalizer|curator|assessment|guardian|critic|plugin:[a-z0-9][a-z0-9_-]*)$",
+          "title": "Source",
+          "type": "string"
+        },
+        "start": {
+          "minimum": 0.0,
+          "title": "Start",
+          "type": "number"
+        },
+        "thread_id": {
+          "pattern": "^t\\d+$",
+          "title": "Thread Id",
+          "type": "string"
+        }
+      },
+      "required": [
+        "thread_id",
+        "start",
+        "end",
+        "rationale"
+      ],
+      "title": "SkippedThread",
+      "type": "object"
+    }
+  },
+  "$id": "https://loom.local/contracts/candidate-cut.schema.json",
+  "additionalProperties": false,
+  "properties": {
+    "agent_trace": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/AgentTraceEntry"
+      },
+      "title": "Agent Trace",
+      "type": "array"
+    },
+    "degraded": {
+      "default": [],
+      "items": {
+        "maxLength": 200,
+        "minLength": 1,
+        "type": "string"
+      },
+      "title": "Degraded",
+      "type": "array"
+    },
+    "explainer_requests": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/ExplainerRequest"
+      },
+      "title": "Explainer Requests",
+      "type": "array"
+    },
+    "graph_sha": {
+      "pattern": "^sha256:[0-9a-f]{64}$",
+      "title": "Graph Sha",
+      "type": "string"
+    },
+    "learner_id": {
+      "pattern": "^[a-z0-9][a-z0-9_]*$",
+      "title": "Learner Id",
+      "type": "string"
+    },
+    "learner_state_sha": {
+      "pattern": "^sha256:[0-9a-f]{64}$",
+      "title": "Learner State Sha",
+      "type": "string"
+    },
+    "pass_number": {
+      "minimum": 1,
+      "title": "Pass Number",
+      "type": "integer"
+    },
+    "quiz": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/QuizRef"
+      },
+      "title": "Quiz",
+      "type": "array"
+    },
+    "redaction_requests": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/RedactionRequest"
+      },
+      "title": "Redaction Requests",
+      "type": "array"
+    },
+    "schema_version": {
+      "default": "2.0",
+      "pattern": "^2\\.\\d+$",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "session_id": {
+      "pattern": "^sess_[a-z0-9]+$",
+      "title": "Session Id",
+      "type": "string"
+    },
+    "skipped": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/SkippedThread"
+      },
+      "title": "Skipped",
+      "type": "array"
+    },
+    "threads": {
+      "items": {
+        "$ref": "#/$defs/CandidateThread"
+      },
+      "title": "Threads",
+      "type": "array"
+    },
+    "video_id": {
+      "pattern": "^[a-z0-9][a-z0-9_]*$",
+      "title": "Video Id",
+      "type": "string"
+    }
+  },
+  "required": [
+    "session_id",
+    "video_id",
+    "graph_sha",
+    "learner_id",
+    "learner_state_sha",
+    "pass_number",
+    "threads"
+  ],
+  "title": "CandidateCut",
+  "type": "object",
+  "x-loom-schema-version": "2.0"
+}

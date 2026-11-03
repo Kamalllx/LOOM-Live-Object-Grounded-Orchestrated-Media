@@ -1,0 +1,506 @@
+{
+  "$defs": {
+    "ConceptEvidence": {
+      "additionalProperties": false,
+      "properties": {
+        "object_ids": {
+          "default": [],
+          "items": {
+            "pattern": "^o_\\d{3,}$",
+            "type": "string"
+          },
+          "title": "Object Ids",
+          "type": "array"
+        },
+        "segment_ids": {
+          "default": [],
+          "items": {
+            "pattern": "^s_\\d{3,}$",
+            "type": "string"
+          },
+          "title": "Segment Ids",
+          "type": "array"
+        },
+        "text_ids": {
+          "default": [],
+          "items": {
+            "pattern": "^x_\\d{3,}$",
+            "type": "string"
+          },
+          "title": "Text Ids",
+          "type": "array"
+        }
+      },
+      "title": "ConceptEvidence",
+      "type": "object"
+    },
+    "ConceptNode": {
+      "additionalProperties": false,
+      "properties": {
+        "canonical_key": {
+          "anyOf": [
+            {
+              "pattern": "^concept:[a-z0-9_]+$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Canonical Key"
+        },
+        "difficulty": {
+          "enum": [
+            "beginner",
+            "intermediate",
+            "expert"
+          ],
+          "title": "Difficulty",
+          "type": "string"
+        },
+        "evidence": {
+          "$ref": "#/$defs/ConceptEvidence"
+        },
+        "label": {
+          "minLength": 1,
+          "title": "Label",
+          "type": "string"
+        },
+        "node_id": {
+          "pattern": "^c_\\d{2,}$",
+          "title": "Node Id",
+          "type": "string"
+        },
+        "prerequisites": {
+          "default": [],
+          "items": {
+            "pattern": "^c_\\d{2,}$",
+            "type": "string"
+          },
+          "title": "Prerequisites",
+          "type": "array"
+        },
+        "summary": {
+          "minLength": 1,
+          "title": "Summary",
+          "type": "string"
+        }
+      },
+      "required": [
+        "node_id",
+        "label",
+        "summary",
+        "evidence",
+        "difficulty"
+      ],
+      "title": "ConceptNode",
+      "type": "object"
+    },
+    "InstanceTimes": {
+      "additionalProperties": false,
+      "properties": {
+        "end": {
+          "minimum": 0.0,
+          "title": "End",
+          "type": "number"
+        },
+        "instance_id": {
+          "pattern": "^o_\\d{3,}_\\d+$",
+          "title": "Instance Id",
+          "type": "string"
+        },
+        "shot_id": {
+          "pattern": "^sh_\\d{2,}$",
+          "title": "Shot Id",
+          "type": "string"
+        },
+        "start": {
+          "minimum": 0.0,
+          "title": "Start",
+          "type": "number"
+        }
+      },
+      "required": [
+        "instance_id",
+        "shot_id",
+        "start",
+        "end"
+      ],
+      "title": "InstanceTimes",
+      "type": "object"
+    },
+    "ObjectSummary": {
+      "additionalProperties": false,
+      "properties": {
+        "instances": {
+          "items": {
+            "$ref": "#/$defs/InstanceTimes"
+          },
+          "title": "Instances",
+          "type": "array"
+        },
+        "is_hazard_class": {
+          "title": "Is Hazard Class",
+          "type": "boolean"
+        },
+        "label": {
+          "title": "Label",
+          "type": "string"
+        },
+        "object_id": {
+          "pattern": "^o_\\d{3,}$",
+          "title": "Object Id",
+          "type": "string"
+        },
+        "safety": {
+          "$ref": "#/$defs/SafetySummary"
+        }
+      },
+      "required": [
+        "object_id",
+        "label",
+        "is_hazard_class",
+        "instances",
+        "safety"
+      ],
+      "title": "ObjectSummary",
+      "type": "object"
+    },
+    "QuizQuestionView": {
+      "additionalProperties": false,
+      "description": "A bank question without its answer — the only form that ever leaves the server.",
+      "properties": {
+        "concept_node_id": {
+          "pattern": "^c_\\d{2,}$",
+          "title": "Concept Node Id",
+          "type": "string"
+        },
+        "evidence_segment_ids": {
+          "items": {
+            "pattern": "^s_\\d{3,}$",
+            "type": "string"
+          },
+          "title": "Evidence Segment Ids",
+          "type": "array"
+        },
+        "level": {
+          "enum": [
+            "beginner",
+            "intermediate",
+            "expert"
+          ],
+          "title": "Level",
+          "type": "string"
+        },
+        "options": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Options",
+          "type": "array"
+        },
+        "question_id": {
+          "pattern": "^q_[a-z0-9_]+$",
+          "title": "Question Id",
+          "type": "string"
+        },
+        "stem": {
+          "title": "Stem",
+          "type": "string"
+        }
+      },
+      "required": [
+        "question_id",
+        "concept_node_id",
+        "level",
+        "stem",
+        "options",
+        "evidence_segment_ids"
+      ],
+      "title": "QuizQuestionView",
+      "type": "object"
+    },
+    "SafetySummary": {
+      "additionalProperties": false,
+      "properties": {
+        "child_unsafe": {
+          "default": false,
+          "title": "Child Unsafe",
+          "type": "boolean"
+        },
+        "severity": {
+          "default": 0.0,
+          "maximum": 1.0,
+          "minimum": 0.0,
+          "title": "Severity",
+          "type": "number"
+        },
+        "status": {
+          "enum": [
+            "reviewed",
+            "partial",
+            "unreviewed"
+          ],
+          "title": "Status",
+          "type": "string"
+        },
+        "tags": {
+          "default": [],
+          "items": {
+            "enum": [
+              "sharp_object",
+              "injury_risk",
+              "fire_or_explosion",
+              "weapon",
+              "blood_or_gore",
+              "nudity",
+              "drugs_or_alcohol",
+              "hazardous_chemical",
+              "disturbing"
+            ],
+            "type": "string"
+          },
+          "title": "Tags",
+          "type": "array"
+        }
+      },
+      "required": [
+        "status"
+      ],
+      "title": "SafetySummary",
+      "type": "object"
+    },
+    "SentenceView": {
+      "additionalProperties": false,
+      "properties": {
+        "end": {
+          "minimum": 0.0,
+          "title": "End",
+          "type": "number"
+        },
+        "seg_id": {
+          "pattern": "^s_\\d{3,}$",
+          "title": "Seg Id",
+          "type": "string"
+        },
+        "start": {
+          "minimum": 0.0,
+          "title": "Start",
+          "type": "number"
+        },
+        "text": {
+          "title": "Text",
+          "type": "string"
+        }
+      },
+      "required": [
+        "seg_id",
+        "start",
+        "end",
+        "text"
+      ],
+      "title": "SentenceView",
+      "type": "object"
+    },
+    "TextSpan": {
+      "additionalProperties": false,
+      "properties": {
+        "bbox": {
+          "maxItems": 4,
+          "minItems": 4,
+          "prefixItems": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "number"
+            },
+            {
+              "type": "number"
+            },
+            {
+              "type": "number"
+            }
+          ],
+          "title": "Bbox",
+          "type": "array"
+        },
+        "confidence": {
+          "maximum": 1.0,
+          "minimum": 0.0,
+          "title": "Confidence",
+          "type": "number"
+        },
+        "end": {
+          "minimum": 0.0,
+          "title": "End",
+          "type": "number"
+        },
+        "reader": {
+          "enum": [
+            "rapidocr",
+            "glm-ocr"
+          ],
+          "title": "Reader",
+          "type": "string"
+        },
+        "start": {
+          "minimum": 0.0,
+          "title": "Start",
+          "type": "number"
+        },
+        "text": {
+          "minLength": 1,
+          "title": "Text",
+          "type": "string"
+        },
+        "text_id": {
+          "pattern": "^x_\\d{3,}$",
+          "title": "Text Id",
+          "type": "string"
+        }
+      },
+      "required": [
+        "text_id",
+        "start",
+        "end",
+        "text",
+        "bbox",
+        "confidence",
+        "reader"
+      ],
+      "title": "TextSpan",
+      "type": "object"
+    },
+    "ThreadRoleAssignment": {
+      "additionalProperties": false,
+      "properties": {
+        "gist": {
+          "title": "Gist",
+          "type": "string"
+        },
+        "role": {
+          "enum": [
+            "intro",
+            "setup",
+            "core",
+            "safety",
+            "summary"
+          ],
+          "title": "Role",
+          "type": "string"
+        },
+        "segment_ids": {
+          "items": {
+            "pattern": "^s_\\d{3,}$",
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Segment Ids",
+          "type": "array"
+        }
+      },
+      "required": [
+        "segment_ids",
+        "role",
+        "gist"
+      ],
+      "title": "ThreadRoleAssignment",
+      "type": "object"
+    }
+  },
+  "$id": "https://loom.local/contracts/graph-view-mesh.schema.json",
+  "additionalProperties": false,
+  "properties": {
+    "concept_nodes": {
+      "items": {
+        "$ref": "#/$defs/ConceptNode"
+      },
+      "title": "Concept Nodes",
+      "type": "array"
+    },
+    "duration_seconds": {
+      "title": "Duration Seconds",
+      "type": "number"
+    },
+    "graph_sha": {
+      "anyOf": [
+        {
+          "pattern": "^sha256:[0-9a-f]{64}$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Graph Sha"
+    },
+    "objects": {
+      "items": {
+        "$ref": "#/$defs/ObjectSummary"
+      },
+      "title": "Objects",
+      "type": "array"
+    },
+    "on_screen_text": {
+      "items": {
+        "$ref": "#/$defs/TextSpan"
+      },
+      "title": "On Screen Text",
+      "type": "array"
+    },
+    "quiz_bank": {
+      "items": {
+        "$ref": "#/$defs/QuizQuestionView"
+      },
+      "title": "Quiz Bank",
+      "type": "array"
+    },
+    "schema_version": {
+      "default": "2.0",
+      "pattern": "^2\\.\\d+$",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "thread_roles": {
+      "items": {
+        "$ref": "#/$defs/ThreadRoleAssignment"
+      },
+      "title": "Thread Roles",
+      "type": "array"
+    },
+    "transcript": {
+      "items": {
+        "$ref": "#/$defs/SentenceView"
+      },
+      "title": "Transcript",
+      "type": "array"
+    },
+    "video_id": {
+      "pattern": "^[a-z0-9][a-z0-9_]*$",
+      "title": "Video Id",
+      "type": "string"
+    },
+    "view": {
+      "const": "mesh",
+      "default": "mesh",
+      "title": "View",
+      "type": "string"
+    }
+  },
+  "required": [
+    "video_id",
+    "graph_sha",
+    "duration_seconds",
+    "transcript",
+    "on_screen_text",
+    "objects",
+    "concept_nodes",
+    "thread_roles",
+    "quiz_bank"
+  ],
+  "title": "MeshGraphView",
+  "type": "object",
+  "x-loom-schema-version": "2.0"
+}

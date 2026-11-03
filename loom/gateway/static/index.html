@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>LOOM</title>
+<meta name="description" content="One lesson, a different verified cut for every viewer - running locally.">
+<link rel="stylesheet" href="/app.css">
+<link rel="stylesheet" href="/workspace.css">
+</head>
+<body>
+<canvas id="threads" aria-hidden="true"></canvas>
+<div class="grain" aria-hidden="true"></div>
+<header class="top">
+  <a href="#/" class="brand" aria-label="LOOM home"><span class="mark" aria-hidden="true"><i></i><i></i><i></i><i></i></span><span class="word">LOOM</span></a>
+  <nav>
+    <a href="#/">Lessons</a>
+    <span id="ready" class="ready"><b></b><span>Checking models</span></span>
+  </nav>
+</header>
+<main id="app"></main>
+<div id="toast" class="toast" role="status" aria-live="polite"></div>
+<script src="/scene.js"></script>
+<script src="/app.js" type="module"></script>
+</body>
+</html>

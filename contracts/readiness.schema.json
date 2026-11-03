@@ -1,0 +1,146 @@
+{
+  "$defs": {
+    "RoleReadiness": {
+      "additionalProperties": false,
+      "properties": {
+        "digest": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Digest"
+        },
+        "last_error": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Last Error"
+        },
+        "last_ok_at": {
+          "anyOf": [
+            {
+              "format": "date-time",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Last Ok At"
+        },
+        "present": {
+          "title": "Present",
+          "type": "boolean"
+        },
+        "required": {
+          "title": "Required",
+          "type": "boolean"
+        },
+        "role": {
+          "title": "Role",
+          "type": "string"
+        },
+        "tag": {
+          "title": "Tag",
+          "type": "string"
+        }
+      },
+      "required": [
+        "role",
+        "tag",
+        "required",
+        "present"
+      ],
+      "title": "RoleReadiness",
+      "type": "object"
+    }
+  },
+  "$id": "https://loom.local/contracts/readiness.schema.json",
+  "additionalProperties": false,
+  "properties": {
+    "checked_at": {
+      "format": "date-time",
+      "title": "Checked At",
+      "type": "string"
+    },
+    "degraded": {
+      "default": [],
+      "items": {
+        "type": "string"
+      },
+      "title": "Degraded",
+      "type": "array"
+    },
+    "disk_free_gb": {
+      "title": "Disk Free Gb",
+      "type": "number"
+    },
+    "missing": {
+      "default": [],
+      "items": {
+        "type": "string"
+      },
+      "title": "Missing",
+      "type": "array"
+    },
+    "offline": {
+      "title": "Offline",
+      "type": "boolean"
+    },
+    "ollama_reachable": {
+      "title": "Ollama Reachable",
+      "type": "boolean"
+    },
+    "ollama_version": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Ollama Version"
+    },
+    "ready": {
+      "title": "Ready",
+      "type": "boolean"
+    },
+    "roles": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/RoleReadiness"
+      },
+      "title": "Roles",
+      "type": "array"
+    },
+    "worker_ok": {
+      "title": "Worker Ok",
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "ready",
+    "ollama_reachable",
+    "worker_ok",
+    "disk_free_gb",
+    "offline",
+    "checked_at"
+  ],
+  "title": "Readiness",
+  "type": "object",
+  "x-loom-schema-version": "2.0"
+}

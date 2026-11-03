@@ -1,0 +1,19 @@
+{
+  "manifest_version": 3,
+  "name": "LOOM for YouTube",
+  "short_name": "LOOM",
+  "version": "3.0.0",
+  "description": "Your verified cut of this lesson: exact-shape masks, tap any object to ask about it, fact-checked Manim explainers and quizzes, from your local LOOM gateway.",
+  "minimum_chrome_version": "116",
+  "background": { "service_worker": "background.js" },
+  "permissions": ["storage"],
+  "host_permissions": ["http://127.0.0.1:8000/*"],
+  "content_scripts": [
+    {
+      "matches": ["https://www.youtube.com/*"],
+      "js": ["rle.js", "scene.js", "content.js"],
+      "css": ["content.css"],
+      "run_at": "document_idle"
+    }
+  ]
+}

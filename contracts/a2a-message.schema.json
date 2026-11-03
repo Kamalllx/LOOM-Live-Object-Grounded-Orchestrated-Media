@@ -1,0 +1,70 @@
+{
+  "$defs": {
+    "DataPart": {
+      "additionalProperties": false,
+      "properties": {
+        "data": {
+          "additionalProperties": true,
+          "title": "Data",
+          "type": "object"
+        },
+        "kind": {
+          "const": "data",
+          "default": "data",
+          "title": "Kind",
+          "type": "string"
+        }
+      },
+      "required": [
+        "data"
+      ],
+      "title": "DataPart",
+      "type": "object"
+    }
+  },
+  "$id": "https://loom.local/contracts/a2a-message.schema.json",
+  "additionalProperties": true,
+  "properties": {
+    "kind": {
+      "const": "message",
+      "default": "message",
+      "title": "Kind",
+      "type": "string"
+    },
+    "messageId": {
+      "title": "Messageid",
+      "type": "string"
+    },
+    "metadata": {
+      "additionalProperties": true,
+      "default": {},
+      "title": "Metadata",
+      "type": "object"
+    },
+    "parts": {
+      "items": {
+        "$ref": "#/$defs/DataPart"
+      },
+      "maxItems": 1,
+      "minItems": 1,
+      "title": "Parts",
+      "type": "array"
+    },
+    "role": {
+      "enum": [
+        "user",
+        "agent"
+      ],
+      "title": "Role",
+      "type": "string"
+    }
+  },
+  "required": [
+    "role",
+    "messageId",
+    "parts"
+  ],
+  "title": "Message",
+  "type": "object",
+  "x-loom-schema-version": "2.0"
+}

@@ -1,0 +1,186 @@
+{
+  "schema_version": "2.0",
+  "session_id": "sess_fixturepriya",
+  "video_id": "acid_base_neutralization_d752a6",
+  "learner_id": "learner_priya",
+  "status": "approved",
+  "fallback_reason": null,
+  "pass_count": 1,
+  "cache_hit": false,
+  "critic_score": {
+    "safety": 1.0,
+    "coherence": 1.0,
+    "factuality": 1.0,
+    "completeness": 1.0
+  },
+  "final_threads": [
+    {
+      "thread_id": "t1",
+      "start": 0.0,
+      "end": 5.9,
+      "action": "keep",
+      "label": "Introduction",
+      "rationale": "mastery 0.20 (prior knowledge): keep at standard pace",
+      "source": "pedagogy"
+    },
+    {
+      "thread_id": "t2",
+      "start": 5.9,
+      "end": 14.4,
+      "action": "keep",
+      "label": "Personal Protective Equipment",
+      "rationale": "mastery 0.20 (prior knowledge): keep at standard pace",
+      "source": "pedagogy"
+    },
+    {
+      "thread_id": "t3",
+      "start": 14.4,
+      "end": 27.533,
+      "action": "keep",
+      "label": "Acid Dissociation",
+      "rationale": "mastery 0.20 (prior knowledge): keep at standard pace",
+      "source": "pedagogy"
+    },
+    {
+      "thread_id": "t4",
+      "start": 27.533,
+      "end": 39.633,
+      "action": "expand",
+      "label": "Neutralization Reaction",
+      "rationale": "mastery 0.20 < 0.35: expand with an explainer",
+      "source": "pedagogy"
+    },
+    {
+      "thread_id": "t5",
+      "start": 39.633,
+      "end": 48.033,
+      "action": "expand",
+      "label": "Indicator and Neutral pH",
+      "rationale": "mastery 0.20 < 0.35: expand with an explainer",
+      "source": "pedagogy"
+    },
+    {
+      "thread_id": "t6",
+      "start": 48.033,
+      "end": 58.333,
+      "action": "keep",
+      "label": "Safe Handling of Broken Glass",
+      "rationale": "mastery 0.20 (prior knowledge): keep at standard pace",
+      "source": "pedagogy"
+    },
+    {
+      "thread_id": "t7",
+      "start": 58.333,
+      "end": 68.733,
+      "action": "keep",
+      "label": "Neutralization Reaction",
+      "rationale": "mastery 0.20 (prior knowledge): keep at standard pace",
+      "source": "pedagogy"
+    }
+  ],
+  "skipped": [],
+  "redaction_masks": [],
+  "explainer_clips": [
+    {
+      "concept_node_id": "c_04",
+      "trigger": "auto",
+      "anchor_seconds": 68.733,
+      "clip_url": "/media/clips/fbd80e95d244989546adc01e18e60ebf28a7524fad9dc4f73d56f4c680bccd0d.mp4",
+      "content_hash": "sha256:fbd80e95d244989546adc01e18e60ebf28a7524fad9dc4f73d56f4c680bccd0d",
+      "title": "Neutralization Reaction",
+      "duration_seconds": 14.0,
+      "storyboard": [
+        "Neutralization Reaction: fixture storyboard line 1.",
+        "Neutralization Reaction: fixture storyboard line 2.",
+        "Neutralization Reaction: fixture storyboard line 3."
+      ],
+      "verified_by": "fixture:hand-authored"
+    },
+    {
+      "concept_node_id": "c_05",
+      "trigger": "auto",
+      "anchor_seconds": 48.033,
+      "clip_url": "/media/clips/85ef7d9909da86532480e821f6bb6930fe9445024b2f9fdf9093e3d4446d3c62.mp4",
+      "content_hash": "sha256:85ef7d9909da86532480e821f6bb6930fe9445024b2f9fdf9093e3d4446d3c62",
+      "title": "Indicator and Neutral pH",
+      "duration_seconds": 14.0,
+      "storyboard": [
+        "Indicator and Neutral pH: fixture storyboard line 1.",
+        "Indicator and Neutral pH: fixture storyboard line 2.",
+        "Indicator and Neutral pH: fixture storyboard line 3."
+      ],
+      "verified_by": "fixture:hand-authored"
+    }
+  ],
+  "tap_targets": [
+    {
+      "object_id": "o_001",
+      "concept_node_id": "c_01"
+    },
+    {
+      "object_id": "o_003",
+      "concept_node_id": "c_02"
+    },
+    {
+      "object_id": "o_004",
+      "concept_node_id": "c_04"
+    },
+    {
+      "object_id": "o_004",
+      "concept_node_id": "c_05"
+    },
+    {
+      "object_id": "o_007",
+      "concept_node_id": "c_06"
+    }
+  ],
+  "quiz": [
+    {
+      "question_id": "q_c04_b_1",
+      "stem": "What two products form when an acid neutralizes a base?",
+      "options": [
+        "Salt and water",
+        "Gas and heat",
+        "Acid and oxygen",
+        "Only water"
+      ]
+    },
+    {
+      "question_id": "q_c05_b_1",
+      "stem": "What colour does universal indicator turn at pH 7?",
+      "options": [
+        "Green",
+        "Red",
+        "Purple",
+        "Yellow"
+      ]
+    },
+    {
+      "question_id": "q_c02_b_1",
+      "stem": "What does hydrochloric acid release in water?",
+      "options": [
+        "Hydrogen ions",
+        "Hydroxide ions",
+        "Sodium ions",
+        "Oxygen gas"
+      ]
+    }
+  ],
+  "loop_trace": [
+    {
+      "pass_number": 1,
+      "approved": true,
+      "scores": {
+        "safety": 1.0,
+        "coherence": 1.0,
+        "factuality": 1.0,
+        "completeness": 1.0
+      },
+      "issues": [],
+      "actions": [],
+      "latency_ms": 820
+    }
+  ],
+  "degraded": [],
+  "created_at": "2026-10-29T00:00:00Z"
+}

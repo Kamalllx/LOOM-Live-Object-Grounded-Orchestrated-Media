@@ -1,0 +1,300 @@
+{
+  "video_id": "acid_base_neutralization_d752a6",
+  "title": "Acid-Base Neutralization",
+  "video_file_sha256": "sha256:d752a602469f190caab8a82a825d952782a4cb4045b3d8d7c8409058201e2fbb",
+  "duration_seconds": 68.733,
+  "frame": {
+    "width": 1280,
+    "height": 720,
+    "fps": 30
+  },
+  "voice": "kokoro-82m/af_heart",
+  "segments": [
+    {
+      "id": "title",
+      "start": 0.0,
+      "end": 5.9,
+      "source": "title_card",
+      "speed": 1.0,
+      "objects": [],
+      "card_bbox": [
+        0.2082,
+        0.4667,
+        0.5836,
+        0.0667
+      ]
+    },
+    {
+      "id": "ppe",
+      "start": 5.9,
+      "end": 14.4,
+      "source": "pexels_4132752",
+      "speed": 1.0,
+      "objects": [
+        "gloves"
+      ],
+      "clip_loops": false
+    },
+    {
+      "id": "acid_base",
+      "start": 14.4,
+      "end": 27.533,
+      "source": "pexels_8326501",
+      "speed": 1.0,
+      "objects": [
+        "lab coat",
+        "glass beaker",
+        "microscope"
+      ],
+      "clip_loops": true
+    },
+    {
+      "id": "reaction",
+      "start": 27.533,
+      "end": 39.633,
+      "source": "pexels_8392557",
+      "speed": 1.0,
+      "objects": [
+        "beaker",
+        "measuring cylinder",
+        "gloves"
+      ],
+      "banner_bbox": [
+        0.5547,
+        0.0389,
+        0.4234,
+        0.0986
+      ],
+      "clip_loops": false
+    },
+    {
+      "id": "indicator",
+      "start": 39.633,
+      "end": 48.033,
+      "source": "pexels_8544763",
+      "speed": 1.0,
+      "objects": [
+        "beaker",
+        "volumetric flask"
+      ],
+      "banner_bbox": [
+        0.7352,
+        0.0389,
+        0.243,
+        0.1042
+      ],
+      "clip_loops": false
+    },
+    {
+      "id": "hazard",
+      "start": 48.033,
+      "end": 58.333,
+      "source": "pexels_854406",
+      "speed": 0.5,
+      "objects": [
+        "broken glass"
+      ],
+      "clip_loops": false
+    },
+    {
+      "id": "summary",
+      "start": 58.333,
+      "end": 68.733,
+      "source": "title_card",
+      "speed": 1.0,
+      "objects": [],
+      "card_bbox": [
+        0.1789,
+        0.4667,
+        0.6422,
+        0.0667
+      ]
+    }
+  ],
+  "narration": [
+    {
+      "segment": "title",
+      "start": 0.4,
+      "end": 5.2,
+      "text": "Welcome. In this short lesson we will find out what happens when an acid meets a base."
+    },
+    {
+      "segment": "ppe",
+      "start": 6.3,
+      "end": 10.311,
+      "text": "Before any experiment, put on a lab coat, gloves and safety goggles."
+    },
+    {
+      "segment": "ppe",
+      "start": 10.661,
+      "end": 13.69,
+      "text": "Acids and bases can damage your skin and eyes."
+    },
+    {
+      "segment": "acid_base",
+      "start": 14.8,
+      "end": 17.189,
+      "text": "Here a scientist pours a solution in the lab."
+    },
+    {
+      "segment": "acid_base",
+      "start": 17.539,
+      "end": 22.297,
+      "text": "An acid such as hydrochloric acid releases hydrogen ions in water."
+    },
+    {
+      "segment": "acid_base",
+      "start": 22.647,
+      "end": 26.828,
+      "text": "A base such as sodium hydroxide releases hydroxide ions."
+    },
+    {
+      "segment": "reaction",
+      "start": 27.933,
+      "end": 33.779,
+      "text": "When the two solutions are mixed, each hydrogen ion joins a hydroxide ion to form water."
+    },
+    {
+      "segment": "reaction",
+      "start": 34.129,
+      "end": 38.929,
+      "text": "The sodium and chloride ions that remain make table salt, which stays dissolved."
+    },
+    {
+      "segment": "indicator",
+      "start": 40.033,
+      "end": 42.828,
+      "text": "An indicator shows when the reaction is complete."
+    },
+    {
+      "segment": "indicator",
+      "start": 43.178,
+      "end": 47.317,
+      "text": "Universal indicator turns green at pH seven, which is neutral."
+    },
+    {
+      "segment": "hazard",
+      "start": 48.433,
+      "end": 50.225,
+      "text": "Accidents can happen in any lab."
+    },
+    {
+      "segment": "hazard",
+      "start": 50.575,
+      "end": 54.117,
+      "text": "If glassware breaks, never pick up the sharp pieces with your hands."
+    },
+    {
+      "segment": "hazard",
+      "start": 54.467,
+      "end": 57.603,
+      "text": "Tell your teacher and sweep them up with a brush and dustpan."
+    },
+    {
+      "segment": "summary",
+      "start": 58.733,
+      "end": 61.827,
+      "text": "So, an acid plus a base gives a salt plus water."
+    },
+    {
+      "segment": "summary",
+      "start": 62.177,
+      "end": 68.022,
+      "text": "This reaction is called neutralization, and antacid tablets use it to settle an upset stomach."
+    }
+  ],
+  "on_screen_text": [
+    {
+      "start": 0.0,
+      "end": 5.9,
+      "text": "Acid-Base Neutralization",
+      "bbox": [
+        0.2082,
+        0.4667,
+        0.5836,
+        0.0667
+      ]
+    },
+    {
+      "start": 27.533,
+      "end": 39.633,
+      "text": "NaOH + HCl → NaCl + H₂O",
+      "bbox": [
+        0.5547,
+        0.0389,
+        0.4234,
+        0.0986
+      ]
+    },
+    {
+      "start": 39.633,
+      "end": 48.033,
+      "text": "pH 7 = neutral",
+      "bbox": [
+        0.7352,
+        0.0389,
+        0.243,
+        0.1042
+      ]
+    },
+    {
+      "start": 58.333,
+      "end": 68.733,
+      "text": "Acid + Base → Salt + Water",
+      "bbox": [
+        0.1789,
+        0.4667,
+        0.6422,
+        0.0667
+      ]
+    }
+  ],
+  "hazards": [
+    {
+      "label": "broken glass",
+      "segment": "hazard",
+      "start": 48.033,
+      "end": 58.333,
+      "note": "the shattering bottle and its shards are visible for the whole segment"
+    }
+  ],
+  "safety_labels": {
+    "broken glass": {
+      "child_unsafe": true,
+      "tags": [
+        "sharp_object",
+        "injury_risk"
+      ]
+    },
+    "gloves": {
+      "child_unsafe": false,
+      "tags": []
+    },
+    "lab coat": {
+      "child_unsafe": false,
+      "tags": []
+    },
+    "glass beaker": {
+      "child_unsafe": false,
+      "tags": []
+    },
+    "beaker": {
+      "child_unsafe": false,
+      "tags": []
+    },
+    "microscope": {
+      "child_unsafe": false,
+      "tags": []
+    },
+    "measuring cylinder": {
+      "child_unsafe": false,
+      "tags": []
+    },
+    "volumetric flask": {
+      "child_unsafe": false,
+      "tags": []
+    }
+  },
+  "keyframe_annotations": "pending (S1): object boxes and masks on 20 keyframes are annotated by hand",
+  "script_sha256": "sha256:7d9b65dbcd07c687297363645267c240ad4ae43c023b65886ab147e69196db80"
+}

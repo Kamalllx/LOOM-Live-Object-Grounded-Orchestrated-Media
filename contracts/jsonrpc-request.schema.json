@@ -1,0 +1,40 @@
+{
+  "$id": "https://loom.local/contracts/jsonrpc-request.schema.json",
+  "additionalProperties": false,
+  "properties": {
+    "id": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "integer"
+        }
+      ],
+      "title": "Id"
+    },
+    "jsonrpc": {
+      "const": "2.0",
+      "default": "2.0",
+      "title": "Jsonrpc",
+      "type": "string"
+    },
+    "method": {
+      "title": "Method",
+      "type": "string"
+    },
+    "params": {
+      "additionalProperties": true,
+      "default": {},
+      "title": "Params",
+      "type": "object"
+    }
+  },
+  "required": [
+    "id",
+    "method"
+  ],
+  "title": "JsonRpcRequest",
+  "type": "object",
+  "x-loom-schema-version": "2.0"
+}

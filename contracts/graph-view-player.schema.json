@@ -1,0 +1,374 @@
+{
+  "$defs": {
+    "FrameInfo": {
+      "additionalProperties": false,
+      "properties": {
+        "content_rect": {
+          "default": [
+            0.0,
+            0.0,
+            1.0,
+            1.0
+          ],
+          "maxItems": 4,
+          "minItems": 4,
+          "prefixItems": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "number"
+            },
+            {
+              "type": "number"
+            },
+            {
+              "type": "number"
+            }
+          ],
+          "title": "Content Rect",
+          "type": "array"
+        },
+        "fps": {
+          "exclusiveMinimum": 0,
+          "title": "Fps",
+          "type": "number"
+        },
+        "height": {
+          "exclusiveMinimum": 0,
+          "title": "Height",
+          "type": "integer"
+        },
+        "width": {
+          "exclusiveMinimum": 0,
+          "title": "Width",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "width",
+        "height",
+        "fps"
+      ],
+      "title": "FrameInfo",
+      "type": "object"
+    },
+    "PlayerConcept": {
+      "additionalProperties": false,
+      "properties": {
+        "label": {
+          "title": "Label",
+          "type": "string"
+        },
+        "node_id": {
+          "pattern": "^c_\\d{2,}$",
+          "title": "Node Id",
+          "type": "string"
+        },
+        "summary": {
+          "title": "Summary",
+          "type": "string"
+        }
+      },
+      "required": [
+        "node_id",
+        "label",
+        "summary"
+      ],
+      "title": "PlayerConcept",
+      "type": "object"
+    },
+    "PlayerInstance": {
+      "additionalProperties": false,
+      "properties": {
+        "end": {
+          "minimum": 0.0,
+          "title": "End",
+          "type": "number"
+        },
+        "instance_id": {
+          "pattern": "^o_\\d{3,}_\\d+$",
+          "title": "Instance Id",
+          "type": "string"
+        },
+        "start": {
+          "minimum": 0.0,
+          "title": "Start",
+          "type": "number"
+        },
+        "track": {
+          "items": {
+            "$ref": "#/$defs/PlayerTrackSample"
+          },
+          "title": "Track",
+          "type": "array"
+        }
+      },
+      "required": [
+        "instance_id",
+        "start",
+        "end",
+        "track"
+      ],
+      "title": "PlayerInstance",
+      "type": "object"
+    },
+    "PlayerObject": {
+      "additionalProperties": false,
+      "properties": {
+        "instances": {
+          "items": {
+            "$ref": "#/$defs/PlayerInstance"
+          },
+          "title": "Instances",
+          "type": "array"
+        },
+        "label": {
+          "title": "Label",
+          "type": "string"
+        },
+        "object_id": {
+          "pattern": "^o_\\d{3,}$",
+          "title": "Object Id",
+          "type": "string"
+        }
+      },
+      "required": [
+        "object_id",
+        "label",
+        "instances"
+      ],
+      "title": "PlayerObject",
+      "type": "object"
+    },
+    "PlayerTrackSample": {
+      "additionalProperties": false,
+      "properties": {
+        "bbox": {
+          "maxItems": 4,
+          "minItems": 4,
+          "prefixItems": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "number"
+            },
+            {
+              "type": "number"
+            },
+            {
+              "type": "number"
+            }
+          ],
+          "title": "Bbox",
+          "type": "array"
+        },
+        "t": {
+          "minimum": 0.0,
+          "title": "T",
+          "type": "number"
+        }
+      },
+      "required": [
+        "t",
+        "bbox"
+      ],
+      "title": "PlayerTrackSample",
+      "type": "object"
+    },
+    "SentenceView": {
+      "additionalProperties": false,
+      "properties": {
+        "end": {
+          "minimum": 0.0,
+          "title": "End",
+          "type": "number"
+        },
+        "seg_id": {
+          "pattern": "^s_\\d{3,}$",
+          "title": "Seg Id",
+          "type": "string"
+        },
+        "start": {
+          "minimum": 0.0,
+          "title": "Start",
+          "type": "number"
+        },
+        "text": {
+          "title": "Text",
+          "type": "string"
+        }
+      },
+      "required": [
+        "seg_id",
+        "start",
+        "end",
+        "text"
+      ],
+      "title": "SentenceView",
+      "type": "object"
+    },
+    "TextSpan": {
+      "additionalProperties": false,
+      "properties": {
+        "bbox": {
+          "maxItems": 4,
+          "minItems": 4,
+          "prefixItems": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "number"
+            },
+            {
+              "type": "number"
+            },
+            {
+              "type": "number"
+            }
+          ],
+          "title": "Bbox",
+          "type": "array"
+        },
+        "confidence": {
+          "maximum": 1.0,
+          "minimum": 0.0,
+          "title": "Confidence",
+          "type": "number"
+        },
+        "end": {
+          "minimum": 0.0,
+          "title": "End",
+          "type": "number"
+        },
+        "reader": {
+          "enum": [
+            "rapidocr",
+            "glm-ocr"
+          ],
+          "title": "Reader",
+          "type": "string"
+        },
+        "start": {
+          "minimum": 0.0,
+          "title": "Start",
+          "type": "number"
+        },
+        "text": {
+          "minLength": 1,
+          "title": "Text",
+          "type": "string"
+        },
+        "text_id": {
+          "pattern": "^x_\\d{3,}$",
+          "title": "Text Id",
+          "type": "string"
+        }
+      },
+      "required": [
+        "text_id",
+        "start",
+        "end",
+        "text",
+        "bbox",
+        "confidence",
+        "reader"
+      ],
+      "title": "TextSpan",
+      "type": "object"
+    }
+  },
+  "$id": "https://loom.local/contracts/graph-view-player.schema.json",
+  "additionalProperties": false,
+  "properties": {
+    "concept_nodes": {
+      "items": {
+        "$ref": "#/$defs/PlayerConcept"
+      },
+      "title": "Concept Nodes",
+      "type": "array"
+    },
+    "duration_seconds": {
+      "title": "Duration Seconds",
+      "type": "number"
+    },
+    "frame": {
+      "$ref": "#/$defs/FrameInfo"
+    },
+    "graph_sha": {
+      "anyOf": [
+        {
+          "pattern": "^sha256:[0-9a-f]{64}$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Graph Sha"
+    },
+    "objects": {
+      "items": {
+        "$ref": "#/$defs/PlayerObject"
+      },
+      "title": "Objects",
+      "type": "array"
+    },
+    "on_screen_text": {
+      "items": {
+        "$ref": "#/$defs/TextSpan"
+      },
+      "title": "On Screen Text",
+      "type": "array"
+    },
+    "schema_version": {
+      "default": "2.0",
+      "pattern": "^2\\.\\d+$",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "title": {
+      "title": "Title",
+      "type": "string"
+    },
+    "transcript": {
+      "items": {
+        "$ref": "#/$defs/SentenceView"
+      },
+      "title": "Transcript",
+      "type": "array"
+    },
+    "video_id": {
+      "pattern": "^[a-z0-9][a-z0-9_]*$",
+      "title": "Video Id",
+      "type": "string"
+    },
+    "video_url": {
+      "title": "Video Url",
+      "type": "string"
+    },
+    "view": {
+      "const": "player",
+      "default": "player",
+      "title": "View",
+      "type": "string"
+    }
+  },
+  "required": [
+    "video_id",
+    "graph_sha",
+    "title",
+    "video_url",
+    "duration_seconds",
+    "frame",
+    "transcript",
+    "on_screen_text",
+    "objects",
+    "concept_nodes"
+  ],
+  "title": "PlayerGraphView",
+  "type": "object",
+  "x-loom-schema-version": "2.0"
+}

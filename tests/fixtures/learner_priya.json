@@ -1,0 +1,21 @@
+{
+  "schema_version": "2.0",
+  "learner_id": "learner_priya",
+  "display_name": "Priya",
+  "persona": "Beginner - new to this topic",
+  "preferences": {
+    "pace": "detailed",
+    "language": "en",
+    "prior_knowledge": 0.2,
+    "explainers": "auto",
+    "never_skip": false
+  },
+  "safety_profile": {
+    "redaction_level": "off",
+    "blocked_tags": [],
+    "allowed_tags": [],
+    "parent_lock": false
+  },
+  "mastery": [],
+  "learner_state_sha": "sha256:918780d2a742ab99ab22e24044a1ca4f9cd71fff143297dca84836d236f5d117"
+}

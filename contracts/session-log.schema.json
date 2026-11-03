@@ -1,0 +1,185 @@
+{
+  "$defs": {
+    "MasteryUpdate": {
+      "additionalProperties": false,
+      "properties": {
+        "after": {
+          "maximum": 1.0,
+          "minimum": 0.0,
+          "title": "After",
+          "type": "number"
+        },
+        "before": {
+          "maximum": 1.0,
+          "minimum": 0.0,
+          "title": "Before",
+          "type": "number"
+        },
+        "cause": {
+          "enum": [
+            "quiz_correct",
+            "quiz_wrong",
+            "explainer_watched",
+            "thread_completed"
+          ],
+          "title": "Cause",
+          "type": "string"
+        },
+        "concept_key": {
+          "pattern": "^([a-z0-9][a-z0-9_]*/c_\\d{2,}|concept:[a-z0-9_]+)$",
+          "title": "Concept Key",
+          "type": "string"
+        }
+      },
+      "required": [
+        "concept_key",
+        "before",
+        "after",
+        "cause"
+      ],
+      "title": "MasteryUpdate",
+      "type": "object"
+    },
+    "QuizAttempt": {
+      "additionalProperties": false,
+      "properties": {
+        "correct": {
+          "title": "Correct",
+          "type": "boolean"
+        },
+        "option_index": {
+          "maximum": 3,
+          "minimum": 0,
+          "title": "Option Index",
+          "type": "integer"
+        },
+        "question_id": {
+          "pattern": "^q_[a-z0-9_]+$",
+          "title": "Question Id",
+          "type": "string"
+        },
+        "server_ts": {
+          "format": "date-time",
+          "title": "Server Ts",
+          "type": "string"
+        }
+      },
+      "required": [
+        "question_id",
+        "option_index",
+        "correct",
+        "server_ts"
+      ],
+      "title": "QuizAttempt",
+      "type": "object"
+    },
+    "SessionEvent": {
+      "additionalProperties": false,
+      "properties": {
+        "client_ts": {
+          "minimum": 0,
+          "title": "Client Ts",
+          "type": "number"
+        },
+        "payload": {
+          "additionalProperties": true,
+          "default": {},
+          "title": "Payload",
+          "type": "object"
+        },
+        "seq": {
+          "minimum": 0,
+          "title": "Seq",
+          "type": "integer"
+        },
+        "server_ts": {
+          "format": "date-time",
+          "title": "Server Ts",
+          "type": "string"
+        },
+        "type": {
+          "enum": [
+            "play",
+            "pause",
+            "seek",
+            "thread_complete",
+            "object_tapped",
+            "explainer_shown",
+            "explainer_skipped",
+            "mask_shown",
+            "mask_revealed",
+            "quiz_answered",
+            "session_end"
+          ],
+          "title": "Type",
+          "type": "string"
+        }
+      },
+      "required": [
+        "seq",
+        "type",
+        "client_ts",
+        "server_ts"
+      ],
+      "title": "SessionEvent",
+      "type": "object"
+    }
+  },
+  "$id": "https://loom.local/contracts/session-log.schema.json",
+  "additionalProperties": false,
+  "properties": {
+    "events": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/SessionEvent"
+      },
+      "title": "Events",
+      "type": "array"
+    },
+    "learner_id": {
+      "pattern": "^[a-z0-9][a-z0-9_]*$",
+      "title": "Learner Id",
+      "type": "string"
+    },
+    "mastery_updates": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/MasteryUpdate"
+      },
+      "title": "Mastery Updates",
+      "type": "array"
+    },
+    "quiz_attempts": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/QuizAttempt"
+      },
+      "title": "Quiz Attempts",
+      "type": "array"
+    },
+    "schema_version": {
+      "default": "2.0",
+      "pattern": "^2\\.\\d+$",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "session_id": {
+      "pattern": "^sess_[a-z0-9]+$",
+      "title": "Session Id",
+      "type": "string"
+    },
+    "video_id": {
+      "pattern": "^[a-z0-9][a-z0-9_]*$",
+      "title": "Video Id",
+      "type": "string"
+    }
+  },
+  "required": [
+    "session_id",
+    "learner_id",
+    "video_id"
+  ],
+  "title": "SessionLog",
+  "type": "object",
+  "x-loom-schema-version": "2.0"
+}

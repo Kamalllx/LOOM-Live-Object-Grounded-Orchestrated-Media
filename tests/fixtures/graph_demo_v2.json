@@ -1,0 +1,2846 @@
+{
+  "schema_version": "2.0",
+  "video_id": "acid_base_neutralization_d752a6",
+  "title": "Acid-Base Neutralization",
+  "source": {
+    "kind": "path",
+    "ref": "tests/eval_data/build/acid_base_neutralization_d752a6.mp4",
+    "youtube_id": null
+  },
+  "video_url": "/media/videos/acid_base_neutralization_d752a6.mp4",
+  "duration_seconds": 68.733,
+  "frame": {
+    "width": 1280,
+    "height": 720,
+    "fps": 30.0,
+    "content_rect": [
+      0.0,
+      0.0,
+      1.0,
+      1.0
+    ]
+  },
+  "shots": [
+    {
+      "shot_id": "sh_01",
+      "start": 0.0,
+      "end": 5.9,
+      "keyframes": [
+        0.5,
+        2.95
+      ]
+    },
+    {
+      "shot_id": "sh_02",
+      "start": 5.9,
+      "end": 14.4,
+      "keyframes": [
+        6.4,
+        10.15
+      ]
+    },
+    {
+      "shot_id": "sh_03",
+      "start": 14.4,
+      "end": 27.533,
+      "keyframes": [
+        14.9,
+        20.97
+      ]
+    },
+    {
+      "shot_id": "sh_04",
+      "start": 27.533,
+      "end": 39.633,
+      "keyframes": [
+        28.03,
+        33.58
+      ]
+    },
+    {
+      "shot_id": "sh_05",
+      "start": 39.633,
+      "end": 48.033,
+      "keyframes": [
+        40.13,
+        43.83
+      ]
+    },
+    {
+      "shot_id": "sh_06",
+      "start": 48.033,
+      "end": 58.333,
+      "keyframes": [
+        48.53,
+        53.18
+      ]
+    },
+    {
+      "shot_id": "sh_07",
+      "start": 58.333,
+      "end": 68.733,
+      "keyframes": [
+        58.83,
+        63.53
+      ]
+    }
+  ],
+  "transcript": [
+    {
+      "seg_id": "s_001",
+      "start": 0.4,
+      "end": 5.2,
+      "text": "Welcome. In this short lesson we will find out what happens when an acid meets a base.",
+      "words": [],
+      "speaker": "narrator"
+    },
+    {
+      "seg_id": "s_002",
+      "start": 6.3,
+      "end": 10.311,
+      "text": "Before any experiment, put on a lab coat, gloves and safety goggles.",
+      "words": [],
+      "speaker": "narrator"
+    },
+    {
+      "seg_id": "s_003",
+      "start": 10.661,
+      "end": 13.69,
+      "text": "Acids and bases can damage your skin and eyes.",
+      "words": [],
+      "speaker": "narrator"
+    },
+    {
+      "seg_id": "s_004",
+      "start": 14.8,
+      "end": 17.189,
+      "text": "Here a scientist pours a solution in the lab.",
+      "words": [],
+      "speaker": "narrator"
+    },
+    {
+      "seg_id": "s_005",
+      "start": 17.539,
+      "end": 22.297,
+      "text": "An acid such as hydrochloric acid releases hydrogen ions in water.",
+      "words": [],
+      "speaker": "narrator"
+    },
+    {
+      "seg_id": "s_006",
+      "start": 22.647,
+      "end": 26.828,
+      "text": "A base such as sodium hydroxide releases hydroxide ions.",
+      "words": [],
+      "speaker": "narrator"
+    },
+    {
+      "seg_id": "s_007",
+      "start": 27.933,
+      "end": 33.779,
+      "text": "When the two solutions are mixed, each hydrogen ion joins a hydroxide ion to form water.",
+      "words": [],
+      "speaker": "narrator"
+    },
+    {
+      "seg_id": "s_008",
+      "start": 34.129,
+      "end": 38.929,
+      "text": "The sodium and chloride ions that remain make table salt, which stays dissolved.",
+      "words": [],
+      "speaker": "narrator"
+    },
+    {
+      "seg_id": "s_009",
+      "start": 40.033,
+      "end": 42.828,
+      "text": "An indicator shows when the reaction is complete.",
+      "words": [],
+      "speaker": "narrator"
+    },
+    {
+      "seg_id": "s_010",
+      "start": 43.178,
+      "end": 47.317,
+      "text": "Universal indicator turns green at pH seven, which is neutral.",
+      "words": [],
+      "speaker": "narrator"
+    },
+    {
+      "seg_id": "s_011",
+      "start": 48.433,
+      "end": 50.225,
+      "text": "Accidents can happen in any lab.",
+      "words": [],
+      "speaker": "narrator"
+    },
+    {
+      "seg_id": "s_012",
+      "start": 50.575,
+      "end": 54.117,
+      "text": "If glassware breaks, never pick up the sharp pieces with your hands.",
+      "words": [],
+      "speaker": "narrator"
+    },
+    {
+      "seg_id": "s_013",
+      "start": 54.467,
+      "end": 57.603,
+      "text": "Tell your teacher and sweep them up with a brush and dustpan.",
+      "words": [],
+      "speaker": "narrator"
+    },
+    {
+      "seg_id": "s_014",
+      "start": 58.733,
+      "end": 61.827,
+      "text": "So, an acid plus a base gives a salt plus water.",
+      "words": [],
+      "speaker": "narrator"
+    },
+    {
+      "seg_id": "s_015",
+      "start": 62.177,
+      "end": 68.022,
+      "text": "This reaction is called neutralization, and antacid tablets use it to settle an upset stomach.",
+      "words": [],
+      "speaker": "narrator"
+    }
+  ],
+  "on_screen_text": [
+    {
+      "text_id": "x_001",
+      "start": 0.0,
+      "end": 5.9,
+      "text": "Acid-Base Neutralization",
+      "bbox": [
+        0.2082,
+        0.4667,
+        0.5836,
+        0.0667
+      ],
+      "confidence": 0.95,
+      "reader": "rapidocr"
+    },
+    {
+      "text_id": "x_002",
+      "start": 27.533,
+      "end": 39.633,
+      "text": "NaOH + HCl → NaCl + H₂O",
+      "bbox": [
+        0.5547,
+        0.0389,
+        0.4234,
+        0.0986
+      ],
+      "confidence": 0.95,
+      "reader": "glm-ocr"
+    },
+    {
+      "text_id": "x_003",
+      "start": 39.633,
+      "end": 48.033,
+      "text": "pH 7 = neutral",
+      "bbox": [
+        0.7352,
+        0.0389,
+        0.243,
+        0.1042
+      ],
+      "confidence": 0.95,
+      "reader": "rapidocr"
+    },
+    {
+      "text_id": "x_004",
+      "start": 58.333,
+      "end": 68.733,
+      "text": "Acid + Base → Salt + Water",
+      "bbox": [
+        0.1789,
+        0.4667,
+        0.6422,
+        0.0667
+      ],
+      "confidence": 0.95,
+      "reader": "glm-ocr"
+    }
+  ],
+  "objects": [
+    {
+      "object_id": "o_001",
+      "label": "gloves",
+      "phrase_source": "vlm",
+      "is_hazard_class": false,
+      "instances": [
+        {
+          "instance_id": "o_001_0",
+          "shot_id": "sh_02",
+          "start": 5.9,
+          "end": 14.4,
+          "score": 0.8,
+          "track": [
+            {
+              "t": 5.9,
+              "bbox": [
+                0.27,
+                0.28,
+                0.48,
+                0.36
+              ],
+              "mask": null
+            },
+            {
+              "t": 6.4,
+              "bbox": [
+                0.27,
+                0.28,
+                0.48,
+                0.36
+              ],
+              "mask": null
+            },
+            {
+              "t": 6.9,
+              "bbox": [
+                0.27,
+                0.28,
+                0.48,
+                0.36
+              ],
+              "mask": null
+            },
+            {
+              "t": 7.4,
+              "bbox": [
+                0.27,
+                0.28,
+                0.48,
+                0.36
+              ],
+              "mask": null
+            },
+            {
+              "t": 7.9,
+              "bbox": [
+                0.27,
+                0.28,
+                0.48,
+                0.36
+              ],
+              "mask": null
+            },
+            {
+              "t": 8.4,
+              "bbox": [
+                0.27,
+                0.28,
+                0.48,
+                0.36
+              ],
+              "mask": null
+            },
+            {
+              "t": 8.9,
+              "bbox": [
+                0.27,
+                0.28,
+                0.48,
+                0.36
+              ],
+              "mask": null
+            },
+            {
+              "t": 9.4,
+              "bbox": [
+                0.27,
+                0.28,
+                0.48,
+                0.36
+              ],
+              "mask": null
+            },
+            {
+              "t": 9.9,
+              "bbox": [
+                0.27,
+                0.28,
+                0.48,
+                0.36
+              ],
+              "mask": null
+            },
+            {
+              "t": 10.4,
+              "bbox": [
+                0.27,
+                0.28,
+                0.48,
+                0.36
+              ],
+              "mask": null
+            },
+            {
+              "t": 10.9,
+              "bbox": [
+                0.27,
+                0.28,
+                0.48,
+                0.36
+              ],
+              "mask": null
+            },
+            {
+              "t": 11.4,
+              "bbox": [
+                0.27,
+                0.28,
+                0.48,
+                0.36
+              ],
+              "mask": null
+            },
+            {
+              "t": 11.9,
+              "bbox": [
+                0.27,
+                0.28,
+                0.48,
+                0.36
+              ],
+              "mask": null
+            },
+            {
+              "t": 12.4,
+              "bbox": [
+                0.27,
+                0.28,
+                0.48,
+                0.36
+              ],
+              "mask": null
+            },
+            {
+              "t": 12.9,
+              "bbox": [
+                0.27,
+                0.28,
+                0.48,
+                0.36
+              ],
+              "mask": null
+            },
+            {
+              "t": 13.4,
+              "bbox": [
+                0.27,
+                0.28,
+                0.48,
+                0.36
+              ],
+              "mask": null
+            },
+            {
+              "t": 13.9,
+              "bbox": [
+                0.27,
+                0.28,
+                0.48,
+                0.36
+              ],
+              "mask": null
+            },
+            {
+              "t": 14.4,
+              "bbox": [
+                0.27,
+                0.28,
+                0.48,
+                0.36
+              ],
+              "mask": null
+            }
+          ],
+          "verification": {
+            "siglip_margin": 0.3,
+            "vlm": "not_run",
+            "status": "verified"
+          }
+        }
+      ],
+      "safety": {
+        "status": "reviewed",
+        "tags": [],
+        "severity": 0.0,
+        "child_unsafe": false,
+        "disagreement": false,
+        "reasons": {
+          "guardian": "fixture: ordinary lab equipment",
+          "vlm": "fixture"
+        },
+        "models": {
+          "safety": "fixture:hand-authored",
+          "vlm": "fixture:hand-authored"
+        }
+      }
+    },
+    {
+      "object_id": "o_002",
+      "label": "lab coat",
+      "phrase_source": "vlm",
+      "is_hazard_class": false,
+      "instances": [
+        {
+          "instance_id": "o_002_0",
+          "shot_id": "sh_03",
+          "start": 14.4,
+          "end": 27.533,
+          "score": 0.8,
+          "track": [
+            {
+              "t": 14.4,
+              "bbox": [
+                0.55,
+                0.0,
+                0.45,
+                0.75
+              ],
+              "mask": null
+            },
+            {
+              "t": 14.9,
+              "bbox": [
+                0.55,
+                0.0,
+                0.45,
+                0.75
+              ],
+              "mask": null
+            },
+            {
+              "t": 15.4,
+              "bbox": [
+                0.55,
+                0.0,
+                0.45,
+                0.75
+              ],
+              "mask": null
+            },
+            {
+              "t": 15.9,
+              "bbox": [
+                0.55,
+                0.0,
+                0.45,
+                0.75
+              ],
+              "mask": null
+            },
+            {
+              "t": 16.4,
+              "bbox": [
+                0.55,
+                0.0,
+                0.45,
+                0.75
+              ],
+              "mask": null
+            },
+            {
+              "t": 16.9,
+              "bbox": [
+                0.55,
+                0.0,
+                0.45,
+                0.75
+              ],
+              "mask": null
+            },
+            {
+              "t": 17.4,
+              "bbox": [
+                0.55,
+                0.0,
+                0.45,
+                0.75
+              ],
+              "mask": null
+            },
+            {
+              "t": 17.9,
+              "bbox": [
+                0.55,
+                0.0,
+                0.45,
+                0.75
+              ],
+              "mask": null
+            },
+            {
+              "t": 18.4,
+              "bbox": [
+                0.55,
+                0.0,
+                0.45,
+                0.75
+              ],
+              "mask": null
+            },
+            {
+              "t": 18.9,
+              "bbox": [
+                0.55,
+                0.0,
+                0.45,
+                0.75
+              ],
+              "mask": null
+            },
+            {
+              "t": 19.4,
+              "bbox": [
+                0.55,
+                0.0,
+                0.45,
+                0.75
+              ],
+              "mask": null
+            },
+            {
+              "t": 19.9,
+              "bbox": [
+                0.55,
+                0.0,
+                0.45,
+                0.75
+              ],
+              "mask": null
+            },
+            {
+              "t": 20.4,
+              "bbox": [
+                0.55,
+                0.0,
+                0.45,
+                0.75
+              ],
+              "mask": null
+            },
+            {
+              "t": 20.9,
+              "bbox": [
+                0.55,
+                0.0,
+                0.45,
+                0.75
+              ],
+              "mask": null
+            },
+            {
+              "t": 21.4,
+              "bbox": [
+                0.55,
+                0.0,
+                0.45,
+                0.75
+              ],
+              "mask": null
+            },
+            {
+              "t": 21.9,
+              "bbox": [
+                0.55,
+                0.0,
+                0.45,
+                0.75
+              ],
+              "mask": null
+            },
+            {
+              "t": 22.4,
+              "bbox": [
+                0.55,
+                0.0,
+                0.45,
+                0.75
+              ],
+              "mask": null
+            },
+            {
+              "t": 22.9,
+              "bbox": [
+                0.55,
+                0.0,
+                0.45,
+                0.75
+              ],
+              "mask": null
+            },
+            {
+              "t": 23.4,
+              "bbox": [
+                0.55,
+                0.0,
+                0.45,
+                0.75
+              ],
+              "mask": null
+            },
+            {
+              "t": 23.9,
+              "bbox": [
+                0.55,
+                0.0,
+                0.45,
+                0.75
+              ],
+              "mask": null
+            },
+            {
+              "t": 24.4,
+              "bbox": [
+                0.55,
+                0.0,
+                0.45,
+                0.75
+              ],
+              "mask": null
+            },
+            {
+              "t": 24.9,
+              "bbox": [
+                0.55,
+                0.0,
+                0.45,
+                0.75
+              ],
+              "mask": null
+            },
+            {
+              "t": 25.4,
+              "bbox": [
+                0.55,
+                0.0,
+                0.45,
+                0.75
+              ],
+              "mask": null
+            },
+            {
+              "t": 25.9,
+              "bbox": [
+                0.55,
+                0.0,
+                0.45,
+                0.75
+              ],
+              "mask": null
+            },
+            {
+              "t": 26.4,
+              "bbox": [
+                0.55,
+                0.0,
+                0.45,
+                0.75
+              ],
+              "mask": null
+            },
+            {
+              "t": 26.9,
+              "bbox": [
+                0.55,
+                0.0,
+                0.45,
+                0.75
+              ],
+              "mask": null
+            },
+            {
+              "t": 27.4,
+              "bbox": [
+                0.55,
+                0.0,
+                0.45,
+                0.75
+              ],
+              "mask": null
+            }
+          ],
+          "verification": {
+            "siglip_margin": 0.3,
+            "vlm": "not_run",
+            "status": "verified"
+          }
+        }
+      ],
+      "safety": {
+        "status": "reviewed",
+        "tags": [],
+        "severity": 0.0,
+        "child_unsafe": false,
+        "disagreement": false,
+        "reasons": {
+          "guardian": "fixture: ordinary lab equipment",
+          "vlm": "fixture"
+        },
+        "models": {
+          "safety": "fixture:hand-authored",
+          "vlm": "fixture:hand-authored"
+        }
+      }
+    },
+    {
+      "object_id": "o_003",
+      "label": "microscope",
+      "phrase_source": "vlm",
+      "is_hazard_class": false,
+      "instances": [
+        {
+          "instance_id": "o_003_0",
+          "shot_id": "sh_03",
+          "start": 14.4,
+          "end": 27.533,
+          "score": 0.8,
+          "track": [
+            {
+              "t": 14.4,
+              "bbox": [
+                0.0,
+                0.05,
+                0.35,
+                0.8
+              ],
+              "mask": null
+            },
+            {
+              "t": 14.9,
+              "bbox": [
+                0.0,
+                0.05,
+                0.35,
+                0.8
+              ],
+              "mask": null
+            },
+            {
+              "t": 15.4,
+              "bbox": [
+                0.0,
+                0.05,
+                0.35,
+                0.8
+              ],
+              "mask": null
+            },
+            {
+              "t": 15.9,
+              "bbox": [
+                0.0,
+                0.05,
+                0.35,
+                0.8
+              ],
+              "mask": null
+            },
+            {
+              "t": 16.4,
+              "bbox": [
+                0.0,
+                0.05,
+                0.35,
+                0.8
+              ],
+              "mask": null
+            },
+            {
+              "t": 16.9,
+              "bbox": [
+                0.0,
+                0.05,
+                0.35,
+                0.8
+              ],
+              "mask": null
+            },
+            {
+              "t": 17.4,
+              "bbox": [
+                0.0,
+                0.05,
+                0.35,
+                0.8
+              ],
+              "mask": null
+            },
+            {
+              "t": 17.9,
+              "bbox": [
+                0.0,
+                0.05,
+                0.35,
+                0.8
+              ],
+              "mask": null
+            },
+            {
+              "t": 18.4,
+              "bbox": [
+                0.0,
+                0.05,
+                0.35,
+                0.8
+              ],
+              "mask": null
+            },
+            {
+              "t": 18.9,
+              "bbox": [
+                0.0,
+                0.05,
+                0.35,
+                0.8
+              ],
+              "mask": null
+            },
+            {
+              "t": 19.4,
+              "bbox": [
+                0.0,
+                0.05,
+                0.35,
+                0.8
+              ],
+              "mask": null
+            },
+            {
+              "t": 19.9,
+              "bbox": [
+                0.0,
+                0.05,
+                0.35,
+                0.8
+              ],
+              "mask": null
+            },
+            {
+              "t": 20.4,
+              "bbox": [
+                0.0,
+                0.05,
+                0.35,
+                0.8
+              ],
+              "mask": null
+            },
+            {
+              "t": 20.9,
+              "bbox": [
+                0.0,
+                0.05,
+                0.35,
+                0.8
+              ],
+              "mask": null
+            },
+            {
+              "t": 21.4,
+              "bbox": [
+                0.0,
+                0.05,
+                0.35,
+                0.8
+              ],
+              "mask": null
+            },
+            {
+              "t": 21.9,
+              "bbox": [
+                0.0,
+                0.05,
+                0.35,
+                0.8
+              ],
+              "mask": null
+            },
+            {
+              "t": 22.4,
+              "bbox": [
+                0.0,
+                0.05,
+                0.35,
+                0.8
+              ],
+              "mask": null
+            },
+            {
+              "t": 22.9,
+              "bbox": [
+                0.0,
+                0.05,
+                0.35,
+                0.8
+              ],
+              "mask": null
+            },
+            {
+              "t": 23.4,
+              "bbox": [
+                0.0,
+                0.05,
+                0.35,
+                0.8
+              ],
+              "mask": null
+            },
+            {
+              "t": 23.9,
+              "bbox": [
+                0.0,
+                0.05,
+                0.35,
+                0.8
+              ],
+              "mask": null
+            },
+            {
+              "t": 24.4,
+              "bbox": [
+                0.0,
+                0.05,
+                0.35,
+                0.8
+              ],
+              "mask": null
+            },
+            {
+              "t": 24.9,
+              "bbox": [
+                0.0,
+                0.05,
+                0.35,
+                0.8
+              ],
+              "mask": null
+            },
+            {
+              "t": 25.4,
+              "bbox": [
+                0.0,
+                0.05,
+                0.35,
+                0.8
+              ],
+              "mask": null
+            },
+            {
+              "t": 25.9,
+              "bbox": [
+                0.0,
+                0.05,
+                0.35,
+                0.8
+              ],
+              "mask": null
+            },
+            {
+              "t": 26.4,
+              "bbox": [
+                0.0,
+                0.05,
+                0.35,
+                0.8
+              ],
+              "mask": null
+            },
+            {
+              "t": 26.9,
+              "bbox": [
+                0.0,
+                0.05,
+                0.35,
+                0.8
+              ],
+              "mask": null
+            },
+            {
+              "t": 27.4,
+              "bbox": [
+                0.0,
+                0.05,
+                0.35,
+                0.8
+              ],
+              "mask": null
+            }
+          ],
+          "verification": {
+            "siglip_margin": 0.3,
+            "vlm": "not_run",
+            "status": "verified"
+          }
+        }
+      ],
+      "safety": {
+        "status": "reviewed",
+        "tags": [],
+        "severity": 0.0,
+        "child_unsafe": false,
+        "disagreement": false,
+        "reasons": {
+          "guardian": "fixture: ordinary lab equipment",
+          "vlm": "fixture"
+        },
+        "models": {
+          "safety": "fixture:hand-authored",
+          "vlm": "fixture:hand-authored"
+        }
+      }
+    },
+    {
+      "object_id": "o_004",
+      "label": "beaker",
+      "phrase_source": "transcript",
+      "is_hazard_class": false,
+      "instances": [
+        {
+          "instance_id": "o_004_0",
+          "shot_id": "sh_04",
+          "start": 27.533,
+          "end": 39.633,
+          "score": 0.8,
+          "track": [
+            {
+              "t": 27.53,
+              "bbox": [
+                0.16,
+                0.02,
+                0.39,
+                0.96
+              ],
+              "mask": null
+            },
+            {
+              "t": 28.03,
+              "bbox": [
+                0.16,
+                0.02,
+                0.39,
+                0.96
+              ],
+              "mask": null
+            },
+            {
+              "t": 28.53,
+              "bbox": [
+                0.16,
+                0.02,
+                0.39,
+                0.96
+              ],
+              "mask": null
+            },
+            {
+              "t": 29.03,
+              "bbox": [
+                0.16,
+                0.02,
+                0.39,
+                0.96
+              ],
+              "mask": null
+            },
+            {
+              "t": 29.53,
+              "bbox": [
+                0.16,
+                0.02,
+                0.39,
+                0.96
+              ],
+              "mask": null
+            },
+            {
+              "t": 30.03,
+              "bbox": [
+                0.16,
+                0.02,
+                0.39,
+                0.96
+              ],
+              "mask": null
+            },
+            {
+              "t": 30.53,
+              "bbox": [
+                0.16,
+                0.02,
+                0.39,
+                0.96
+              ],
+              "mask": null
+            },
+            {
+              "t": 31.03,
+              "bbox": [
+                0.16,
+                0.02,
+                0.39,
+                0.96
+              ],
+              "mask": null
+            },
+            {
+              "t": 31.53,
+              "bbox": [
+                0.16,
+                0.02,
+                0.39,
+                0.96
+              ],
+              "mask": null
+            },
+            {
+              "t": 32.03,
+              "bbox": [
+                0.16,
+                0.02,
+                0.39,
+                0.96
+              ],
+              "mask": null
+            },
+            {
+              "t": 32.53,
+              "bbox": [
+                0.16,
+                0.02,
+                0.39,
+                0.96
+              ],
+              "mask": null
+            },
+            {
+              "t": 33.03,
+              "bbox": [
+                0.16,
+                0.02,
+                0.39,
+                0.96
+              ],
+              "mask": null
+            },
+            {
+              "t": 33.53,
+              "bbox": [
+                0.16,
+                0.02,
+                0.39,
+                0.96
+              ],
+              "mask": null
+            },
+            {
+              "t": 34.03,
+              "bbox": [
+                0.16,
+                0.02,
+                0.39,
+                0.96
+              ],
+              "mask": null
+            },
+            {
+              "t": 34.53,
+              "bbox": [
+                0.16,
+                0.02,
+                0.39,
+                0.96
+              ],
+              "mask": null
+            },
+            {
+              "t": 35.03,
+              "bbox": [
+                0.16,
+                0.02,
+                0.39,
+                0.96
+              ],
+              "mask": null
+            },
+            {
+              "t": 35.53,
+              "bbox": [
+                0.16,
+                0.02,
+                0.39,
+                0.96
+              ],
+              "mask": null
+            },
+            {
+              "t": 36.03,
+              "bbox": [
+                0.16,
+                0.02,
+                0.39,
+                0.96
+              ],
+              "mask": null
+            },
+            {
+              "t": 36.53,
+              "bbox": [
+                0.16,
+                0.02,
+                0.39,
+                0.96
+              ],
+              "mask": null
+            },
+            {
+              "t": 37.03,
+              "bbox": [
+                0.16,
+                0.02,
+                0.39,
+                0.96
+              ],
+              "mask": null
+            },
+            {
+              "t": 37.53,
+              "bbox": [
+                0.16,
+                0.02,
+                0.39,
+                0.96
+              ],
+              "mask": null
+            },
+            {
+              "t": 38.03,
+              "bbox": [
+                0.16,
+                0.02,
+                0.39,
+                0.96
+              ],
+              "mask": null
+            },
+            {
+              "t": 38.53,
+              "bbox": [
+                0.16,
+                0.02,
+                0.39,
+                0.96
+              ],
+              "mask": null
+            },
+            {
+              "t": 39.03,
+              "bbox": [
+                0.16,
+                0.02,
+                0.39,
+                0.96
+              ],
+              "mask": null
+            },
+            {
+              "t": 39.53,
+              "bbox": [
+                0.16,
+                0.02,
+                0.39,
+                0.96
+              ],
+              "mask": null
+            }
+          ],
+          "verification": {
+            "siglip_margin": 0.3,
+            "vlm": "not_run",
+            "status": "verified"
+          }
+        },
+        {
+          "instance_id": "o_004_1",
+          "shot_id": "sh_05",
+          "start": 39.633,
+          "end": 48.033,
+          "score": 0.8,
+          "track": [
+            {
+              "t": 39.63,
+              "bbox": [
+                0.42,
+                0.27,
+                0.23,
+                0.68
+              ],
+              "mask": null
+            },
+            {
+              "t": 40.13,
+              "bbox": [
+                0.42,
+                0.27,
+                0.23,
+                0.68
+              ],
+              "mask": null
+            },
+            {
+              "t": 40.63,
+              "bbox": [
+                0.42,
+                0.27,
+                0.23,
+                0.68
+              ],
+              "mask": null
+            },
+            {
+              "t": 41.13,
+              "bbox": [
+                0.42,
+                0.27,
+                0.23,
+                0.68
+              ],
+              "mask": null
+            },
+            {
+              "t": 41.63,
+              "bbox": [
+                0.42,
+                0.27,
+                0.23,
+                0.68
+              ],
+              "mask": null
+            },
+            {
+              "t": 42.13,
+              "bbox": [
+                0.42,
+                0.27,
+                0.23,
+                0.68
+              ],
+              "mask": null
+            },
+            {
+              "t": 42.63,
+              "bbox": [
+                0.42,
+                0.27,
+                0.23,
+                0.68
+              ],
+              "mask": null
+            },
+            {
+              "t": 43.13,
+              "bbox": [
+                0.42,
+                0.27,
+                0.23,
+                0.68
+              ],
+              "mask": null
+            },
+            {
+              "t": 43.63,
+              "bbox": [
+                0.42,
+                0.27,
+                0.23,
+                0.68
+              ],
+              "mask": null
+            },
+            {
+              "t": 44.13,
+              "bbox": [
+                0.42,
+                0.27,
+                0.23,
+                0.68
+              ],
+              "mask": null
+            },
+            {
+              "t": 44.63,
+              "bbox": [
+                0.42,
+                0.27,
+                0.23,
+                0.68
+              ],
+              "mask": null
+            },
+            {
+              "t": 45.13,
+              "bbox": [
+                0.42,
+                0.27,
+                0.23,
+                0.68
+              ],
+              "mask": null
+            },
+            {
+              "t": 45.63,
+              "bbox": [
+                0.42,
+                0.27,
+                0.23,
+                0.68
+              ],
+              "mask": null
+            },
+            {
+              "t": 46.13,
+              "bbox": [
+                0.42,
+                0.27,
+                0.23,
+                0.68
+              ],
+              "mask": null
+            },
+            {
+              "t": 46.63,
+              "bbox": [
+                0.42,
+                0.27,
+                0.23,
+                0.68
+              ],
+              "mask": null
+            },
+            {
+              "t": 47.13,
+              "bbox": [
+                0.42,
+                0.27,
+                0.23,
+                0.68
+              ],
+              "mask": null
+            },
+            {
+              "t": 47.63,
+              "bbox": [
+                0.42,
+                0.27,
+                0.23,
+                0.68
+              ],
+              "mask": null
+            }
+          ],
+          "verification": {
+            "siglip_margin": 0.3,
+            "vlm": "not_run",
+            "status": "verified"
+          }
+        }
+      ],
+      "safety": {
+        "status": "reviewed",
+        "tags": [],
+        "severity": 0.0,
+        "child_unsafe": false,
+        "disagreement": false,
+        "reasons": {
+          "guardian": "fixture: ordinary lab equipment",
+          "vlm": "fixture"
+        },
+        "models": {
+          "safety": "fixture:hand-authored",
+          "vlm": "fixture:hand-authored"
+        }
+      }
+    },
+    {
+      "object_id": "o_005",
+      "label": "measuring cylinder",
+      "phrase_source": "vlm",
+      "is_hazard_class": false,
+      "instances": [
+        {
+          "instance_id": "o_005_0",
+          "shot_id": "sh_04",
+          "start": 27.533,
+          "end": 39.633,
+          "score": 0.8,
+          "track": [
+            {
+              "t": 27.53,
+              "bbox": [
+                0.62,
+                0.0,
+                0.36,
+                1.0
+              ],
+              "mask": null
+            },
+            {
+              "t": 28.03,
+              "bbox": [
+                0.62,
+                0.0,
+                0.36,
+                1.0
+              ],
+              "mask": null
+            },
+            {
+              "t": 28.53,
+              "bbox": [
+                0.62,
+                0.0,
+                0.36,
+                1.0
+              ],
+              "mask": null
+            },
+            {
+              "t": 29.03,
+              "bbox": [
+                0.62,
+                0.0,
+                0.36,
+                1.0
+              ],
+              "mask": null
+            },
+            {
+              "t": 29.53,
+              "bbox": [
+                0.62,
+                0.0,
+                0.36,
+                1.0
+              ],
+              "mask": null
+            },
+            {
+              "t": 30.03,
+              "bbox": [
+                0.62,
+                0.0,
+                0.36,
+                1.0
+              ],
+              "mask": null
+            },
+            {
+              "t": 30.53,
+              "bbox": [
+                0.62,
+                0.0,
+                0.36,
+                1.0
+              ],
+              "mask": null
+            },
+            {
+              "t": 31.03,
+              "bbox": [
+                0.62,
+                0.0,
+                0.36,
+                1.0
+              ],
+              "mask": null
+            },
+            {
+              "t": 31.53,
+              "bbox": [
+                0.62,
+                0.0,
+                0.36,
+                1.0
+              ],
+              "mask": null
+            },
+            {
+              "t": 32.03,
+              "bbox": [
+                0.62,
+                0.0,
+                0.36,
+                1.0
+              ],
+              "mask": null
+            },
+            {
+              "t": 32.53,
+              "bbox": [
+                0.62,
+                0.0,
+                0.36,
+                1.0
+              ],
+              "mask": null
+            },
+            {
+              "t": 33.03,
+              "bbox": [
+                0.62,
+                0.0,
+                0.36,
+                1.0
+              ],
+              "mask": null
+            },
+            {
+              "t": 33.53,
+              "bbox": [
+                0.62,
+                0.0,
+                0.36,
+                1.0
+              ],
+              "mask": null
+            },
+            {
+              "t": 34.03,
+              "bbox": [
+                0.62,
+                0.0,
+                0.36,
+                1.0
+              ],
+              "mask": null
+            },
+            {
+              "t": 34.53,
+              "bbox": [
+                0.62,
+                0.0,
+                0.36,
+                1.0
+              ],
+              "mask": null
+            },
+            {
+              "t": 35.03,
+              "bbox": [
+                0.62,
+                0.0,
+                0.36,
+                1.0
+              ],
+              "mask": null
+            },
+            {
+              "t": 35.53,
+              "bbox": [
+                0.62,
+                0.0,
+                0.36,
+                1.0
+              ],
+              "mask": null
+            },
+            {
+              "t": 36.03,
+              "bbox": [
+                0.62,
+                0.0,
+                0.36,
+                1.0
+              ],
+              "mask": null
+            },
+            {
+              "t": 36.53,
+              "bbox": [
+                0.62,
+                0.0,
+                0.36,
+                1.0
+              ],
+              "mask": null
+            },
+            {
+              "t": 37.03,
+              "bbox": [
+                0.62,
+                0.0,
+                0.36,
+                1.0
+              ],
+              "mask": null
+            },
+            {
+              "t": 37.53,
+              "bbox": [
+                0.62,
+                0.0,
+                0.36,
+                1.0
+              ],
+              "mask": null
+            },
+            {
+              "t": 38.03,
+              "bbox": [
+                0.62,
+                0.0,
+                0.36,
+                1.0
+              ],
+              "mask": null
+            },
+            {
+              "t": 38.53,
+              "bbox": [
+                0.62,
+                0.0,
+                0.36,
+                1.0
+              ],
+              "mask": null
+            },
+            {
+              "t": 39.03,
+              "bbox": [
+                0.62,
+                0.0,
+                0.36,
+                1.0
+              ],
+              "mask": null
+            },
+            {
+              "t": 39.53,
+              "bbox": [
+                0.62,
+                0.0,
+                0.36,
+                1.0
+              ],
+              "mask": null
+            }
+          ],
+          "verification": {
+            "siglip_margin": 0.3,
+            "vlm": "not_run",
+            "status": "verified"
+          }
+        }
+      ],
+      "safety": {
+        "status": "reviewed",
+        "tags": [],
+        "severity": 0.0,
+        "child_unsafe": false,
+        "disagreement": false,
+        "reasons": {
+          "guardian": "fixture: ordinary lab equipment",
+          "vlm": "fixture"
+        },
+        "models": {
+          "safety": "fixture:hand-authored",
+          "vlm": "fixture:hand-authored"
+        }
+      }
+    },
+    {
+      "object_id": "o_006",
+      "label": "volumetric flask",
+      "phrase_source": "vlm",
+      "is_hazard_class": false,
+      "instances": [
+        {
+          "instance_id": "o_006_0",
+          "shot_id": "sh_05",
+          "start": 39.633,
+          "end": 48.033,
+          "score": 0.8,
+          "track": [
+            {
+              "t": 39.63,
+              "bbox": [
+                0.0,
+                0.0,
+                0.22,
+                0.97
+              ],
+              "mask": null
+            },
+            {
+              "t": 40.13,
+              "bbox": [
+                0.0,
+                0.0,
+                0.22,
+                0.97
+              ],
+              "mask": null
+            },
+            {
+              "t": 40.63,
+              "bbox": [
+                0.0,
+                0.0,
+                0.22,
+                0.97
+              ],
+              "mask": null
+            },
+            {
+              "t": 41.13,
+              "bbox": [
+                0.0,
+                0.0,
+                0.22,
+                0.97
+              ],
+              "mask": null
+            },
+            {
+              "t": 41.63,
+              "bbox": [
+                0.0,
+                0.0,
+                0.22,
+                0.97
+              ],
+              "mask": null
+            },
+            {
+              "t": 42.13,
+              "bbox": [
+                0.0,
+                0.0,
+                0.22,
+                0.97
+              ],
+              "mask": null
+            },
+            {
+              "t": 42.63,
+              "bbox": [
+                0.0,
+                0.0,
+                0.22,
+                0.97
+              ],
+              "mask": null
+            },
+            {
+              "t": 43.13,
+              "bbox": [
+                0.0,
+                0.0,
+                0.22,
+                0.97
+              ],
+              "mask": null
+            },
+            {
+              "t": 43.63,
+              "bbox": [
+                0.0,
+                0.0,
+                0.22,
+                0.97
+              ],
+              "mask": null
+            },
+            {
+              "t": 44.13,
+              "bbox": [
+                0.0,
+                0.0,
+                0.22,
+                0.97
+              ],
+              "mask": null
+            },
+            {
+              "t": 44.63,
+              "bbox": [
+                0.0,
+                0.0,
+                0.22,
+                0.97
+              ],
+              "mask": null
+            },
+            {
+              "t": 45.13,
+              "bbox": [
+                0.0,
+                0.0,
+                0.22,
+                0.97
+              ],
+              "mask": null
+            },
+            {
+              "t": 45.63,
+              "bbox": [
+                0.0,
+                0.0,
+                0.22,
+                0.97
+              ],
+              "mask": null
+            },
+            {
+              "t": 46.13,
+              "bbox": [
+                0.0,
+                0.0,
+                0.22,
+                0.97
+              ],
+              "mask": null
+            },
+            {
+              "t": 46.63,
+              "bbox": [
+                0.0,
+                0.0,
+                0.22,
+                0.97
+              ],
+              "mask": null
+            },
+            {
+              "t": 47.13,
+              "bbox": [
+                0.0,
+                0.0,
+                0.22,
+                0.97
+              ],
+              "mask": null
+            },
+            {
+              "t": 47.63,
+              "bbox": [
+                0.0,
+                0.0,
+                0.22,
+                0.97
+              ],
+              "mask": null
+            }
+          ],
+          "verification": {
+            "siglip_margin": 0.3,
+            "vlm": "not_run",
+            "status": "verified"
+          }
+        }
+      ],
+      "safety": {
+        "status": "reviewed",
+        "tags": [],
+        "severity": 0.0,
+        "child_unsafe": false,
+        "disagreement": false,
+        "reasons": {
+          "guardian": "fixture: ordinary lab equipment",
+          "vlm": "fixture"
+        },
+        "models": {
+          "safety": "fixture:hand-authored",
+          "vlm": "fixture:hand-authored"
+        }
+      }
+    },
+    {
+      "object_id": "o_007",
+      "label": "broken glass",
+      "phrase_source": "hazard_class",
+      "is_hazard_class": true,
+      "instances": [
+        {
+          "instance_id": "o_007_0",
+          "shot_id": "sh_06",
+          "start": 48.033,
+          "end": 58.333,
+          "score": 0.8,
+          "track": [
+            {
+              "t": 48.03,
+              "bbox": [
+                0.3,
+                0.05,
+                0.47,
+                0.8
+              ],
+              "mask": null
+            },
+            {
+              "t": 48.53,
+              "bbox": [
+                0.3,
+                0.05,
+                0.47,
+                0.8
+              ],
+              "mask": null
+            },
+            {
+              "t": 49.03,
+              "bbox": [
+                0.3,
+                0.05,
+                0.47,
+                0.8
+              ],
+              "mask": null
+            },
+            {
+              "t": 49.53,
+              "bbox": [
+                0.3,
+                0.05,
+                0.47,
+                0.8
+              ],
+              "mask": null
+            },
+            {
+              "t": 50.03,
+              "bbox": [
+                0.3,
+                0.05,
+                0.47,
+                0.8
+              ],
+              "mask": null
+            },
+            {
+              "t": 50.53,
+              "bbox": [
+                0.3,
+                0.05,
+                0.47,
+                0.8
+              ],
+              "mask": null
+            },
+            {
+              "t": 51.03,
+              "bbox": [
+                0.3,
+                0.05,
+                0.47,
+                0.8
+              ],
+              "mask": null
+            },
+            {
+              "t": 51.53,
+              "bbox": [
+                0.3,
+                0.05,
+                0.47,
+                0.8
+              ],
+              "mask": null
+            },
+            {
+              "t": 52.03,
+              "bbox": [
+                0.3,
+                0.05,
+                0.47,
+                0.8
+              ],
+              "mask": null
+            },
+            {
+              "t": 52.53,
+              "bbox": [
+                0.3,
+                0.05,
+                0.47,
+                0.8
+              ],
+              "mask": null
+            },
+            {
+              "t": 53.03,
+              "bbox": [
+                0.3,
+                0.05,
+                0.47,
+                0.8
+              ],
+              "mask": null
+            },
+            {
+              "t": 53.53,
+              "bbox": [
+                0.3,
+                0.05,
+                0.47,
+                0.8
+              ],
+              "mask": null
+            },
+            {
+              "t": 54.03,
+              "bbox": [
+                0.3,
+                0.05,
+                0.47,
+                0.8
+              ],
+              "mask": null
+            },
+            {
+              "t": 54.53,
+              "bbox": [
+                0.3,
+                0.05,
+                0.47,
+                0.8
+              ],
+              "mask": null
+            },
+            {
+              "t": 55.03,
+              "bbox": [
+                0.3,
+                0.05,
+                0.47,
+                0.8
+              ],
+              "mask": null
+            },
+            {
+              "t": 55.53,
+              "bbox": [
+                0.3,
+                0.05,
+                0.47,
+                0.8
+              ],
+              "mask": null
+            },
+            {
+              "t": 56.03,
+              "bbox": [
+                0.3,
+                0.05,
+                0.47,
+                0.8
+              ],
+              "mask": null
+            },
+            {
+              "t": 56.53,
+              "bbox": [
+                0.3,
+                0.05,
+                0.47,
+                0.8
+              ],
+              "mask": null
+            },
+            {
+              "t": 57.03,
+              "bbox": [
+                0.3,
+                0.05,
+                0.47,
+                0.8
+              ],
+              "mask": null
+            },
+            {
+              "t": 57.53,
+              "bbox": [
+                0.3,
+                0.05,
+                0.47,
+                0.8
+              ],
+              "mask": null
+            },
+            {
+              "t": 58.03,
+              "bbox": [
+                0.3,
+                0.05,
+                0.47,
+                0.8
+              ],
+              "mask": null
+            }
+          ],
+          "verification": {
+            "siglip_margin": 0.3,
+            "vlm": "confirmed",
+            "status": "verified"
+          }
+        }
+      ],
+      "safety": {
+        "status": "reviewed",
+        "tags": [
+          "sharp_object",
+          "injury_risk"
+        ],
+        "severity": 0.9,
+        "child_unsafe": true,
+        "disagreement": false,
+        "reasons": {
+          "guardian": "fixture: sharp shards could cut a child",
+          "vlm": "fixture"
+        },
+        "models": {
+          "safety": "fixture:hand-authored",
+          "vlm": "fixture:hand-authored"
+        }
+      }
+    }
+  ],
+  "concept_nodes": [
+    {
+      "node_id": "c_01",
+      "label": "Personal Protective Equipment",
+      "summary": "Wear a lab coat, gloves and safety goggles because acids and bases can damage skin and eyes.",
+      "evidence": {
+        "segment_ids": [
+          "s_002",
+          "s_003"
+        ],
+        "text_ids": [],
+        "object_ids": [
+          "o_001",
+          "o_002"
+        ]
+      },
+      "prerequisites": [],
+      "difficulty": "beginner",
+      "canonical_key": "concept:lab_ppe"
+    },
+    {
+      "node_id": "c_02",
+      "label": "Acid Dissociation",
+      "summary": "An acid such as hydrochloric acid releases hydrogen ions when it dissolves in water.",
+      "evidence": {
+        "segment_ids": [
+          "s_004",
+          "s_005"
+        ],
+        "text_ids": [],
+        "object_ids": [
+          "o_003"
+        ]
+      },
+      "prerequisites": [
+        "c_01"
+      ],
+      "difficulty": "intermediate",
+      "canonical_key": "concept:acid_dissociation"
+    },
+    {
+      "node_id": "c_03",
+      "label": "Base Dissociation",
+      "summary": "A base such as sodium hydroxide releases hydroxide ions in water.",
+      "evidence": {
+        "segment_ids": [
+          "s_006"
+        ],
+        "text_ids": [],
+        "object_ids": []
+      },
+      "prerequisites": [
+        "c_01"
+      ],
+      "difficulty": "intermediate",
+      "canonical_key": "concept:base_dissociation"
+    },
+    {
+      "node_id": "c_04",
+      "label": "Neutralization Reaction",
+      "summary": "Hydrogen ions and hydroxide ions combine to form water; the remaining ions form a dissolved salt.",
+      "evidence": {
+        "segment_ids": [
+          "s_007",
+          "s_008",
+          "s_014",
+          "s_015"
+        ],
+        "text_ids": [
+          "x_002",
+          "x_004"
+        ],
+        "object_ids": [
+          "o_004",
+          "o_005"
+        ]
+      },
+      "prerequisites": [
+        "c_02",
+        "c_03"
+      ],
+      "difficulty": "intermediate",
+      "canonical_key": "concept:neutralization"
+    },
+    {
+      "node_id": "c_05",
+      "label": "Indicator and Neutral pH",
+      "summary": "Universal indicator shows when neutralization is complete by turning green at pH 7.",
+      "evidence": {
+        "segment_ids": [
+          "s_009",
+          "s_010"
+        ],
+        "text_ids": [
+          "x_003"
+        ],
+        "object_ids": [
+          "o_004",
+          "o_006"
+        ]
+      },
+      "prerequisites": [
+        "c_04"
+      ],
+      "difficulty": "beginner",
+      "canonical_key": "concept:ph_indicator"
+    },
+    {
+      "node_id": "c_06",
+      "label": "Safe Handling of Broken Glass",
+      "summary": "Never pick up broken glass by hand; tell the teacher and use a brush and dustpan.",
+      "evidence": {
+        "segment_ids": [
+          "s_011",
+          "s_012",
+          "s_013"
+        ],
+        "text_ids": [],
+        "object_ids": [
+          "o_007"
+        ]
+      },
+      "prerequisites": [
+        "c_01"
+      ],
+      "difficulty": "beginner",
+      "canonical_key": "concept:broken_glass_safety"
+    }
+  ],
+  "thread_roles": [
+    {
+      "segment_ids": [
+        "s_001"
+      ],
+      "role": "intro",
+      "gist": "Lesson overview"
+    },
+    {
+      "segment_ids": [
+        "s_002",
+        "s_003"
+      ],
+      "role": "safety",
+      "gist": "Protective equipment before the experiment"
+    },
+    {
+      "segment_ids": [
+        "s_004",
+        "s_005",
+        "s_006"
+      ],
+      "role": "setup",
+      "gist": "What acids and bases release in water"
+    },
+    {
+      "segment_ids": [
+        "s_007",
+        "s_008"
+      ],
+      "role": "core",
+      "gist": "Hydrogen and hydroxide ions form water and salt"
+    },
+    {
+      "segment_ids": [
+        "s_009",
+        "s_010"
+      ],
+      "role": "core",
+      "gist": "Indicator shows the neutral point"
+    },
+    {
+      "segment_ids": [
+        "s_011",
+        "s_012",
+        "s_013"
+      ],
+      "role": "safety",
+      "gist": "What to do when glassware breaks"
+    },
+    {
+      "segment_ids": [
+        "s_014",
+        "s_015"
+      ],
+      "role": "summary",
+      "gist": "Acid plus base gives salt plus water"
+    }
+  ],
+  "quiz_bank": [
+    {
+      "question_id": "q_c01_b_1",
+      "concept_node_id": "c_01",
+      "level": "beginner",
+      "stem": "Which items should you put on before an acid-base experiment?",
+      "options": [
+        "A lab coat, gloves and safety goggles",
+        "Only a lab coat",
+        "A face mask only",
+        "Nothing for small amounts"
+      ],
+      "answer_index": 0,
+      "rationale": "The lesson lists a lab coat, gloves and safety goggles.",
+      "evidence_segment_ids": [
+        "s_002"
+      ],
+      "verified_by": "fixture:hand-authored"
+    },
+    {
+      "question_id": "q_c01_i_1",
+      "concept_node_id": "c_01",
+      "level": "intermediate",
+      "stem": "Why does the lesson say protective equipment is needed?",
+      "options": [
+        "Acids and bases can damage skin and eyes",
+        "The beaker is heavy",
+        "The lab is cold",
+        "To keep the solution clean"
+      ],
+      "answer_index": 0,
+      "rationale": "Acids and bases can damage your skin and eyes.",
+      "evidence_segment_ids": [
+        "s_003"
+      ],
+      "verified_by": "fixture:hand-authored"
+    },
+    {
+      "question_id": "q_c01_e_1",
+      "concept_node_id": "c_01",
+      "level": "expert",
+      "stem": "Which hazard of acids and bases do goggles specifically protect against?",
+      "options": [
+        "Damage to the eyes",
+        "Breathing in fumes",
+        "Burns to the feet",
+        "Electric shock"
+      ],
+      "answer_index": 0,
+      "rationale": "Goggles protect the eyes, which acids and bases can damage.",
+      "evidence_segment_ids": [
+        "s_002",
+        "s_003"
+      ],
+      "verified_by": "fixture:hand-authored"
+    },
+    {
+      "question_id": "q_c02_b_1",
+      "concept_node_id": "c_02",
+      "level": "beginner",
+      "stem": "What does hydrochloric acid release in water?",
+      "options": [
+        "Hydrogen ions",
+        "Hydroxide ions",
+        "Sodium ions",
+        "Oxygen gas"
+      ],
+      "answer_index": 0,
+      "rationale": "An acid such as hydrochloric acid releases hydrogen ions in water.",
+      "evidence_segment_ids": [
+        "s_005"
+      ],
+      "verified_by": "fixture:hand-authored"
+    },
+    {
+      "question_id": "q_c02_i_1",
+      "concept_node_id": "c_02",
+      "level": "intermediate",
+      "stem": "Which ion makes a solution acidic, according to the lesson?",
+      "options": [
+        "Hydrogen ion",
+        "Chloride ion",
+        "Hydroxide ion",
+        "Sodium ion"
+      ],
+      "answer_index": 0,
+      "rationale": "Acids release hydrogen ions.",
+      "evidence_segment_ids": [
+        "s_005"
+      ],
+      "verified_by": "fixture:hand-authored"
+    },
+    {
+      "question_id": "q_c02_e_1",
+      "concept_node_id": "c_02",
+      "level": "expert",
+      "stem": "Hydrochloric acid dissolves in water. Which particle does the lesson say it releases?",
+      "options": [
+        "H⁺ (hydrogen ion)",
+        "OH⁻ (hydroxide ion)",
+        "Na⁺ (sodium ion)",
+        "H₂O (water molecule)"
+      ],
+      "answer_index": 0,
+      "rationale": "The acid releases hydrogen ions (H⁺).",
+      "evidence_segment_ids": [
+        "s_005"
+      ],
+      "verified_by": "fixture:hand-authored"
+    },
+    {
+      "question_id": "q_c03_b_1",
+      "concept_node_id": "c_03",
+      "level": "beginner",
+      "stem": "What does sodium hydroxide release in water?",
+      "options": [
+        "Hydroxide ions",
+        "Hydrogen ions",
+        "Chloride ions",
+        "Carbon dioxide"
+      ],
+      "answer_index": 0,
+      "rationale": "A base such as sodium hydroxide releases hydroxide ions.",
+      "evidence_segment_ids": [
+        "s_006"
+      ],
+      "verified_by": "fixture:hand-authored"
+    },
+    {
+      "question_id": "q_c03_i_1",
+      "concept_node_id": "c_03",
+      "level": "intermediate",
+      "stem": "Sodium hydroxide is an example of which kind of substance?",
+      "options": [
+        "A base",
+        "An acid",
+        "A salt",
+        "An indicator"
+      ],
+      "answer_index": 0,
+      "rationale": "The lesson names sodium hydroxide as a base.",
+      "evidence_segment_ids": [
+        "s_006"
+      ],
+      "verified_by": "fixture:hand-authored"
+    },
+    {
+      "question_id": "q_c03_e_1",
+      "concept_node_id": "c_03",
+      "level": "expert",
+      "stem": "Which ion released by sodium hydroxide later combines with hydrogen ions?",
+      "options": [
+        "Hydroxide ion",
+        "Sodium ion",
+        "Chloride ion",
+        "Oxide ion"
+      ],
+      "answer_index": 0,
+      "rationale": "Hydroxide ions from the base join hydrogen ions to form water.",
+      "evidence_segment_ids": [
+        "s_006",
+        "s_007"
+      ],
+      "verified_by": "fixture:hand-authored"
+    },
+    {
+      "question_id": "q_c04_b_1",
+      "concept_node_id": "c_04",
+      "level": "beginner",
+      "stem": "What two products form when an acid neutralizes a base?",
+      "options": [
+        "Salt and water",
+        "Gas and heat",
+        "Acid and oxygen",
+        "Only water"
+      ],
+      "answer_index": 0,
+      "rationale": "An acid plus a base gives a salt plus water.",
+      "evidence_segment_ids": [
+        "s_014"
+      ],
+      "verified_by": "fixture:hand-authored"
+    },
+    {
+      "question_id": "q_c04_i_1",
+      "concept_node_id": "c_04",
+      "level": "intermediate",
+      "stem": "What forms when a hydrogen ion joins a hydroxide ion?",
+      "options": [
+        "Water",
+        "Table salt",
+        "Hydrochloric acid",
+        "Sodium hydroxide"
+      ],
+      "answer_index": 0,
+      "rationale": "Each hydrogen ion joins a hydroxide ion to form water.",
+      "evidence_segment_ids": [
+        "s_007"
+      ],
+      "verified_by": "fixture:hand-authored"
+    },
+    {
+      "question_id": "q_c04_e_1",
+      "concept_node_id": "c_04",
+      "level": "expert",
+      "stem": "After neutralizing hydrochloric acid with sodium hydroxide, what happens to the salt formed?",
+      "options": [
+        "It stays dissolved in the water",
+        "It falls out as a solid",
+        "It escapes as a gas",
+        "It turns back into acid"
+      ],
+      "answer_index": 0,
+      "rationale": "The sodium and chloride ions make table salt, which stays dissolved.",
+      "evidence_segment_ids": [
+        "s_008"
+      ],
+      "verified_by": "fixture:hand-authored"
+    },
+    {
+      "question_id": "q_c05_b_1",
+      "concept_node_id": "c_05",
+      "level": "beginner",
+      "stem": "What colour does universal indicator turn at pH 7?",
+      "options": [
+        "Green",
+        "Red",
+        "Purple",
+        "Yellow"
+      ],
+      "answer_index": 0,
+      "rationale": "Universal indicator turns green at pH seven.",
+      "evidence_segment_ids": [
+        "s_010"
+      ],
+      "verified_by": "fixture:hand-authored"
+    },
+    {
+      "question_id": "q_c05_i_1",
+      "concept_node_id": "c_05",
+      "level": "intermediate",
+      "stem": "What does pH 7 mean, according to the lesson?",
+      "options": [
+        "The solution is neutral",
+        "The solution is strongly acidic",
+        "The solution is strongly basic",
+        "The reaction has not started"
+      ],
+      "answer_index": 0,
+      "rationale": "pH seven is neutral.",
+      "evidence_segment_ids": [
+        "s_010"
+      ],
+      "verified_by": "fixture:hand-authored"
+    },
+    {
+      "question_id": "q_c05_e_1",
+      "concept_node_id": "c_05",
+      "level": "expert",
+      "stem": "Why is an indicator used during neutralization?",
+      "options": [
+        "To show when the reaction is complete",
+        "To speed up the reaction",
+        "To make the salt dissolve",
+        "To cool the solution"
+      ],
+      "answer_index": 0,
+      "rationale": "An indicator shows when the reaction is complete.",
+      "evidence_segment_ids": [
+        "s_009"
+      ],
+      "verified_by": "fixture:hand-authored"
+    },
+    {
+      "question_id": "q_c06_b_1",
+      "concept_node_id": "c_06",
+      "level": "beginner",
+      "stem": "What should you do if glassware breaks?",
+      "options": [
+        "Tell your teacher and use a brush and dustpan",
+        "Pick up the pieces with your hands",
+        "Leave it on the floor",
+        "Wash it down the sink"
+      ],
+      "answer_index": 0,
+      "rationale": "Never pick up the pieces by hand; tell your teacher and sweep them up.",
+      "evidence_segment_ids": [
+        "s_012",
+        "s_013"
+      ],
+      "verified_by": "fixture:hand-authored"
+    },
+    {
+      "question_id": "q_c06_i_1",
+      "concept_node_id": "c_06",
+      "level": "intermediate",
+      "stem": "Why should broken glass never be picked up by hand?",
+      "options": [
+        "The pieces are sharp",
+        "The glass is hot",
+        "The glass is acidic",
+        "It is too heavy"
+      ],
+      "answer_index": 0,
+      "rationale": "The lesson calls the broken pieces sharp.",
+      "evidence_segment_ids": [
+        "s_012"
+      ],
+      "verified_by": "fixture:hand-authored"
+    },
+    {
+      "question_id": "q_c06_e_1",
+      "concept_node_id": "c_06",
+      "level": "expert",
+      "stem": "Which tools does the lesson recommend for cleaning up broken glass?",
+      "options": [
+        "A brush and dustpan",
+        "Gloves and tweezers",
+        "A wet cloth",
+        "A vacuum and mop"
+      ],
+      "answer_index": 0,
+      "rationale": "Sweep them up with a brush and dustpan.",
+      "evidence_segment_ids": [
+        "s_013"
+      ],
+      "verified_by": "fixture:hand-authored"
+    }
+  ],
+  "perception_meta": {
+    "pipeline_version": "fixture-0",
+    "segmentation_tier": "fixture",
+    "models": {
+      "all": "fixture:hand-authored"
+    },
+    "timings_s": {},
+    "degraded": [],
+    "stage_hashes": {
+      "ground_truth": "sha256:eebc5f2dc1ff5b58378a51a3e21513c4306802011a6c554411c1d3f545b65c7a"
+    }
+  },
+  "graph_sha": "sha256:adc07ad3845ceca50efbb300880ab7f4d1c1ecf4af6764c65067d71c3135c7cd"
+}

@@ -1,0 +1,40 @@
+{
+  "license": "Pexels License (https://www.pexels.com/license/): free to use and modify, no attribution required",
+  "clips": [
+    {
+      "clip_id": "4132752",
+      "page": "https://www.pexels.com/video/rekawiczki-4132752/",
+      "note": "hand putting on a latex glove",
+      "file": "sources/pexels_4132752.mp4",
+      "sha256": "sha256:2064d4e4c5a93911134ad777cb33415ac82e56e2c285468c5c3724b799d3afa4"
+    },
+    {
+      "clip_id": "8326501",
+      "page": "https://www.pexels.com/video/a-scientist-doing-an-experiment-8326501/",
+      "note": "scientist in a lab coat pouring",
+      "file": "sources/pexels_8326501.mp4",
+      "sha256": "sha256:ca995eaeafb37ba694105019d9c0e555bf7a233214d905406fb3a9cd6ae74cc1"
+    },
+    {
+      "clip_id": "8392557",
+      "page": "https://www.pexels.com/video/mixing-colored-liquid-in-a-beaker-8392557/",
+      "note": "stirring a blue solution",
+      "file": "sources/pexels_8392557.mp4",
+      "sha256": "sha256:016cda17770e0e7ea7a0446d9201d14db40be801968ba835eefb0db62717f6f2"
+    },
+    {
+      "clip_id": "8544763",
+      "page": "https://www.pexels.com/video/a-hand-pouring-blue-liquid-into-a-beaker-8544763/",
+      "note": "blue poured into yellow, the beaker turns green",
+      "file": "sources/pexels_8544763.mp4",
+      "sha256": "sha256:1f5772dd1eaec2fd40d5bc3e85c5f12920c1f569e01710418452c2b45d714756"
+    },
+    {
+      "clip_id": "854406",
+      "page": "https://www.pexels.com/video/bottle-shattering-slow-motion-854406/",
+      "note": "glass bottle shattering",
+      "file": "sources/pexels_854406.mp4",
+      "sha256": "sha256:71d1d738464fe22ba2e0fac7d189f3c23460e822b9a77830c1d3f8d581a58fc4"
+    }
+  ]
+}
