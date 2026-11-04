@@ -212,6 +212,7 @@ class LinkRequest(BaseModel):
 
 
 _ingesting: dict[str, asyncio.Task[Any]] = {}
+_ingest_from: dict[str, int] = {}  # channel -> last event id before the current run (its replay starts after)
 
 
 @router.post("/api/videos/link")
@@ -228,6 +229,8 @@ async def ingest_link(req: LinkRequest, state: GatewayState = Depends(get_state)
             return {"status": "ready", "video_id": g.video_id}
     channel = f"ingest_{yt.replace('-', '_')}"
     if channel not in _ingesting or _ingesting[channel].done():
+        # replay only this run: earlier attempts on the same channel (e.g. a failed one) must not reach the view
+        _ingest_from[channel] = max((ev.id for ev in state.events.history(channel, 0, 100000)), default=0)
 
         def progress(stage: str, status: str, p: float, detail: str, image: str | None = None,
                      items: list[str] | None = None) -> None:
@@ -245,7 +248,7 @@ async def ingest_link(req: LinkRequest, state: GatewayState = Depends(get_state)
                 state.events.publish(channel, "error", {"message": str(e)[:300], "where": "ingest"})
 
         _ingesting[channel] = asyncio.create_task(run())
-    return {"status": "processing", "channel": channel}
+    return {"status": "processing", "channel": channel, "after": _ingest_from.get(channel, 0)}
 
 
 @router.get("/api/channels/{channel}/latest")

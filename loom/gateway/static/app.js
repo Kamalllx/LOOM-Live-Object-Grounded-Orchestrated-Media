@@ -65,10 +65,14 @@ async function ingest(url) {
     const next = new Image(); next.onload = () => { img.hidden = false; img.classList.remove("in"); void img.offsetWidth; img.src = src; img.classList.add("in"); cap.textContent = text; }; next.src = src;
   };
   note("LOOM", "Starting perception. This runs once per video, on your GPU, and takes a few minutes.", "thinking");
-  const es = new EventSource(`/api/events/${r.channel}`);
-  let within = 0;
+  const es = new EventSource(`/api/events/${r.channel}?last_event_id=${r.after || 0}`);
+  let within = 0, stopped = false;
   es.addEventListener("ingest_stage", (e) => {
     const d = JSON.parse(e.data).data, chip = $(`.ing-stages [data-s="${d.stage}"]`), who = STAGE_AGENT[d.stage] || d.stage;
+    if (d.stage === "download" && d.status === "started") {  // a (new) run begins: show only this run
+      $$(".ing-stages span").forEach((c) => { c.classList.remove("run", "done"); $("em", c).textContent = ""; });
+      log.innerHTML = ""; within = 0; stopped = false;
+    }
     if (chip) {
       if (d.status === "started") { $$(".ing-stages span.run").forEach((c) => c.classList.remove("run")); chip.classList.add("run"); within = 0; now.textContent = `${who}: ${chip.firstChild.textContent}…`; note(who, `${chip.firstChild.textContent}…`, "thinking"); }
       if (d.status === "done") { chip.classList.remove("run"); chip.classList.add("done"); $("em", chip).textContent = d.detail || ""; within = 0; }
@@ -84,7 +88,8 @@ async function ingest(url) {
     $(".ing-bar i").style.width = `${Math.min(100, Math.round((100 * (done + within)) / STAGES.length))}%`;
   });
   es.addEventListener("delivered", () => { es.close(); $(".ing-bar i").style.width = "100%"; now.textContent = "Done"; note("LOOM", `Done in ${Math.round((Date.now() - t0) / 1000)} s. The lesson is ready to watch.`, "output"); setTimeout(library, 4000); });
-  es.addEventListener("error", (e) => { if (e.data) { es.close(); now.textContent = "Stopped"; note("LOOM", `Stopped: ${JSON.parse(e.data).data.message}`, "output"); } });
+  // an error ends a run, but a later run on the same channel may follow in the replay: keep listening
+  es.addEventListener("error", (e) => { if (e.data) { stopped = true; now.textContent = "Stopped"; note("LOOM", `Stopped: ${JSON.parse(e.data).data.message}`, "output"); } });
 }
 
 // ================================================================ geometry
