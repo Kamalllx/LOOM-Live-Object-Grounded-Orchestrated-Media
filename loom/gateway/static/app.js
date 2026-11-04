@@ -40,11 +40,11 @@ addEventListener("pointerout", (e) => { const card = e.target.closest?.(".lesson
 
 // ================================================================ ingest: watch perception work
 const STAGES = [["download", "Downloading"], ["probe", "Normalizing"], ["shots", "Finding shots"], ["asr", "Listening"],
-  ["ocr", "Reading the screen"], ["ocr_reread", "Re-reading formulas"], ["vocab", "Spotting objects"], ["detect", "Detecting"],
+  ["ocr", "Reading the screen"], ["board", "Scanning the board"], ["ocr_reread", "Re-reading formulas"], ["vocab", "Spotting objects"], ["board_read", "Reading the board"], ["detect", "Detecting"],
   ["track", "Tracking"], ["verify", "Verifying"], ["fuse", "Building concepts"], ["safety", "Safety review"], ["quiz", "Writing the quiz"],
   ["masks", "Exact outlines"]];
 const STAGE_AGENT = { asr: "Listener", ocr: "Reader", ocr_reread: "Reader", vocab: "Spotter", detect: "Detector", track: "Tracker",
-  verify: "Verifier", fuse: "Curator", safety: "Guardian", quiz: "Assessment", masks: "Segmenter", download: "Fetcher", probe: "Fetcher", shots: "Editor" };
+  board: "Board scanner", board_read: "Board reader", verify: "Verifier", fuse: "Curator", safety: "Guardian", quiz: "Assessment", masks: "Segmenter", download: "Fetcher", probe: "Fetcher", shots: "Editor" };
 async function ingest(url) {
   if (!url) return toast("Paste a YouTube link first");
   const box = $("#ing");

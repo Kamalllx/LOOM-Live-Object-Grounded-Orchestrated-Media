@@ -265,6 +265,9 @@ export interface FrameInfo {
  * via the `definition` "GraphObject".
  */
 export interface GraphObject {
+  content?: string | null;
+  description?: string | null;
+  element_kind?: ("text" | "equation" | "diagram" | "table" | "code" | "chart" | "illustration") | null;
   /**
    * @minItems 1
    */
@@ -272,7 +275,7 @@ export interface GraphObject {
   is_hazard_class?: boolean;
   label: string;
   object_id: string;
-  phrase_source: "hazard_class" | "vlm" | "transcript";
+  phrase_source: "hazard_class" | "vlm" | "transcript" | "board";
   safety: SafetyRecord;
 }
 /**

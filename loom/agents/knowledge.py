@@ -56,8 +56,9 @@ def items_of(graph: ConceptGraph) -> list[dict[str, Any]]:
         first = min(i.start for i in o.instances)
         near = " ".join(s.text for s in graph.transcript
                         if any(i.start - 2 <= s.start <= i.end + 2 for i in o.instances))[:400]
+        what = f" ({o.element_kind}) {o.content or ''} {o.description or ''}" if o.phrase_source == "board" else ""
         out.append({"id": o.object_id, "kind": "object", "t": first, "end": max(i.end for i in o.instances),
-                    "text": f"{o.label}. {near}", "label": o.label,
+                    "text": f"{o.label}.{what} {near}"[:900], "label": o.label,
                     "unsafe": o.safety.child_unsafe, "tags": list(o.safety.tags)})
     return out
 

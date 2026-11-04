@@ -58,6 +58,11 @@ TAG_TEXT = {
     "hazardous_chemical": "a dangerous chemical being misused",
     "disturbing": "disturbing or frightening content",
 }
+BOARD_SURFACES = {"whiteboard", "blackboard", "chalkboard", "board", "white board", "black board", "screen", "slide",
+                  "wall", "person", "man", "woman", "teacher", "presenter", "hand", "marker", "chalk", "pen", "background"}
+REREAD_LIMIT = 40  # GLM-OCR re-reads per video (math-like first, then least confident): 2000 spans took 938 s
+ANY_HARM = ("harmful content for a child: a weapon, blood or gore, nudity, drugs or alcohol, self-harm, hate, or "
+            "frightening or disturbing imagery")
 HAZARD_CLASS_TAGS = {
     "broken glass": ["sharp_object", "injury_risk"], "knife": ["sharp_object", "weapon"], "blade": ["sharp_object"],
     "scissors": ["sharp_object"], "needle": ["sharp_object", "injury_risk"], "syringe": ["sharp_object"],
@@ -164,7 +169,8 @@ def build_concepts(fused: Fused, sentence_ids: set[str], text_ids: set[str], obj
     for i, c in enumerate(fused.concepts[:9]):
         segs = [s for s in c.segment_ids if s in sentence_ids]
         texts = [t for t in c.text_ids if t in text_ids]
-        if not segs and not texts:
+        objs = [o for o in c.object_ids if o in object_ids]
+        if not segs and not texts and not objs:
             continue
         cid = f"c_{len(nodes) + 1:02d}"
         prereq_idx = [p for p in c.prerequisites if 0 <= p < i]
@@ -246,6 +252,26 @@ async def ingest(
     _free_torch()
     done()
 
+    from loom.perception.board import is_noise, merge_lines, read_elements, scan_board, scan_times, stream_frames
+    from loom.perception.ocr import is_math_like
+
+    clean = [sp for sp in ocr.spans if not is_noise(sp.text, sp.confidence)]
+    want = sorted((sp for sp in clean if sp.needs_reread), key=lambda sp: (not is_math_like(sp.text), sp.confidence))
+    allowed = {sp.text_id for sp in want[:REREAD_LIMIT]}
+    ocr = ocr.model_copy(update={"spans": [sp if sp.text_id in allowed or not sp.needs_reread
+                                           else sp.model_copy(update={"needs_reread": False}) for sp in clean]})
+
+    # board / slide / animation marks: CPU only (ffmpeg + OpenCV), runs while Ollama is still unloaded
+    done = stage("board")
+    _, board_iv = scan_times(info.duration_s)
+    cuts = [s.start for s in shots[1:]]
+    scan = await asyncio.to_thread(
+        lambda: scan_board(stream_frames(out, board_iv, rect, info.width, info.height), cuts, board_iv))
+    board_mode = scan.board_ratio >= 0.5
+    progress("board", "progress", 0.9, (f"Board, slide or animation in {scan.board_ratio:.0%} of the video: "
+                                        f"{len(scan.elements)} written or drawn elements tracked")[:200])
+    done()
+
     done = stage("ocr_reread")
     try:
         ocr = await reread_spans(ocr, out, rect, llm, data / "work" / video_id / "ocr")
@@ -254,7 +280,9 @@ async def ingest(
     done()
     texts = [TextSpan(text_id=s.text_id, start=s.start, end=max(s.end, s.start + 0.05), text=s.text, bbox=s.bbox,
                       confidence=min(1.0, max(0.0, s.confidence)), reader=s.reader if s.reader in ("rapidocr", "glm-ocr") else "rapidocr")  # type: ignore[arg-type]
-             for s in ocr.spans if s.text.strip()]
+             for s in ocr.spans if s.text.strip() and not is_noise(s.text, s.confidence)]
+    texts = merge_lines(texts, lambda f, text, a, b, box, conf: TextSpan(
+        text_id=f.text_id, start=a, end=max(b, a + 0.05), text=text, bbox=box, confidence=conf, reader=f.reader))
     progress("ocr", "progress", 0.9, (f"Read {len(texts)} pieces of on-screen text: " + "; ".join(dict.fromkeys(t.text for t in texts)))[:200])
 
     done = stage("vocab")
@@ -268,15 +296,28 @@ async def ingest(
         if h not in phrases:
             phrases.append(h)
             sources[h] = "hazard_class"
+    if board_mode:
+        phrases = [ph for ph in phrases if ph.lower() not in BOARD_SURFACES]
     hazards = set(cfg.perception.hazard_classes) & set(phrases)
     progress("vocab", "progress", 0.9, ("Looking for: " + ", ".join(phrases))[:200])
+    done()
+
+    done = stage("board_read")
+    board_objects, board_degraded = await read_elements(
+        llm, scan, texts, sentences, shots, info.duration_s, board_iv, 1, data / "work" / video_id / "board",
+        progress=lambda m: progress("board_read", "progress", 0.5, m[:200]))
+    degraded += board_degraded
+    progress("board_read", "progress", 0.9, (f"Read {len(board_objects)} board elements: "
+                                             + "; ".join(o.label for o in board_objects))[:200])
     done()
 
     for tag in await http.loaded_models():
         await http.unload(tag)
 
     done = stage("detect")
-    base = sample_times(spans, cfg.perception.sample_fps)
+    # a board lesson is mostly marks, not things: sample the detector more sparsely there
+    det_fps = cfg.perception.sample_fps if not board_mode else min(cfg.perception.sample_fps, 0.5)
+    base = sample_times(spans, det_fps)
     detector = await asyncio.to_thread(Detector, cfg.perception.box_threshold)
     try:
         boxes = await asyncio.to_thread(lambda: detector.detect(_frames(out, base), phrases, rect))
@@ -290,7 +331,7 @@ async def ingest(
     done()
 
     done = stage("track")
-    interval = 1.0 / cfg.perception.sample_fps
+    interval = 1.0 / det_fps  # the tracker's gap tolerance must match how densely the detector sampled
     tracks = []
     for s in shots:
         tracks += track_shot([b for b in boxes if s.start <= b.t < s.end], s.shot_id, s.start, s.end, interval, hazards)
@@ -334,6 +375,13 @@ async def ingest(
             is_hazard_class=phrase in hazards, instances=insts,
             safety=SafetyRecord(status="unreviewed")))
 
+    if board_mode:
+        objects = [o for o in objects if o.label.lower() not in BOARD_SURFACES]
+    for b in board_objects:
+        oid = f"o_{len(objects) + 1:03d}"
+        objects.append(b.model_copy(update={"object_id": oid, "instances": [
+            i.model_copy(update={"instance_id": f"{oid}_{k}"}) for k, i in enumerate(b.instances)]}))
+
     # fusion
     done = stage("fuse")
     sentence_ids = [s.seg_id for s in sentences]
@@ -343,7 +391,9 @@ async def ingest(
             "sentences": [{"id": s.seg_id, "start": s.start, "text": s.text} for s in sentences],
             "on_screen_text": [{"id": t.text_id, "start": t.start, "text": t.text} for t in texts],
             "objects": [{"id": o.object_id, "label": o.label,
-                         "visible": [[round(i.start, 1), round(i.end, 1)] for i in o.instances]} for o in objects],
+                         "visible": [[round(i.start, 1), round(i.end, 1)] for i in o.instances],
+                         **({"kind": o.element_kind, "content": o.content or "", "meaning": o.description or ""}
+                            if o.phrase_source == "board" else {})} for o in objects],
         }
         fused = (await llm.call("brain", "concept_fuse", payload, Fused, priority="ingest", timeout_s=300)).value
     except LLMError:
@@ -360,6 +410,21 @@ async def ingest(
     # safety review: Guardian per object per tag, union with verified hazard classes (fail closed)
     done = stage("safety")
     for n, o in enumerate(objects):
+        if o.phrase_source == "board":
+            item = {"object": f"{o.element_kind} written or drawn in the lesson: {o.label}",
+                    "lesson_context": f"{o.content or ''} {o.description or ''}"[:600] or "(none)", "on_screen_seconds":
+                    round(sum(i.end - i.start for i in o.instances), 1)}
+            try:
+                r = await llm.call("safety", "spike_guardian_tag", item, Score, params={"tag_description": ANY_HARM},
+                                   parser=parse_score, priority="ingest", timeout_s=60)
+                rec = SafetyRecord(status="reviewed", tags=["disturbing"] if r.value.yes else [],
+                                   severity=0.7 if r.value.yes else 0.0, child_unsafe=r.value.yes,
+                                   reasons={"guardian": "combined harm check on the written/drawn element"},
+                                   models={"safety": cfg.models.safety.tag})
+            except LLMError:
+                rec = SafetyRecord(status="unreviewed")  # fail closed: masked for strict viewers
+            objects[n] = o.model_copy(update={"safety": rec})
+            continue
         context = " ".join(s.text for s in sentences if any(i.start - 3 <= s.start <= i.end + 3 for i in o.instances))[:600]
         item = {"object": o.label, "lesson_context": context or "(no narration)",
                 "on_screen_seconds": round(sum(i.end - i.start for i in o.instances), 1)}
@@ -392,9 +457,21 @@ async def ingest(
     done = stage("quiz")
     bank: list[QuizQuestion] = []
     sent_text = {s.seg_id: s.text for s in sentences}
+    text_by_id = {t.text_id: t for t in texts}
+    obj_by_id = {o.object_id: o for o in objects}
     for c in concepts:
         ev = [{"id": s, "text": sent_text[s]} for s in c.evidence.segment_ids if s in sent_text]
-        if not ev:
+        # times the concept is on screen: its sentences, on-screen text and objects
+        when = [(t.start, t.end) for t in (text_by_id[x] for x in c.evidence.text_ids if x in text_by_id)]
+        when += [(i.start, i.end) for o in (obj_by_id[x] for x in c.evidence.object_ids if x in obj_by_id)
+                 for i in o.instances]
+        if not ev and when:  # the teacher's words while it was on screen
+            ev = [{"id": s.seg_id, "text": s.text} for s in sentences
+                  if any(a - 3 <= s.start <= b + 3 for a, b in when)][:12]
+        ev += [{"id": x, "text": text_by_id[x].text} for x in c.evidence.text_ids if x in text_by_id][:8]
+        ev += [{"id": o.object_id, "text": f"{o.label}: {o.content or ''} {o.description or ''}".strip()}
+               for o in (obj_by_id[x] for x in c.evidence.object_ids if x in obj_by_id) if o.phrase_source == "board"]
+        if not any(e["id"] in sent_text for e in ev):
             continue
         try:
             qs = (await llm.call("brain", "quiz_write", {"lesson_sentences": ev}, Written, params={"label": c.label},
@@ -411,7 +488,7 @@ async def ingest(
             lvl = q.level if q.level in ("beginner", "intermediate", "expert") else "intermediate"
             if i not in good or len(set(q.options)) != 4:
                 continue
-            evid = [s for s in q.evidence_segment_ids if s in sent_text] or c.evidence.segment_ids[:1]
+            evid = [s for s in q.evidence_segment_ids if s in sent_text] or [e["id"] for e in ev if e["id"] in sent_text][:1]
             bank.append(QuizQuestion(question_id=f"q_{c.node_id.replace('_', '')}_{lvl[0]}_{i + 1}", concept_node_id=c.node_id,
                                      level=lvl, stem=q.stem, options=q.options, answer_index=q.answer_index,  # type: ignore[arg-type]
                                      rationale=q.rationale or "From the lesson.", evidence_segment_ids=evid,
@@ -430,7 +507,8 @@ async def ingest(
             pipeline_version="2.0.0-s1", segmentation_tier="boxes",
             models={"asr": cfg.perception.asr_model, "detector": cfg.perception.detector,
                     "verifier": cfg.perception.verifier, "brain": cfg.models.brain.tag, "judge": cfg.models.judge.tag,
-                    "safety": cfg.models.safety.tag, "encoder": encoder},
+                    "safety": cfg.models.safety.tag, "encoder": encoder,
+                    "board": f"{len(board_objects)} elements, board-like {scan.board_ratio:.0%}"},
             timings_s={**timings, "total": round(time.perf_counter() - t_all, 1)}, degraded=degraded[:20]),
     ).sealed()
     # exact-shape masks (SAM 2.1): torch stage, so no Ollama model may be resident

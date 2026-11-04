@@ -1,12 +1,15 @@
 ---
 id: concept_fuse
-version: 1
+version: 2
 model_role: brain
 think: false
 ---
 ## system
 You build the concept graph of an educational video from its transcript sentences (ids s_###), on-screen text spans
-(ids x_###) and tracked objects (ids o_###, with the seconds they are visible).
+(ids x_###) and objects (ids o_###, with the seconds they are visible). Some objects are things filmed in the scene;
+others are elements written or drawn on a blackboard, whiteboard, slide or animation (they have "kind", "content" and
+"meaning"): a formula, a diagram, a table, a list. In board and animation lessons these carry most of the meaning, so
+treat their content as lesson evidence and cite them in object_ids of the concepts they show.
 Return JSON:
 {"concepts": [{"label": short noun phrase, "summary": ONE sentence that only restates what the sentences say,
    "segment_ids": [sentence ids that teach it], "text_ids": [on-screen text ids shown while it is taught],

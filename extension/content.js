@@ -6,6 +6,7 @@
 
   const GATEWAY = "http://127.0.0.1:8000";
   const Rle = self.LoomRle;
+  const Views = self.LoomViews;
   const COLOR = { sky: "#7CC7FF", mint: "#6EF2C4", lilac: "#C3A6FF", coral: "#FF5C7A", peach: "#FFB38A" };
   const CONTROLS_H = 64; // YouTube's control bar: never intercept pointer events there
   const YT_CHROME = ".ytp-chrome-bottom, .ytp-chrome-top, .ytp-popup, .ytp-settings-menu, .ytp-ce-element, .ytp-cards-teaser, .ytp-cards-button, .ytp-iv-player-content, .ytp-ad-module, .ytp-paid-content-overlay, .ytp-autonav-endscreen-countdown-overlay, .html5-endscreen, .ytp-contextmenu, .loom-chip, .loom-pop";
@@ -52,6 +53,8 @@
       ytid, videoId: null, graph: null, learners: [], learner: null, cut: null,
       threads: [], gaps: [], masks: [], objects: [], selected: null,
       jobs: new Map(), library: [], blobs: new Map(), ov: null,
+      mapIndex: null, mapLoading: false, retrieved: [], sessionId: null, weaveSeq: 0,
+      sessionAnswers: {}, sessionPending: new Set(), finishedSession: null, finishingSession: null, agentEvents: [],
       toggles: { skip: true, masks: true, objects: false },
       allowGap: null, selfSeekUntil: 0, lastSkipAt: 0, endShown: false,
       timers: new Set(), cleanups: [], seq: 0, inView: "",
@@ -77,11 +80,17 @@
         <nav class="loom-tabs" role="tablist">
           <button data-act="tab" data-tab="cut" class="on">My cut</button>
           <button data-act="tab" data-tab="ask" disabled>Ask</button>
+          <button data-act="tab" data-tab="loom" disabled>Loom</button>
+          <button data-act="tab" data-tab="graph" disabled>Graph</button>
+          <button data-act="tab" data-tab="map" disabled>Map</button>
           <button data-act="tab" data-tab="lib" disabled>Library <span data-role="libcount"></span></button>
         </nav>
         <div class="loom-body">
           <section class="loom-pane on" data-pane="cut"></section>
           <section class="loom-pane" data-pane="ask"></section>
+          <section class="loom-pane" data-pane="loom"></section>
+          <section class="loom-pane" data-pane="graph"></section>
+          <section class="loom-pane" data-pane="map"></section>
           <section class="loom-pane" data-pane="lib"></section>
         </div>
         <form class="loom-quizbar" data-role="quizbar">
@@ -110,9 +119,12 @@
     root.querySelectorAll(".loom-tabs button").forEach((b) => b.classList.toggle("on", b.dataset.tab === name));
     root.querySelectorAll(".loom-pane").forEach((p) => p.classList.toggle("on", p.dataset.pane === name));
     if (name === "lib") refreshLibrary();
+    if (name === "loom" && S?.videoId) renderLoom(S);
+    if (name === "graph" && S?.graph) renderGraph(S);
+    if (name === "map" && S?.graph) renderMap(S);
   }
   function enableVideoFeatures(on) {
-    root.querySelectorAll('.loom-tabs button[data-tab="ask"], .loom-tabs button[data-tab="lib"]').forEach((b) => { b.disabled = !on; });
+    root.querySelectorAll('.loom-tabs button:not([data-tab="cut"])').forEach((b) => { b.disabled = !on; });
     const inp = $("#loom-quiz-topic"), btn = $('[data-role="quizbar"] button');
     if (inp) { inp.disabled = !on; inp.placeholder = on ? "any topic, e.g. broken glass" : "process this lesson to unlock quizzes"; }
     if (btn) btn.disabled = !on;
@@ -164,6 +176,9 @@
     enableVideoFeatures(false);
     pane("cut").innerHTML = `<div class="loom-working"><span class="loom-spin"></span>Checking this lesson…</div>`;
     pane("ask").innerHTML = "";
+    pane("loom").innerHTML = "";
+    pane("graph").innerHTML = "";
+    pane("map").innerHTML = "";
     pane("lib").innerHTML = "";
     $('[data-role="libcount"]').textContent = "";
     setCollapsed(!!(await store.get("collapsed")), false);
@@ -300,15 +315,23 @@
     if (!my.learner) return;
     store.set("viewer", my.learner.learner_id);
     clearCut(my);
+    const seq = my.weaveSeq;
     pane("cut").innerHTML = `<div class="loom-card"><div class="loom-working"><span class="loom-spin"></span>Planner drafting · Critic checking · ${elapsed(Date.now())}</div><p class="loom-muted loom-small">Weaving a cut for ${esc(my.learner.display_name)}.</p></div>`;
     const s = await call("/api/sessions", "POST", { video_id: my.videoId, learner_id: my.learner.learner_id });
-    if (!alive(my)) return;
+    if (!alive(my) || my.weaveSeq !== seq) return;
     if (!s.ok || !s.data?.session_id) return weaveFailed(my, errText(s));
+    my.sessionId = s.data.session_id;
     const deadline = Date.now() + 120000;
     while (Date.now() < deadline) {
-      const c = await call(`/api/sessions/${s.data.session_id}`);
-      if (!alive(my)) return;
-      if (c.ok && c.data) return applyCut(my, c.data);
+      const [c, ev] = await Promise.all([
+        call(`/api/sessions/${s.data.session_id}`),
+        call(`/api/channels/${encodeURIComponent(s.data.session_id)}/latest?limit=200`),
+      ]);
+      if (!alive(my) || my.weaveSeq !== seq) return;
+      if (ev.ok) { my.agentEvents = ev.data?.events || []; renderLoom(my); }
+      if (c.ok && c.data) return applyCut(my, c.data, seq);
+      const failure = my.agentEvents.findLast((event) => event.kind === "error");
+      if (failure) return weaveFailed(my, failure.data?.message || "Session failed");
       if (c.status !== 404 && c.status !== 202) return weaveFailed(my, errText(c));
       await sleep(700);
     }
@@ -318,19 +341,21 @@
     pane("cut").innerHTML = `<div class="loom-card loom-alert"><h3>Couldn't weave the cut</h3><p>${esc(why)}</p><button class="loom-btn" data-act="repick">Back</button></div>`;
   }
   function clearCut(my) {
+    my.weaveSeq += 1;
+    my.sessionId = null; my.agentEvents = []; my.sessionAnswers = {}; my.sessionPending.clear(); my.finishedSession = null; my.finishingSession = null;
     my.cut = null; my.threads = []; my.gaps = []; my.masks = []; my.allowGap = null; my.endShown = false;
     my.ov?.chips.forEach((c) => c.remove());
     my.ov?.chips.clear();
   }
 
-  async function applyCut(my, cut) {
+  async function applyCut(my, cut, seq = my.weaveSeq) {
     const masks = await Promise.all((cut.redaction_masks || []).map(async (m) => {
       // Same track_url across sessions: bust caches so we never get an old box-only copy.
       const bust = m.track_url ? `${m.track_url}${m.track_url.includes("?") ? "&" : "?"}s=${encodeURIComponent(cut.session_id || Date.now())}` : null;
       const r = bust ? await call(bust) : null;
       return { ...m, samples: (r?.data?.samples || []).filter((x) => x && x.bbox).sort((a, b) => a.t - b.t) };
     }));
-    if (!alive(my)) return;
+    if (!alive(my) || my.weaveSeq !== seq) return;
     const dur = my.graph.duration_seconds || 0;
     my.cut = cut;
     my.masks = masks;
@@ -341,7 +366,39 @@
     if (dur - cursor > 0.5) my.gaps.push(gapInfo(my, cursor, dur));
     my.toggles.masks = true;
     renderCut(my);
+    renderLoom(my);
     attachOverlay(my, 0);
+  }
+
+  // ---------- web workspace views ----------
+  const agentNames = { "loom-curator": "Curator", "loom-pedagogy": "Pedagogy", "loom-personalizer": "Personalizer", "loom-assessment": "Assessment", "loom-guardian": "Guardian", "loom-animator": "Animator", "loom-critic": "Critic" };
+  function renderLoom(my) {
+    if (!alive(my) || !pane("loom")) return;
+    const latest = {};
+    for (const event of my.agentEvents) if ((event.kind === "agent_call" || event.kind === "agent_done") && event.data?.agent) latest[event.data.agent] = event;
+    const notes = my.agentEvents.filter((event) => event.kind === "agent_note").slice(-8).reverse();
+    const scores = my.cut?.critic_score;
+    pane("loom").innerHTML = `<div class="loom-card loom-workspace-intro"><span class="loom-kicker">Your learning workspace</span><h3>How your cut is woven</h3><p class="loom-muted">Agent activity and the Critic's checks for this session.</p></div>
+      ${scores ? `<div class="loom-card"><h4>Critic checks</h4><div class="loom-scores">${["safety", "coherence", "factuality", "completeness"].map((k) => `<div><span>${k}</span><i><b style="width:${Math.round(100 * Math.max(0, Math.min(1, +scores[k] || 0)))}%"></b></i><em>${(+scores[k] || 0).toFixed(2)}</em></div>`).join("")}</div><p class="loom-muted loom-small">${my.cut.status === "approved" ? "Approved" : "Fallback"} after ${+my.cut.pass_count || 0} passes. Checks cover the available lesson graph.</p></div>` : `<p class="loom-muted loom-small">${my.sessionId ? "The agents are working on your cut." : "Choose a viewer and weave a cut to see agent activity."}</p>`}
+      <div class="loom-agent-list">${Object.entries(agentNames).map(([id, name]) => { const e = latest[id], running = e?.kind === "agent_call"; const detail = running ? "Working" : e ? `${Math.max(0, +e.data?.latency_ms || 0)} ms` : "Waiting"; return `<div class="loom-agent ${running ? "running" : e ? "done" : ""}"><i></i><b>${esc(name)}</b><span>${detail}</span></div>`; }).join("")}</div>
+      ${notes.length ? `<div class="loom-card"><h4>Agent activity</h4>${notes.map((e) => `<div class="loom-agent-note"><b>${esc(agentNames[e.data?.agent] || e.data?.agent)}</b><span>${esc(e.data?.text)}</span>${(e.data?.items || []).length ? `<ul>${e.data.items.map((item) => `<li>${esc(item)}</li>`).join("")}</ul>` : ""}</div>`).join("")}</div>` : ""}`;
+  }
+  function renderGraph(my) {
+    if (alive(my) && pane("graph")) pane("graph").innerHTML = Views.graph(my.graph);
+  }
+  async function renderMap(my) {
+    if (!alive(my) || !pane("map")) return;
+    if (!my.mapIndex) {
+      if (my.mapLoading) return;
+      my.mapLoading = true;
+      pane("map").innerHTML = `<div class="loom-working"><span class="loom-spin"></span>Building the lesson map…</div>`;
+      const r = await call(`/api/videos/${my.videoId}/map`, "GET", undefined, { timeoutMs: 240000 });
+      my.mapLoading = false;
+      if (!alive(my)) return;
+      if (!r.ok) { pane("map").innerHTML = `<p class="loom-bad">Couldn't load the map: ${esc(errText(r))}</p><button class="loom-btn small" data-act="map-retry">Try again</button>`; return; }
+      my.mapIndex = r.data;
+    }
+    pane("map").innerHTML = Views.map(my.mapIndex, my.retrieved);
   }
   function gapInfo(my, start, end) {
     const k = (my.cut.skipped || []).find((s) => s.start < end && s.end > start);
@@ -628,7 +685,9 @@
     if (!it) { ov.label.classList.remove("on"); return; }
     const r = boxPx(g.P, it.s.bbox);
     const masked = my.masks.some((m) => m.object_id === it.o.id);
-    const text = `${it.o.label}${masked ? " (masked)" : ""} · click to ask`;
+    const text = it.o.phrase_source === "board"
+      ? `${it.o.element_kind || "text"} · ${it.o.label} · click to learn`
+      : `${it.o.label}${masked ? " (masked)" : ""} · click to ask`;
     if (ov.label.textContent !== text) ov.label.textContent = text;
     const x = Math.min(Math.max(8, r.x), g.pw - 220), y = r.y > 34 ? r.y - 30 : Math.min(r.y + r.h + 6, g.ph - CONTROLS_H - 30);
     ov.label.style.transform = `translate(${Math.round(x)}px, ${Math.round(y)}px)`;
@@ -746,9 +805,10 @@
         ${obj.safety?.child_unsafe ? `<span class="loom-tag coral">flagged: ${esc((obj.safety.tags || []).join(", ") || "unsafe")}</span>` : ""}
         <button type="button" class="loom-icon" data-act="popclose" aria-label="Close">&times;</button>
       </header>
+      ${obj.phrase_source === "board" ? `<div class="loom-board"><span>${esc(obj.element_kind || "text")} on the board</span>${obj.content ? `<p class="c">${esc(obj.content)}</p>` : ""}${obj.description ? `<p class="m">${esc(obj.description)}</p>` : ""}</div>` : ""}
       <p class="loom-pop-q">What do you want to learn about the <b>${esc(obj.label)}</b>?</p>
       <form data-role="popform"><input type="text" autocomplete="off" placeholder="Ask anything about it…" aria-label="Your question"></form>
-      <div class="loom-chips">${["What is it?", "Why is it used here?", "Is it safe?"].map((q) => `<button type="button" class="loom-chipbtn" data-act="popfill" data-q="${esc(q)}">${esc(q)}</button>`).join("")}</div>
+      <div class="loom-chips">${(obj.phrase_source === "board" ? ["Explain it step by step", "Why is this written here?", "Give me an example"] : ["What is it?", "Why is it used here?", "Is it safe?"]).map((q) => `<button type="button" class="loom-chipbtn" data-act="popfill" data-q="${esc(q)}">${esc(q)}</button>`).join("")}</div>
       <div class="loom-actions">
         <button type="button" class="loom-btn primary" data-act="popanim">Make an animation</button>
         <button type="button" class="loom-btn mint" data-act="popanswer">Just answer</button>
@@ -893,6 +953,7 @@
     if (!alive(my)) return;
     if (!r.ok) { put(`<p class="loom-bad">Couldn't answer: ${esc(errText(r))}</p>`); return; }
     const d = r.data || {};
+    my.retrieved = Array.isArray(d.retrieved) ? d.retrieved : [];
     const v = my.ov?.video;
     const from = v ? v.currentTime : null;
     let jumped = false;
@@ -908,6 +969,7 @@
       <div class="loom-actions small">
         <button class="loom-btn lilac small" data-act="animate" data-q="${esc(question)}">Animate this</button>
         <button class="loom-btn ghost small" data-act="quiz" data-q="${esc(obj?.label || question)}">Quiz me on this</button>
+        <button class="loom-btn ghost small" data-act="tab" data-tab="map">Show on map</button>
       </div>`);
   }
   const trace = (t) => (Array.isArray(t) && t.length ? `<p class="loom-trace">${t.map((x) => `${esc(x.agent)}.${esc(x.skill)} via ${esc(x.transport || "A2A")} · ${secs(+x.latency_ms || 0)}`).join("<br>")}</p>` : "");
@@ -1110,42 +1172,72 @@
     }
     questions = questions.slice(0, 3);
     if (!questions.length) { body.innerHTML = `<p class="loom-muted">No questions could be checked against this lesson for "${esc(topic)}". Try a topic the video covers.</p>`; return; }
+    const sessionId = preset ? my.cut?.session_id : null;
     body.innerHTML = `
       ${d.source ? `<p class="loom-small loom-muted">${esc(d.source)}</p>` : ""}
-      ${questions.map((q, qi) => `
-        <div class="loom-q" data-qid="${esc(q.question_id)}">
+      ${questions.map((q, qi) => { const previous = sessionId ? my.sessionAnswers[q.question_id] : null; return `
+        <div class="loom-q" data-qid="${esc(q.question_id)}" ${previous ? `data-done="1" data-correct="${previous.correct ? 1 : 0}"` : ""}>
           <p class="loom-stem"><b>${qi + 1}.</b> ${esc(q.stem)}</p>
-          <div class="loom-opts">${(q.options || []).map((o, i) => `<button class="loom-opt" data-act="answerq" data-i="${i}">${esc(o)}</button>`).join("")}</div>
-          <div class="loom-q-result"></div>
-        </div>`).join("")}
+          <div class="loom-opts">${(q.options || []).map((o, i) => `<button class="loom-opt ${previous && i === previous.correct_index ? "right" : ""}" data-act="answerq" data-i="${i}" ${previous ? "disabled" : ""}>${esc(o)}</button>`).join("")}</div>
+          <div class="loom-q-result">${previous ? `<p class="${previous.correct ? "loom-good" : "loom-bad"}">${previous.correct ? "Right." : "Not quite."} ${esc(previous.rationale || "")}</p>` : ""}</div>
+        </div>`; }).join("")}
       <p class="loom-score" data-role="score"></p>
+      ${sessionId ? `<button class="loom-btn primary wide" data-act="save-mastery" ${my.finishedSession === sessionId || questions.some((q) => !my.sessionAnswers[q.question_id]) ? "disabled" : ""}>${my.finishedSession === sessionId ? "Mastery saved" : "Save to my mastery"}</button><div data-role="mastery-result"></div>` : ""}
       ${trace(d.agent_trace)}`;
     body.dataset.total = String(questions.length);
+    if (sessionId) body.dataset.sessionId = sessionId;
   }
 
   async function answerQuestion(my, btn) {
     const q = btn.closest(".loom-q"), card = btn.closest(".loom-result-body");
     if (!q || q.dataset.done) return;
+    const sessionId = card.dataset.sessionId;
+    if (sessionId && (sessionId !== my.sessionId || my.sessionAnswers[q.dataset.qid] || my.sessionPending.has(q.dataset.qid) || my.finishedSession === sessionId)) return;
+    if (sessionId) my.sessionPending.add(q.dataset.qid);
     q.dataset.done = "1";
     const opts = [...q.querySelectorAll(".loom-opt")];
     opts.forEach((b) => { b.disabled = true; });
     btn.classList.add("picked");
     const out = q.querySelector(".loom-q-result");
     out.innerHTML = `<div class="loom-working"><span class="loom-spin sky"></span>Grading…</div>`;
-    const r = await call(`/api/quiz/${encodeURIComponent(q.dataset.qid)}/answer`, "POST", { option_index: +btn.dataset.i, learner_id: my.learner?.learner_id });
-    if (!alive(my)) return;
+    const path = sessionId ? `/api/sessions/${encodeURIComponent(sessionId)}/quiz/${encodeURIComponent(q.dataset.qid)}/answer` : `/api/quiz/${encodeURIComponent(q.dataset.qid)}/answer`;
+    const r = await call(path, "POST", { option_index: +btn.dataset.i, ...(sessionId ? {} : { learner_id: my.learner?.learner_id }) });
+    if (sessionId === my.sessionId) my.sessionPending.delete(q.dataset.qid);
+    if (!alive(my) || (sessionId && sessionId !== my.sessionId)) return;
     if (!r.ok) { out.innerHTML = `<p class="loom-bad">Couldn't grade: ${esc(errText(r))}</p>`; delete q.dataset.done; opts.forEach((b) => { b.disabled = false; }); return; }
     const d = r.data || {};
+    if (sessionId && sessionId === my.sessionId) my.sessionAnswers[q.dataset.qid] = d;
     opts.forEach((b, i) => { if (i === d.correct_index) b.classList.add("right"); });
     if (!d.correct) btn.classList.add("wrong");
     q.dataset.correct = d.correct ? "1" : "0";
     out.innerHTML = `
       <p class="${d.correct ? "loom-good" : "loom-bad"} loom-strong">${d.correct ? "Right." : "Not quite."}</p>
       ${d.rationale ? `<p class="loom-small">${esc(d.rationale)}</p>` : ""}
-      ${[...new Set((d.evidence || []).filter((e) => typeof e.t === "number").map((e) => Math.floor(e.t)))].map((t) => ({ t })).map((e) => `<button class="loom-link" data-act="seek" data-t="${e.t}" data-play="1">Hear it at ${fmt(e.t)}</button>`).join(" ")}`;
+      ${[...new Set((d.evidence || []).map((e) => e.t ?? e.start).filter((t) => typeof t === "number").map(Math.floor))].map((t) => `<button class="loom-link" data-act="seek" data-t="${t}" data-play="1">Hear it at ${fmt(t)}</button>`).join(" ")}`;
     const done = card.querySelectorAll(".loom-q[data-done]").length, right = card.querySelectorAll('.loom-q[data-correct="1"]').length;
     const score = card.querySelector('[data-role="score"]');
-    if (score && done === +card.dataset.total) score.textContent = `${right} of ${done} right.`;
+    if (score && done === +card.dataset.total) {
+      score.textContent = `${right} of ${done} right.`;
+      const save = card.querySelector('[data-act="save-mastery"]');
+      if (save && my.finishedSession !== sessionId) save.disabled = false;
+    }
+  }
+
+  async function saveMastery(my, btn) {
+    const card = btn.closest(".loom-result-body"), sessionId = card?.dataset.sessionId;
+    if (!sessionId || sessionId !== my.sessionId || my.finishedSession === sessionId || my.finishingSession === sessionId || btn.disabled) return;
+    my.finishingSession = sessionId;
+    btn.disabled = true;
+    const out = card.querySelector('[data-role="mastery-result"]');
+    out.innerHTML = `<div class="loom-working"><span class="loom-spin"></span>Saving mastery…</div>`;
+    const r = await call(`/api/sessions/${encodeURIComponent(sessionId)}/finish`, "POST", { explainers_watched: [] });
+    if (!alive(my) || my.sessionId !== sessionId) return;
+    my.finishingSession = null;
+    if (!r.ok) { btn.disabled = false; out.innerHTML = `<p class="loom-bad">Couldn't save: ${esc(errText(r))}</p>`; return; }
+    my.finishedSession = sessionId;
+    btn.textContent = "Mastery saved";
+    const updates = r.data?.mastery_updates || [];
+    out.innerHTML = `<p class="loom-good">Saved. Weave another cut to use your updated mastery.</p>${updates.map((u) => `<p class="loom-small">${esc(u.label)}: ${(+u.before).toFixed(2)} → ${(+u.after).toFixed(2)}</p>`).join("")}`;
   }
 
   // ---------- event wiring ----------
@@ -1168,6 +1260,15 @@
         return userSeek(my, ((e.clientX - r.left) / r.width) * (my.graph?.duration_seconds || 0), false);
       }
       case "seek": return userSeek(my, +el.dataset.t, el.dataset.play === "1");
+      case "concept": return userSeek(my, +el.dataset.t, false);
+      case "concept-ask": {
+        const concept = (my.graph?.concept_nodes || []).find((c) => c.node_id === el.dataset.id);
+        if (!concept) return;
+        my.selected = null; renderSelection(my); showTab("ask");
+        const q = `Explain ${concept.label}`; const ta = $(".loom-ask textarea"); if (ta) ta.value = q;
+        return runAnswer(my, q);
+      }
+      case "map-retry": return renderMap(my);
       case "watchgap": { const gp = my.gaps[+el.dataset.i]; if (gp) { my.allowGap = gp; userSeek(my, gp.start + 0.05, true); } return; }
       case "select": return selectObject(my, el.dataset.id);
       case "unselect": my.selected = null; return renderSelection(my);
@@ -1177,6 +1278,7 @@
       case "quiz": return runQuiz(my, el.dataset.q || readQuestion(my, my.selected?.label || ""));
       case "lessonquiz": return runQuiz(my, null, my.cut?.quiz || []);
       case "answerq": return answerQuestion(my, el);
+      case "save-mastery": return saveMastery(my, el);
       case "dismiss": return el.closest(".loom-result")?.remove();
       case "openclip": { const j = my.jobs.get(el.dataset.job); if (j?.clip) openClip(my, j.clip, j.question); return; }
       case "libopen": { const c = my.library[+el.dataset.i]; if (c) openClip(my, c, c.question); return; }
@@ -1193,6 +1295,9 @@
   }
   function onRootKey(e) {
     e.stopPropagation(); // keep YouTube shortcuts (space, k, f…) from firing while typing in the panel
+    if ((e.key === "Enter" || e.key === " ") && e.target.matches('svg [role="button"]')) {
+      e.preventDefault(); e.target.dispatchEvent(new MouseEvent("click", { bubbles: true })); return;
+    }
     if (e.key === "Enter" && !e.shiftKey && e.target.matches(".loom-ask textarea")) {
       e.preventDefault();
       if (S) runAnswer(S, readQuestion(S, S.selected ? "What is this?" : ""));

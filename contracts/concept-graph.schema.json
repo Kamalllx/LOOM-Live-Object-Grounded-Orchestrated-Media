@@ -153,6 +153,53 @@
     "GraphObject": {
       "additionalProperties": false,
       "properties": {
+        "content": {
+          "anyOf": [
+            {
+              "maxLength": 600,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Content"
+        },
+        "description": {
+          "anyOf": [
+            {
+              "maxLength": 400,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Description"
+        },
+        "element_kind": {
+          "anyOf": [
+            {
+              "enum": [
+                "text",
+                "equation",
+                "diagram",
+                "table",
+                "code",
+                "chart",
+                "illustration"
+              ],
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Element Kind"
+        },
         "instances": {
           "items": {
             "$ref": "#/$defs/ObjectInstance"
@@ -180,7 +227,8 @@
           "enum": [
             "hazard_class",
             "vlm",
-            "transcript"
+            "transcript",
+            "board"
           ],
           "title": "Phrase Source",
           "type": "string"

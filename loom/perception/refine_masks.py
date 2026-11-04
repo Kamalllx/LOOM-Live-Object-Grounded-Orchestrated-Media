@@ -81,6 +81,8 @@ def refine(cfg: Any, graph: ConceptGraph, progress: Callable[[str], None] = prin
             seeds: list[tuple[int, Track]] = []
             owners: list[tuple[int, int]] = []
             for oi, o in enumerate(objects):
+                if o.phrase_source == "board":
+                    continue
                 for ii, inst in enumerate(o.instances):
                     if inst.shot_id != shot.shot_id or not inst.track or inst.end <= w0 or inst.start >= w1:
                         continue
@@ -103,6 +105,8 @@ def refine(cfg: Any, graph: ConceptGraph, progress: Callable[[str], None] = prin
                     s for mt in out if mt.seed_index == k for s in mt.samples if inst.start - 1e-6 <= s.t <= inst.end + 1e-6)
             progress(f"{shot.shot_id} {w0:.0f}-{w1:.0f}s: {len(seeds)} instances")
         for oi, o in enumerate(objects):
+            if o.phrase_source == "board":
+                continue
             for ii, inst in enumerate(o.instances):
                 total += 1
                 samples = sorted({round(s.t, 3): s for s in collected.get((oi, ii), [])}.values(), key=lambda s: s.t)

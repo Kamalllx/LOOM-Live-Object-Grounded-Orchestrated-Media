@@ -218,9 +218,10 @@ export function makeWatch(ctx) {
       const el = document.createElement("div"); el.className = "learn"; el.setAttribute("role", "dialog"); el.setAttribute("aria-label", `Learn about ${o.label}`);
       el.innerHTML = `<button class="close" aria-label="Close">×</button>
         <h3>What do you want to learn about the <em>${esc(o.label)}</em>?</h3>
+        ${o.phrase_source === "board" ? `<div class="board-read"><span class="kind">${esc(o.element_kind || "text")} on the board</span>${o.content ? `<p class="content">${esc(o.content)}</p>` : ""}${o.description ? `<p class="meaning">${esc(o.description)}</p>` : ""}</div>` : ""}
         <p class="ctx">${c ? `It appears while the lesson explains ${esc(c.label.toLowerCase())}.` : "Seen in this lesson."} Type anything; LOOM writes, renders and fact-checks an animation for exactly that.</p>
         <div class="row"><input placeholder="e.g. why is it used here?" aria-label="Your question"></div>
-        <div class="chips">${[`What is a ${o.label}?`, `Why is the ${o.label} used here?`, `Is the ${o.label} safe?`].map((q) => `<button class="pchip">${esc(q)}</button>`).join("")}</div>
+        <div class="chips">${(o.phrase_source === "board" ? [`Explain the ${o.label} step by step`, `Why is this written here?`, `Give me an example of this`] : [`What is a ${o.label}?`, `Why is the ${o.label} used here?`, `Is the ${o.label} safe?`]).map((q) => `<button class="pchip">${esc(q)}</button>`).join("")}</div>
         <div class="acts"><button class="go" data-a="anim">Make an animation</button><button data-a="ans">Just answer</button><button data-a="quiz">Quiz me</button></div>
         <div class="prog"></div>`;
       document.body.appendChild(el);
@@ -418,7 +419,7 @@ export function makeWatch(ctx) {
         const hc = $("#hoverchip");
         if (hover && !active.some((m) => m.object_id === hover.o.object_id)) drawMaskShape(hover.s, pr, C.amber, 0.14, false);
         if (selected) for (const inst of (objById[selected]?.instances || [])) { if (t >= inst.start && t <= inst.end) { const s = sampleAt(inst.track, t); if (s && !(hover && hover.o.object_id === selected)) drawMaskShape(s, pr, C.violet, 0.1, false); } }
-        if (hover) { hc.style.display = "block"; hc.style.left = `${pointer.x + 14}px`; hc.style.top = `${pointer.y + 10}px`; hc.textContent = `${hover.o.label}: click to ask`; hl.style.cursor = "pointer"; } else { hc.style.display = "none"; hl.style.cursor = "default"; }
+        if (hover) { hc.style.display = "block"; hc.style.left = `${pointer.x + 14}px`; hc.style.top = `${pointer.y + 10}px`; hc.textContent = hover.o.phrase_source === "board" ? `${hover.o.element_kind || "text"} · ${hover.o.label}: click to learn` : `${hover.o.label}: click to ask`; hl.style.cursor = "pointer"; } else { hc.style.display = "none"; hl.style.cursor = "default"; }
         requestAnimationFrame(frame);
       }
       vid.addEventListener("loadeddata", () => requestAnimationFrame(frame), { once: true });

@@ -998,6 +998,50 @@
     "GraphObject": {
       "additionalProperties": false,
       "properties": {
+        "content": {
+          "anyOf": [
+            {
+              "maxLength": 600,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "description": {
+          "anyOf": [
+            {
+              "maxLength": 400,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "element_kind": {
+          "anyOf": [
+            {
+              "enum": [
+                "text",
+                "equation",
+                "diagram",
+                "table",
+                "code",
+                "chart",
+                "illustration"
+              ],
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
         "instances": {
           "items": {
             "$ref": "#/$defs/ObjectInstance"
@@ -1021,7 +1065,8 @@
           "enum": [
             "hazard_class",
             "vlm",
-            "transcript"
+            "transcript",
+            "board"
           ],
           "type": "string"
         },

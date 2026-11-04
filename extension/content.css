@@ -70,8 +70,8 @@ html.loom-fs #loom-root .loom-tab { z-index: 2147483000; }
 }
 #loom-root .loom-icon:hover, #loom-modal .loom-icon:hover, .loom-pop .loom-icon:hover { background: var(--well-hi); border-color: var(--dim); }
 
-#loom-root .loom-tabs { display: flex; gap: 4px; margin: 0 14px 10px; padding: 3px; border-radius: 99px; background: var(--well); border: 1px solid var(--edge-soft); }
-#loom-root .loom-tabs button { flex: 1; padding: 6px 8px; border-radius: 99px; border: 0; background: transparent; color: var(--dim); cursor: pointer; transition: background .3s var(--ease), color .3s var(--ease); }
+#loom-root .loom-tabs { display: flex; gap: 3px; margin: 0 14px 10px; padding: 4px; overflow-x: auto; scrollbar-width: thin; border-radius: 16px; background: rgba(6, 20, 28, .92); border: 1px solid var(--edge-soft); }
+#loom-root .loom-tabs button { flex: 1 0 auto; padding: 7px 8px; font-size: 11.5px; white-space: nowrap; border-radius: 99px; border: 0; background: transparent; color: var(--dim); cursor: pointer; transition: background .3s var(--ease), color .3s var(--ease); }
 #loom-root .loom-tabs button:hover:not(:disabled) { color: var(--ink); }
 #loom-root .loom-tabs button.on { background: var(--well-hi); color: var(--ink); box-shadow: inset 0 0 0 1px var(--edge); }
 #loom-root .loom-tabs button:disabled { color: var(--faint); cursor: default; }
@@ -80,6 +80,29 @@ html.loom-fs #loom-root .loom-tab { z-index: 2147483000; }
 #loom-root .loom-body { flex: 1; overflow-y: auto; overscroll-behavior: contain; padding: 2px 14px 12px; scrollbar-width: thin; scrollbar-color: var(--edge) transparent; }
 #loom-root .loom-pane { display: none; }
 #loom-root .loom-pane.on { display: block; animation: loom-in .35s var(--ease); }
+
+/* The same graph, similarity map and agent activity as the LOOM player. */
+#loom-root .loom-workspace-intro { background: linear-gradient(150deg, rgba(110,242,196,.12), rgba(195,166,255,.08)); border-color: rgba(110,242,196,.23); }
+#loom-root .loom-visual { width: 100%; overflow: auto; border: 1px solid var(--edge-soft); border-radius: 14px; background: rgba(6,20,28,.72); }
+#loom-root .loom-visual svg { display: block; width: 100%; min-width: 280px; height: auto; font-family: "Bahnschrift", "Segoe UI", sans-serif; }
+#loom-root .loom-visual svg [role="button"] { cursor: pointer; }
+#loom-root .loom-visual svg [role="button"]:focus-visible { outline: none; filter: drop-shadow(0 0 5px #ffb38a); }
+#loom-root .loom-concept-list { display: flex; flex-wrap: wrap; gap: 6px; margin: 10px 0; }
+#loom-root .loom-map-key { display: flex; flex-wrap: wrap; gap: 10px; color: var(--dim); font-size: 11px; margin: 10px 0; }
+#loom-root .loom-map-key span:nth-child(1) { color: var(--mint); }
+#loom-root .loom-map-key span:nth-child(2) { color: var(--sky); }
+#loom-root .loom-map-key span:nth-child(3) { color: var(--lilac); }
+#loom-root .loom-map-key span:nth-child(4) { color: var(--coral); }
+#loom-root .loom-agent-list { display: grid; gap: 6px; margin: 10px 0; }
+#loom-root .loom-agent { display: grid; grid-template-columns: 12px 1fr auto; align-items: center; gap: 8px; padding: 9px 11px; border-radius: 12px; background: rgba(6,20,28,.7); border: 1px solid var(--edge-soft); }
+#loom-root .loom-agent i { width: 8px; height: 8px; border-radius: 50%; background: var(--faint); }
+#loom-root .loom-agent.running i { background: var(--peach); box-shadow: 0 0 12px var(--peach); }
+#loom-root .loom-agent.done i { background: var(--mint); }
+#loom-root .loom-agent span { color: var(--dim); font-size: 11px; }
+#loom-root .loom-agent-note { display: grid; gap: 3px; padding: 8px 0; border-top: 1px solid var(--edge-soft); font-size: 12px; }
+#loom-root .loom-agent-note b { color: var(--mint); }
+#loom-root .loom-agent-note span, #loom-root .loom-agent-note li { color: var(--dim); }
+#loom-root .loom-agent-note ul { margin: 0; padding-left: 18px; }
 
 #loom-root .loom-card { background: var(--well); border: 1px solid var(--edge-soft); border-radius: 14px; padding: 12px; margin: 0 0 10px; }
 #loom-root .loom-card h3 { margin: 0 0 6px; font-size: 15px; font-weight: 600; }
@@ -338,3 +361,9 @@ html.loom-fs #loom-root .loom-tab { z-index: 2147483000; }
   #loom-root, #loom-root *, #loom-modal, #loom-modal *, .loom-pop, .loom-pop *, .loom-layer * { animation: none !important; transition: none !important; }
   #loom-root .loom-spin, #loom-modal .loom-spin, .loom-pop .loom-spin { border-color: var(--mint); }
 }
+
+/* board / animation elements */
+.loom-pop .loom-board { margin: 6px 0 8px; padding: 8px 10px; border-radius: 10px; background: rgba(124, 199, 255, .08); border: 1px solid rgba(124, 199, 255, .25); }
+.loom-pop .loom-board span { font-weight: 600; font-size: 12px; color: #7cc7ff; }
+.loom-pop .loom-board .c { margin: 4px 0 0; font-size: 13px; color: #eaf6ff; white-space: pre-wrap; max-height: 7em; overflow: auto; }
+.loom-pop .loom-board .m { margin: 4px 0 0; font-size: 12px; color: #a9bec6; }

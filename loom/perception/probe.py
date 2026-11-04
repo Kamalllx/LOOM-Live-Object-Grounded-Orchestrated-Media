@@ -9,6 +9,7 @@ from __future__ import annotations
 
 import json
 import re
+import os
 import shutil
 import subprocess
 from dataclasses import dataclass
@@ -138,13 +139,18 @@ def normalize(src: Path, out: Path, max_seconds: int, use_nvenc: bool | None = N
     cmd = ["ffmpeg", "-v", "error", "-y", "-i", str(src), "-t", str(max_seconds), "-map", "0:v:0"]
     if info.has_audio:
         cmd += ["-map", "0:a:0"]
-    cmd += ["-vf", vf, "-pix_fmt", "yuv420p", *venc, *audio, "-movflags", "+faststart", str(out)]
+    # write to a private temp file and swap it in whole: a second ingest of the same video (CLI + web at once) must
+    # never read a half-written MP4 ("moov atom not found")
+    tmp = out.with_name(f"{out.stem}.{os.getpid()}.part.mp4")
+    cmd += ["-vf", vf, "-pix_fmt", "yuv420p", *venc, *audio, "-movflags", "+faststart", str(tmp)]
     try:
         _run(cmd)
     except ProbeError:
+        tmp.unlink(missing_ok=True)
         if not nvenc:
             raise
         return normalize(src, out, max_seconds, use_nvenc=False)  # NVENC busy/unavailable: CPU encode
+    os.replace(tmp, out)
     return info, trimmed, "h264_nvenc" if nvenc else "libx264"
 
 

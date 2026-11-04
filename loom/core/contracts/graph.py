@@ -135,13 +135,20 @@ class SafetyRecord(Contract):
         return self
 
 
+BOARD_ONLY_FIELDS = ("element_kind", "content", "description")
+
+
 class GraphObject(Contract):
     object_id: ObjectId
     label: str = Field(min_length=1)
-    phrase_source: Literal["hazard_class", "vlm", "transcript"]
+    phrase_source: Literal["hazard_class", "vlm", "transcript", "board"]
     is_hazard_class: bool = False
     instances: list[ObjectInstance] = Field(min_length=1)
     safety: SafetyRecord
+    # Board / animation elements (phrase_source "board"): what was written or drawn, read by the VLM.
+    element_kind: Literal["text", "equation", "diagram", "table", "code", "chart", "illustration"] | None = None
+    content: str | None = Field(default=None, max_length=600)
+    description: str | None = Field(default=None, max_length=400)
 
 
 class ConceptEvidence(Contract):
@@ -213,7 +220,12 @@ class ConceptGraph(Contract):
     graph_sha: Sha256 | None = None
 
     def compute_sha(self) -> str:
-        return sha256_of(self.model_dump(mode="json", exclude={"graph_sha"}))
+        d = self.model_dump(mode="json", exclude={"graph_sha"})
+        for o in d.get("objects", []):  # board-only fields are hashed only when set: graphs sealed before them still verify
+            for k in BOARD_ONLY_FIELDS:
+                if o.get(k) is None:
+                    o.pop(k, None)
+        return sha256_of(d)
 
     def sealed(self) -> ConceptGraph:
         """Return a copy carrying its content hash (graphs are immutable once committed)."""

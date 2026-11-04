@@ -176,3 +176,9 @@
 .ing-bar { height: 6px; border-radius: 99px; background: rgba(214, 240, 255, .1); overflow: hidden; }
 .ing-bar i { display: block; height: 100%; width: 0; background: linear-gradient(90deg, var(--amber), var(--teal), var(--violet)); transition: width .8s var(--ease-out); }
 .ing-log { display: grid; gap: 8px; max-height: 280px; overflow: auto; }
+
+/* board / animation elements in the learn popover */
+.learn .board-read { margin: 4px 0 10px; padding: 10px 12px; border-radius: 12px; background: rgba(124, 199, 255, .08); border: 1px solid rgba(124, 199, 255, .25); }
+.learn .board-read .kind { font: 600 12px var(--display); color: var(--amber); text-transform: none; }
+.learn .board-read .content { margin: 6px 0 0; font: 500 14px var(--text); color: var(--ink); white-space: pre-wrap; max-height: 7.5em; overflow: auto; }
+.learn .board-read .meaning { margin: 6px 0 0; font-size: 13px; color: var(--dim); }

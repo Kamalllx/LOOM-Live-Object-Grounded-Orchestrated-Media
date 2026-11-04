@@ -5,7 +5,9 @@ A Manifest V3 extension with plain JS and no build step. On a YouTube watch page
 - the LOOM panel (docked on the right, collapsible to a slim tab)
 - exact-shape masks drawn over the video
 - tracked objects you can click while the video plays
-- Ask, Animate it (fact-checked Manim explainers), Quiz me and a Library
+- Ask, Animate it, Quiz me and a Library, with the same scene player as the web workspace
+- Loom agent activity and Critic scores, a concept Graph, and a similarity Map that highlights retrieved evidence
+- session quiz grading and a **Save to my mastery** action for the next cut
 
 All data comes from your local LOOM gateway at `http://127.0.0.1:8000`.
 
@@ -16,6 +18,7 @@ All data comes from your local LOOM gateway at `http://127.0.0.1:8000`.
 | `manifest.json` | Runs the content scripts on `youtube.com` and grants access to `127.0.0.1:8000`. |
 | `background.js` | Service worker. It is the only place that calls the gateway: content scripts send `{path, method, body}` and get back `{ok, status, data}`. Clips are returned as base64 when `as: "base64"` is set. It never caches responses. |
 | `rle.js` | Mask decoder (`rle:<h>x<w>:<counts>`). It exposes `self.LoomRle` to `content.js`. |
+| `views.js` | Renders the concept graph and similarity map for the YouTube panel. |
 | `content.js` | The panel, the overlay over the video, the click popover, the explainer modal and the YouTube SPA navigation handling. |
 | `content.css` | All styles, scoped to `#loom-root`, `#loom-modal`, `.loom-pop` and `.loom-layer`. |
 
@@ -30,6 +33,8 @@ All data comes from your local LOOM gateway at `http://127.0.0.1:8000`.
 
 1. On `chrome://extensions`, click the circular **Reload** arrow on the LOOM card.
 2. **Refresh the YouTube tab.** Content scripts in tabs that were already open keep running the old code; until you refresh, LOOM shows "LOOM was reloaded".
+
+The web player and extension use the same gateway and lesson data, but the extension keeps its own YouTube-focused interface. The current extension is version 3.1.0; confirm that Chrome loaded the `remake/extension` folder rather than the older extension in the parent project.
 
 To debug the service worker, click "service worker" on the LOOM card. To debug the page, use the YouTube tab's DevTools console; LOOM only logs overlay warnings there.
 
