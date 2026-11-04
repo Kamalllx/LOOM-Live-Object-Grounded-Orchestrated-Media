@@ -223,7 +223,8 @@ async def ingest_link(req: LinkRequest, state: GatewayState = Depends(get_state)
     if not yt:
         raise HTTPException(400, "only YouTube links are supported")
     for g in S.list_graphs(state.cfg.data_dir):
-        if g.source.youtube_id == yt:
+        # graphs perceived before the board/animation stage are re-perceived (their board marks were never read)
+        if g.source.youtube_id == yt and "board" in g.perception_meta.models:
             return {"status": "ready", "video_id": g.video_id}
     channel = f"ingest_{yt.replace('-', '_')}"
     if channel not in _ingesting or _ingesting[channel].done():
