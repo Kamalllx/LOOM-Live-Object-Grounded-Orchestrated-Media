@@ -153,9 +153,14 @@ def ingest(
 
     from loom.perception.pipeline import ingest_source
 
+    def _ingest_echo(st: str, status: str, p: float, d: str, image: str | None = None, items: list[str] | None = None) -> None:
+        typer.echo(f"  {st:10} {status:8} {d}" + (f"  [{image}]" if image else ""))
+        for it in items or []:
+            typer.echo(f"  {'':10} {'':8}   - {it}")
+
     cfg = _cfg(config)
     graph = asyncio.run(
-        ingest_source(cfg, source, title, lambda st, status, p, d: typer.echo(f"  {st:10} {status:8} {d}"))
+        ingest_source(cfg, source, title, _ingest_echo)
     )
     typer.echo(f"OK {graph.video_id}: {len(graph.transcript)} sentences, {len(graph.on_screen_text)} text spans, "
                f"{len(graph.objects)} objects, {len(graph.concept_nodes)} concepts, {len(graph.quiz_bank)} questions, "

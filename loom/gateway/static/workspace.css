@@ -182,3 +182,15 @@
 .learn .board-read .kind { font: 600 12px var(--display); color: var(--amber); text-transform: none; }
 .learn .board-read .content { margin: 6px 0 0; font: 500 14px var(--text); color: var(--ink); white-space: pre-wrap; max-height: 7.5em; overflow: auto; }
 .learn .board-read .meaning { margin: 6px 0 0; font-size: 13px; color: var(--dim); }
+
+/* ingest: live picture of what the current stage is looking at */
+.ing-main { display: grid; grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr); gap: 16px; align-items: start; }
+.ing-live { margin: 0; padding: 12px; border-radius: 18px; background: rgba(3, 12, 18, .72); border: 1px solid var(--warp); display: grid; gap: 10px; }
+.ing-stage-name { font: 600 14px var(--display); color: var(--amber); }
+.ing-live img { width: 100%; border-radius: 12px; display: block; background: #050d12; }
+.ing-live img.in { animation: ingfade .6s var(--ease-out); }
+@keyframes ingfade { from { opacity: .25; filter: blur(4px); } }
+.ing-live figcaption { font-size: 13px; color: var(--dim); }
+.ing-main .ing-log { max-height: 560px; }
+@media (max-width: 900px) { .ing-main { grid-template-columns: 1fr; } }
+@media (prefers-reduced-motion: reduce) { .ing-live img.in { animation: none; } }

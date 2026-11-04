@@ -161,8 +161,25 @@ def _norm_box(box: tuple[int, int, int, int], w: int, h: int) -> tuple[float, fl
     return (round(x / w, 4), round(y / h, 4), round(bw / w, 4), round(bh / h, 4))
 
 
+PREVIEW_EVERY_S = 30.0
+
+
+def render_scan(img: np.ndarray, visible: np.ndarray, masks: list[np.ndarray]) -> np.ndarray:
+    """What the scanner sees: occluders (presenter, illustrations) dimmed, each tracked element outlined."""
+    import cv2
+
+    from loom.perception.preview import colour
+
+    out = img.copy()
+    out[~visible] = (out[~visible] * 0.35).astype(np.uint8)
+    for i, m in enumerate(masks):
+        cnts, _ = cv2.findContours(m.astype(np.uint8), cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+        cv2.drawContours(out, cnts, -1, colour(i), 2)
+    return out
+
+
 def scan_board(
-    frames: Any, shot_starts: list[float], interval: float
+    frames: Any, shot_starts: list[float], interval: float, on_preview: Any = None
 ) -> BoardScan:
     """`frames` yields (t, BGR picture already cropped to the content rect). Returns tracked board elements."""
     import cv2
@@ -175,6 +192,7 @@ def scan_board(
     hw = (0, 0)
     cuts = sorted(shot_starts)
     next_cut = 0
+    last_preview = -1e9
     for t, frame in frames:
         total += 1
         h0, w0 = frame.shape[:2]
@@ -201,7 +219,14 @@ def scan_board(
             colour_mem = img.copy()
         mem = new_mem
         colour_mem[visible] = img[visible]
-        for box, mask, inkpx in group_elements(mem):
+        groups = group_elements(mem)
+        if on_preview is not None and t - last_preview >= PREVIEW_EVERY_S:
+            last_preview = t
+            try:
+                on_preview(t, render_scan(img, visible, [m for _, m, _ in groups]), len(groups))
+            except Exception:  # noqa: BLE001 - a preview never stops the scan
+                pass
+        for box, mask, inkpx in groups:
             best: ElementTrack | None = None
             best_o = 0.4
             for tr in tracks:
@@ -415,6 +440,10 @@ async def read_elements(
 
     schema = _reading_schema()
     degraded: list[str] = []
+
+    def shot_of(t: float) -> Any:
+        return next((s for s in shots if s.start <= t < s.end), shots[-1])
+
     by_label: dict[str, Any] = {}
     order: list[str] = []
     failures = 0
@@ -439,18 +468,25 @@ async def read_elements(
                 continue
             kind, label, content, meaning = "text", " ".join(ocr)[:80], " ".join(ocr)[:600], ""
         if progress:
-            progress(f"{kind}: {label}")
-        key = re.sub(r"[^a-z0-9]+", " ", label.lower()).strip()
+            progress(f"{kind}: {label}", crop, [x for x in (content, meaning) if x])
+        base_key = re.sub(r"[^a-z0-9]+", " ", label.lower()).strip()
+        # same name = same object only if they are never on screen together in one shot (an object's instances must
+        # not overlap); two simultaneous marks with one name ("Q1" twice) become "Q1" and "Q1 (2)"
+        sh = shot_of(e.first_t)
+        key, k = base_key, 1
+        while key in by_label and any(
+                shot_of(o.first_t) is sh and o.first_t < e.last_t + interval and e.first_t < o.last_t + interval
+                for o in by_label[key]["els"]):
+            k += 1
+            key = f"{base_key} #{k}"
         if key not in by_label:
-            by_label[key] = {"kind": kind, "label": label, "content": content, "meaning": meaning, "els": []}
+            by_label[key] = {"kind": kind, "label": label if k == 1 else f"{label} ({k})", "content": content,
+                             "meaning": meaning, "els": []}
             order.append(key)
         by_label[key]["els"].append(e)
         del n
     if failures:
         degraded.append(f"board reading unavailable for {failures} element(s)")
-
-    def shot_of(t: float) -> Any:
-        return next((s for s in shots if s.start <= t < s.end), shots[-1])
 
     objects = []
     for key in order:

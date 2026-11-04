@@ -105,3 +105,52 @@ def test_scribble_noise_is_dropped() -> None:
 def test_boxes_overlap_is_over_the_smaller_box() -> None:
     assert boxes_overlap((0, 0, 1, 1), (0.2, 0.2, 0.1, 0.1)) == pytest.approx(1.0)
     assert boxes_overlap((0, 0, 0.1, 0.1), (0.5, 0.5, 0.1, 0.1)) == 0.0
+
+
+def test_same_label_on_screen_together_never_overlaps(tmp_path) -> None:
+    """Regression (N-Queens ingest): two simultaneous marks the VLM names alike must not become one object with
+    overlapping instances (ConceptGraph rejects that and the whole ingest was lost)."""
+    import asyncio
+    from types import SimpleNamespace
+
+    from loom.perception.board import BoardScan, ElementTrack, read_elements
+
+    class FakeLLM:
+        async def call(self, *a, **k):  # every element reads as "Q1"
+            return SimpleNamespace(value=SimpleNamespace(is_content=True, kind="text", label="Q1", content="Q1",
+                                                         meaning="queen 1"))
+
+    def el(i: int, a: float, b: float) -> ElementTrack:
+        e = ElementTrack(track_id=i, box=(10 * i, 10, 20, 20), first_t=a, last_t=b, epoch=1)
+        e.samples = [(a, "rle:2x2:4", (0.1, 0.1, 0.1, 0.1))]
+        e.crop = np.full((20, 20, 3), 255, np.uint8)
+        return e
+
+    scan = BoardScan(elements=[el(0, 10, 50), el(1, 20, 60), el(2, 70, 90)], board_ratio=1.0, samples=100,
+                     picture_hw=(360, 640))
+    shots = [SimpleNamespace(shot_id="sh_01", start=0.0, end=100.0)]
+    objs, _ = asyncio.run(read_elements(FakeLLM(), scan, [], [], shots, 100.0, 1.0, 1, tmp_path))
+    assert sorted(o.label for o in objs) == ["Q1", "Q1 (2)"]
+    for o in objs:  # no object has instances overlapping in time
+        spans = sorted((i.start, i.end) for i in o.instances)
+        assert all(b0 <= a1 for (_, b0), (a1, _) in zip(spans, spans[1:]))
+
+
+def test_split_overlaps_moves_overlapping_instances_to_a_new_object() -> None:
+    from loom.core.contracts.graph import GraphObject, ObjectInstance, SafetyRecord, TrackSample, Verification
+    from loom.perception.pipeline import split_overlaps
+
+    def inst(k: int, a: float, b: float) -> ObjectInstance:
+        return ObjectInstance(instance_id=f"o_001_{k}", shot_id="sh_01", start=a, end=b, score=0.9,
+                              track=[TrackSample(t=a, bbox=(0.1, 0.1, 0.1, 0.1))],
+                              verification=Verification(status="verified"))
+
+    o = GraphObject.model_construct(object_id="o_001", label="Q1", phrase_source="board", is_hazard_class=False,
+                                    instances=[inst(0, 0, 10), inst(1, 5, 15), inst(2, 20, 30)],
+                                    safety=SafetyRecord(status="unreviewed"), element_kind="text", content=None,
+                                    description=None)
+    out = split_overlaps([o])
+    assert [x.label for x in out] == ["Q1", "Q1 (2)"]
+    assert [x.object_id for x in out] == ["o_001", "o_002"]
+    assert [len(x.instances) for x in out] == [2, 1]
+    assert out[1].instances[0].instance_id == "o_002_0"

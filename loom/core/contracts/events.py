@@ -35,6 +35,8 @@ class IngestStageData(Contract):
     eta_s: float | None = None
     detail: str = ""
     degraded: Degraded = []
+    image: Annotated[str, StringConstraints(pattern=r"^/media/ingest/[A-Za-z0-9_./-]+$")] | None = None  # live preview
+    items: list[Annotated[str, StringConstraints(max_length=240)]] = Field(default=[], max_length=12)
 
 
 class SessionStartData(Contract):

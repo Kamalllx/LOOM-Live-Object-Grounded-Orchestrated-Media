@@ -229,9 +229,11 @@ async def ingest_link(req: LinkRequest, state: GatewayState = Depends(get_state)
     channel = f"ingest_{yt.replace('-', '_')}"
     if channel not in _ingesting or _ingesting[channel].done():
 
-        def progress(stage: str, status: str, p: float, detail: str) -> None:
-            state.events.publish(channel, "ingest_stage", {"stage": stage, "status": status, "progress": p,
-                                                           "detail": detail[:200]})
+        def progress(stage: str, status: str, p: float, detail: str, image: str | None = None,
+                     items: list[str] | None = None) -> None:
+            state.events.publish(channel, "ingest_stage", {"stage": stage, "status": status, "progress": min(1.0, max(0.0, p)),
+                                                           "detail": detail[:200], "image": image,
+                                                           "items": [i[:240] for i in (items or [])][:12]})
 
         async def run() -> None:
             try:

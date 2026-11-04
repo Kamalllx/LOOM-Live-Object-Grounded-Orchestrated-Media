@@ -48,26 +48,43 @@ const STAGE_AGENT = { asr: "Listener", ocr: "Reader", ocr_reread: "Reader", voca
 async function ingest(url) {
   if (!url) return toast("Paste a YouTube link first");
   const box = $("#ing");
-  box.innerHTML = `<div class="ing"><div class="ing-stages">${STAGES.map(([k, n]) => `<span data-s="${k}">${n}<em></em></span>`).join("")}</div><div class="ing-bar"><i></i></div><div class="ing-log" id="inglog"></div></div>`;
+  box.innerHTML = `<div class="ing"><div class="ing-stages">${STAGES.map(([k, n]) => `<span data-s="${k}">${n}<em></em></span>`).join("")}</div>
+    <div class="ing-bar"><i></i></div>
+    <div class="ing-main"><figure class="ing-live" id="inglive"><div class="ing-stage-name" id="ingnow">Waiting for the first stage…</div><img id="ingimg" alt="" hidden><figcaption id="ingcap">Each stage shows what it is looking at here.</figcaption></figure>
+    <div class="ing-log" id="inglog"></div></div></div>`;
   let r;
   try { r = await post("/api/videos/link", { url }); } catch (e) { box.innerHTML = `<p class="err">${esc(e.message)}</p>`; return; }
   if (r.status === "ready") { toast("Already processed. It is in your lessons."); return library(); }
-  const t0 = Date.now(), log = $("#inglog");
-  const note = (who, text, cls = "") => { const d = document.createElement("div"); d.className = `thought ${cls}`; d.innerHTML = `<b>${esc(who)}</b><span class="tx">${esc(text)}</span>`; log.prepend(d); };
+  const t0 = Date.now(), log = $("#inglog"), img = $("#ingimg"), cap = $("#ingcap"), now = $("#ingnow");
+  const note = (who, text, cls = "", items = []) => {
+    const d = document.createElement("div"); d.className = `thought ${cls}`;
+    d.innerHTML = `<b>${esc(who)}</b><span class="tx">${esc(text)}</span>${items.length ? `<ul>${items.map((i) => `<li>${esc(i)}</li>`).join("")}</ul>` : ""}`;
+    log.prepend(d);
+  };
+  const show = (src, text) => {  // cross-fade to the new picture once it has loaded
+    const next = new Image(); next.onload = () => { img.hidden = false; img.classList.remove("in"); void img.offsetWidth; img.src = src; img.classList.add("in"); cap.textContent = text; }; next.src = src;
+  };
   note("LOOM", "Starting perception. This runs once per video, on your GPU, and takes a few minutes.", "thinking");
   const es = new EventSource(`/api/events/${r.channel}`);
+  let within = 0;
   es.addEventListener("ingest_stage", (e) => {
-    const d = JSON.parse(e.data).data, chip = $(`.ing-stages [data-s="${d.stage}"]`);
+    const d = JSON.parse(e.data).data, chip = $(`.ing-stages [data-s="${d.stage}"]`), who = STAGE_AGENT[d.stage] || d.stage;
     if (chip) {
-      if (d.status === "started") { $$(".ing-stages span.run").forEach((c) => c.classList.remove("run")); chip.classList.add("run"); note(STAGE_AGENT[d.stage] || d.stage, `${chip.firstChild.textContent}…`, "thinking"); }
-      if (d.status === "done") { chip.classList.remove("run"); chip.classList.add("done"); $("em", chip).textContent = d.detail || ""; }
-      if (d.status === "progress" && d.detail) note(STAGE_AGENT[d.stage] || d.stage, d.detail, "output");
+      if (d.status === "started") { $$(".ing-stages span.run").forEach((c) => c.classList.remove("run")); chip.classList.add("run"); within = 0; now.textContent = `${who}: ${chip.firstChild.textContent}…`; note(who, `${chip.firstChild.textContent}…`, "thinking"); }
+      if (d.status === "done") { chip.classList.remove("run"); chip.classList.add("done"); $("em", chip).textContent = d.detail || ""; within = 0; }
+      if (d.status === "progress") {
+        within = Math.max(within, d.progress || 0);
+        if (d.image) show(`${d.image}`, d.detail || "");
+        // the board scanner reports a frame every 30 s of video: refresh the picture, do not flood the log
+        if (d.detail && !(d.stage === "board" && d.image)) note(who, d.detail, "output", d.items || []);
+        else if (d.stage === "board" && d.image) now.textContent = `${who}: ${d.detail}`;
+      }
     }
     const done = $$(".ing-stages span.done").length;
-    $(".ing-bar i").style.width = `${Math.round((100 * done) / STAGES.length)}%`;
+    $(".ing-bar i").style.width = `${Math.min(100, Math.round((100 * (done + within)) / STAGES.length))}%`;
   });
-  es.addEventListener("delivered", () => { es.close(); $(".ing-bar i").style.width = "100%"; note("LOOM", `Done in ${Math.round((Date.now() - t0) / 1000)} s. The lesson is ready to watch.`, "output"); setTimeout(library, 2500); });
-  es.addEventListener("error", (e) => { if (e.data) { es.close(); note("LOOM", `Stopped: ${JSON.parse(e.data).data.message}`, "output"); } });
+  es.addEventListener("delivered", () => { es.close(); $(".ing-bar i").style.width = "100%"; now.textContent = "Done"; note("LOOM", `Done in ${Math.round((Date.now() - t0) / 1000)} s. The lesson is ready to watch.`, "output"); setTimeout(library, 4000); });
+  es.addEventListener("error", (e) => { if (e.data) { es.close(); now.textContent = "Stopped"; note("LOOM", `Stopped: ${JSON.parse(e.data).data.message}`, "output"); } });
 }
 
 // ================================================================ geometry

@@ -183,6 +183,29 @@ def build_concepts(fused: Fused, sentence_ids: set[str], text_ids: set[str], obj
     return nodes
 
 
+def split_overlaps(objects: list[GraphObject]) -> list[GraphObject]:
+    """Safety net before the graph is validated: an object's instances must not overlap within a shot. Overlapping
+    instances are moved to a new object with the same label (renumbered ids) instead of failing the whole ingest."""
+    out: list[GraphObject] = []
+    for o in objects:
+        groups: list[list[ObjectInstance]] = []
+        for inst in sorted(o.instances, key=lambda i: i.start):
+            for g in groups:
+                if all(i.shot_id != inst.shot_id or i.end <= inst.start + 1e-3 or inst.end <= i.start + 1e-3 for i in g):
+                    g.append(inst)
+                    break
+            else:
+                groups.append([inst])
+        for k, g in enumerate(groups):
+            out.append(o.model_copy(update={"label": o.label if k == 0 else f"{o.label} ({k + 1})", "instances": g}))
+    renumbered = []
+    for n, o in enumerate(out):
+        oid = f"o_{n + 1:03d}"
+        renumbered.append(o.model_copy(update={"object_id": oid, "instances": [
+            i.model_copy(update={"instance_id": f"{oid}_{k}"}) for k, i in enumerate(o.instances)]}))
+    return renumbered
+
+
 # ---------------------------------------------------------------- the pipeline
 
 
@@ -228,9 +251,43 @@ async def ingest(
         degraded.append(f"trimmed to {cfg.runtime.max_seconds} s")
     done()
 
+    # live previews: pictures + findings for the ingest view (best effort, never fails perception)
+    import cv2
+
+    from loom.perception.board import picture_frames
+    from loom.perception.preview import Previewer, draw_boxes, draw_masks, mmss, tile
+
+    loop = asyncio.get_running_loop()
+
+    def emit(*a: Any, **k: Any) -> None:
+        try:
+            progress(*a, **k)
+        except TypeError:  # a progress callback that only takes (stage, status, progress, detail)
+            progress(*a[:4])
+
+    pv = Previewer(data, video_id, emit)
+
+    def frames(times: list[float]) -> list[Any]:
+        return [f.copy() for _, f in picture_frames(out, times, rect)]
+
+    async def show(stage_name: str, make: Callable[[], Any], detail: str, items: Any = (), p: float = 0.5) -> None:
+        try:
+            img = await asyncio.to_thread(make)
+            if img is not None:
+                pv.image(stage_name, img, detail, items, p)
+        except Exception:  # noqa: BLE001
+            pv.items(stage_name, detail, items, p)
+
+    await show("probe", lambda: (frames([info.duration_s / 2]) or [None])[0],
+               f"{info.width}x{info.height}, {mmss(info.duration_s)}, re-encoded with {encoder}")
+
     done = stage("shots")
     shots = (await asyncio.to_thread(detect_shots, out, info.duration_s)).shots
     spans = [(s.start, s.end) for s in shots]
+    picks = shots if len(shots) <= 8 else [shots[round(i * (len(shots) - 1) / 7)] for i in range(8)]
+    await show("shots", lambda: tile(list(zip(frames([(s.start + s.end) / 2 for s in picks]),
+                                              [f"{s.shot_id}  {mmss(s.start)}" for s in picks], strict=False))),
+               f"{len(shots)} shot{'s' if len(shots) != 1 else ''}" + (" (one continuous take)" if len(shots) == 1 else ""))
     done()
 
     for tag in await http.loaded_models():  # torch stages next: no Ollama model may be resident
@@ -242,7 +299,8 @@ async def ingest(
                           words=[Word(w=w.w, start=w.start, end=max(w.end, w.start)) for w in s.words])
                  for s in asr.sentences if s.text.strip()]
     degraded += asr.degraded
-    progress("asr", "progress", 0.9, (f"Heard {len(sentences)} sentences. First: {sentences[0].text}" if sentences else "No speech in this video")[:200])
+    pv.items("asr", f"Heard {len(sentences)} sentences" if sentences else "No speech in this video",
+             [f"{mmss(x.start)}  {x.text}" for x in sentences[:12]])
     _free_torch()
     done()
 
@@ -265,8 +323,13 @@ async def ingest(
     done = stage("board")
     _, board_iv = scan_times(info.duration_s)
     cuts = [s.start for s in shots[1:]]
+    def board_preview(t: float, img: Any, n: int) -> None:
+        loop.call_soon_threadsafe(lambda: pv.image(
+            "board", img, f"Scanning {mmss(t)} of {mmss(info.duration_s)}: {n} written or drawn elements "
+            "(the teacher and pictures are dimmed and ignored)", progress=min(0.95, t / max(1.0, info.duration_s))))
+
     scan = await asyncio.to_thread(
-        lambda: scan_board(stream_frames(out, board_iv, rect, info.width, info.height), cuts, board_iv))
+        lambda: scan_board(stream_frames(out, board_iv, rect, info.width, info.height), cuts, board_iv, board_preview))
     board_mode = scan.board_ratio >= 0.5
     progress("board", "progress", 0.9, (f"Board, slide or animation in {scan.board_ratio:.0%} of the video: "
                                         f"{len(scan.elements)} written or drawn elements tracked")[:200])
@@ -283,6 +346,11 @@ async def ingest(
              for s in ocr.spans if s.text.strip() and not is_noise(s.text, s.confidence)]
     texts = merge_lines(texts, lambda f, text, a, b, box, conf: TextSpan(
         text_id=f.text_id, start=a, end=max(b, a + 0.05), text=text, bbox=box, confidence=conf, reader=f.reader))
+    if texts:
+        busiest = max(texts, key=lambda x: sum(1 for y in texts if y.start <= x.start < y.end)).start
+        on = [x for x in texts if x.start <= busiest < x.end][:24]
+        await show("ocr", lambda: draw_boxes(frames([busiest])[0], [(x.bbox, x.text) for x in on]),
+                   f"Text on screen at {mmss(busiest)}: {len(on)} lines", list(dict.fromkeys(x.text for x in texts))[:12])
     progress("ocr", "progress", 0.9, (f"Read {len(texts)} pieces of on-screen text: " + "; ".join(dict.fromkeys(t.text for t in texts)))[:200])
 
     done = stage("vocab")
@@ -299,13 +367,14 @@ async def ingest(
     if board_mode:
         phrases = [ph for ph in phrases if ph.lower() not in BOARD_SURFACES]
     hazards = set(cfg.perception.hazard_classes) & set(phrases)
-    progress("vocab", "progress", 0.9, ("Looking for: " + ", ".join(phrases))[:200])
+    pv.items("vocab", f"Looking for {len(phrases)} kinds of things in the picture", phrases)
     done()
 
     done = stage("board_read")
     board_objects, board_degraded = await read_elements(
         llm, scan, texts, sentences, shots, info.duration_s, board_iv, 1, data / "work" / video_id / "board",
-        progress=lambda m: progress("board_read", "progress", 0.5, m[:200]))
+        progress=lambda m, img=None, items=(): pv.image("board_read", cv2.imread(str(img)), m, items)
+        if img is not None else pv.items("board_read", m, items, 0.5))
     degraded += board_degraded
     progress("board_read", "progress", 0.9, (f"Read {len(board_objects)} board elements: "
                                              + "; ".join(o.label for o in board_objects))[:200])
@@ -327,7 +396,13 @@ async def ingest(
             boxes += await asyncio.to_thread(lambda: detector.detect(_frames(out, extra), sorted(hazards), rect))
     finally:
         detector.close()
-    progress("detect", "progress", 0.9, (f"{len(boxes)} detections across {len(base) + len(extra)} frames")[:200])
+    by_t: dict[float, list[Any]] = {}
+    for b in boxes:
+        by_t.setdefault(b.t, []).append(b)
+    best_t = sorted(by_t, key=lambda t: -len(by_t[t]))[:4]
+    await show("detect", lambda: tile([(draw_boxes(f, [(b.box, f"{b.phrase} {b.score:.2f}") for b in by_t[t][:12]]), mmss(t))
+                                       for t, f in zip(sorted(best_t), frames(sorted(best_t)), strict=False)], cols=2, cell_w=480),
+               f"{len(boxes)} detections across {len(base) + len(extra)} frames")
     done()
 
     done = stage("track")
@@ -351,7 +426,20 @@ async def ingest(
         _free_torch()
     await vlm_phase(llm, tracks, verdicts, hazards, cfg.perception.lookalikes, priority="ingest")
     kept = [(tr, verdicts[i]) for i, tr in enumerate(tracks) if verdicts[i].decide(tr.phrase in hazards)[0]]
-    progress("verify", "progress", 0.9, (f"Kept {len(kept)} of {len(tracks)} tracks: " + ", ".join(dict.fromkeys(tr.phrase for tr, _ in kept)))[:200])
+    def verify_tile() -> Any:
+        cells = []
+        order = sorted(range(len(tracks)), key=lambda i: (tracks[i].phrase not in hazards, -len(tracks[i].samples)))
+        for i in order[:12]:
+            if not crops.get(i):
+                continue
+            ok = verdicts[i].decide(tracks[i].phrase in hazards)[0]
+            img = cv2.imread(str(crops[i][0]))
+            if img is not None:
+                cells.append((img, f"{'kept' if ok else 'rejected'}: {tracks[i].phrase}"))
+        return tile(cells, cols=4, cell_w=240) if cells else None
+
+    await show("verify", verify_tile, f"Kept {len(kept)} of {len(tracks)} tracks after look-alike and VLM checks",
+               list(dict.fromkeys(tr.phrase for tr, _ in kept)))
     done()
 
     # objects
@@ -382,6 +470,8 @@ async def ingest(
         objects.append(b.model_copy(update={"object_id": oid, "instances": [
             i.model_copy(update={"instance_id": f"{oid}_{k}"}) for k, i in enumerate(b.instances)]}))
 
+    objects = split_overlaps(objects)
+
     # fusion
     done = stage("fuse")
     sentence_ids = [s.seg_id for s in sentences]
@@ -404,7 +494,8 @@ async def ingest(
         concepts = [ConceptNode(node_id="c_01", label=title[:60], summary=sentences[0].text,
                                 evidence=ConceptEvidence(segment_ids=sentence_ids), difficulty="intermediate")]
     roles = fix_roles(fused.thread_roles if fused else [], sentence_ids) if sentences else []
-    progress("fuse", "progress", 0.9, (f"{len(concepts)} concepts: " + "; ".join(c.label for c in concepts))[:200])
+    pv.items("fuse", f"{len(concepts)} concepts, linked to {sum(len(c.evidence.object_ids) for c in concepts)} objects and board elements",
+             [f"{c.label}: {c.summary}" for c in concepts])
     done()
 
     # safety review: Guardian per object per tag, union with verified hazard classes (fail closed)
@@ -450,7 +541,8 @@ async def ingest(
             reasons={"guardian": f"{len(tags)} of {ok} criteria flagged"},
             models={"safety": cfg.models.safety.tag})})
     flagged = [o.label for o in objects if o.safety.child_unsafe]
-    progress("safety", "progress", 0.9, ("Child-unsafe: " + ", ".join(flagged) if flagged else "Nothing child-unsafe found")[:200])
+    pv.items("safety", ("Child-unsafe: " + ", ".join(flagged)) if flagged else "Nothing child-unsafe found",
+             [f"{o.label}: {'masked for children (' + ', '.join(o.safety.tags) + ')' if o.safety.child_unsafe else o.safety.status}" for o in objects])
     done()
 
     # quiz bank
@@ -493,7 +585,7 @@ async def ingest(
                                      level=lvl, stem=q.stem, options=q.options, answer_index=q.answer_index,  # type: ignore[arg-type]
                                      rationale=q.rationale or "From the lesson.", evidence_segment_ids=evid,
                                      verified_by=cfg.models.judge.tag))
-    progress("quiz", "progress", 0.9, f"{len(bank)} questions written and verified by the judge"[:200])
+    pv.items("quiz", f"{len(bank)} questions written and verified by the judge", [q.stem for q in bank])
     done()
 
     graph = ConceptGraph(
@@ -522,6 +614,26 @@ async def ingest(
     except Exception as e:  # boxes remain (the player falls back to them) - recorded, not hidden
         degraded.append(f"exact masks unavailable: {type(e).__name__}")
     _free_torch()
+
+    def outlines() -> Any:
+        from loom.perception.segment import decode_rle
+
+        insts = [(o, i) for o in graph.objects for i in o.instances]
+        if not insts:
+            return None
+        t = max(((i.start + i.end) / 2 for _, i in insts),
+                key=lambda t: sum(1 for _, j in insts if j.start <= t <= j.end))
+        f = frames([t])[0]
+        shapes = []
+        for o, i in insts:
+            if i.start <= t <= i.end:
+                smp = min(i.track, key=lambda s: abs(s.t - t))
+                if smp.mask:
+                    shapes.append((decode_rle(smp.mask).astype(bool), o.label))
+        return draw_masks(f, shapes) if shapes else None
+
+    await show("masks", outlines, f"Exact outlines: {len(graph.objects)} clickable objects and board elements",
+               [f"{o.element_kind or 'object'}: {o.label}" for o in graph.objects])
     done()
     save_graph(data, graph)
     shutil.rmtree(data / "work" / video_id, ignore_errors=True)
