@@ -658,6 +658,9 @@ def download(url: str, dest_dir: Path) -> tuple[Path, str]:
         "format": "bv*[height<=720][ext=mp4]+ba[ext=m4a]/b[height<=720][ext=mp4]/b[height<=720]/b",
         "merge_output_format": "mp4", "outtmpl": str(dest_dir / "%(id)s.%(ext)s"), "quiet": True, "noprogress": True,
         "noplaylist": True,
+        # YouTube's player challenge needs a JS runtime; yt-dlp only enables deno by default, and without one some
+        # videos report "This video is not available". Node is used when it is installed.
+        "js_runtimes": {"deno": {"path": None}, "node": {"path": None}},
     }
     with yt_dlp.YoutubeDL(opts) as ydl:
         info = ydl.extract_info(url, download=True)
