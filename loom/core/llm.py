@@ -158,8 +158,11 @@ class LLMClient:
         parser: Callable[[str], T] | None = None,
         priority: Priority = "session",
         model: str | None = None,
+        num_ctx: int | None = None,
     ) -> LLMResult[T]:
-        """Structured call for a role. `model` is for evaluation only (spike/fallback comparison of a role)."""
+        """Structured call for a role. `model` is for evaluation only (spike/fallback comparison of a role).
+        `num_ctx` raises the context for one large ingest call (Ollama silently drops the start of a prompt that does
+        not fit, which loses the instructions); interactive paths keep the role's value."""
         prompt = self.prompts.get(prompt_id)
         if prompt.model_role != role:
             raise ValueError(f"prompt {prompt.ref} is written for role {prompt.model_role!r}, not {role!r}")
@@ -172,7 +175,7 @@ class LLMClient:
             think_on = think if think is not None else (prompt.think if prompt.think is not None else rcfg.think)
             options: dict[str, Any] = {
                 "temperature": rcfg.temperature,
-                "num_ctx": rcfg.num_ctx or self.cfg.ollama.default_num_ctx,
+                "num_ctx": max(num_ctx or 0, rcfg.num_ctx or self.cfg.ollama.default_num_ctx),
             }
             if rcfg.seed is not None:
                 options["seed"] = rcfg.seed

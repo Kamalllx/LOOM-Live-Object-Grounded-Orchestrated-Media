@@ -1,0 +1,200 @@
+{
+  "suite": "ocr",
+  "measured_at": "2026-10-29T05:05:36.025959+00:00",
+  "machine": {
+    "platform": "Windows-11-10.0.26200-SP0",
+    "python": "3.12.16",
+    "loom": "2.0.0.dev0",
+    "gpu": "NVIDIA GeForce RTX 5070 Laptop GPU, 8151 MiB, 610.88",
+    "git_commit": "9ce95b7c56d4bd13505ed1c586810b7bb1466057"
+  },
+  "video_id": "acid_base_neutralization_d752a6",
+  "engine": "rapidocr-pp-ocrv6/torch-cuda",
+  "frames_read": 151,
+  "spans": 6,
+  "shots": 7,
+  "shots_s": 6.17,
+  "rapidocr_s": 17.96,
+  "rapidocr_only": {
+    "recall_at_0_8": 1.0,
+    "mean_temporal_iou": 0.98,
+    "formula_exact": 1.0,
+    "pass": true,
+    "captions": [
+      {
+        "caption": "Acid-Base Neutralization",
+        "found": "Acid-Base Neutralization",
+        "reader": "rapidocr",
+        "char_sim": 1.0,
+        "temporal_iou": 0.983,
+        "formula": false,
+        "exact": true
+      },
+      {
+        "caption": "NaOH + HCl → NaCl + H₂O",
+        "found": "NaOH + HCl → NaCl + H₂O",
+        "reader": "rapidocr",
+        "char_sim": 1.0,
+        "temporal_iou": 0.979,
+        "formula": true,
+        "exact": true
+      },
+      {
+        "caption": "pH 7 = neutral",
+        "found": "pH 7 = neutral",
+        "reader": "rapidocr",
+        "char_sim": 1.0,
+        "temporal_iou": 0.971,
+        "formula": true,
+        "exact": true
+      },
+      {
+        "caption": "Acid + Base → Salt + Water",
+        "found": "Acid + Base → Salt + Water",
+        "reader": "rapidocr",
+        "char_sim": 1.0,
+        "temporal_iou": 0.985,
+        "formula": true,
+        "exact": true
+      }
+    ]
+  },
+  "reread_s": 4.06,
+  "reread_spans": 3,
+  "with_reread": {
+    "recall_at_0_8": 1.0,
+    "mean_temporal_iou": 0.98,
+    "formula_exact": 1.0,
+    "pass": true,
+    "captions": [
+      {
+        "caption": "Acid-Base Neutralization",
+        "found": "Acid-Base Neutralization",
+        "reader": "rapidocr",
+        "char_sim": 1.0,
+        "temporal_iou": 0.983,
+        "formula": false,
+        "exact": true
+      },
+      {
+        "caption": "NaOH + HCl → NaCl + H₂O",
+        "found": "NaOH + HCl → NaCl + H₂O",
+        "reader": "glm-ocr",
+        "char_sim": 1.0,
+        "temporal_iou": 0.979,
+        "formula": true,
+        "exact": true
+      },
+      {
+        "caption": "pH 7 = neutral",
+        "found": "pH 7 = neutral",
+        "reader": "glm-ocr",
+        "char_sim": 1.0,
+        "temporal_iou": 0.971,
+        "formula": true,
+        "exact": true
+      },
+      {
+        "caption": "Acid + Base → Salt + Water",
+        "found": "Acid + Base → Salt + Water",
+        "reader": "glm-ocr",
+        "char_sim": 1.0,
+        "temporal_iou": 0.985,
+        "formula": true,
+        "exact": true
+      }
+    ]
+  },
+  "recall_at_0_8": 1.0,
+  "mean_temporal_iou": 0.98,
+  "formula_exact": 1.0,
+  "pass": true,
+  "targets": {
+    "recall_at_0_8": 1.0,
+    "mean_temporal_iou": 0.9,
+    "formula_exact": 1.0
+  },
+  "degraded": [],
+  "all_spans": [
+    {
+      "text_id": "x_001",
+      "start": 0.0,
+      "end": 6.0,
+      "text": "Acid-Base Neutralization",
+      "bbox": [
+        0.2023,
+        0.4486,
+        0.5953,
+        0.1014
+      ],
+      "confidence": 1.0,
+      "reader": "rapidocr",
+      "best_t": 0.1,
+      "needs_reread": false
+    },
+    {
+      "text_id": "x_002",
+      "start": 27.38,
+      "end": 39.53,
+      "text": "NaOH + HCl → NaCl + H₂O",
+      "bbox": [
+        0.5633,
+        0.0514,
+        0.4062,
+        0.0667
+      ],
+      "confidence": 0.983,
+      "reader": "glm-ocr",
+      "best_t": 31.783,
+      "needs_reread": true
+    },
+    {
+      "text_id": "x_003",
+      "start": 39.48,
+      "end": 48.13,
+      "text": "pH 7 = neutral",
+      "bbox": [
+        0.7414,
+        0.05,
+        0.2297,
+        0.0736
+      ],
+      "confidence": 0.967,
+      "reader": "glm-ocr",
+      "best_t": 42.383,
+      "needs_reread": true
+    },
+    {
+      "text_id": "x_004",
+      "start": 39.48,
+      "end": 48.13,
+      "text": "50",
+      "bbox": [
+        0.5523,
+        0.6972,
+        0.0406,
+        0.0597
+      ],
+      "confidence": 1.0,
+      "reader": "rapidocr",
+      "best_t": 39.73,
+      "needs_reread": false
+    },
+    {
+      "text_id": "x_005",
+      "start": 58.18,
+      "end": 68.73,
+      "text": "Acid + Base → Salt + Water",
+      "bbox": [
+        0.1711,
+        0.4472,
+        0.657,
+        0.1056
+      ],
+      "confidence": 0.995,
+      "reader": "glm-ocr",
+      "best_t": 58.43,
+      "needs_reread": true
+    }
+  ]
+}

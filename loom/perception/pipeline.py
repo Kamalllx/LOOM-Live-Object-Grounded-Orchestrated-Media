@@ -170,8 +170,8 @@ def build_concepts(fused: Fused, sentence_ids: set[str], text_ids: set[str], obj
         segs = [s for s in c.segment_ids if s in sentence_ids]
         texts = [t for t in c.text_ids if t in text_ids]
         objs = [o for o in c.object_ids if o in object_ids]
-        if not segs and not texts and not objs:
-            continue
+        if not segs and not texts:  # the graph requires a sentence or on-screen text per concept (objects alone
+            continue                # failed two batch lessons outright: the concept is dropped, the lesson stays)
         cid = f"c_{len(nodes) + 1:02d}"
         prereq_idx = [p for p in c.prerequisites if 0 <= p < i]
         nodes.append(ConceptNode(
@@ -181,6 +181,15 @@ def build_concepts(fused: Fused, sentence_ids: set[str], text_ids: set[str], obj
         ))
         nodes[-1] = nodes[-1].model_copy(update={"prerequisites": [f"c_{p + 1:02d}" for p in prereq_idx if p < len(nodes) - 1]})
     return nodes
+
+
+def fit_ctx(payload: Any, reply_tokens: int = 2500, floor: int = 6144, cap: int = 16384) -> int:
+    """Context for one ingest call: the JSON payload (~3 chars a token) + instructions + the reply, rounded up to
+    2048. Above the role's 6144 the model spills to CPU (slower, S0 finding 5) - accepted once per ingest."""
+    import json
+
+    need = len(json.dumps(payload, ensure_ascii=False)) // 3 + 1200 + reply_tokens
+    return min(cap, max(floor, -(-need // 2048) * 2048))
 
 
 def split_overlaps(objects: list[GraphObject]) -> list[GraphObject]:
@@ -210,7 +219,8 @@ def split_overlaps(objects: list[GraphObject]) -> list[GraphObject]:
 
 
 async def ingest(
-    cfg: LoomConfig, src: Path, title: str, source: SourceInfo, progress: Progress, llm: Any, http: Any
+    cfg: LoomConfig, src: Path, title: str, source: SourceInfo, progress: Progress, llm: Any, http: Any,
+    max_height: int | None = None,
 ) -> ConceptGraph:
     from loom.agents.session import save_graph
     from loom.core.llm import LLMError
@@ -244,7 +254,7 @@ async def ingest(
     sha = await asyncio.to_thread(lambda: hashlib.sha256(src.read_bytes()).hexdigest())
     video_id = slug(title, sha)
     out = data / "media" / "videos" / f"{video_id}.mp4"
-    src_info, trimmed, encoder = await asyncio.to_thread(normalize, src, out, cfg.runtime.max_seconds)
+    src_info, trimmed, encoder = await asyncio.to_thread(normalize, src, out, cfg.runtime.max_seconds, None, max_height)
     info = await asyncio.to_thread(media_info, out)
     rect = await asyncio.to_thread(detect_content_rect, out, info)
     if trimmed:
@@ -328,11 +338,67 @@ async def ingest(
             "board", img, f"Scanning {mmss(t)} of {mmss(info.duration_s)}: {n} written or drawn elements "
             "(the teacher and pictures are dimmed and ignored)", progress=min(0.95, t / max(1.0, info.duration_s))))
 
+    boards = data / "media" / "boards" / video_id
+    shutil.rmtree(boards, ignore_errors=True)
+    snaps: list[dict[str, Any]] = []
+
+    def board_snapshot(t: float, bgra: Any) -> None:
+        """Presenter-free board pictures for the player's "see through the teacher" view."""
+        boards.mkdir(parents=True, exist_ok=True)
+        name = f"{round(t * 10):06d}.webp"
+        if cv2.imwrite(str(boards / name), bgra, [cv2.IMWRITE_WEBP_QUALITY, 78]):
+            snaps.append({"t": round(t, 2), "url": f"/media/boards/{video_id}/{name}"})
+
     scan = await asyncio.to_thread(
-        lambda: scan_board(stream_frames(out, board_iv, rect, info.width, info.height), cuts, board_iv, board_preview))
+        lambda: scan_board(stream_frames(out, board_iv, rect, info.width, info.height), cuts, board_iv, board_preview,
+                           board_snapshot, 2.0 if info.duration_s <= 300 else 5.0))
+
     board_mode = scan.board_ratio >= 0.5
     progress("board", "progress", 0.9, (f"Board, slide or animation in {scan.board_ratio:.0%} of the video: "
                                         f"{len(scan.elements)} written or drawn elements tracked")[:200])
+    done()
+
+    # segment everything (SAM 2.1 point grid) on drawn frames: animations, slides, illustrated lessons. Torch, so it
+    # runs here while no Ollama model is resident; camera footage is skipped per frame (the detector tier covers it)
+    from loom.perception.everything import EverythingSegmenter, board_parts, scan_everything, scan_interval, to_tracks
+
+    done = stage("elements")
+    ev_iv = scan_interval(info.duration_s)
+
+    def ev_preview(t: float, img: Any, masks: list[Any]) -> None:
+        shown = draw_masks(img, [(m, "") for m in masks[:40]])
+        loop.call_soon_threadsafe(lambda: pv.image(
+            "elements", shown,
+            f"Segmenting {mmss(t)} of {mmss(info.duration_s)}: {len(masks)} separate elements in this frame",
+            progress=min(0.95, t / max(1.0, info.duration_s))))
+
+    seg = None
+    try:
+        seg = await asyncio.to_thread(EverythingSegmenter)
+        ev_scan = await asyncio.to_thread(
+            lambda: scan_everything(stream_frames(out, ev_iv, rect, info.width, info.height), cuts, seg,
+                                    on_preview=ev_preview))
+        scene_tracks = to_tracks(ev_scan, scan.elements)
+        # drawings on the board split into their parts (petals, roots, an arrow) with the same model
+        split = await asyncio.to_thread(board_parts, seg, scan.elements)
+        progress("elements", "progress", 0.95, (
+            f"Drawn content in {ev_scan.graphic_ratio:.0%} of the samples: "
+            f"{len(scene_tracks)} separate elements tracked ({ev_scan.seconds} s); "
+            f"{split + sum(1 for t in scene_tracks if t.parts)} drawings split into parts")[:200])
+    except Exception as e:  # recorded, never hidden: the board and detector tiers still run
+        degraded.append(f"segment-everything unavailable: {type(e).__name__}")
+        ev_scan, scene_tracks = None, []
+    finally:
+        if seg is not None:
+            seg.close()
+    _free_torch()
+    # "see through the teacher" only where there is one: a filmed board, not an animation or a slide deck
+    if snaps and scan.board_ratio >= 0.3 and (ev_scan is None or ev_scan.graphic_ratio < 0.5):
+        import json
+
+        (boards / "index.json").write_text(json.dumps({"video_id": video_id, "snapshots": snaps}), encoding="utf-8")
+    else:
+        shutil.rmtree(boards, ignore_errors=True)
     done()
 
     done = stage("ocr_reread")
@@ -376,6 +442,16 @@ async def ingest(
         progress=lambda m, img=None, items=(): pv.image("board_read", cv2.imread(str(img)), m, items)
         if img is not None else pv.items("board_read", m, items, 0.5))
     degraded += board_degraded
+    if scene_tracks:
+        from loom.perception.board import BoardScan
+
+        scene_objects, scene_degraded = await read_elements(
+            llm, BoardScan(elements=scene_tracks, board_ratio=0.0, samples=0, picture_hw=(0, 0)), texts, sentences,
+            shots, info.duration_s, ev_iv, 1, data / "work" / video_id / "scene", prompt="scene_element",
+            progress=lambda m, img=None, items=(): pv.image("board_read", cv2.imread(str(img)), m, items)
+            if img is not None else pv.items("board_read", m, items, 0.5))
+        board_objects += scene_objects
+        degraded += scene_degraded
     progress("board_read", "progress", 0.9, (f"Read {len(board_objects)} board elements: "
                                              + "; ".join(o.label for o in board_objects))[:200])
     done()
@@ -481,11 +557,13 @@ async def ingest(
             "sentences": [{"id": s.seg_id, "start": s.start, "text": s.text} for s in sentences],
             "on_screen_text": [{"id": t.text_id, "start": t.start, "text": t.text} for t in texts],
             "objects": [{"id": o.object_id, "label": o.label,
-                         "visible": [[round(i.start, 1), round(i.end, 1)] for i in o.instances],
-                         **({"kind": o.element_kind, "content": o.content or "", "meaning": o.description or ""}
+                         "visible": [[round(i.start, 1), round(i.end, 1)] for i in o.instances[:4]],
+                         **({"kind": o.element_kind, "content": (o.content or "")[:180],
+                             "meaning": (o.description or "")[:140]}
                             if o.phrase_source == "board" else {})} for o in objects],
         }
-        fused = (await llm.call("brain", "concept_fuse", payload, Fused, priority="ingest", timeout_s=300)).value
+        fused = (await llm.call("brain", "concept_fuse", payload, Fused, priority="ingest", timeout_s=300,
+                                num_ctx=fit_ctx(payload))).value
     except LLMError:
         degraded.append("fusion unavailable: one concept per role group")
     concepts = build_concepts(fused, set(sentence_ids), {t.text_id for t in texts}, {o.object_id for o in objects}) \
@@ -600,7 +678,9 @@ async def ingest(
             models={"asr": cfg.perception.asr_model, "detector": cfg.perception.detector,
                     "verifier": cfg.perception.verifier, "brain": cfg.models.brain.tag, "judge": cfg.models.judge.tag,
                     "safety": cfg.models.safety.tag, "encoder": encoder,
-                    "board": f"{len(board_objects)} elements, board-like {scan.board_ratio:.0%}"},
+                    "board": f"{len(board_objects)} elements, board-like {scan.board_ratio:.0%}",
+                    "elements": (f"{len(scene_tracks)} segmented, drawn {ev_scan.graphic_ratio:.0%}" if ev_scan
+                                 else "unavailable")},
             timings_s={**timings, "total": round(time.perf_counter() - t_all, 1)}, degraded=degraded[:20]),
     ).sealed()
     # exact-shape masks (SAM 2.1): torch stage, so no Ollama model may be resident
@@ -661,6 +741,8 @@ def download(url: str, dest_dir: Path) -> tuple[Path, str]:
         # YouTube's player challenge needs a JS runtime; yt-dlp only enables deno by default, and without one some
         # videos report "This video is not available". Node is used when it is installed.
         "js_runtimes": {"deno": {"path": None}, "node": {"path": None}},
+        # merging video + audio needs ffmpeg; name it explicitly instead of relying on yt-dlp's own lookup
+        **({"ffmpeg_location": str(Path(ff).parent)} if (ff := shutil.which("ffmpeg")) else {}),
     }
     with yt_dlp.YoutubeDL(opts) as ydl:
         info = ydl.extract_info(url, download=True)
@@ -671,7 +753,8 @@ def download(url: str, dest_dir: Path) -> tuple[Path, str]:
     return path, str(info.get("title") or info["id"])
 
 
-async def ingest_source(cfg: LoomConfig, ref: str, title: str | None, progress: Progress) -> ConceptGraph:
+async def ingest_source(cfg: LoomConfig, ref: str, title: str | None, progress: Progress,
+                        max_height: int | None = None) -> ConceptGraph:
     from loom.core.llm import LLMClient
     from loom.core.ollama import OllamaHttp
     from loom.core.store import Store
@@ -684,12 +767,12 @@ async def ingest_source(cfg: LoomConfig, ref: str, title: str | None, progress: 
         source = SourceInfo(kind="youtube" if yt else "path", ref=ref, youtube_id=yt)
     else:
         path, auto_title = Path(ref), Path(ref).stem.replace("_", " ")
-        source = SourceInfo(kind="path", ref=path.name)
+        source = SourceInfo(kind="upload" if path.parent.name == "uploads" else "path", ref=path.name)
     http = OllamaHttp(cfg)
     store = Store(cfg.data_dir / "loom.db")
     try:
         llm = LLMClient(cfg, http, store=store)
-        return await ingest(cfg, path, title or auto_title, source, progress, llm, http)
+        return await ingest(cfg, path, title or auto_title, source, progress, llm, http, max_height=max_height)
     finally:
         await http.aclose()
         store.close()

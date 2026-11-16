@@ -44,6 +44,7 @@ async def worker_selftest(timeout_s: float = 30.0) -> bool:
             "-m",
             "loom.worker",
             "--selftest",
+            stdin=asyncio.subprocess.DEVNULL,  # never inherit the gateway's console handles (they may be gone)
             stdout=asyncio.subprocess.PIPE,
             stderr=asyncio.subprocess.PIPE,
         )

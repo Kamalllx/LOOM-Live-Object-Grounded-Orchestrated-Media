@@ -283,7 +283,8 @@
     my.objects = (my.graph.objects || []).map((o) => ({
       id: o.object_id, label: o.label || o.object_id, safety: o.safety || {},
       spans: (o.instances || []).map((i) => [i.start, i.end]),
-      samples: (o.instances || []).flatMap((i) => i.track || []).filter((s) => s && s.bbox).sort((a, b) => a.t - b.t),
+      insts: (o.instances || []).map((i) => ({ start: i.start, end: i.end,
+        samples: (i.track || []).filter((s) => s && s.bbox).sort((a, b) => a.t - b.t) })),
     }));
     enableVideoFeatures(true);
     renderAsk(my);
@@ -510,19 +511,11 @@
   }
   const boxPx = (P, b) => ({ x: P.x + b[0] * P.w, y: P.y + b[1] * P.h, w: b[2] * P.w, h: b[3] * P.h });
 
-  function nearest(samples, t, tol = 0.6) {
-    let lo = 0, hi = samples.length - 1;
-    if (hi < 0) return null;
-    while (lo < hi) { const mid = (lo + hi) >> 1; if (samples[mid].t < t) lo = mid + 1; else hi = mid; }
-    let best = samples[lo];
-    if (lo > 0 && Math.abs(samples[lo - 1].t - t) < Math.abs(best.t - t)) best = samples[lo - 1];
-    return Math.abs(best.t - t) <= tol ? best : null;
-  }
   function objectsAt(my, t) {
     const out = [];
     for (const o of my.objects) {
-      if (!o.spans.some(([a, b]) => t >= a - 0.3 && t <= b + 0.3)) continue;
-      const s = nearest(o.samples, t);
+      const inst = o.insts.find((i) => t >= i.start - 0.3 && t <= i.end + 0.3);
+      const s = inst && Rle.sampleAt(inst.samples, t);  // held between samples: board elements no longer blink
       if (s) out.push({ o, s });
     }
     return out;
@@ -610,7 +603,7 @@
       b.filter = "none";
       const mx = (P.x - F.x) * k, my_ = (P.y - F.y) * k, mw = P.w * k, mh = P.h * k;
       for (const m of active) {
-        const s = nearest(m.samples, t, 0.6);
+        const s = Rle.sampleAt(m.samples, t);  // a mask is active for its whole span: hold (fail closed)
         const bbox = s?.bbox || m.fallback_bbox;
         c.globalCompositeOperation = "source-over";
         c.clearRect(0, 0, bw, bh);

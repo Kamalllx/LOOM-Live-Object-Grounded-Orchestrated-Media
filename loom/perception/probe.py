@@ -125,13 +125,22 @@ def detect_content_rect(path: Path, info: MediaInfo, samples: int = 8) -> tuple[
     )
 
 
-def normalize(src: Path, out: Path, max_seconds: int, use_nvenc: bool | None = None) -> tuple[MediaInfo, bool, str]:
-    """Transcode to the normalized MP4. Returns (source info, trimmed, encoder)."""
+def normalize(src: Path, out: Path, max_seconds: int, use_nvenc: bool | None = None,
+              max_height: int | None = None) -> tuple[MediaInfo, bool, str]:
+    """Transcode to the normalized MP4. Returns (source info, trimmed, encoder). `max_height` (e.g. 480) downscales
+    below the default 1080 cap, for lighter playback and faster perception of long lessons."""
     if shutil.which("ffmpeg") is None:
         raise ProbeError("ffmpeg not on PATH")
     info = media_info(src)
     trimmed = info.duration_s > max_seconds + 0.5
-    vf = f"scale=-2:'min({MAX_HEIGHT},ih)'" if info.height > MAX_HEIGHT else "scale=trunc(iw/2)*2:trunc(ih/2)*2"
+    # "480p" caps the *short* side: a portrait phone video (720x1280) keeps 480 px of width, not 270
+    cap = min(MAX_HEIGHT, max_height or MAX_HEIGHT)
+    if min(info.width, info.height) <= cap:
+        vf = "scale=trunc(iw/2)*2:trunc(ih/2)*2"
+    elif info.height <= info.width:
+        vf = f"scale=-2:{cap}"
+    else:
+        vf = f"scale={cap}:-2"
     nvenc = nvenc_available() if use_nvenc is None else use_nvenc
     venc = ["-c:v", "h264_nvenc", "-preset", "p5", "-cq", "21"] if nvenc else ["-c:v", "libx264", "-crf", "20"]
     audio = ["-c:a", "aac", "-b:a", "160k", "-ar", "48000"] if info.has_audio else ["-an"]
@@ -149,7 +158,8 @@ def normalize(src: Path, out: Path, max_seconds: int, use_nvenc: bool | None = N
         tmp.unlink(missing_ok=True)
         if not nvenc:
             raise
-        return normalize(src, out, max_seconds, use_nvenc=False)  # NVENC busy/unavailable: CPU encode
+        # NVENC busy/unavailable: CPU encode
+        return normalize(src, out, max_seconds, use_nvenc=False, max_height=max_height)
     os.replace(tmp, out)
     return info, trimmed, "h264_nvenc" if nvenc else "libx264"
 

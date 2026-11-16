@@ -66,9 +66,21 @@ export function hit(value, u, v) {
   return x >= 0 && y >= 0 && x < m.w && y < m.h && m.data[y * m.w + x] === 1;
 }
 
-/** Nearest track sample at time t (masks are sampled at 5 fps). */
-export function sampleAt(track, t) {
-  let best = null, bd = Infinity;
-  for (const s of track) { const d = Math.abs(s.t - t); if (d < bd) { bd = d; best = s; } }
-  return bd <= 0.6 ? best : null;
+/** The sample to show at time t (track sorted by t; callers check the instance span first). A mask holds until the
+ * next sample: board elements are re-sampled only when their ink changes (every 2-10 s), so a nearest-sample window
+ * made them blink. Dense tracks (SAM 2.1, 5 fps) interpolate the box and take the nearest mask; sparse ones keep the
+ * last mask and box, so strokes never appear before they are drawn. `maxGap` bounds how far a sample may be held. */
+export function sampleAt(track, t, maxGap = Infinity) {
+  const n = track.length;
+  if (!n) return null;
+  let lo = 0, hi = n;  // first index with s.t > t
+  while (lo < hi) { const mid = (lo + hi) >> 1; if (track[mid].t <= t) lo = mid + 1; else hi = mid; }
+  const a = track[lo - 1], b = track[lo];
+  if (!a) return b.t - t <= maxGap ? b : null;
+  if (!b) return t - a.t <= maxGap ? a : null;
+  if (t - a.t > maxGap && b.t - t > maxGap) return null;
+  const span = b.t - a.t;
+  if (span > 0.5) return a;
+  const k = span > 0 ? (t - a.t) / span : 0;
+  return { t, mask: k > 0.5 ? b.mask : a.mask, bbox: a.bbox.map((v, j) => v + (b.bbox[j] - v) * k) };
 }

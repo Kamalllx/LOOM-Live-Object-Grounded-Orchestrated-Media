@@ -201,7 +201,7 @@ One event model for ingest jobs, sessions and taps (`05-contracts.md` §6). Tran
 | `GET /api/ready` | Readiness: Ollama reachable, each required model present + last smoke result, worker spawnable, disk free, offline mode. `ready:false` lists what is missing; HTTP 200 when ready, **503** otherwise. Model presence is polled every `ollama.ready_poll_s` (10 s) via `/api/tags` — it never loads a model into VRAM; "last smoke" = the newest of the last successful call per role (client metrics) and the last `loom doctor` smoke run (`data/run/smoke.json`). |
 | `GET /api/models` | Per-role model status, residency, last latency, failure counts. |
 | `GET /api/videos` · `GET /api/videos/{id}` · `DELETE /api/videos/{id}` | Library. |
-| `POST /api/videos` (multipart) · `POST /api/videos/link {url}` | Ingest from upload / local path / YouTube (link disabled when offline). Returns `{video_id, job_id}`; duplicates return the existing job. |
+| `POST /api/videos/upload?filename=&max_height=` (raw body) · `POST /api/videos/link {url, max_height?}` | Ingest from upload / YouTube (link disabled when offline). Returns `{status, channel}`; progress streams on `channel`; an active run on the same channel is joined, not restarted. |
 | `POST /api/videos/{id}/reprocess {from_stage}` | Re-run perception from a stage. |
 | `GET /api/videos/{id}/graph?view=mesh\|player\|full` | Concept graph views. |
 | `GET /api/videos/{id}/weaves` | Per-learner cut summaries for "Compare weaves". |

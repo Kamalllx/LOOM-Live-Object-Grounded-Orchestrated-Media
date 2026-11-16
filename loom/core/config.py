@@ -145,6 +145,7 @@ class AnimatorConfig(_Section):
     max_source_lines: int = 250
     tts: list[str] = ["kokoro", "piper", "sapi"]
     voice: str = "af_heart"
+    web_images: bool = True  # explainers may use freely licensed Wikimedia Commons pictures (off when LOOM_OFFLINE=1)
 
 
 class A2AConfig(_Section):

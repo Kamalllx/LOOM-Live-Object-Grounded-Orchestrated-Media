@@ -1,0 +1,34 @@
+<svg xmlns='http://www.w3.org/2000/svg' width='900' height='236' viewBox='0 0 900 236' font-family='Segoe UI, Helvetica, Arial, sans-serif'>
+<rect x='0.5' y='0.5' width='899' height='235' rx='14' fill='#ffffff' stroke='#e3e8ee'/>
+<text x='24' y='34' font-size='17' font-weight='700' fill='#1f2933'>What gets masked, over time - Acid-Base demo (68.7 s)</text>
+<text x='24' y='54' font-size='12.5' fill='#66788a'>detector and verified rows from the grounding suite; the last row is the viewer&#x27;s delivered masks</text>
+<line x1='230.0' y1='70' x2='230.0' y2='206' stroke='#e3e8ee'/>
+<text x='230.0' y='222' font-size='11' fill='#66788a' text-anchor='middle'>0s</text>
+<line x1='323.1' y1='70' x2='323.1' y2='206' stroke='#e3e8ee'/>
+<text x='323.1' y='222' font-size='11' fill='#66788a' text-anchor='middle'>10s</text>
+<line x1='416.2' y1='70' x2='416.2' y2='206' stroke='#e3e8ee'/>
+<text x='416.2' y='222' font-size='11' fill='#66788a' text-anchor='middle'>20s</text>
+<line x1='509.3' y1='70' x2='509.3' y2='206' stroke='#e3e8ee'/>
+<text x='509.3' y='222' font-size='11' fill='#66788a' text-anchor='middle'>30s</text>
+<line x1='602.5' y1='70' x2='602.5' y2='206' stroke='#e3e8ee'/>
+<text x='602.5' y='222' font-size='11' fill='#66788a' text-anchor='middle'>40s</text>
+<line x1='695.6' y1='70' x2='695.6' y2='206' stroke='#e3e8ee'/>
+<text x='695.6' y='222' font-size='11' fill='#66788a' text-anchor='middle'>50s</text>
+<line x1='788.7' y1='70' x2='788.7' y2='206' stroke='#e3e8ee'/>
+<text x='788.7' y='222' font-size='11' fill='#66788a' text-anchor='middle'>60s</text>
+<text x='220' y='91' font-size='12' fill='#1f2933' text-anchor='end'>ground-truth hazard</text>
+<rect x='230' y='80' width='640' height='20' rx='3' fill='#f4f6f8'/>
+<rect x='677.3' y='80' width='95.9' height='20' rx='3' fill='#ef5d7a'/>
+<text x='220' y='121' font-size='12' fill='#1f2933' text-anchor='end'>detector only</text>
+<rect x='230' y='110' width='640' height='20' rx='3' fill='#f4f6f8'/>
+<rect x='359.4' y='110' width='51.2' height='20' rx='3' fill='#f2b33d'/>
+<rect x='433.9' y='110' width='14.0' height='20' rx='3' fill='#f2b33d'/>
+<rect x='461.9' y='110' width='303.6' height='20' rx='3' fill='#f2b33d'/>
+<text x='220' y='151' font-size='12' fill='#1f2933' text-anchor='end'>verified hazard class (LOOM)</text>
+<rect x='230' y='140' width='640' height='20' rx='3' fill='#f4f6f8'/>
+<rect x='672.6' y='140' width='50.9' height='20' rx='3' fill='#8b6cf6'/>
+<rect x='723.8' y='140' width='30.0' height='20' rx='3' fill='#8b6cf6'/>
+<text x='220' y='181' font-size='12' fill='#1f2933' text-anchor='end'>Parent + child masks (session)</text>
+<rect x='230' y='170' width='640' height='20' rx='3' fill='#f4f6f8'/>
+<rect x='672.6' y='170' width='105.2' height='20' rx='3' fill='#2bb79a'/>
+</svg>

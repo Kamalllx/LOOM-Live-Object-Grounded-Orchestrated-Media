@@ -244,6 +244,15 @@ def ocr_frame(engine: Any, frame: Any) -> list[tuple[list[list[float]], str, flo
 # ------------------------------------------------------------------------------------------------ stage
 
 
+def clamp_box(b: tuple[float, float, float, float]) -> tuple[float, float, float, float]:
+    """Text touching the picture's edge can come back with y = 1.0 and a height (batch: one short failed on it):
+    keep the box inside the picture, at least one pixel-ish in size, instead of failing the lesson."""
+    x, y, w, h = (float(v) for v in b)
+    x, y = min(max(0.0, x), 0.999), min(max(0.0, y), 0.999)
+    w, h = max(0.001, min(w, 1.0 - x)), max(0.001, min(h, 1.0 - y))
+    return (round(x, 4), round(y, 4), round(w, 4), round(h, 4))
+
+
 class OcrSpan(Contract):
     text_id: str
     start: float
@@ -307,7 +316,7 @@ def detect_text(
                 start=start,
                 end=max(end, round(start + 0.05, 2)),
                 text=best.text,
-                bbox=d.box,
+                bbox=clamp_box(d.box),
                 confidence=d.confidence,
                 reader="rapidocr",
                 best_t=best.t,

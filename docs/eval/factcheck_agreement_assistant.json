@@ -1,0 +1,28 @@
+{
+ "judge_alone": {
+  "labelled_by": "assistant",
+  "verdict": "judge alone",
+  "n": 40,
+  "agreement": 0.6,
+  "cohens_kappa": 0.048,
+  "verdict_supported_label_supported": 22,
+  "verdict_supported_label_unsupported": 2,
+  "verdict_unsupported_label_supported": 14,
+  "verdict_unsupported_label_unsupported": 2,
+  "false_accept_rate": 0.5,
+  "false_reject_rate": 0.389
+ },
+ "loom_final": {
+  "labelled_by": "assistant",
+  "verdict": "LOOM final (judge + overrule + guard)",
+  "n": 40,
+  "agreement": 0.925,
+  "cohens_kappa": 0.688,
+  "verdict_supported_label_supported": 33,
+  "verdict_supported_label_unsupported": 0,
+  "verdict_unsupported_label_supported": 3,
+  "verdict_unsupported_label_unsupported": 4,
+  "false_accept_rate": 0.0,
+  "false_reject_rate": 0.083
+ }
+}

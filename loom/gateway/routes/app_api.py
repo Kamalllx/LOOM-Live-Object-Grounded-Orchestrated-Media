@@ -5,9 +5,10 @@ from __future__ import annotations
 import asyncio
 import json
 import logging
+import re
 from typing import Any
 
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, Depends, HTTPException, Request
 from pydantic import BaseModel
 
 from loom.agents import session as S
@@ -44,8 +45,10 @@ def videos(state: GatewayState = Depends(get_state)) -> list[dict[str, Any]]:
 
 @router.get("/api/videos/{video_id}/graph")
 def graph(video_id: str, state: GatewayState = Depends(get_state)) -> dict[str, Any]:
+    from loom.agents.knowledge import apply_overrides
+
     try:
-        return _player_graph(S.load_graph(state.cfg.data_dir, video_id))
+        return _player_graph(apply_overrides(state.store, S.load_graph(state.cfg.data_dir, video_id)))
     except FileNotFoundError as e:
         raise HTTPException(404, f"no video {video_id}") from e
 
@@ -209,25 +212,24 @@ async def explain(session_id: str, req: ExplainRequest, state: GatewayState = De
 class LinkRequest(BaseModel):
     url: str
     title: str | None = None
+    max_height: int | None = None  # downscale on ingest (e.g. 480) so a long lesson stays light to play and perceive
 
 
 _ingesting: dict[str, asyncio.Task[Any]] = {}
 _ingest_from: dict[str, int] = {}  # channel -> last event id before the current run (its replay starts after)
+UPLOAD_SUFFIXES = {".mp4", ".mov", ".mkv", ".webm", ".avi", ".m4v"}
+UPLOAD_MAX_BYTES = 4 * 1024**3
+HEIGHTS = {360, 480, 720, 1080}
 
 
-@router.post("/api/videos/link")
-async def ingest_link(req: LinkRequest, state: GatewayState = Depends(get_state)) -> dict[str, Any]:
-    """User-initiated link ingest (YouTube): perception runs in the background; progress on `channel`."""
-    from loom.perception.pipeline import ingest_source, youtube_id
+def _start_ingest(
+    state: GatewayState, channel: str, ref: str, title: str | None, max_height: int | None
+) -> dict[str, Any]:
+    """Run perception in the background (one run per channel at a time); progress and the result go to `channel`."""
+    from loom.perception.pipeline import ingest_source
 
-    yt = youtube_id(req.url)
-    if not yt:
-        raise HTTPException(400, "only YouTube links are supported")
-    for g in S.list_graphs(state.cfg.data_dir):
-        # graphs perceived before the board/animation stage are re-perceived (their board marks were never read)
-        if g.source.youtube_id == yt and "board" in g.perception_meta.models:
-            return {"status": "ready", "video_id": g.video_id}
-    channel = f"ingest_{yt.replace('-', '_')}"
+    if max_height is not None and max_height not in HEIGHTS:
+        raise HTTPException(400, f"max_height must be one of {sorted(HEIGHTS)}")
     if channel not in _ingesting or _ingesting[channel].done():
         # replay only this run: earlier attempts on the same channel (e.g. a failed one) must not reach the view
         _ingest_from[channel] = max((ev.id for ev in state.events.history(channel, 0, 100000)), default=0)
@@ -238,17 +240,86 @@ async def ingest_link(req: LinkRequest, state: GatewayState = Depends(get_state)
                                                            "detail": detail[:200], "image": image,
                                                            "items": [i[:240] for i in (items or [])][:12]})
 
+        # the run's first event names it: a reloaded page, the header's running-tasks list and the run history show it
+        progress("queued", "started", 0.0, title or ref)
+
         async def run() -> None:
             try:
-                g = await ingest_source(state.cfg, req.url, req.title, progress)
+                g = await ingest_source(state.cfg, ref, title, progress, max_height=max_height)
                 state.events.publish(channel, "delivered", {"status": "approved", "pass_count": 1})
-                log.info("ingested %s as %s", req.url, g.video_id)
+                log.info("ingested %s as %s", ref, g.video_id)
             except Exception as e:
-                log.exception("ingest %s failed", req.url)
+                log.exception("ingest %s failed", ref)
                 state.events.publish(channel, "error", {"message": str(e)[:300], "where": "ingest"})
 
         _ingesting[channel] = asyncio.create_task(run())
     return {"status": "processing", "channel": channel, "after": _ingest_from.get(channel, 0)}
+
+
+@router.post("/api/videos/link")
+async def ingest_link(req: LinkRequest, state: GatewayState = Depends(get_state)) -> dict[str, Any]:
+    """User-initiated link ingest (YouTube): perception runs in the background; progress on `channel`."""
+    from loom.perception.pipeline import youtube_id
+
+    yt = youtube_id(req.url)
+    if not yt:
+        raise HTTPException(400, "only YouTube links are supported")
+    for g in S.list_graphs(state.cfg.data_dir):
+        # graphs perceived before the board and segment-everything stages are re-perceived (their marks and drawn
+        # elements were never found)
+        if g.source.youtube_id == yt and {"board", "elements"} <= set(g.perception_meta.models):
+            return {"status": "ready", "video_id": g.video_id}
+    return _start_ingest(state, f"ingest_{yt.replace('-', '_')}", req.url, req.title, req.max_height)
+
+
+def upload_name(filename: str) -> tuple[str, str]:
+    """Client file name -> (safe stored name, display title). Raises 400 for non-video suffixes."""
+    from pathlib import PurePath
+
+    base = PurePath(filename.replace("\\", "/")).name
+    suffix = PurePath(base).suffix.lower()
+    if suffix not in UPLOAD_SUFFIXES:
+        allowed = ", ".join(sorted(UPLOAD_SUFFIXES))
+        raise HTTPException(400, f"unsupported file type {suffix or '(none)'}; use one of {allowed}")
+    stem = re.sub(r"[^A-Za-z0-9_-]+", "_", PurePath(base).stem).strip("_")[:60] or "upload"
+    # downloader prefixes and quality tags are not part of the lesson's name (the title is the topic for explainers)
+    title = re.sub(r"[_]+", " ", PurePath(base).stem)
+    title = re.sub(r"^\s*[\w-]+\.(com|net|org|io|app|cc)\b[\s_-]*", "", title, flags=re.IGNORECASE)
+    title = re.sub(r"\b(\d{3,4}[pP]|[48][kK]|HD|FHD|UHD)\b|\(\d+\)", "", title)
+    title = re.sub(r"\s+", " ", title).strip(" -_.")[:120] or "Uploaded lesson"
+    return stem + suffix, title
+
+
+@router.post("/api/videos/upload")
+async def ingest_upload(request: Request, filename: str, title: str | None = None, max_height: int | None = None,
+                        state: GatewayState = Depends(get_state)) -> dict[str, Any]:
+    """Upload a local video file (raw request body, streamed to disk) and perceive it like a link. Works offline."""
+    import hashlib
+    import uuid
+
+    stored, auto_title = upload_name(filename)
+    if max_height is not None and max_height not in HEIGHTS:
+        raise HTTPException(400, f"max_height must be one of {sorted(HEIGHTS)}")
+    dest_dir = state.cfg.data_dir / "media" / "sources" / "uploads"
+    dest_dir.mkdir(parents=True, exist_ok=True)
+    tmp = dest_dir / f".{uuid.uuid4().hex}.part"
+    h, size = hashlib.sha256(), 0
+    try:
+        with tmp.open("wb") as f:
+            async for chunk in request.stream():
+                size += len(chunk)
+                if size > UPLOAD_MAX_BYTES:
+                    raise HTTPException(413, "file is larger than 4 GB")
+                h.update(chunk)
+                f.write(chunk)
+        if size == 0:
+            raise HTTPException(400, "empty upload")
+        sha = h.hexdigest()
+        dest = dest_dir / f"{sha[:10]}_{stored}"
+        tmp.replace(dest)
+    finally:
+        tmp.unlink(missing_ok=True)
+    return {**_start_ingest(state, f"ingest_up_{sha[:12]}", str(dest), title or auto_title, max_height), "bytes": size}
 
 
 @router.get("/api/channels/{channel}/latest")
@@ -290,6 +361,9 @@ class AskBody(BaseModel):
     question: str
     object_id: str | None = None
     learner_id: str | None = None
+    part_id: str | None = None
+    feedback: str | None = None  # why the learner rejected the previous answer / explainer: re-plan for that
+    length: str | None = None  # explainers: short | medium | deep
 
 
 @router.post("/api/videos/{video_id}/ask")
@@ -300,7 +374,8 @@ async def ask(video_id: str, body: AskBody, state: GatewayState = Depends(get_st
     client, base = _a2a(state)
     channel = f"tap_{video_id}_ask"
     try:
-        r = await client.send(f"{base}/a2a/loom-retriever/", "answer", AskReq(video_id=video_id, **body.model_dump()),
+        req = AskReq(video_id=video_id, **body.model_dump(exclude={"length"}))
+        r = await client.send(f"{base}/a2a/loom-retriever/", "answer", req,
                               AskRes, agent="loom-retriever", channel=channel, timeout_s=300)
     finally:
         await client.http.aclose()
@@ -314,7 +389,8 @@ async def explain_question(video_id: str, body: AskBody, state: GatewayState = D
     from loom.agents.a2a_agents import ExplainReq, ExplainRes
 
     level = K.level_for(state.store, body.learner_id)
-    key = K.explainer_key(video_id, body.question, level)
+    key = K.explainer_key(video_id, body.question, level, body.part_id, body.feedback,
+                          body.length if body.length in K.LENGTHS else "medium")
     row = state.store.query_one("SELECT * FROM custom_explainers WHERE key = ?", (key,))
     if row:
         return {"status": "ready", "clip": K._clip_row(row, cached=True)}
@@ -390,3 +466,78 @@ def ask_history(video_id: str, learner_id: str, state: GatewayState = Depends(ge
     from loom.agents import knowledge as K
 
     return K.history(state.store, video_id, learner_id)
+
+
+# ---------------------------------------------------------------- the learner feedback loop
+
+class FeedbackBody(BaseModel):
+    video_id: str
+    target_kind: str  # answer | explainer | label | part
+    target_id: str
+    rating: int  # 1 helpful, -1 not helpful
+    reason: str | None = None
+    note: str | None = None
+    learner_id: str | None = None
+
+
+@router.post("/api/feedback")
+def feedback(body: FeedbackBody, state: GatewayState = Depends(get_state)) -> dict[str, Any]:
+    """Store a rating. A thumbs-down on an answer or explainer is followed by the client re-asking with the reason
+    (`feedback` on ask/explain), so the agents re-plan for exactly what was wrong."""
+    from loom.core.store import iso_now
+
+    if body.target_kind not in ("answer", "explainer", "label", "part") or body.rating not in (-1, 1):
+        raise HTTPException(400, "target_kind must be answer|explainer|label|part and rating 1 or -1")
+    state.store.execute(
+        "INSERT INTO feedback (video_id, learner_id, target_kind, target_id, rating, reason, note, created_at) "
+        "VALUES (?,?,?,?,?,?,?,?)", (body.video_id, body.learner_id, body.target_kind, body.target_id[:200],
+                                     body.rating, (body.reason or "")[:40] or None, (body.note or "")[:400] or None,
+                                     iso_now()))
+    return feedback_summary(body.video_id, state)
+
+
+@router.get("/api/videos/{video_id}/feedback")
+def feedback_summary(video_id: str, state: GatewayState = Depends(get_state)) -> dict[str, Any]:
+    rows = state.store.query("SELECT target_kind, rating, reason FROM feedback WHERE video_id = ?", (video_id,))
+    fixed = state.store.query("SELECT object_id, part_id, label FROM label_overrides WHERE video_id = ?", (video_id,))
+    up = sum(1 for r in rows if r["rating"] > 0)
+    return {"ratings": len(rows), "helpful": up, "not_helpful": len(rows) - up,
+            "reasons": {k: sum(1 for r in rows if r["reason"] == k)
+                        for k in {r["reason"] for r in rows if r["reason"]}},
+            "labels_fixed": [{"object_id": r["object_id"], "part_id": r["part_id"] or None, "label": r["label"]}
+                             for r in fixed]}
+
+
+class LabelBody(BaseModel):
+    object_id: str
+    label: str
+    part_id: str | None = None
+    learner_id: str | None = None
+
+
+@router.post("/api/videos/{video_id}/labels")
+def fix_label(video_id: str, body: LabelBody, state: GatewayState = Depends(get_state)) -> dict[str, Any]:
+    """A learner renames an element or a part that LOOM misnamed. Applied for everyone from now on (graph, answers,
+    explainers), and recorded as feedback on the reader model."""
+    from loom.core.store import iso_now
+
+    label = " ".join(body.label.split())[:80]
+    if not label:
+        raise HTTPException(400, "empty label")
+    try:
+        g = S.load_graph(state.cfg.data_dir, video_id)
+    except FileNotFoundError as e:
+        raise HTTPException(404, f"no video {video_id}") from e
+    obj = next((o for o in g.objects if o.object_id == body.object_id), None)
+    if obj is None or (body.part_id and not any(p.part_id == body.part_id for p in obj.parts)):
+        raise HTTPException(404, "no such object or part")
+    old = next((p.label for p in obj.parts if p.part_id == body.part_id), None) if body.part_id else obj.label
+    state.store.execute(
+        "INSERT OR REPLACE INTO label_overrides (video_id, object_id, part_id, label, learner_id, created_at) "
+        "VALUES (?,?,?,?,?,?)", (video_id, body.object_id, body.part_id or "", label, body.learner_id, iso_now()))
+    state.store.execute(
+        "INSERT INTO feedback (video_id, learner_id, target_kind, target_id, rating, reason, note, created_at) "
+        "VALUES (?,?,?,?,?,?,?,?)", (video_id, body.learner_id, "part" if body.part_id else "label",
+                                     f"{body.object_id}/{body.part_id or ''}", -1, "wrong_label",
+                                     f"{old} -> {label}"[:400], iso_now()))
+    return {"object_id": body.object_id, "part_id": body.part_id, "label": label, "was": old}

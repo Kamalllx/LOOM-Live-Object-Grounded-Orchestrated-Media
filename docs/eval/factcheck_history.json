@@ -1,0 +1,608 @@
+{
+ "suite": "factcheck_history",
+ "summary": {
+  "explainer_runs": 12,
+  "first_draft_line_support": 0.72,
+  "first_draft_lines": 82,
+  "first_draft_fully_supported": 5,
+  "first_draft_accepted": 9,
+  "delivered": 9,
+  "drafts_histogram": {
+   "1": 10,
+   "2": 1,
+   "3": 1
+  }
+ },
+ "runs": [
+  {
+   "channel": "tap_water_sciences_laboratory_tutorial_glass_a98109_f2d73f92eb6f766ee12f756d",
+   "started": "2026-11-03T05:15:23.246778+00:00",
+   "drafts": 1,
+   "first_draft": {
+    "supported": 6,
+    "lines": 8,
+    "items": [
+     {
+      "verdict": "ok",
+      "line": "When disposing of broken glass, you must wear safety goggles.",
+      "reason": ""
+     },
+     {
+      "verdict": "ok",
+      "line": "These protect your eyes from flying shards.",
+      "reason": ""
+     },
+     {
+      "verdict": "ok",
+      "line": "Alert everyone in the vicinity to be careful of broken glass.",
+      "reason": ""
+     },
+     {
+      "verdict": "cut",
+      "line": "Step two is to carefully pick up large pieces.",
+      "reason": "The evidence states that Step 2 is to alert everyone, and Step 3 is to pick up large pieces."
+     },
+     {
+      "verdict": "ok",
+      "line": "Throw the large pieces into a glass disposal box.",
+      "reason": ""
+     },
+     {
+      "verdict": "ok",
+      "line": "Using a wet paper towel, wipe away any glass that couldn't be picked up.",
+      "reason": ""
+     },
+     {
+      "verdict": "cut",
+      "line": "Always wear safety goggles during this entire process.",
+      "reason": "The evidence only mentions safety goggles in relation to a specific step, not that they must be worn for the entire process."
+     },
+     {
+      "verdict": "ok",
+      "line": "This prevents injury from broken glass.",
+      "reason": ""
+     }
+    ]
+   },
+   "first_fully_supported": false,
+   "first_accepted": true,
+   "delivered": true,
+   "construction": false
+  },
+  {
+   "channel": "tap_vidssave_com_the_process_of_photosynthes_b5be68_d39e4148ce84cff17226a723",
+   "started": "2026-11-14T21:14:54.641210+00:00",
+   "drafts": 1,
+   "first_draft": {
+    "supported": 8,
+    "lines": 8,
+    "items": [
+     {
+      "verdict": "ok",
+      "line": "The video introduces the topic by showing the word Photosynthesis.",
+      "reason": ""
+     },
+     {
+      "verdict": "ok",
+      "line": "The video displays the word Photosynthesis again to emphasize the subject.",
+      "reason": ""
+     },
+     {
+      "verdict": "ok",
+      "line": "The video shows the word Photosynthesis multiple times throughout the clip.",
+      "reason": ""
+     },
+     {
+      "verdict": "ok",
+      "line": "The video also shows the word Photosynthess with a slight spelling variation.",
+      "reason": ""
+     },
+     {
+      "verdict": "ok",
+      "line": "The video displays the word Photosynthess again at a different time.",
+      "reason": ""
+     },
+     {
+      "verdict": "ok",
+      "line": "The video shows the word Photosynthess one more time.",
+      "reason": ""
+     },
+     {
+      "verdict": "ok",
+      "line": "The video shows the word Photosynthess again.",
+      "reason": ""
+     },
+     {
+      "verdict": "ok",
+      "line": "The video continues to show the topic of Photosynthesis.",
+      "reason": ""
+     }
+    ]
+   },
+   "first_fully_supported": true,
+   "first_accepted": true,
+   "delivered": true,
+   "construction": false
+  },
+  {
+   "channel": "tap_vidssave_com_the_process_of_photosynthes_b5be68_34924e315794b6d8af2b229a",
+   "started": "2026-11-14T21:43:12.942778+00:00",
+   "drafts": 3,
+   "first_draft": {
+    "supported": 0,
+    "lines": 7,
+    "items": [
+     {
+      "verdict": "cut",
+      "line": "Photosynthesis is how plants make their own food using sunlight.",
+      "reason": "The evidence provided does not mention photosynthesis or how plants make food."
+     },
+     {
+      "verdict": "cut",
+      "line": "The plant takes in water from the ground and carbon dioxide from the air.",
+      "reason": "The evidence provided does not mention water or carbon dioxide intake."
+     },
+     {
+      "verdict": "cut",
+      "line": "Inside the leaves, these ingredients mix together to create sugar.",
+      "reason": "The evidence provided does not mention the mixing of ingredients inside leaves to create sugar."
+     },
+     {
+      "verdict": "cut",
+      "line": "The plant uses this sugar for energy to grow tall and strong.",
+      "reason": "The evidence provided does not mention the plant using sugar for energy to grow."
+     },
+     {
+      "verdict": "cut",
+      "line": "Any extra sugar is stored as starch for later use.",
+      "reason": "The evidence provided does not mention storing extra sugar as starch."
+     },
+     {
+      "verdict": "cut",
+      "line": "The plant also releases oxygen back into the air for us to breathe.",
+      "reason": "The evidence provided does not mention the release of oxygen."
+     },
+     {
+      "verdict": "cut",
+      "line": "So, photosynthesis turns sunlight and air into food and oxygen.",
+      "reason": "The evidence provided does not summarize the process of photosynthesis."
+     }
+    ]
+   },
+   "first_fully_supported": false,
+   "first_accepted": false,
+   "delivered": false,
+   "construction": false
+  },
+  {
+   "channel": "tap_vidssave_com_the_process_of_photosynthes_b5be68_34924e315794b6d8af2b229a",
+   "started": "2026-11-14T21:47:48.090701+00:00",
+   "drafts": 1,
+   "first_draft": {
+    "supported": 0,
+    "lines": 7,
+    "items": [
+     {
+      "verdict": "cut",
+      "line": "Photosynthesis is how plants make their own food using sunlight.",
+      "reason": "The evidence provided does not mention photosynthesis or how plants make food."
+     },
+     {
+      "verdict": "cut",
+      "line": "The plant takes in water from the ground and carbon dioxide from the air.",
+      "reason": "The evidence provided does not mention water or carbon dioxide intake."
+     },
+     {
+      "verdict": "cut",
+      "line": "Inside the leaves, these ingredients mix together to create sugar.",
+      "reason": "The evidence provided does not mention the mixing of ingredients inside leaves to create sugar."
+     },
+     {
+      "verdict": "cut",
+      "line": "The plant uses this sugar for energy to grow tall and strong.",
+      "reason": "The evidence provided does not mention the plant using sugar for energy to grow."
+     },
+     {
+      "verdict": "cut",
+      "line": "Any extra sugar is stored as starch for later use.",
+      "reason": "The evidence provided does not mention storing extra sugar as starch."
+     },
+     {
+      "verdict": "cut",
+      "line": "The plant also releases oxygen back into the air for us to breathe.",
+      "reason": "The evidence provided does not mention the release of oxygen."
+     },
+     {
+      "verdict": "cut",
+      "line": "So, photosynthesis turns sunlight and air into food and oxygen.",
+      "reason": "The evidence provided does not summarize the process of photosynthesis."
+     }
+    ]
+   },
+   "first_fully_supported": false,
+   "first_accepted": false,
+   "delivered": false,
+   "construction": false
+  },
+  {
+   "channel": "tap_vidssave_com_the_process_of_photosynthes_b5be68_34924e315794b6d8af2b229a",
+   "started": "2026-11-14T21:48:44.150217+00:00",
+   "drafts": 1,
+   "first_draft": {
+    "supported": 6,
+    "lines": 6,
+    "items": [
+     {
+      "verdict": "ok",
+      "line": "Plants make their own food using a process called photosynthesis.",
+      "reason": ""
+     },
+     {
+      "verdict": "ok",
+      "line": "The plant takes in carbon dioxide from the air and water from the soil.",
+      "reason": ""
+     },
+     {
+      "verdict": "ok",
+      "line": "Inside the leaves, a green pigment called chlorophyll captures energy from the sunlight.",
+      "reason": ""
+     },
+     {
+      "verdict": "ok",
+      "line": "Using this energy, the plant combines the carbon dioxide and water to make sugar.",
+      "reason": ""
+     },
+     {
+      "verdict": "ok",
+      "line": "The plant keeps the sugar for food and releases oxygen into the air.",
+      "reason": ""
+     },
+     {
+      "verdict": "ok",
+      "line": "So, photosynthesis turns sunlight and air into food for the plant and oxygen for us.",
+      "reason": ""
+     }
+    ]
+   },
+   "first_fully_supported": true,
+   "first_accepted": true,
+   "delivered": true,
+   "construction": false
+  },
+  {
+   "channel": "tap_photosynthesis_explained_science_teacher_5472dc_b28f3066aa093a9f9c16f858",
+   "started": "2026-11-14T23:20:40.307233+00:00",
+   "drafts": 1,
+   "first_draft": {
+    "supported": 5,
+    "lines": 6,
+    "items": [
+     {
+      "verdict": "ok",
+      "line": "Photosynthesis is the process where plants use sunlight to turn simple ingredients into food.",
+      "reason": ""
+     },
+     {
+      "verdict": "ok",
+      "line": "The plant needs six molecules of carbon dioxide and six molecules of water to start the reaction.",
+      "reason": ""
+     },
+     {
+      "verdict": "ok",
+      "line": "With the help of light and chlorophyll, these ingredients combine to create new substances.",
+      "reason": ""
+     },
+     {
+      "verdict": "ok",
+      "line": "The result is glucose, which the plant uses as food, and oxygen gas that it releases.",
+      "reason": ""
+     },
+     {
+      "verdict": "ok",
+      "line": "This equation matters because it shows how plants provide the food we eat and the oxygen we breathe.",
+      "reason": ""
+     },
+     {
+      "verdict": "cut",
+      "line": "So, the chemical equation summarizes how sunlight and water turn air into life.",
+      "reason": "The claim incorrectly states that sunlight and water turn 'air' into life; the reactants are carbon dioxide and water, not just 'air'."
+     }
+    ]
+   },
+   "first_fully_supported": false,
+   "first_accepted": true,
+   "delivered": true,
+   "construction": false
+  },
+  {
+   "channel": "tap_sql_foreign_keys_clip_8f527f_e711f5075e3951ef08bf4b4a",
+   "started": "2026-11-15T13:27:50.532721+00:00",
+   "drafts": 1,
+   "first_draft": {
+    "supported": 5,
+    "lines": 5,
+    "items": [
+     {
+      "verdict": "ok",
+      "line": "A foreign key is a special column that stores a unique ID from another table to create a link.",
+      "reason": ""
+     },
+     {
+      "verdict": "ok",
+      "line": "In our example, the 'teams' table holds the master list of teams with their unique IDs.",
+      "reason": ""
+     },
+     {
+      "verdict": "ok",
+      "line": "The 'players' table contains a column called 'team_id' that copies those unique IDs to show which team each player belon",
+      "reason": ""
+     },
+     {
+      "verdict": "ok",
+      "line": "By storing the team's ID inside the player's row, we can instantly find out which team a specific player plays for.",
+      "reason": ""
+     },
+     {
+      "verdict": "ok",
+      "line": "So, the foreign key acts as a bridge, connecting every player record to its correct team without needing to repeat the f",
+      "reason": ""
+     }
+    ]
+   },
+   "first_fully_supported": true,
+   "first_accepted": true,
+   "delivered": true,
+   "construction": false
+  },
+  {
+   "channel": "tap_chalkboard_geometry_bisect_angle_constru_7a21b9_370455a6645f037d66fab3bf",
+   "started": "2026-11-16T04:38:44.451409+00:00",
+   "drafts": 1,
+   "first_draft": {
+    "supported": 6,
+    "lines": 7,
+    "items": [
+     {
+      "verdict": "ok",
+      "line": "To split an angle into two equal halves, we use a compass to draw special curved lines called arcs.",
+      "reason": ""
+     },
+     {
+      "verdict": "ok",
+      "line": "First, place the compass point exactly on the vertex where the two rays meet.",
+      "reason": ""
+     },
+     {
+      "verdict": "ok",
+      "line": "Draw a large arc that crosses both rays, creating two points that are the same distance from the vertex.",
+      "reason": ""
+     },
+     {
+      "verdict": "ok",
+      "line": "Now, place the compass on Point D and draw a small arc inside the angle.",
+      "reason": ""
+     },
+     {
+      "verdict": "cut",
+      "line": "Next, place the compass on Point E and draw another small arc that crosses the first one.",
+      "reason": "repeats an earlier line"
+     },
+     {
+      "verdict": "ok",
+      "line": "The spot where these two small arcs meet is the exact middle line of the angle.",
+      "reason": ""
+     },
+     {
+      "verdict": "ok",
+      "line": "By drawing these intersecting arcs, we have successfully divided the angle into two identical parts.",
+      "reason": ""
+     }
+    ]
+   },
+   "first_fully_supported": false,
+   "first_accepted": true,
+   "delivered": true,
+   "construction": false
+  },
+  {
+   "channel": "tap_chalkboard_geometry_bisect_angle_constru_7a21b9_f01f41baf29a50cc8a6ee4c1",
+   "started": "2026-11-16T04:50:13.149111+00:00",
+   "drafts": 1,
+   "first_draft": {
+    "supported": 7,
+    "lines": 8,
+    "items": [
+     {
+      "verdict": "ok",
+      "line": "We start with an angle formed by rays BA and BC, meeting at vertex B.",
+      "reason": ""
+     },
+     {
+      "verdict": "ok",
+      "line": "Place the compass point on B and draw a large arc that crosses both rays at points D and E.",
+      "reason": ""
+     },
+     {
+      "verdict": "ok",
+      "line": "Mark the intersection on ray BA as D and the intersection on ray BC as E.",
+      "reason": ""
+     },
+     {
+      "verdict": "ok",
+      "line": "Now, keeping the same compass width, place the point on D and draw an arc inside the angle.",
+      "reason": ""
+     },
+     {
+      "verdict": "ok",
+      "line": "Without changing the compass width, move the point to E and draw another arc that crosses the first one.",
+      "reason": ""
+     },
+     {
+      "verdict": "ok",
+      "line": "The two new arcs cross at a single point F; this point is equidistant from D and E.",
+      "reason": ""
+     },
+     {
+      "verdict": "ok",
+      "line": "Draw a ray from the vertex B through point F; this ray bisects the angle into two equal parts.",
+      "reason": ""
+     },
+     {
+      "verdict": "cut",
+      "line": "The ray BF is the angle bisector because triangles BDF and BEF are congruent by SSS, making the angles equal.",
+      "reason": "The evidence does not mention the congruence of triangles BDF and BEF or the SSS postulate as the reason for the bisection."
+     }
+    ]
+   },
+   "first_fully_supported": false,
+   "first_accepted": true,
+   "delivered": true,
+   "construction": true
+  },
+  {
+   "channel": "tap_chalkboard_geometry_bisect_angle_constru_7a21b9_93f178326421c6fc8593835b",
+   "started": "2026-11-16T04:54:25.409261+00:00",
+   "drafts": 2,
+   "first_draft": {
+    "supported": 3,
+    "lines": 7,
+    "items": [
+     {
+      "verdict": "ok",
+      "line": "We start with an angle formed by two rays meeting at vertex B, and we want to draw the line that splits it exactly in ha",
+      "reason": ""
+     },
+     {
+      "verdict": "ok",
+      "line": "Place the compass point on the vertex B and draw a large arc that crosses both rays at points D and E.",
+      "reason": ""
+     },
+     {
+      "verdict": "ok",
+      "line": "Mark the two places where this arc crosses the rays; these points are equidistant from the vertex.",
+      "reason": ""
+     },
+     {
+      "verdict": "cut",
+      "line": "Now set the compass to a radius larger than half the distance between D and E, then draw an arc from point D.",
+      "reason": "The evidence does not describe this specific step involving a larger radius or the distance between D and E."
+     },
+     {
+      "verdict": "cut",
+      "line": "Keep the same compass width and draw a second arc from point E so that it crosses the first one inside the angle.",
+      "reason": "The evidence does not describe this specific step involving drawing a second arc from E with a specific radius."
+     },
+     {
+      "verdict": "cut",
+      "line": "Mark the intersection of these two new arcs as point F; this point lies exactly on the angle bisector.",
+      "reason": "The evidence does not describe the final intersection point F or its role in the construction."
+     },
+     {
+      "verdict": "cut",
+      "line": "Draw the ray from the vertex B through point F; this is the exact angle bisector because triangles BDF and BEF are congr (The evidence describes the general process but does not mention the specific proof involving congruent triangles.",
+      "reason": ""
+     }
+    ]
+   },
+   "first_fully_supported": false,
+   "first_accepted": false,
+   "delivered": false,
+   "construction": true
+  },
+  {
+   "channel": "tap_chalkboard_geometry_bisect_angle_constru_7a21b9_93f178326421c6fc8593835b",
+   "started": "2026-11-16T04:58:50.524117+00:00",
+   "drafts": 1,
+   "first_draft": {
+    "supported": 7,
+    "lines": 7,
+    "items": [
+     {
+      "verdict": "ok",
+      "line": "We start with an angle formed by rays BA and BC meeting at vertex B.",
+      "reason": ""
+     },
+     {
+      "verdict": "ok",
+      "line": "Place the compass point on B and draw a large arc that crosses both rays at points D and E.",
+      "reason": ""
+     },
+     {
+      "verdict": "ok",
+      "line": "Mark the intersection on ray BA as D and the intersection on ray BC as E.",
+      "reason": ""
+     },
+     {
+      "verdict": "ok",
+      "line": "Set the compass width to the distance between D and E, then place the point on D.",
+      "reason": ""
+     },
+     {
+      "verdict": "ok",
+      "line": "Keep the same width and draw an arc from E to cross the previous one inside the angle.",
+      "reason": ""
+     },
+     {
+      "verdict": "ok",
+      "line": "Mark the point where these two new arcs cross as F; this point is equidistant from D and E.",
+      "reason": ""
+     },
+     {
+      "verdict": "ok",
+      "line": "Draw the ray from B through F; this ray bisects the angle into two equal parts.",
+      "reason": ""
+     }
+    ]
+   },
+   "first_fully_supported": true,
+   "first_accepted": true,
+   "delivered": true,
+   "construction": true
+  },
+  {
+   "channel": "tap_chalkboard_geometry_bisect_angle_constru_7a21b9_1d1bad4d9a82aca791562e79",
+   "started": "2026-11-16T05:02:44.287696+00:00",
+   "drafts": 1,
+   "first_draft": {
+    "supported": 6,
+    "lines": 6,
+    "items": [
+     {
+      "verdict": "ok",
+      "line": "We start with an angle formed by rays BA and BC, meeting at vertex B.",
+      "reason": ""
+     },
+     {
+      "verdict": "ok",
+      "line": "Place the compass point exactly on the vertex B and draw a large arc that crosses both rays.",
+      "reason": ""
+     },
+     {
+      "verdict": "ok",
+      "line": "Mark the two points where this arc crosses the rays; call them D on ray BA and E on ray BC.",
+      "reason": ""
+     },
+     {
+      "verdict": "ok",
+      "line": "Now open the compass to a radius larger than half the distance between D and E.",
+      "reason": ""
+     },
+     {
+      "verdict": "ok",
+      "line": "These two new arcs cross at a single point inside the angle; mark this intersection as F.",
+      "reason": ""
+     },
+     {
+      "verdict": "ok",
+      "line": "Draw a ray starting at B and passing through F; this ray bisects the original angle into two equal parts.",
+      "reason": ""
+     }
+    ]
+   },
+   "first_fully_supported": true,
+   "first_accepted": true,
+   "delivered": true,
+   "construction": true
+  }
+ ]
+}

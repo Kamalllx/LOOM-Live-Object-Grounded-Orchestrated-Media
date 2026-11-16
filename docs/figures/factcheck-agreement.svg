@@ -1,0 +1,41 @@
+<svg xmlns='http://www.w3.org/2000/svg' width='860' height='340' viewBox='0 0 860 340' font-family='Segoe UI, Helvetica, Arial, sans-serif'>
+<rect x='0.5' y='0.5' width='859' height='339' rx='14' fill='#ffffff' stroke='#e3e8ee'/>
+<text x='24' y='34' font-size='17' font-weight='700' fill='#1f2933'>Fact-check verdicts vs labelled narration lines (n = 40)</text>
+<text x='24' y='54' font-size='12.5' fill='#66788a'>labels by the AI assistant, not yet by a human; LOOM final = judge + absence overrule + not-teaching guard</text>
+<rect x='24' y='64' width='11' height='11' rx='2' fill='#ff9f78'/>
+<text x='39' y='74' font-size='11.5' fill='#1f2933'>judge alone</text>
+<rect x='127' y='64' width='11' height='11' rx='2' fill='#8b6cf6'/>
+<text x='142' y='74' font-size='11.5' fill='#1f2933'>LOOM final verdict</text>
+<line x1='56' y1='266.0' x2='836' y2='266.0' stroke='#e3e8ee'/>
+<text x='48' y='270.0' font-size='11' fill='#66788a' text-anchor='end'>0.00</text>
+<line x1='56' y1='231.2' x2='836' y2='231.2' stroke='#e3e8ee'/>
+<text x='48' y='235.2' font-size='11' fill='#66788a' text-anchor='end'>0.20</text>
+<line x1='56' y1='196.4' x2='836' y2='196.4' stroke='#e3e8ee'/>
+<text x='48' y='200.4' font-size='11' fill='#66788a' text-anchor='end'>0.40</text>
+<line x1='56' y1='161.6' x2='836' y2='161.6' stroke='#e3e8ee'/>
+<text x='48' y='165.6' font-size='11' fill='#66788a' text-anchor='end'>0.60</text>
+<line x1='56' y1='126.8' x2='836' y2='126.8' stroke='#e3e8ee'/>
+<text x='48' y='130.8' font-size='11' fill='#66788a' text-anchor='end'>0.80</text>
+<line x1='56' y1='92.0' x2='836' y2='92.0' stroke='#e3e8ee'/>
+<text x='48' y='96.0' font-size='11' fill='#66788a' text-anchor='end'>1.00</text>
+<rect x='119.5' y='161.6' width='31.0' height='104.4' rx='3' fill='#ff9f78'/>
+<text x='135.0' y='157.6' font-size='10' fill='#1f2933' text-anchor='middle'>0.60</text>
+<rect x='153.5' y='105.0' width='31.0' height='161.0' rx='3' fill='#8b6cf6'/>
+<text x='169.0' y='101.0' font-size='10' fill='#1f2933' text-anchor='middle'>0.93</text>
+<text x='153.5' y='284' font-size='11' fill='#1f2933' text-anchor='middle'>agreement</text>
+<rect x='314.5' y='257.6' width='31.0' height='8.4' rx='3' fill='#ff9f78'/>
+<text x='330.0' y='253.6' font-size='10' fill='#1f2933' text-anchor='middle'>0.05</text>
+<rect x='348.5' y='146.3' width='31.0' height='119.7' rx='3' fill='#8b6cf6'/>
+<text x='364.0' y='142.3' font-size='10' fill='#1f2933' text-anchor='middle'>0.69</text>
+<text x='348.5' y='284' font-size='11' fill='#1f2933' text-anchor='middle'>Cohen&#x27;s kappa</text>
+<rect x='509.5' y='179.0' width='31.0' height='87.0' rx='3' fill='#ff9f78'/>
+<text x='525.0' y='175.0' font-size='10' fill='#1f2933' text-anchor='middle'>0.50</text>
+<rect x='543.5' y='266.0' width='31.0' height='0.5' rx='3' fill='#8b6cf6'/>
+<text x='559.0' y='262.0' font-size='10' fill='#1f2933' text-anchor='middle'>0.00</text>
+<text x='543.5' y='284' font-size='11' fill='#1f2933' text-anchor='middle'>false accepts</text>
+<rect x='704.5' y='198.3' width='31.0' height='67.7' rx='3' fill='#ff9f78'/>
+<text x='720.0' y='194.3' font-size='10' fill='#1f2933' text-anchor='middle'>0.39</text>
+<rect x='738.5' y='251.6' width='31.0' height='14.4' rx='3' fill='#8b6cf6'/>
+<text x='754.0' y='247.6' font-size='10' fill='#1f2933' text-anchor='middle'>0.08</text>
+<text x='738.5' y='284' font-size='11' fill='#1f2933' text-anchor='middle'>false rejects</text>
+</svg>

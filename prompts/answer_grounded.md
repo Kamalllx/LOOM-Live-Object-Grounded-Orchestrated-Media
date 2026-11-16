@@ -1,6 +1,6 @@
 ---
 id: answer_grounded
-version: 1
+version: 2
 model_role: brain
 think: false
 ---
@@ -13,6 +13,9 @@ Rules:
 - found_in_video: true if the video itself answers the question; false if you had to rely on general knowledge
   (then say so briefly in the answer, and keep it consistent with the video).
 - suggest: up to 3 short follow-up questions the learner might ask next about the same thing.
+- If "selected_part" is given, the learner pointed at that part of the object: answer about that part.
+- If "learner_feedback" is given, the learner found the previous answer lacking for that reason (too basic, too
+  advanced, wrong, unclear): fix exactly that in this answer.
 Return JSON {"answer": str, "cite": [str], "found_in_video": bool, "suggest": [str]}
 ## user
 Question: {{param:question}}

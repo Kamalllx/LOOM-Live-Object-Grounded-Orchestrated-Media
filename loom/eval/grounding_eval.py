@@ -210,19 +210,27 @@ async def _vlm(cfg: LoomConfig, tracks: list[Track], verdicts: dict[int, TrackVe
         await http.aclose()
 
 
-def run_grounding_eval(cfg: LoomConfig) -> dict[str, Any]:
+def run_grounding_eval(
+    cfg: LoomConfig, gt_path: Path | None = None, phrases: list[str] | None = None
+) -> dict[str, Any]:
+    """`gt_path`: another ground-truth lesson (default: the demo); `phrases`: its vocabulary (default: `loom eval
+    vocab`'s cached one, which belongs to the demo)."""
     from loom.perception.detect import Detector, hazard_window_times
     from loom.perception.probe import detect_content_rect, media_info
     from loom.perception.shots import detect_shots
     from loom.perception.verify import SiglipVerifier, crop_boxes, siglip_phase
 
-    gt = load_ground_truth()
+    gt = load_ground_truth(gt_path) if gt_path else load_ground_truth()
     video = demo_video(cfg, gt)
     info = media_info(video)
     rect = detect_content_rect(video, info)
     shots = detect_shots(video, info.duration_s).shots
     spans = [(s.start, s.end) for s in shots]
-    phrases, vocab_source = _vocab_phrases(cfg)
+    if phrases:
+        phrases = [*phrases, *[h for h in cfg.perception.hazard_classes if h not in phrases]]
+        vocab_source = f"given ({len(phrases)} phrases incl. hazard classes)"
+    else:
+        phrases, vocab_source = _vocab_phrases(cfg)
     hazards = set(cfg.perception.hazard_classes) & set(phrases)
     timings: dict[str, float] = {}
     unloaded = free_gpu_for_torch(cfg)
@@ -303,5 +311,6 @@ def run_grounding_eval(cfg: LoomConfig) -> dict[str, Any]:
             if tr.phrase in hazards
         ],
     }
-    write_result(cfg, "grounding", body)
+    if gt_path is None:  # the demo's suite file; another lesson's caller writes its own (it once overwrote this one)
+        write_result(cfg, "grounding", body)
     return body

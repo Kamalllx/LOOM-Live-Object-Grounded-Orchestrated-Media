@@ -136,6 +136,19 @@ class SafetyRecord(Contract):
 
 
 BOARD_ONLY_FIELDS = ("element_kind", "content", "description")
+OPTIONAL_LIST_FIELDS = ("parts",)  # hashed only when non-empty: graphs sealed before them still verify
+
+
+class ObjectPart(Contract):
+    """A named part of a diagram or drawing (petals, roots, one arrow, a table row), segmented at `t`. Its mask and
+    box are picture-relative at that moment; the player maps them onto the element's current box."""
+
+    part_id: str = Field(pattern=r"^p_\d{2}$")
+    label: str = Field(min_length=1, max_length=80)
+    description: str | None = Field(default=None, max_length=300)
+    t: Seconds
+    bbox: BBox
+    mask: MaskRle | None = None
 
 
 class GraphObject(Contract):
@@ -149,6 +162,7 @@ class GraphObject(Contract):
     element_kind: Literal["text", "equation", "diagram", "table", "code", "chart", "illustration"] | None = None
     content: str | None = Field(default=None, max_length=600)
     description: str | None = Field(default=None, max_length=400)
+    parts: list[ObjectPart] = Field(default=[], max_length=16)
 
 
 class ConceptEvidence(Contract):
@@ -224,6 +238,9 @@ class ConceptGraph(Contract):
         for o in d.get("objects", []):  # board-only fields are hashed only when set: graphs sealed before them still verify
             for k in BOARD_ONLY_FIELDS:
                 if o.get(k) is None:
+                    o.pop(k, None)
+            for k in OPTIONAL_LIST_FIELDS:
+                if not o.get(k):
                     o.pop(k, None)
         return sha256_of(d)
 

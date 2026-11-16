@@ -1,0 +1,31 @@
+{
+  "suite": "asr",
+  "measured_at": "2026-10-29T04:59:28.212311+00:00",
+  "machine": {
+    "platform": "Windows-11-10.0.26200-SP0",
+    "python": "3.12.16",
+    "loom": "2.0.0.dev0",
+    "gpu": "NVIDIA GeForce RTX 5070 Laptop GPU, 8151 MiB, 610.88",
+    "git_commit": "9ce95b7c56d4bd13505ed1c586810b7bb1466057"
+  },
+  "video_id": "acid_base_neutralization_d752a6",
+  "model": "faster-whisper large-v3-turbo",
+  "device": "cuda",
+  "compute_type": "float16",
+  "audio_seconds": 68.73,
+  "runtime_s": 10.26,
+  "runtime_per_75s": 11.2,
+  "wer": 0.0,
+  "ref_words": 170,
+  "substitutions": 0,
+  "deletions": 0,
+  "insertions": 0,
+  "target_wer": 0.03,
+  "pass": true,
+  "sentences": 15,
+  "ids_contiguous": true,
+  "all_start_lt_end": true,
+  "degraded": [],
+  "hypothesis": "Welcome. In this short lesson, we will find out what happens when an acid meets a base. Before any experiment, put on a lab coat, gloves, and safety goggles. Acids and bases can damage your skin and eyes. Here a scientist pours a solution in the lab. An acid, such as hydrochloric acid, releases hydrogen ions in water. A base, such as sodium hydroxide, releases hydroxide ions. When the two solutions are mixed, each hydrogen ion joins a hydroxide ion to form water. The sodium and chloride ions that remain make table salt, which stays dissolved. An indicator shows when the reaction is complete. Universal indicator turns green at pH 7, which is neutral. Accidents can happen in any lab. If glassware breaks, never pick up the sharp pieces with your hands. tell your teacher and sweep them up with a brush and dustpan. So, an acid plus a base gives a salt plus water. This reaction is called neutralization, and antacid tablets use it to settle an upset stomach.",
+  "reference": "Welcome. In this short lesson we will find out what happens when an acid meets a base. Before any experiment, put on a lab coat, gloves and safety goggles. Acids and bases can damage your skin and eyes. Here a scientist pours a solution in the lab. An acid such as hydrochloric acid releases hydrogen ions in water. A base such as sodium hydroxide releases hydroxide ions. When the two solutions are mixed, each hydrogen ion joins a hydroxide ion to form water. The sodium and chloride ions that remain make table salt, which stays dissolved. An indicator shows when the reaction is complete. Universal indicator turns green at pH seven, which is neutral. Accidents can happen in any lab. If glassware breaks, never pick up the sharp pieces with your hands. Tell your teacher and sweep them up with a brush and dustpan. So, an acid plus a base gives a salt plus water. This reaction is called neutralization, and antacid tablets use it to settle an upset stomach."
+}

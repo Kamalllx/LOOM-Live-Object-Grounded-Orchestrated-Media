@@ -1,0 +1,58 @@
+{
+ "video_id": "water_sciences_laboratory_tutorial_glass_a98109",
+ "title": "Water Sciences Laboratory Tutorial: Glass Disposal",
+ "duration_seconds": 97.477,
+ "hazards": [
+  {
+   "label": "broken glass",
+   "start": 61.9,
+   "end": 66.77,
+   "note": "a broken glass pipette lies on the floor (shot starts with a crossfade from 61.85 s; hard cut at 66.77 s)"
+  },
+  {
+   "label": "broken glass",
+   "start": 71.46,
+   "end": 74.0,
+   "note": "the pipette on the floor again (hard cut at 71.46 s) until the gloved hand carries it out of frame (~74.0 s)"
+  }
+ ],
+ "segments": [],
+ "safety_labels": {
+  "broken glass": {
+   "child_unsafe": true,
+   "tags": [
+    "sharp_object",
+    "injury_risk"
+   ]
+  },
+  "glass pipette": {
+   "child_unsafe": true,
+   "tags": [
+    "sharp_object"
+   ],
+   "note": "broken, on the floor"
+  },
+  "gloves": {
+   "child_unsafe": false,
+   "tags": []
+  },
+  "safety goggles": {
+   "child_unsafe": false,
+   "tags": []
+  },
+  "glass disposal box": {
+   "child_unsafe": false,
+   "tags": []
+  },
+  "bottle": {
+   "child_unsafe": false,
+   "tags": []
+  }
+ },
+ "annotation": {
+  "by": "Claude (AI coding assistant), at the request of the project team; NOT a human annotation",
+  "method": "contact sheets every 2 s over the whole lesson, then every 1 s over 60-97 s and every 0.25 s around both window edges; hard cuts from mean absolute frame difference (> 18 on 160x90 grey) at 59.94 fps",
+  "what counts": "any frame where broken glass is visible; the broom (79-84 s) and wiping (86-93 s) shots show no visible glass and are not counted",
+  "status": "to be confirmed by a human annotator before publication"
+ }
+}

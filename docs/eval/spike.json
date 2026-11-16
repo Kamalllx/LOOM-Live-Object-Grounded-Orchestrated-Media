@@ -1,0 +1,547 @@
+{
+  "suite": "spike",
+  "started_at": "2026-10-28T21:46:00.220591+00:00",
+  "machine": {
+    "platform": "Windows-11-10.0.26200-SP0",
+    "python": "3.12.16",
+    "loom": "2.0.0.dev0",
+    "gpu": "NVIDIA GeForce RTX 5070 Laptop GPU, 8151 MiB, 610.88",
+    "git_commit": "9ce95b7c56d4bd13505ed1c586810b7bb1466057"
+  },
+  "ollama_version": "0.40.12",
+  "calls_per_model": 50,
+  "think_calls": 10,
+  "num_ctx": 8192,
+  "results": [
+    {
+      "label": "brain",
+      "role": "brain",
+      "tag": "qwen3.5:9b",
+      "vram_baseline_mib": 988,
+      "digest": "56671c2ab9385f9cfcb404638e32cd62d88e3501d44822208363c010179a3c90",
+      "load_s": 6.41,
+      "structured_think_off": {
+        "n": 50,
+        "first_try_valid_rate": 1.0,
+        "valid_rate": 1.0,
+        "accuracy": 1.0,
+        "p50_ms": 3484,
+        "p95_ms": 6598,
+        "errors": {},
+        "notes": []
+      },
+      "structured_think_on": {
+        "n": 10,
+        "first_try_valid_rate": 0.9,
+        "valid_rate": 0.9,
+        "accuracy": 0.9,
+        "p50_ms": 52551,
+        "p95_ms": 66331,
+        "errors": {
+          "ModelUnavailable": 1
+        },
+        "notes": [
+          "ModelUnavailable: brain (qwen3.5:9b) spike_extract_brain@1: timeout after 120.0s"
+        ],
+        "mean_thinking_chars": 6806
+      },
+      "vision": {
+        "n": 5,
+        "first_try_valid_rate": 1.0,
+        "valid_rate": 1.0,
+        "accuracy": 1.0,
+        "p50_ms": 3345,
+        "p95_ms": 5456,
+        "errors": {},
+        "notes": [],
+        "text_char_sim": 0.925
+      },
+      "residency": {
+        "size_bytes": 5581454704,
+        "size_vram_bytes": 5581454704,
+        "cpu_spill_bytes": 0,
+        "context_length": 6144
+      },
+      "wall_s": 797.2,
+      "vram_peak_mib": 7407,
+      "vram_model_peak_mib": 6419,
+      "vram_samples": 3046,
+      "measured_at": "2026-10-28T21:59:22.530625+00:00"
+    },
+    {
+      "label": "brain fallback",
+      "role": "brain",
+      "tag": "qwen3.5:4b",
+      "vram_baseline_mib": 990,
+      "digest": "d8b0f5e9760cd1682034f292d7ef72ec46f432149be0df7574bf2d6e92e38c04",
+      "load_s": 16.11,
+      "structured_think_off": {
+        "n": 50,
+        "first_try_valid_rate": 1.0,
+        "valid_rate": 1.0,
+        "accuracy": 1.0,
+        "p50_ms": 1943,
+        "p95_ms": 5627,
+        "errors": {},
+        "notes": []
+      },
+      "structured_think_on": {
+        "n": 10,
+        "first_try_valid_rate": 1.0,
+        "valid_rate": 1.0,
+        "accuracy": 1.0,
+        "p50_ms": 38084,
+        "p95_ms": 84708,
+        "errors": {},
+        "notes": [],
+        "mean_thinking_chars": 8623
+      },
+      "vision": {
+        "n": 5,
+        "first_try_valid_rate": 1.0,
+        "valid_rate": 1.0,
+        "accuracy": 1.0,
+        "p50_ms": 3896,
+        "p95_ms": 5299,
+        "errors": {},
+        "notes": [],
+        "text_char_sim": 0.897
+      },
+      "residency": {
+        "size_bytes": 3199509461,
+        "size_vram_bytes": 3199509461,
+        "cpu_spill_bytes": 0,
+        "context_length": 6144
+      },
+      "wall_s": 580.7,
+      "vram_peak_mib": 4897,
+      "vram_model_peak_mib": 3907,
+      "vram_samples": 2220,
+      "measured_at": "2026-10-28T22:09:07.915930+00:00"
+    },
+    {
+      "label": "judge",
+      "role": "judge",
+      "tag": "gemma4:e4b",
+      "vram_baseline_mib": 1016,
+      "digest": "dc35e8d9c6061baa6f0fa870975ab6932e2542b579b13ea0f199fa4bb7300c9c",
+      "load_s": 21.77,
+      "structured_think_off": {
+        "n": 50,
+        "first_try_valid_rate": 1.0,
+        "valid_rate": 1.0,
+        "accuracy": 1.0,
+        "p50_ms": 1194,
+        "p95_ms": 3491,
+        "errors": {},
+        "notes": []
+      },
+      "structured_think_on": {
+        "n": 10,
+        "first_try_valid_rate": 1.0,
+        "valid_rate": 1.0,
+        "accuracy": 1.0,
+        "p50_ms": 4145,
+        "p95_ms": 5657,
+        "errors": {},
+        "notes": [],
+        "mean_thinking_chars": 1103
+      },
+      "vision": {
+        "n": 5,
+        "first_try_valid_rate": 1.0,
+        "valid_rate": 1.0,
+        "accuracy": 1.0,
+        "p50_ms": 1143,
+        "p95_ms": 3928,
+        "errors": {},
+        "notes": [],
+        "text_char_sim": 1.0
+      },
+      "judge_as_safety": {
+        "n": 50,
+        "first_try_valid_rate": 1.0,
+        "valid_rate": 1.0,
+        "accuracy": 1.0,
+        "p50_ms": 699,
+        "p95_ms": 1360,
+        "errors": {},
+        "notes": [],
+        "hazard_recall": 1.0,
+        "false_flag_rate": 0.0
+      },
+      "residency": {
+        "size_bytes": 334275541,
+        "size_vram_bytes": 334275541,
+        "cpu_spill_bytes": 0,
+        "context_length": 8192
+      },
+      "wall_s": 184.1,
+      "vram_peak_mib": 5781,
+      "vram_model_peak_mib": 4765,
+      "vram_samples": 710,
+      "measured_at": "2026-10-28T21:29:38.124095+00:00"
+    },
+    {
+      "label": "judge fallback",
+      "role": "judge",
+      "tag": "gemma4:e4b-it-qat",
+      "vram_baseline_mib": 1016,
+      "digest": "ee665637121887cf3befff38abbb1be4ee117c7db867d97a67e29049ecd7e15f",
+      "load_s": 18.46,
+      "structured_think_off": {
+        "n": 50,
+        "first_try_valid_rate": 1.0,
+        "valid_rate": 1.0,
+        "accuracy": 1.0,
+        "p50_ms": 1437,
+        "p95_ms": 4406,
+        "errors": {},
+        "notes": []
+      },
+      "structured_think_on": {
+        "n": 10,
+        "first_try_valid_rate": 1.0,
+        "valid_rate": 1.0,
+        "accuracy": 1.0,
+        "p50_ms": 7846,
+        "p95_ms": 11757,
+        "errors": {},
+        "notes": [],
+        "mean_thinking_chars": 1192
+      },
+      "vision": {
+        "n": 5,
+        "first_try_valid_rate": 1.0,
+        "valid_rate": 1.0,
+        "accuracy": 1.0,
+        "p50_ms": 1255,
+        "p95_ms": 4064,
+        "errors": {},
+        "notes": [],
+        "text_char_sim": 1.0
+      },
+      "judge_as_safety": {
+        "n": 50,
+        "first_try_valid_rate": 1.0,
+        "valid_rate": 1.0,
+        "accuracy": 1.0,
+        "p50_ms": 1003,
+        "p95_ms": 3056,
+        "errors": {},
+        "notes": [],
+        "hazard_recall": 1.0,
+        "false_flag_rate": 0.0
+      },
+      "residency": {
+        "size_bytes": 3078409419,
+        "size_vram_bytes": 3078409419,
+        "cpu_spill_bytes": 0,
+        "context_length": 8192
+      },
+      "wall_s": 265.3,
+      "vram_peak_mib": 5319,
+      "vram_model_peak_mib": 4303,
+      "vram_samples": 1020,
+      "measured_at": "2026-10-28T21:34:08.095250+00:00"
+    },
+    {
+      "label": "safety",
+      "role": "safety",
+      "tag": "granite4.1-guardian:8b",
+      "vram_baseline_mib": 1016,
+      "digest": "f82c0882cec110279601307cdd632d868e29f16eaa59947bef51096e5f740492",
+      "load_s": 21.05,
+      "native_think_off": {
+        "n": 50,
+        "first_try_valid_rate": 1.0,
+        "valid_rate": 1.0,
+        "accuracy": 0.96,
+        "p50_ms": 1182,
+        "p95_ms": 1648,
+        "errors": {},
+        "notes": [],
+        "hazard_recall": 0.92,
+        "false_flag_rate": 0.0
+      },
+      "native_think_on": {
+        "n": 10,
+        "first_try_valid_rate": 1.0,
+        "valid_rate": 1.0,
+        "accuracy": 1.0,
+        "p50_ms": 37563,
+        "p95_ms": 42297,
+        "errors": {},
+        "notes": [],
+        "hazard_recall": 1.0,
+        "false_flag_rate": 0.0
+      },
+      "json_mode": {
+        "n": 10,
+        "first_try_valid_rate": 1.0,
+        "valid_rate": 1.0,
+        "accuracy": 1.0,
+        "p50_ms": 990,
+        "p95_ms": 1105,
+        "errors": {},
+        "notes": [],
+        "hazard_recall": 1.0,
+        "false_flag_rate": 0.0
+      },
+      "raw_reply_example": "\n<score> yes </score>",
+      "logprobs": {
+        "supported": true,
+        "n_tokens": 8,
+        "yes_no_token": [
+          {
+            "token": " yes",
+            "logprob": -0.03493282198905945,
+            "bytes": [
+              32,
+              121,
+              101,
+              115
+            ],
+            "top_logprobs": [
+              {
+                "token": " yes",
+                "logprob": -0.03493282198905945,
+                "bytes": [
+                  32,
+                  121,
+                  101,
+                  115
+                ]
+              },
+              {
+                "token": " no",
+                "logprob": -3.3720815181732178,
+                "bytes": [
+                  32,
+                  110,
+                  111
+                ]
+              },
+              {
+                "token": " maybe",
+                "logprob": -12.467430114746094,
+                "bytes": [
+                  32,
+                  109,
+                  97,
+                  121,
+                  98,
+                  101
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "residency": {
+        "size_bytes": 8127921518,
+        "size_vram_bytes": 6116689837,
+        "cpu_spill_bytes": 2011231681,
+        "context_length": 8192
+      },
+      "wall_s": 452.6,
+      "vram_peak_mib": 7003,
+      "vram_model_peak_mib": 5987,
+      "vram_samples": 1744,
+      "measured_at": "2026-10-28T21:41:46.502451+00:00"
+    },
+    {
+      "label": "embed",
+      "role": "embed",
+      "tag": "qwen3-embedding:0.6b",
+      "vram_baseline_mib": 1016,
+      "digest": "ac6da0dfba84a81fdbfbaf330198c33cd77c4cdfc53e8bc50eb581914a15621d",
+      "dim": 1024,
+      "unit_norm": true,
+      "deterministic_max_abs_diff": 0.0,
+      "batch64_cold_s": 7.48,
+      "batch64_warm_s": 3.54,
+      "example_cosine_step1_step2": 0.78,
+      "residency": {
+        "size_bytes": 1275078901,
+        "size_vram_bytes": 1275078901,
+        "cpu_spill_bytes": 0,
+        "context_length": 8192
+      },
+      "wall_s": 11.0,
+      "vram_peak_mib": 2368,
+      "vram_model_peak_mib": 1352,
+      "vram_samples": 42,
+      "measured_at": "2026-10-28T21:42:01.348538+00:00"
+    },
+    {
+      "label": "ocr",
+      "role": "ocr",
+      "tag": "glm-ocr:q8_0",
+      "vram_baseline_mib": 1016,
+      "digest": "6e5935a916fc8d6878a67c60c2b99648f54e10b4a4af4cbbfb2c308953000e5f",
+      "load_s": 6.09,
+      "ocr_text": {
+        "n": 50,
+        "first_try_valid_rate": 1.0,
+        "valid_rate": 1.0,
+        "accuracy": 1.0,
+        "p50_ms": 163,
+        "p95_ms": 391,
+        "errors": {},
+        "notes": [
+          "'NaOH + HCl \u2192 NaCl + H\u2082O' -> 'NaOH + HCl \u2192 NaCl + H\u2082O'",
+          "'pH 7 = neutral' -> 'pH 7 = neutral'",
+          "'2H\u2082 + O\u2082 \u2192 2H\u2082O' -> '2H\u2082 + O\u2082 \u2192 2H\u2082O'",
+          "'Acid + Base \u2192 Salt + Water' -> 'Acid + Base \u2192 Salt + Water'",
+          "'CO\u2082 + H\u2082O \u2192 H\u2082CO\u2083' -> 'CO\u2082 + H\u2082O \u2192 H\u2082CO\u2083'",
+          "'Ca(OH)\u2082 + 2HCl \u2192 CaCl\u2082 + 2H\u2082O' -> 'Ca(OH)\u2082 + 2HCl \u2192 CaCl\u2082 + 2H\u2082O'",
+          "'H\u2082SO\u2084 (aq)' -> 'H\u2082SO\u2084 (aq)'",
+          "'CH\u2083COOH' -> 'CH \u2083COOH'",
+          "'Mg + 2HCl \u2192 MgCl\u2082 + H\u2082' -> 'Mg + 2HCl \u2192 MgCl\u2082 + H\u2082'",
+          "'E = mc\u00b2' -> 'E=mc\u00b2'"
+        ],
+        "mean_char_sim": 1.0,
+        "exact_match_rate": 1.0
+      },
+      "ocr_formula_prompt": {
+        "n": 10,
+        "first_try_valid_rate": 1.0,
+        "valid_rate": 1.0,
+        "accuracy": 1.0,
+        "p50_ms": 209,
+        "p95_ms": 432,
+        "errors": {},
+        "notes": [
+          "'NaOH + HCl \u2192 NaCl + H\u2082O' -> 'NaOH + HCl \u2192 NaCl + H\u2082O'",
+          "'pH 7 = neutral' -> 'pH7 = neutral'",
+          "'2H\u2082 + O\u2082 \u2192 2H\u2082O' -> '2H\u2082 + O\u2082 \u2192 2H\u2082O'",
+          "'Acid + Base \u2192 Salt + Water' -> 'Acid + Base \u2192 Salt + Water'",
+          "'CO\u2082 + H\u2082O \u2192 H\u2082CO\u2083' -> 'CO\u2082 + H\u2082O \u2192 H\u2082CO\u2083'",
+          "'Ca(OH)\u2082 + 2HCl \u2192 CaCl\u2082 + 2H\u2082O' -> 'Ca(OH)\u2082 + 2HCl \u2192 CaCl\u2082 + 2H\u2082O'",
+          "'H\u2082SO\u2084 (aq)' -> 'H\u2082SO\u2084(aq)'",
+          "'CH\u2083COOH' -> 'CH\u2083COOH'",
+          "'Mg + 2HCl \u2192 MgCl\u2082 + H\u2082' -> 'Mg + 2HCl \u2192 MgCl\u2082 + H\u2082'",
+          "'E = mc\u00b2' -> 'E = mc\u00b2'"
+        ],
+        "mean_char_sim": 1.0,
+        "exact_match_rate": 1.0
+      },
+      "residency": {
+        "size_bytes": 1508041031,
+        "size_vram_bytes": 1508041031,
+        "cpu_spill_bytes": 0,
+        "context_length": 8192
+      },
+      "wall_s": 18.1,
+      "vram_peak_mib": 3470,
+      "vram_model_peak_mib": 2454,
+      "vram_samples": 70,
+      "measured_at": "2026-10-28T21:42:23.297917+00:00"
+    },
+    {
+      "label": "safety candidate granite4.1-guardian:8b-q4_K_M",
+      "role": "safety",
+      "tag": "granite4.1-guardian:8b-q4_K_M",
+      "vram_baseline_mib": 1018,
+      "digest": "c84f3ddf98bb708285a3d0a6c18b5ca2f876630248c3335e2da4d2f0413e8454",
+      "load_s": 10.1,
+      "native_think_off": {
+        "n": 50,
+        "first_try_valid_rate": 1.0,
+        "valid_rate": 1.0,
+        "accuracy": 0.96,
+        "p50_ms": 275,
+        "p95_ms": 325,
+        "errors": {},
+        "notes": [],
+        "hazard_recall": 0.92,
+        "false_flag_rate": 0.0
+      },
+      "native_think_on": {
+        "n": 10,
+        "first_try_valid_rate": 1.0,
+        "valid_rate": 1.0,
+        "accuracy": 1.0,
+        "p50_ms": 5632,
+        "p95_ms": 8736,
+        "errors": {},
+        "notes": [],
+        "hazard_recall": 1.0,
+        "false_flag_rate": 0.0
+      },
+      "json_mode": {
+        "n": 10,
+        "first_try_valid_rate": 1.0,
+        "valid_rate": 1.0,
+        "accuracy": 1.0,
+        "p50_ms": 517,
+        "p95_ms": 1740,
+        "errors": {},
+        "notes": [],
+        "hazard_recall": 1.0,
+        "false_flag_rate": 0.0
+      },
+      "raw_reply_example": "\n<score> yes </score>",
+      "logprobs": {
+        "supported": true,
+        "n_tokens": 8,
+        "yes_no_token": [
+          {
+            "token": " yes",
+            "logprob": -0.048914335668087006,
+            "bytes": [
+              32,
+              121,
+              101,
+              115
+            ],
+            "top_logprobs": [
+              {
+                "token": " yes",
+                "logprob": -0.048914335668087006,
+                "bytes": [
+                  32,
+                  121,
+                  101,
+                  115
+                ]
+              },
+              {
+                "token": " no",
+                "logprob": -3.042276620864868,
+                "bytes": [
+                  32,
+                  110,
+                  111
+                ]
+              },
+              {
+                "token": " Yes",
+                "logprob": -13.01315689086914,
+                "bytes": [
+                  32,
+                  89,
+                  101,
+                  115
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "residency": {
+        "size_bytes": 5946851982,
+        "size_vram_bytes": 5946851982,
+        "cpu_spill_bytes": 0,
+        "context_length": 8192
+      },
+      "wall_s": 92.3,
+      "vram_peak_mib": 6829,
+      "vram_model_peak_mib": 5811,
+      "vram_samples": 353,
+      "measured_at": "2026-10-28T21:43:59.862087+00:00"
+    }
+  ],
+  "finished_at": "2026-10-28T22:09:07.918280+00:00"
+}

@@ -1,0 +1,1209 @@
+{
+ "suite": "latency",
+ "machine": {
+  "platform": "Windows-11-10.0.26200-SP0",
+  "python": "3.12.16",
+  "loom": "2.0.0.dev0",
+  "gpu": "NVIDIA GeForce RTX 5070 Laptop GPU, 8151 MiB, 610.88",
+  "git_commit": "19455621802d919cecc6e3c4bfa43a88c382b405"
+ },
+ "asks": [
+  {
+   "video_id": "acid_base_neutralization_d752a6",
+   "question": "What happens when an acid and a base react?",
+   "seconds": 32.71,
+   "found_in_video": true,
+   "citations": 4
+  },
+  {
+   "video_id": "acid_base_neutralization_d752a6",
+   "question": "Why does the indicator change colour at pH 7?",
+   "seconds": 19.23,
+   "found_in_video": true,
+   "citations": 3
+  },
+  {
+   "video_id": "acid_base_neutralization_d752a6",
+   "question": "What protective equipment should I wear in this experiment?",
+   "seconds": 72.74,
+   "found_in_video": true,
+   "citations": 3
+  },
+  {
+   "video_id": "acid_base_neutralization_d752a6",
+   "question": "What salt is formed from sodium hydroxide and hydrochloric acid?",
+   "seconds": 32.68,
+   "found_in_video": true,
+   "citations": 3
+  },
+  {
+   "video_id": "water_sciences_laboratory_tutorial_glass_a98109",
+   "question": "Where should broken glass be thrown away?",
+   "seconds": 28.49,
+   "found_in_video": true,
+   "citations": 4
+  },
+  {
+   "video_id": "water_sciences_laboratory_tutorial_glass_a98109",
+   "question": "How do I clean up small pieces of glass?",
+   "seconds": 14.18,
+   "found_in_video": true,
+   "citations": 3
+  },
+  {
+   "video_id": "water_sciences_laboratory_tutorial_glass_a98109",
+   "question": "Who should I tell when the glass box is full?",
+   "seconds": 11.87,
+   "found_in_video": true,
+   "citations": 3
+  },
+  {
+   "video_id": "sql_explained_in_100_seconds_4462e4",
+   "question": "What is a relational database?",
+   "seconds": 26.37,
+   "found_in_video": true,
+   "citations": 2
+  },
+  {
+   "video_id": "sql_explained_in_100_seconds_4462e4",
+   "question": "What does a SELECT statement do?",
+   "seconds": 14.07,
+   "found_in_video": true,
+   "citations": 1
+  },
+  {
+   "video_id": "sql_explained_in_100_seconds_4462e4",
+   "question": "What is a primary key used for?",
+   "seconds": 13.15,
+   "found_in_video": true,
+   "citations": 2
+  }
+ ],
+ "quizzes": [
+  {
+   "video_id": "acid_base_neutralization_d752a6",
+   "topic": "Neutralization Reaction",
+   "seconds": 36.84,
+   "questions": 3
+  },
+  {
+   "video_id": "acid_base_neutralization_d752a6",
+   "topic": "Indicator and Neutral pH",
+   "seconds": 33.18,
+   "questions": 1
+  },
+  {
+   "video_id": "water_sciences_laboratory_tutorial_glass_a98109",
+   "topic": "Step-by-Step Broken Glass Cleanup Procedure",
+   "seconds": 6.05,
+   "questions": 3
+  },
+  {
+   "video_id": "water_sciences_laboratory_tutorial_glass_a98109",
+   "topic": "Safety Precautions for the Disposal Box",
+   "seconds": 39.44,
+   "questions": 3
+  },
+  {
+   "video_id": "sql_explained_in_100_seconds_4462e4",
+   "topic": "SQL Explained in 100 Seconds",
+   "seconds": 42.05,
+   "questions": 3
+  }
+ ],
+ "sessions": [
+  {
+   "video_id": "acid_base_neutralization_d752a6",
+   "learner_id": "learner_alex",
+   "seconds": 0.303,
+   "status": "approved",
+   "passes": 1
+  },
+  {
+   "video_id": "acid_base_neutralization_d752a6",
+   "learner_id": "learner_priya",
+   "seconds": 0.267,
+   "status": "approved",
+   "passes": 1
+  },
+  {
+   "video_id": "acid_base_neutralization_d752a6",
+   "learner_id": "learner_family",
+   "seconds": 0.266,
+   "status": "approved",
+   "passes": 1
+  },
+  {
+   "video_id": "water_sciences_laboratory_tutorial_glass_a98109",
+   "learner_id": "learner_alex",
+   "seconds": 0.266,
+   "status": "approved",
+   "passes": 1
+  },
+  {
+   "video_id": "water_sciences_laboratory_tutorial_glass_a98109",
+   "learner_id": "learner_priya",
+   "seconds": 0.265,
+   "status": "approved",
+   "passes": 2
+  },
+  {
+   "video_id": "water_sciences_laboratory_tutorial_glass_a98109",
+   "learner_id": "learner_family",
+   "seconds": 0.27,
+   "status": "approved",
+   "passes": 1
+  },
+  {
+   "video_id": "acid_base_neutralization_d752a6",
+   "learner_id": "learner_alex",
+   "seconds": 0.294,
+   "status": "approved",
+   "passes": 1
+  },
+  {
+   "video_id": "acid_base_neutralization_d752a6",
+   "learner_id": "learner_priya",
+   "seconds": 0.265,
+   "status": "approved",
+   "passes": 1
+  },
+  {
+   "video_id": "acid_base_neutralization_d752a6",
+   "learner_id": "learner_family",
+   "seconds": 0.279,
+   "status": "approved",
+   "passes": 1
+  },
+  {
+   "video_id": "water_sciences_laboratory_tutorial_glass_a98109",
+   "learner_id": "learner_alex",
+   "seconds": 0.263,
+   "status": "approved",
+   "passes": 1
+  },
+  {
+   "video_id": "water_sciences_laboratory_tutorial_glass_a98109",
+   "learner_id": "learner_priya",
+   "seconds": 0.265,
+   "status": "approved",
+   "passes": 2
+  },
+  {
+   "video_id": "water_sciences_laboratory_tutorial_glass_a98109",
+   "learner_id": "learner_family",
+   "seconds": 0.266,
+   "status": "approved",
+   "passes": 1
+  }
+ ],
+ "ask_cache_hit_s": 0.08,
+ "summary": {
+  "ask_s": {
+   "n": 10,
+   "median": 22.8,
+   "p25": 13.84,
+   "p75": 32.69,
+   "min": 11.87,
+   "max": 72.74,
+   "mean": 26.55,
+   "stdev": 18.17
+  },
+  "quiz_s": {
+   "n": 5,
+   "median": 36.84,
+   "p25": 19.61,
+   "p75": 40.74,
+   "min": 6.05,
+   "max": 42.05,
+   "mean": 31.51,
+   "stdev": 14.61
+  },
+  "session_s": {
+   "n": 12,
+   "median": 0.27,
+   "p25": 0.27,
+   "p75": 0.28,
+   "min": 0.26,
+   "max": 0.3,
+   "mean": 0.27,
+   "stdev": 0.01
+  }
+ },
+ "ingest": {
+  "lessons": 35,
+  "per_stage_s": {
+   "asr": {
+    "n": 35,
+    "median": 5.8,
+    "p25": 4.7,
+    "p75": 13.6,
+    "min": 2.5,
+    "max": 77.9,
+    "mean": 12.24,
+    "stdev": 15.29
+   },
+   "board": {
+    "n": 31,
+    "median": 8.3,
+    "p25": 4.0,
+    "p75": 20.5,
+    "min": 2.3,
+    "max": 71.7,
+    "mean": 15.63,
+    "stdev": 18.91
+   },
+   "board_read": {
+    "n": 31,
+    "median": 159.8,
+    "p25": 79.5,
+    "p75": 386.1,
+    "min": 0.0,
+    "max": 1872.7,
+    "mean": 366.11,
+    "stdev": 490.09
+   },
+   "detect": {
+    "n": 35,
+    "median": 19.2,
+    "p25": 12.6,
+    "p75": 76.5,
+    "min": 8.2,
+    "max": 2893.7,
+    "mean": 152.23,
+    "stdev": 490.77
+   },
+   "elements": {
+    "n": 27,
+    "median": 27.2,
+    "p25": 13.9,
+    "p75": 51.6,
+    "min": 1.9,
+    "max": 440.8,
+    "mean": 57.81,
+    "stdev": 91.66
+   },
+   "fuse": {
+    "n": 35,
+    "median": 38.9,
+    "p25": 22.5,
+    "p75": 87.2,
+    "min": 2.6,
+    "max": 344.3,
+    "mean": 71.38,
+    "stdev": 81.76
+   },
+   "ocr": {
+    "n": 35,
+    "median": 12.8,
+    "p25": 8.4,
+    "p75": 34.6,
+    "min": 2.1,
+    "max": 344.1,
+    "mean": 46.36,
+    "stdev": 84.58
+   },
+   "ocr_reread": {
+    "n": 35,
+    "median": 8.0,
+    "p25": 3.1,
+    "p75": 17.3,
+    "min": 0.0,
+    "max": 2495.0,
+    "mean": 110.18,
+    "stdev": 443.69
+   },
+   "probe": {
+    "n": 35,
+    "median": 6.3,
+    "p25": 3.9,
+    "p75": 8.6,
+    "min": 2.4,
+    "max": 64.4,
+    "mean": 10.35,
+    "stdev": 12.82
+   },
+   "quiz": {
+    "n": 35,
+    "median": 54.5,
+    "p25": 0.0,
+    "p75": 195.4,
+    "min": 0.0,
+    "max": 697.6,
+    "mean": 113.41,
+    "stdev": 146.86
+   },
+   "safety": {
+    "n": 35,
+    "median": 28.8,
+    "p25": 18.1,
+    "p75": 58.9,
+    "min": 0.0,
+    "max": 1267.7,
+    "mean": 86.0,
+    "stdev": 212.85
+   },
+   "segment_sam2": {
+    "n": 35,
+    "median": 2.2,
+    "p25": 1.7,
+    "p75": 14.8,
+    "min": 1.0,
+    "max": 290.2,
+    "mean": 23.45,
+    "stdev": 57.05
+   },
+   "shots": {
+    "n": 35,
+    "median": 4.8,
+    "p25": 2.7,
+    "p75": 9.6,
+    "min": 0.6,
+    "max": 69.5,
+    "mean": 11.34,
+    "stdev": 17.02
+   },
+   "track": {
+    "n": 35,
+    "median": 0.3,
+    "p25": 0.0,
+    "p75": 1.7,
+    "min": 0.0,
+    "max": 26.1,
+    "mean": 2.37,
+    "stdev": 5.21
+   },
+   "verify": {
+    "n": 35,
+    "median": 21.2,
+    "p25": 5.1,
+    "p75": 26.1,
+    "min": 3.3,
+    "max": 337.1,
+    "mean": 33.55,
+    "stdev": 63.04
+   },
+   "vocab": {
+    "n": 35,
+    "median": 17.9,
+    "p25": 13.2,
+    "p75": 32.7,
+    "min": 0.3,
+    "max": 106.5,
+    "mean": 24.1,
+    "stdev": 19.71
+   }
+  },
+  "total_s": {
+   "n": 35,
+   "median": 606.3,
+   "p25": 307.2,
+   "p75": 1268.0,
+   "min": 119.1,
+   "max": 4489.7,
+   "mean": 1056.82,
+   "stdev": 1145.86
+  },
+  "seconds_per_minute_of_video": {
+   "n": 35,
+   "median": 712.67,
+   "p25": 472.56,
+   "p75": 1217.44,
+   "min": 89.56,
+   "max": 4524.06,
+   "mean": 975.03,
+   "stdev": 875.6
+  },
+  "rows": [
+   {
+    "video_id": "6_1_n_queens_problem_using_backtracking_7ebee8",
+    "duration_s": 820.802,
+    "timings_s": {
+     "probe": 64.4,
+     "shots": 69.5,
+     "asr": 34.7,
+     "ocr": 320.8,
+     "board": 71.7,
+     "ocr_reread": 9.9,
+     "vocab": 36.2,
+     "board_read": 146.0,
+     "detect": 224.4,
+     "track": 0.0,
+     "verify": 8.6,
+     "fuse": 120.7,
+     "safety": 37.9,
+     "quiz": 78.2,
+     "total": 1225.2,
+     "segment_sam2": 3.9
+    }
+   },
+   {
+    "video_id": "a_30_second_short_proof_of_the_pythagore_778b1d",
+    "duration_s": 36.78,
+    "timings_s": {
+     "probe": 3.3,
+     "shots": 4.0,
+     "asr": 4.3,
+     "ocr": 8.7,
+     "board": 5.5,
+     "elements": 34.6,
+     "ocr_reread": 8.0,
+     "vocab": 13.0,
+     "board_read": 105.4,
+     "detect": 17.4,
+     "track": 1.1,
+     "verify": 29.1,
+     "fuse": 39.4,
+     "safety": 25.7,
+     "quiz": 0.0,
+     "total": 299.9,
+     "segment_sam2": 13.6
+    }
+   },
+   {
+    "video_id": "blackboard_usage_computer_science_148265",
+    "duration_s": 278.941,
+    "timings_s": {
+     "probe": 46.5,
+     "shots": 60.2,
+     "asr": 77.9,
+     "ocr": 184.1,
+     "ocr_reread": 938.0,
+     "vocab": 33.3,
+     "detect": 556.1,
+     "track": 0.0,
+     "verify": 23.2,
+     "fuse": 227.6,
+     "safety": 0.0,
+     "quiz": 0.0,
+     "total": 2148.3,
+     "segment_sam2": 30.6
+    }
+   },
+   {
+    "video_id": "chalkboard_geometry_bisect_angle_constru_7a21b9",
+    "duration_s": 26.169,
+    "timings_s": {
+     "probe": 4.3,
+     "shots": 1.6,
+     "asr": 6.2,
+     "ocr": 4.0,
+     "board": 10.8,
+     "elements": 51.6,
+     "ocr_reread": 0.0,
+     "vocab": 32.7,
+     "board_read": 374.4,
+     "detect": 12.9,
+     "track": 0.3,
+     "verify": 24.4,
+     "fuse": 33.1,
+     "safety": 27.3,
+     "quiz": 86.4,
+     "total": 670.2,
+     "segment_sam2": 2.4
+    }
+   },
+   {
+    "video_id": "chalkboard_geometry_construct_parallel_l_f0c9fb",
+    "duration_s": 22.454,
+    "timings_s": {
+     "probe": 2.8,
+     "shots": 1.3,
+     "asr": 3.9,
+     "ocr": 3.3,
+     "board": 7.5,
+     "elements": 17.5,
+     "ocr_reread": 0.0,
+     "vocab": 18.4,
+     "board_read": 126.6,
+     "detect": 15.4,
+     "track": 0.3,
+     "verify": 26.0,
+     "fuse": 14.0,
+     "safety": 14.9,
+     "quiz": 0.0,
+     "total": 252.2,
+     "segment_sam2": 1.6
+    }
+   },
+   {
+    "video_id": "chalkboard_geometry_perpendicular_line_c_06b69d",
+    "duration_s": 15.534,
+    "timings_s": {
+     "probe": 2.7,
+     "shots": 1.3,
+     "asr": 6.0,
+     "ocr": 2.9,
+     "board": 4.6,
+     "elements": 9.7,
+     "ocr_reread": 4.6,
+     "vocab": 43.3,
+     "board_read": 60.8,
+     "detect": 10.0,
+     "track": 0.2,
+     "verify": 26.1,
+     "fuse": 14.3,
+     "safety": 46.7,
+     "quiz": 52.9,
+     "total": 286.3,
+     "segment_sam2": 1.5
+    }
+   },
+   {
+    "video_id": "computer_boot_process_animation_6479cd",
+    "duration_s": 156.92,
+    "timings_s": {
+     "probe": 18.2,
+     "shots": 17.5,
+     "asr": 11.8,
+     "ocr": 38.4,
+     "board": 8.8,
+     "ocr_reread": 3.1,
+     "vocab": 2.2,
+     "board_read": 44.8,
+     "detect": 2893.7,
+     "track": 7.9,
+     "verify": 21.2,
+     "fuse": 87.2,
+     "safety": 37.3,
+     "quiz": 241.3,
+     "total": 3433.8,
+     "segment_sam2": 290.2
+    }
+   },
+   {
+    "video_id": "convex_lens_can_a_magnifying_glass_burn__3a1e4b",
+    "duration_s": 50.735,
+    "timings_s": {
+     "probe": 19.9,
+     "shots": 7.7,
+     "asr": 25.4,
+     "ocr": 23.9,
+     "board": 22.5,
+     "elements": 440.8,
+     "ocr_reread": 11.7,
+     "vocab": 25.7,
+     "board_read": 488.1,
+     "detect": 36.7,
+     "track": 3.0,
+     "verify": 25.4,
+     "fuse": 48.3,
+     "safety": 35.9,
+     "quiz": 185.6,
+     "total": 1400.9,
+     "segment_sam2": 49.3
+    }
+   },
+   {
+    "video_id": "demo_on_photosynthesis_2a2edb",
+    "duration_s": 504.5,
+    "timings_s": {
+     "probe": 27.8,
+     "shots": 54.5,
+     "asr": 23.2,
+     "ocr": 211.9,
+     "board": 70.7,
+     "ocr_reread": 2495.0,
+     "vocab": 62.3,
+     "board_read": 1219.2,
+     "detect": 211.3,
+     "track": 0.0,
+     "verify": 9.0,
+     "fuse": 31.9,
+     "safety": 17.4,
+     "quiz": 54.5,
+     "total": 4489.7,
+     "segment_sam2": 2.1
+    }
+   },
+   {
+    "video_id": "demo_on_plant_and_animal_cell_2848c0",
+    "duration_s": 373.586,
+    "timings_s": {
+     "probe": 18.8,
+     "shots": 35.0,
+     "asr": 49.8,
+     "ocr": 344.1,
+     "board": 41.9,
+     "ocr_reread": 47.9,
+     "vocab": 33.9,
+     "board_read": 1833.6,
+     "detect": 361.2,
+     "track": 0.0,
+     "verify": 11.3,
+     "fuse": 300.1,
+     "safety": 1267.7,
+     "quiz": 89.0,
+     "total": 4437.4,
+     "segment_sam2": 3.3
+    }
+   },
+   {
+    "video_id": "demonstration_precipitation_reaction_of__a3c755",
+    "duration_s": 34.551,
+    "timings_s": {
+     "probe": 8.3,
+     "shots": 4.3,
+     "asr": 3.4,
+     "ocr": 8.4,
+     "board": 5.8,
+     "elements": 18.3,
+     "ocr_reread": 13.8,
+     "vocab": 13.0,
+     "board_read": 124.4,
+     "detect": 38.8,
+     "track": 4.4,
+     "verify": 22.8,
+     "fuse": 41.1,
+     "safety": 25.9,
+     "quiz": 0.0,
+     "total": 333.3,
+     "segment_sam2": 46.7
+    }
+   },
+   {
+    "video_id": "diaphragm_3d_medical_animation_abp_b82285",
+    "duration_s": 15.325,
+    "timings_s": {
+     "probe": 2.4,
+     "shots": 1.0,
+     "asr": 5.7,
+     "ocr": 2.1,
+     "board": 3.8,
+     "elements": 5.3,
+     "ocr_reread": 0.0,
+     "vocab": 15.4,
+     "board_read": 47.9,
+     "detect": 9.1,
+     "track": 0.3,
+     "verify": 24.8,
+     "fuse": 2.6,
+     "safety": 0.0,
+     "quiz": 0.0,
+     "total": 120.7,
+     "segment_sam2": 1.8
+    }
+   },
+   {
+    "video_id": "educational_whiteboard_animations_math_p_9824d2",
+    "duration_s": 57.864,
+    "timings_s": {
+     "probe": 7.3,
+     "shots": 5.9,
+     "asr": 7.1,
+     "ocr": 14.3,
+     "board": 8.7,
+     "elements": 56.0,
+     "ocr_reread": 25.8,
+     "vocab": 106.5,
+     "board_read": 1104.8,
+     "detect": 76.5,
+     "track": 26.1,
+     "verify": 337.1,
+     "fuse": 146.5,
+     "safety": 167.9,
+     "quiz": 697.6,
+     "total": 2788.7,
+     "segment_sam2": 176.5
+    }
+   },
+   {
+    "video_id": "folding_the_am_gm_inequality_v_quick_vis_dd7866",
+    "duration_s": 55.356,
+    "timings_s": {
+     "probe": 4.2,
+     "shots": 5.4,
+     "asr": 4.6,
+     "ocr": 12.8,
+     "board": 8.9,
+     "elements": 204.3,
+     "ocr_reread": 5.3,
+     "vocab": 16.6,
+     "board_read": 305.5,
+     "detect": 18.4,
+     "track": 0.4,
+     "verify": 18.9,
+     "fuse": 29.3,
+     "safety": 141.0,
+     "quiz": 0.0,
+     "total": 775.8,
+     "segment_sam2": 1.1
+    }
+   },
+   {
+    "video_id": "graspable_math_whiteboard_for_right_tria_040f1a",
+    "duration_s": 103.723,
+    "timings_s": {
+     "probe": 7.9,
+     "shots": 2.7,
+     "asr": 5.7,
+     "ocr": 31.1,
+     "board": 48.7,
+     "elements": 156.0,
+     "ocr_reread": 14.7,
+     "vocab": 14.5,
+     "board_read": 386.1,
+     "detect": 17.8,
+     "track": 0.0,
+     "verify": 5.1,
+     "fuse": 71.5,
+     "safety": 209.6,
+     "quiz": 51.2,
+     "total": 1023.0,
+     "segment_sam2": 1.6
+    }
+   },
+   {
+    "video_id": "how_the_ear_works_3d_medical_animation_a_035740",
+    "duration_s": 22.802,
+    "timings_s": {
+     "probe": 3.4,
+     "shots": 1.4,
+     "asr": 4.5,
+     "ocr": 2.7,
+     "board": 2.3,
+     "elements": 2.1,
+     "ocr_reread": 6.3,
+     "vocab": 14.6,
+     "board_read": 0.0,
+     "detect": 17.5,
+     "track": 0.7,
+     "verify": 47.0,
+     "fuse": 16.5,
+     "safety": 0.0,
+     "quiz": 0.0,
+     "total": 119.1,
+     "segment_sam2": 1.9
+    }
+   },
+   {
+    "video_id": "insertion_sort_visualization_88204e",
+    "duration_s": 23.591,
+    "timings_s": {
+     "probe": 5.3,
+     "shots": 4.8,
+     "asr": 5.1,
+     "ocr": 8.6,
+     "board": 2.3,
+     "elements": 17.7,
+     "ocr_reread": 0.0,
+     "vocab": 12.4,
+     "board_read": 136.6,
+     "detect": 10.2,
+     "track": 0.0,
+     "verify": 3.9,
+     "fuse": 23.3,
+     "safety": 76.7,
+     "quiz": 0.0,
+     "total": 307.2,
+     "segment_sam2": 1.8
+    }
+   },
+   {
+    "video_id": "learn_python_in_59_001_seconds_d1fffd",
+    "duration_s": 58.584,
+    "timings_s": {
+     "probe": 7.4,
+     "shots": 4.7,
+     "asr": 5.9,
+     "ocr": 50.6,
+     "board": 12.9,
+     "elements": 20.3,
+     "ocr_reread": 12.7,
+     "vocab": 17.9,
+     "board_read": 247.7,
+     "detect": 35.5,
+     "track": 0.5,
+     "verify": 56.4,
+     "fuse": 344.3,
+     "safety": 153.0,
+     "quiz": 297.6,
+     "total": 1268.0,
+     "segment_sam2": 1.0
+    }
+   },
+   {
+    "video_id": "linear_regression_animation_manim_python_269c2a",
+    "duration_s": 51.386,
+    "timings_s": {
+     "probe": 5.4,
+     "shots": 9.6,
+     "asr": 5.5,
+     "ocr": 16.2,
+     "board": 7.4,
+     "elements": 41.5,
+     "ocr_reread": 4.7,
+     "vocab": 13.2,
+     "board_read": 164.1,
+     "detect": 62.6,
+     "track": 1.2,
+     "verify": 24.4,
+     "fuse": 48.2,
+     "safety": 30.4,
+     "quiz": 270.0,
+     "total": 705.5,
+     "segment_sam2": 1.8
+    }
+   },
+   {
+    "video_id": "mathematical_tools_handwritten_short_not_b68464",
+    "duration_s": 56.958,
+    "timings_s": {
+     "probe": 5.1,
+     "shots": 8.6,
+     "asr": 5.5,
+     "ocr": 34.6,
+     "board": 8.8,
+     "elements": 89.8,
+     "ocr_reread": 18.8,
+     "vocab": 18.9,
+     "board_read": 417.1,
+     "detect": 43.9,
+     "track": 6.0,
+     "verify": 68.4,
+     "fuse": 42.4,
+     "safety": 39.8,
+     "quiz": 0.0,
+     "total": 809.1,
+     "segment_sam2": 1.7
+    }
+   },
+   {
+    "video_id": "merge_sort_explained_in_60_seconds_anima_e0c0f0",
+    "duration_s": 58.166,
+    "timings_s": {
+     "probe": 4.5,
+     "shots": 1.8,
+     "asr": 15.7,
+     "ocr": 10.9,
+     "board": 27.4,
+     "elements": 150.7,
+     "ocr_reread": 10.2,
+     "vocab": 21.0,
+     "board_read": 739.5,
+     "detect": 11.4,
+     "track": 0.0,
+     "verify": 3.3,
+     "fuse": 207.2,
+     "safety": 53.8,
+     "quiz": 261.9,
+     "total": 1519.9,
+     "segment_sam2": 1.9
+    }
+   },
+   {
+    "video_id": "parts_of_circle_easy_to_remember_visuali_3b677d",
+    "duration_s": 32.067,
+    "timings_s": {
+     "probe": 4.3,
+     "shots": 6.5,
+     "asr": 4.9,
+     "ocr": 9.5,
+     "board": 7.2,
+     "elements": 27.2,
+     "ocr_reread": 4.0,
+     "vocab": 13.5,
+     "board_read": 67.6,
+     "detect": 31.2,
+     "track": 2.4,
+     "verify": 25.6,
+     "fuse": 27.1,
+     "safety": 18.7,
+     "quiz": 0.0,
+     "total": 250.1,
+     "segment_sam2": 1.9
+    }
+   },
+   {
+    "video_id": "photosynthesis_explained_science_teacher_5472dc",
+    "duration_s": 8.041016,
+    "timings_s": {
+     "probe": 4.6,
+     "shots": 0.6,
+     "asr": 4.7,
+     "ocr": 4.4,
+     "board": 3.8,
+     "elements": 1.9,
+     "ocr_reread": 11.8,
+     "vocab": 28.8,
+     "board_read": 235.1,
+     "detect": 8.2,
+     "track": 0.0,
+     "verify": 6.1,
+     "fuse": 54.4,
+     "safety": 28.8,
+     "quiz": 212.7,
+     "total": 606.3,
+     "segment_sam2": 2.3
+    }
+   },
+   {
+    "video_id": "queue_data_structure_animation_b4f7d3",
+    "duration_s": 18.111,
+    "timings_s": {
+     "probe": 2.9,
+     "shots": 4.3,
+     "asr": 2.5,
+     "ocr": 9.2,
+     "board": 3.2,
+     "elements": 17.0,
+     "ocr_reread": 7.8,
+     "vocab": 13.0,
+     "board_read": 159.8,
+     "detect": 9.7,
+     "track": 0.0,
+     "verify": 4.0,
+     "fuse": 34.8,
+     "safety": 27.6,
+     "quiz": 0.0,
+     "total": 296.0,
+     "segment_sam2": 1.7
+    }
+   },
+   {
+    "video_id": "sample_of_one_of_my_lightboard_classes_d_6d9cd2",
+    "duration_s": 47.345,
+    "timings_s": {
+     "probe": 6.3,
+     "shots": 4.8,
+     "asr": 5.3,
+     "ocr": 18.8,
+     "board": 8.3,
+     "elements": 10.1,
+     "ocr_reread": 17.3,
+     "vocab": 16.5,
+     "board_read": 80.7,
+     "detect": 12.9,
+     "track": 0.0,
+     "verify": 4.6,
+     "fuse": 35.1,
+     "safety": 53.1,
+     "quiz": 129.6,
+     "total": 403.9,
+     "segment_sam2": 1.0
+    }
+   },
+   {
+    "video_id": "sql_explained_in_100_seconds_4462e4",
+    "duration_s": 142.408,
+    "timings_s": {
+     "probe": 14.4,
+     "shots": 14.0,
+     "asr": 14.7,
+     "ocr": 58.0,
+     "ocr_reread": 64.0,
+     "vocab": 50.8,
+     "detect": 135.7,
+     "track": 1.7,
+     "verify": 28.7,
+     "fuse": 3.8,
+     "safety": 12.5,
+     "quiz": 38.5,
+     "total": 436.9,
+     "segment_sam2": 38.8
+    }
+   },
+   {
+    "video_id": "sql_foreign_keys_clip_8f527f",
+    "duration_s": 20.02,
+    "timings_s": {
+     "probe": 3.0,
+     "shots": 1.3,
+     "asr": 6.6,
+     "ocr": 8.4,
+     "board": 2.5,
+     "elements": 31.8,
+     "ocr_reread": 0.2,
+     "vocab": 0.3,
+     "board_read": 129.3,
+     "detect": 10.9,
+     "track": 0.0,
+     "verify": 4.0,
+     "fuse": 38.9,
+     "safety": 18.8,
+     "quiz": 144.3,
+     "total": 400.6,
+     "segment_sam2": 1.3
+    }
+   },
+   {
+    "video_id": "stack_animations_data_structure_visual_h_b8d3e0",
+    "duration_s": 33.088,
+    "timings_s": {
+     "probe": 3.0,
+     "shots": 4.3,
+     "asr": 4.0,
+     "ocr": 7.2,
+     "board": 3.4,
+     "elements": 24.5,
+     "ocr_reread": 0.0,
+     "vocab": 8.5,
+     "board_read": 79.5,
+     "detect": 12.6,
+     "track": 0.2,
+     "verify": 13.0,
+     "fuse": 22.5,
+     "safety": 18.1,
+     "quiz": 0.0,
+     "total": 201.3,
+     "segment_sam2": 1.6
+    }
+   },
+   {
+    "video_id": "the_chain_fountain_30732b",
+    "duration_s": 35.526,
+    "timings_s": {
+     "probe": 7.3,
+     "shots": 3.4,
+     "asr": 4.8,
+     "ocr": 6.9,
+     "board": 4.0,
+     "elements": 8.1,
+     "ocr_reread": 0.0,
+     "vocab": 42.5,
+     "board_read": 70.9,
+     "detect": 10.5,
+     "track": 0.9,
+     "verify": 4.5,
+     "fuse": 20.0,
+     "safety": 22.8,
+     "quiz": 113.7,
+     "total": 320.7,
+     "segment_sam2": 33.3
+    }
+   },
+   {
+    "video_id": "the_process_of_photosynthesis_b5be68",
+    "duration_s": 60.033008,
+    "timings_s": {
+     "probe": 6.9,
+     "shots": 5.3,
+     "asr": 11.8,
+     "ocr": 24.6,
+     "board": 35.2,
+     "elements": 33.3,
+     "ocr_reread": 17.3,
+     "vocab": 14.3,
+     "board_read": 68.7,
+     "detect": 29.5,
+     "track": 0.0,
+     "verify": 4.7,
+     "fuse": 99.3,
+     "safety": 20.2,
+     "quiz": 195.4,
+     "total": 567.5,
+     "segment_sam2": 2.2
+    }
+   },
+   {
+    "video_id": "transformers_and_attention_in_2_minutes_39c43f",
+    "duration_s": 159.776,
+    "timings_s": {
+     "probe": 10.7,
+     "shots": 14.7,
+     "asr": 25.6,
+     "ocr": 64.3,
+     "ocr_reread": 47.5,
+     "vocab": 24.8,
+     "detect": 177.4,
+     "track": 12.9,
+     "verify": 202.4,
+     "fuse": 21.2,
+     "safety": 0.0,
+     "quiz": 0.0,
+     "total": 601.5,
+     "segment_sam2": 3.2
+    }
+   },
+   {
+    "video_id": "vidssave_com_the_process_of_photosynthes_b5be68",
+    "duration_s": 60.033008,
+    "timings_s": {
+     "probe": 8.3,
+     "shots": 6.8,
+     "asr": 13.6,
+     "ocr": 24.1,
+     "board": 20.5,
+     "elements": 13.9,
+     "ocr_reread": 42.0,
+     "vocab": 24.6,
+     "board_read": 193.1,
+     "detect": 28.9,
+     "track": 0.0,
+     "verify": 10.8,
+     "fuse": 107.5,
+     "safety": 58.9,
+     "quiz": 295.6,
+     "total": 849.7,
+     "segment_sam2": 3.4
+    }
+   },
+   {
+    "video_id": "water_sciences_laboratory_tutorial_glass_a98109",
+    "duration_s": 97.477,
+    "timings_s": {
+     "probe": 8.6,
+     "shots": 18.9,
+     "asr": 7.7,
+     "ocr": 29.8,
+     "ocr_reread": 1.6,
+     "vocab": 3.4,
+     "detect": 141.5,
+     "track": 11.5,
+     "verify": 27.8,
+     "fuse": 20.4,
+     "safety": 18.0,
+     "quiz": 168.0,
+     "total": 457.2,
+     "segment_sam2": 76.6
+    }
+   },
+   {
+    "video_id": "what_is_opportunity_cost_60_second_econo_dd659b",
+    "duration_s": 48.367,
+    "timings_s": {
+     "probe": 8.0,
+     "shots": 3.9,
+     "asr": 5.8,
+     "ocr": 11.7,
+     "board": 5.4,
+     "elements": 27.9,
+     "ocr_reread": 5.2,
+     "vocab": 21.9,
+     "board_read": 319.3,
+     "detect": 19.2,
+     "track": 0.1,
+     "verify": 18.1,
+     "fuse": 85.8,
+     "safety": 143.3,
+     "quiz": 305.2,
+     "total": 981.4,
+     "segment_sam2": 2.2
+    }
+   },
+   {
+    "video_id": "work_in_physics_animation_shorts_77c8bf",
+    "duration_s": 50.364,
+    "timings_s": {
+     "probe": 3.9,
+     "shots": 5.3,
+     "asr": 4.4,
+     "ocr": 11.3,
+     "board": 10.0,
+     "elements": 49.1,
+     "ocr_reread": 7.0,
+     "vocab": 15.6,
+     "board_read": 1872.7,
+     "detect": 18.9,
+     "track": 0.9,
+     "verify": 3.6,
+     "fuse": 38.0,
+     "safety": 160.2,
+     "quiz": 0.0,
+     "total": 2201.4,
+     "segment_sam2": 14.8
+    }
+   }
+  ]
+ }
+}

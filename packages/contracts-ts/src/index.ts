@@ -275,6 +275,125 @@ export interface GraphObject {
   is_hazard_class?: boolean;
   label: string;
   object_id: string;
+  /**
+   * @maxItems 16
+   */
+  parts?:
+    | []
+    | [ObjectPart]
+    | [ObjectPart, ObjectPart]
+    | [ObjectPart, ObjectPart, ObjectPart]
+    | [ObjectPart, ObjectPart, ObjectPart, ObjectPart]
+    | [ObjectPart, ObjectPart, ObjectPart, ObjectPart, ObjectPart]
+    | [ObjectPart, ObjectPart, ObjectPart, ObjectPart, ObjectPart, ObjectPart]
+    | [ObjectPart, ObjectPart, ObjectPart, ObjectPart, ObjectPart, ObjectPart, ObjectPart]
+    | [ObjectPart, ObjectPart, ObjectPart, ObjectPart, ObjectPart, ObjectPart, ObjectPart, ObjectPart]
+    | [ObjectPart, ObjectPart, ObjectPart, ObjectPart, ObjectPart, ObjectPart, ObjectPart, ObjectPart, ObjectPart]
+    | [
+        ObjectPart,
+        ObjectPart,
+        ObjectPart,
+        ObjectPart,
+        ObjectPart,
+        ObjectPart,
+        ObjectPart,
+        ObjectPart,
+        ObjectPart,
+        ObjectPart
+      ]
+    | [
+        ObjectPart,
+        ObjectPart,
+        ObjectPart,
+        ObjectPart,
+        ObjectPart,
+        ObjectPart,
+        ObjectPart,
+        ObjectPart,
+        ObjectPart,
+        ObjectPart,
+        ObjectPart
+      ]
+    | [
+        ObjectPart,
+        ObjectPart,
+        ObjectPart,
+        ObjectPart,
+        ObjectPart,
+        ObjectPart,
+        ObjectPart,
+        ObjectPart,
+        ObjectPart,
+        ObjectPart,
+        ObjectPart,
+        ObjectPart
+      ]
+    | [
+        ObjectPart,
+        ObjectPart,
+        ObjectPart,
+        ObjectPart,
+        ObjectPart,
+        ObjectPart,
+        ObjectPart,
+        ObjectPart,
+        ObjectPart,
+        ObjectPart,
+        ObjectPart,
+        ObjectPart,
+        ObjectPart
+      ]
+    | [
+        ObjectPart,
+        ObjectPart,
+        ObjectPart,
+        ObjectPart,
+        ObjectPart,
+        ObjectPart,
+        ObjectPart,
+        ObjectPart,
+        ObjectPart,
+        ObjectPart,
+        ObjectPart,
+        ObjectPart,
+        ObjectPart,
+        ObjectPart
+      ]
+    | [
+        ObjectPart,
+        ObjectPart,
+        ObjectPart,
+        ObjectPart,
+        ObjectPart,
+        ObjectPart,
+        ObjectPart,
+        ObjectPart,
+        ObjectPart,
+        ObjectPart,
+        ObjectPart,
+        ObjectPart,
+        ObjectPart,
+        ObjectPart,
+        ObjectPart
+      ]
+    | [
+        ObjectPart,
+        ObjectPart,
+        ObjectPart,
+        ObjectPart,
+        ObjectPart,
+        ObjectPart,
+        ObjectPart,
+        ObjectPart,
+        ObjectPart,
+        ObjectPart,
+        ObjectPart,
+        ObjectPart,
+        ObjectPart,
+        ObjectPart,
+        ObjectPart,
+        ObjectPart
+      ];
   phrase_source: "hazard_class" | "vlm" | "transcript" | "board";
   safety: SafetyRecord;
 }
@@ -315,6 +434,25 @@ export interface Verification {
   siglip_margin?: number | null;
   status: "verified" | "unverified";
   vlm?: "confirmed" | "rejected" | "not_run" | "failed";
+}
+/**
+ * A named part of a diagram or drawing (petals, roots, one arrow, a table row), segmented at `t`. Its mask and
+ * box are picture-relative at that moment; the player maps them onto the element's current box.
+ *
+ * This interface was referenced by `LoomContracts`'s JSON-Schema
+ * via the `definition` "ObjectPart".
+ */
+export interface ObjectPart {
+  /**
+   * @minItems 4
+   * @maxItems 4
+   */
+  bbox: [unknown, unknown, unknown, unknown];
+  description?: string | null;
+  label: string;
+  mask?: string | null;
+  part_id: string;
+  t: number;
 }
 /**
  * Per-object ingest-time safety review (FR-PER-09). Anything not `reviewed` is treated as unsafe downstream.

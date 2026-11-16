@@ -12,6 +12,8 @@ from fastapi.responses import Response, StreamingResponse
 
 from loom.gateway.state import GatewayState, get_state
 
+mimetypes.add_type("image/webp", ".webp")  # Windows' registry often lacks it (board snapshots are WebP)
+
 router = APIRouter()
 
 _RANGE = re.compile(r"^bytes=(\d*)-(\d*)$")

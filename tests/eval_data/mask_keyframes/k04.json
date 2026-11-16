@@ -1,0 +1,23 @@
+{
+ "version": "5.4.1",
+ "flags": {},
+ "shapes": [],
+ "imagePath": "k04.png",
+ "imageData": null,
+ "imageHeight": 720,
+ "imageWidth": 1280,
+ "loom": {
+  "video_id": "acid_base_neutralization_d752a6",
+  "t": 16.59,
+  "outline_these": [
+   {
+    "label": "o_002",
+    "object": "lab coat"
+   },
+   {
+    "label": "o_003",
+    "object": "microscope"
+   }
+  ]
+ }
+}

@@ -19,6 +19,8 @@ class AskReq(Contract):
     question: str
     object_id: str | None = None
     learner_id: str | None = None
+    part_id: str | None = None
+    feedback: str | None = None
 
 
 class AskRes(Contract):
@@ -46,6 +48,9 @@ class ExplainReq(Contract):
     object_id: str | None = None
     learner_id: str | None = None
     channel: str | None = None
+    part_id: str | None = None
+    feedback: str | None = None
+    length: str | None = None
 
 
 class ExplainRes(Contract):
@@ -60,6 +65,7 @@ class ExplainRes(Contract):
     evidence: list[dict[str, Any]] = []
     object_id: str | None = None
     cached: bool = False
+    checks: list[dict[str, Any]] = []  # the fact-checker's verdict per narrated line (kept, cut + why, overruled)
 
 
 class QuizReq(Contract):
@@ -101,7 +107,7 @@ def routers(get_state: Any, base_url: str) -> list[tuple[str, APIRouter, AgentCa
 
     async def index_for(video_id: str) -> tuple[Any, Any]:
         state = get_state()
-        g = load_graph(state.cfg.data_dir, video_id)
+        g = K.apply_overrides(state.store, load_graph(state.cfg.data_dir, video_id))
         return g, await K.build_index(state.llm, state.cfg.data_dir, g)
 
     async def search(req: SearchReq) -> SearchRes:
@@ -112,7 +118,8 @@ def routers(get_state: Any, base_url: str) -> list[tuple[str, APIRouter, AgentCa
     async def answer(req: AskReq) -> AskRes:
         state = get_state()
         g, idx = await index_for(req.video_id)
-        return AskRes(**await K.answer(state.llm, state.store, idx, g, req.question, req.object_id, req.learner_id))
+        return AskRes(**await K.answer(state.llm, state.store, idx, g, req.question, req.object_id, req.learner_id,
+                                       req.part_id, req.feedback))
 
     async def explain(req: ExplainReq) -> ExplainRes:
         state = get_state()
@@ -128,8 +135,9 @@ def routers(get_state: Any, base_url: str) -> list[tuple[str, APIRouter, AgentCa
                 state.events.publish(req.channel, "agent_note", {
                     "agent": agent, "text": text[:400], "kind": kind, "items": [i[:240] for i in (items or [])][:12]})
 
-        return ExplainRes(**await K.custom_explainer(state.cfg, state.llm, state.store, state.cfg.data_dir, idx, g, req.question,
-                                                     req.object_id, req.learner_id, progress, note))
+        return ExplainRes(**await K.custom_explainer(state.cfg, state.llm, state.store, state.cfg.data_dir, idx, g,
+                                                     req.question, req.object_id, req.learner_id, progress, note,
+                                                     req.part_id, req.feedback, req.length))
 
     async def quiz(req: QuizReq) -> QuizRes:
         state = get_state()

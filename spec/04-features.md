@@ -129,6 +129,51 @@ Legend for "Old": ✅ worked · ⚠️ partly / fragile · ❌ broken or missing
   interactive lease.
 - **Accept** After prerender, Priya's session has all auto explainers as cache hits (time to cut ≤ 2 s).
 
+### FR-PER-13 · Segment everything on drawn frames · M
+- **New** For animations, slides and illustrated lessons: SAM 2.1 automatic masks on frames whose graphic score is
+  ≥ 0.90 (`loom/perception/everything.py`), tracked through time, de-duplicated against board-ink elements, named by
+  the brain VLM (`prompts/scene_element.md`) and stored as `phrase_source: "board"` objects with `element_kind`.
+  Torch stage: runs while no Ollama model is resident.
+- **Accept** On a 20 s animated SQL clip: ≥ 30 labelled elements, each present on consecutive samples; camera footage
+  frames are skipped; ≤ 1 s and ≤ 3 GB VRAM per segmented frame.
+
+### FR-PER-14 · Upload a local video · S
+- **New** `POST /api/videos/upload?filename=&max_height=` streams the raw body to `data/media/sources/uploads/` and
+  ingests it like a link (`source.kind = "upload"`); the player's "Add a lesson" has a drop zone and a resolution
+  choice (360/480/720/original). Works with `offline = true`.
+- **Accept** Contract test: upload stored byte-exact, ingest started with the chosen height; bad type or height → 400.
+
+### FR-PER-15 · Element parts · M
+- **New** Animation elements keep the SAM sub-masks inside them; drawn board elements are split by SAM on the
+  presenter-free picture; all parts of an element are named in one set-of-marks VLM call (`prompts/element_parts.md`).
+  Stored as `GraphObject.parts` (hashed only when non-empty).
+- **Accept** On the SQL clip, the teams table has ≥ 5 named parts (rows, title, key label).
+
+### FR-UX-10 · Tap to lift, part selection, feedback loop · M
+- **New** Clicking an element lifts its cut-out in 3-D with its parts as an exploded diagram; a part can be asked
+  about, animated or quizzed (`part_id`). Answers/explainers are rated; a thumbs-down with a reason re-plans with that
+  reason. Labels can be corrected (`label_overrides`, applied on serve). Cited elements glow; "watch it being written".
+- **Accept** Contract tests for `/api/feedback` and `/api/videos/{id}/labels`; browser check: lift opens with part
+  chips, picking a part focuses the question card on it.
+
+### FR-OPS-08 · Agent runs, live and replayable · M
+- **New** `GET /api/runs`, `GET /api/runs/{id}` rebuild runs from the event log (split at starts, terminal events and,
+  outside ingests, long pauses); the player shows the orchestration graph, agent lanes and the agents' notes, live and
+  as a replay; a header pill lists running runs; reloading the library reattaches to a running ingest.
+- **Accept** Unit tests for splitting, lanes and status; browser check: a reload during an ingest shows its progress.
+
+### FR-GEN-07 · 3-D explainers with pictures and a chosen length · M
+- **New** In-browser three.js player for scene plans (`static/scene.js`); `image` elements from lesson crops and,
+  when not offline, Wikimedia Commons (credited); `length` = short | medium | deep in the API, the planner and the cache
+  key. Pictures never fail an explainer (fewer pictures instead).
+- **Accept** A short explainer on the SQL clip has 4-5 beats, uses ≥ 1 lesson picture that matches its narration, and
+  every line passes the fact-check; unit tests for picture picking, gating and lengths.
+
+### FR-UX-11 · Motion system and 3-D landing · S
+- **New** Smooth scroll, reveals, page curtain, command palette, 3-D thread journey on the Lessons page; reduced
+  motion respected; libraries vendored locally.
+- **Accept** Browser check: hero sculpture renders, the journey's panels advance with scroll, the palette lists lessons.
+
 ### FR-PER-12 · Perception inspector · S
 - **Old ⚠️** `scripts/render_frame.py`, `overlay.py` produce static images.
 - **New** Web page `/videos/{id}/inspect`: video with toggleable overlays (object masks with labels and

@@ -197,3 +197,76 @@ async def test_cors_allows_only_web_origin(gw: tuple[httpx.AsyncClient, GatewayS
     assert ok.headers.get("access-control-allow-origin") == "http://localhost:3001"
     evil = await client.get("/api/health", headers={"Origin": "https://evil.example"})
     assert "access-control-allow-origin" not in evil.headers
+
+
+def test_upload_name_is_safe_and_titled() -> None:
+    from fastapi import HTTPException
+
+    from loom.gateway.routes.app_api import upload_name
+
+    assert upload_name(r"C:\Users\me\Photosynthesis demo (part 1).MP4") ==("Photosynthesis_demo_part_1.mp4",
+                                                                              "Photosynthesis demo (part 1)")
+    assert upload_name("../../etc/passwd.mov")[0] == "passwd.mov"
+    with pytest.raises(HTTPException):
+        upload_name("notes.pdf")
+
+
+async def test_upload_streams_to_disk_and_starts_ingest(
+    gw: tuple[httpx.AsyncClient, GatewayState], monkeypatch: pytest.MonkeyPatch
+) -> None:
+    import asyncio
+
+    from loom.perception import pipeline
+
+    client, state = gw
+    seen: dict[str, object] = {}
+
+    async def fake_ingest(cfg: object, ref: str, title: str | None, progress: object,
+                          max_height: int | None = None) -> None:
+        seen.update(ref=ref, title=title, max_height=max_height)
+        raise RuntimeError("stop here")
+
+    monkeypatch.setattr(pipeline, "ingest_source", fake_ingest)
+    body = b"\x00\x00\x00\x18ftypmp42" + b"x" * 5000
+    r = await client.post("/api/videos/upload", params={"filename": "Cell demo.mp4", "max_height": 480}, content=body)
+    assert r.status_code == 200, r.text
+    d = r.json()
+    assert d["status"] == "processing" and d["channel"].startswith("ingest_up_") and d["bytes"] == len(body)
+    for _ in range(50):
+        if seen:
+            break
+        await asyncio.sleep(0.02)
+    stored = state.cfg.data_dir / "media" / "sources" / "uploads"
+    files = [p for p in stored.iterdir() if not p.name.startswith(".")]
+    assert len(files) == 1 and files[0].read_bytes() == body and files[0].name.endswith("_Cell_demo.mp4")
+    assert seen == {"ref": str(files[0]), "title": "Cell demo", "max_height": 480}
+    bad = await client.post("/api/videos/upload", params={"filename": "x.mp4", "max_height": 999}, content=body)
+    assert bad.status_code == 400
+    assert (await client.post("/api/videos/upload", params={"filename": "x.mp4"}, content=b"")).status_code == 400
+
+
+async def test_label_fix_and_feedback_loop(gw: tuple[httpx.AsyncClient, GatewayState]) -> None:
+    from loom.agents.knowledge import apply_overrides
+    from loom.agents.session import load_graph, save_graph
+    from tests.fixtures.build_fixtures import build_graph as fixture_graph
+
+    client, state = gw
+    g = fixture_graph()
+    save_graph(state.cfg.data_dir, g)
+    oid = g.objects[0].object_id
+    r = await client.post(f"/api/videos/{g.video_id}/labels", json={"object_id": oid, "label": "  safety   goggles "})
+    assert r.status_code == 200 and r.json()["label"] == "safety goggles"
+    served = (await client.get(f"/api/videos/{g.video_id}/graph")).json()
+    assert next(o for o in served["objects"] if o["object_id"] == oid)["label"] == "safety goggles"
+    assert load_graph(state.cfg.data_dir, g.video_id).objects[0].label == g.objects[0].label  # perception untouched
+    assert apply_overrides(state.store, g).objects[0].label == "safety goggles"
+    bad = await client.post(f"/api/videos/{g.video_id}/labels",
+                            json={"object_id": oid, "part_id": "p_01", "label": "x"})
+    assert bad.status_code == 404  # the fixture object has no parts
+    fb = await client.post("/api/feedback", json={"video_id": g.video_id, "target_kind": "answer", "target_id": "q1",
+                                                  "rating": -1, "reason": "too_basic"})
+    s = fb.json()
+    assert s["ratings"] == 2 and s["not_helpful"] == 2 and s["reasons"] == {"wrong_label": 1, "too_basic": 1}
+    assert s["labels_fixed"] == [{"object_id": oid, "part_id": None, "label": "safety goggles"}]
+    assert (await client.post("/api/feedback", json={"video_id": g.video_id, "target_kind": "nope", "target_id": "x",
+                                                      "rating": 3})).status_code == 400

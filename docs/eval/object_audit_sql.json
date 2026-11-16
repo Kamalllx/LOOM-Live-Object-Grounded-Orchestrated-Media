@@ -1,0 +1,35 @@
+{
+ "suite": "object_audit",
+ "lesson": "sql_explained_in_100_seconds_4462e4",
+ "audited_by": "Claude (AI assistant) from frames at 137.8-141.2 s with the tracked boxes drawn; to be confirmed by a human",
+ "objects": [
+  {
+   "object_id": "o_001",
+   "label": "fire",
+   "instances": [
+    [
+     138.2,
+     140.4
+    ]
+   ],
+   "verdict": "false positive",
+   "what_it_is": "the Fireship channel logo (a flat flame icon) on the outro card",
+   "hazard": false
+  },
+  {
+   "object_id": "o_002",
+   "label": "open flame",
+   "instances": [
+    [
+     138.2,
+     140.8
+    ]
+   ],
+   "verdict": "false positive",
+   "what_it_is": "the same logo; the box stays ~0.5 s into the THANKS FOR WATCHING card after the logo is gone",
+   "hazard": false
+  }
+ ],
+ "consequence": "Parent + child viewers see the logo masked for ~2.6 s; no lesson content is affected",
+ "evidence_image": "docs/paper/audit-sql-objects.jpg"
+}

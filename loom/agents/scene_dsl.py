@@ -22,7 +22,7 @@ COLORS = {"blue": "BLUE", "red": "RED", "green": "GREEN", "yellow": "YELLOW", "w
 
 class Element(Contract):
     id: str = Field(min_length=1, max_length=24)
-    kind: Literal["circle", "box", "pill", "text", "arrow"] = "circle"
+    kind: Literal["circle", "box", "pill", "text", "arrow", "image"] = "circle"
     label: str = Field("", max_length=28)
     color: str = "blue"
     x: float = 0.0
@@ -30,6 +30,7 @@ class Element(Contract):
     size: Literal["s", "m", "l"] = "m"
     to_x: float | None = None  # arrows only: end point
     to_y: float | None = None
+    image: str | None = Field(None, max_length=24)  # images only: a visual id offered to the planner
 
 
 class Action(Contract):
@@ -49,7 +50,7 @@ class Beat(Contract):
 
 class ScenePlan(Contract):
     title: str = Field(min_length=2, max_length=48)
-    beats: list[Beat] = Field(min_length=3, max_length=10)
+    beats: list[Beat] = Field(min_length=3, max_length=14)
     takeaway: str = Field("", max_length=90)
 
     @property

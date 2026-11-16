@@ -1,0 +1,31 @@
+# category | url   (LOOM batch evaluation set, 2026-11-15; chalkboard/whiteboard picks verified by watching, rest by metadata)
+Chalkboard | https://www.youtube.com/shorts/XapGLl0ppD8
+Chalkboard | https://www.youtube.com/shorts/nE2QubbYigs
+Chalkboard | https://www.youtube.com/shorts/q6yUcJvFSiA
+Digital whiteboard | https://www.youtube.com/shorts/BKUc10F8zlQ
+Glass lightboard | https://www.youtube.com/watch?v=_ZlapYF-HvM
+Glass lightboard | https://www.youtube.com/watch?v=UI3XHzrH6BA
+Handwriting on paper | https://www.youtube.com/watch?v=4W5iqMOrYck
+Handwriting on paper | https://www.youtube.com/watch?v=gugFuLOL_RY
+Whiteboard doodle animation | https://www.youtube.com/watch?v=jIZe4x5lcKo
+2D animated explainer | https://www.youtube.com/watch?v=cf_aUBbyuts
+2D animated explainer | https://www.youtube.com/watch?v=4Ku1shmtnx0
+2D animated explainer | https://www.youtube.com/watch?v=yPW7Pm3HCA4
+Math animation | https://www.youtube.com/watch?v=keVhu2TFZkE
+Math animation | https://www.youtube.com/watch?v=IJGwvvQdfgg
+Math animation | https://www.youtube.com/watch?v=Qx2qtTF4pDw
+Math animation | https://www.youtube.com/watch?v=P-BVVLD41NM
+Algorithm visualization | https://www.youtube.com/shorts/2FmSASgpC8M
+Algorithm visualization | https://www.youtube.com/watch?v=Q1JdRUh1_98
+Algorithm visualization | https://www.youtube.com/watch?v=dbU7vOEvnjY
+Data structure animation | https://www.youtube.com/watch?v=ojGf3SH7n48
+Data structure animation | https://www.youtube.com/watch?v=4wfGJMETkdc
+Chemistry lab demo | https://www.youtube.com/watch?v=8ydqPYBcpk0
+Chemistry lab demo | https://www.youtube.com/watch?v=Eg64S0DhAaI
+Chemistry lab demo | https://www.youtube.com/watch?v=AiD81xpdcBo
+Physics demo | https://www.youtube.com/watch?v=_dQJBBklpQQ
+Coding screencast | https://www.youtube.com/watch?v=fabelAs_m08
+3D anatomy | https://www.youtube.com/watch?v=GiuTQS1EyBM
+3D anatomy | https://www.youtube.com/watch?v=jAP5Biyf7Nc
+3D anatomy | https://www.youtube.com/watch?v=rDQbYyZOR4o
+3D anatomy | https://www.youtube.com/watch?v=23-KAubf-js

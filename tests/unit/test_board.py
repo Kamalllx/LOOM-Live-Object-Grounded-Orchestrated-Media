@@ -51,9 +51,11 @@ def test_elements_grow_and_survive_occlusion() -> None:
         frames.append((float(t), board(t, presenter, written)))
     scan = scan_board(iter(frames), [], 1.0)
     assert scan.board_ratio == 1.0
-    boxes = [e.box for e in scan.elements]
-    grid = [e for e, b in zip(scan.elements, boxes) if b[0] < 60 and b[2] > 150]
-    text = [e for e, b in zip(scan.elements, boxes) if b[0] >= 340]
+    # e.box lives on the pan-following board canvas; the reported samples are in frame coordinates
+    boxes = [tuple(round(v * s) for v, s in zip(e.samples[-1][2], (W, H, W, H), strict=True)) for e in scan.elements]
+    grid = [e for e, b in zip(scan.elements, boxes, strict=True) if b[0] < 60 and b[2] > 150]
+    text = [e for e, b in zip(scan.elements, boxes, strict=True) if b[0] >= 340]
+    assert len(grid) == 1
     # each written line is one element: all four were written before the presenter walked in, and standing in front
     # of them for 16 s neither erased nor split them
     assert len(text) == 4
@@ -154,3 +156,80 @@ def test_split_overlaps_moves_overlapping_instances_to_a_new_object() -> None:
     assert [x.object_id for x in out] == ["o_001", "o_002"]
     assert [len(x.instances) for x in out] == [2, 1]
     assert out[1].instances[0].instance_id == "o_002_0"
+
+
+def test_fit_ctx_grows_with_the_payload_and_is_capped() -> None:
+    from loom.perception.pipeline import fit_ctx
+
+    assert fit_ctx({"sentences": []}) == 6144
+    big = {"objects": [{"content": "x" * 180, "meaning": "y" * 140} for _ in range(60)]}
+    assert 6144 < fit_ctx(big) <= 16384 and fit_ctx(big) % 2048 == 0
+    assert fit_ctx({"s": "z" * 200000}) == 16384
+
+
+def chalkboard(shift: tuple[int, int] = (0, 0)) -> np.ndarray:
+    """A phone filming a green chalkboard: more wall than board, a person in dark jeans in front of the wall."""
+    img = np.full((H, W, 3), (200, 205, 210), np.uint8)  # white wall: the largest colour in the picture
+    cv2.rectangle(img, (40, 60), (600, 230), (50, 70, 45), -1)  # the board
+    for k, txt in enumerate(("food making process", "6CO2 + 6H2O -> C6H12O6")):
+        cv2.putText(img, txt, (70, 110 + 50 * k), cv2.FONT_HERSHEY_SIMPLEX, 0.8, (225, 230, 225), 2)
+    cv2.rectangle(img, (470, 250), (520, 350), (55, 72, 50), -1)  # jeans: board-coloured, below the board
+    cv2.rectangle(img, (485, 280), (500, 320), (190, 190, 190), -1)  # a faded patch on them
+    return np.roll(img, shift, axis=(0, 1))
+
+
+def test_board_is_the_written_surface_not_the_largest_one() -> None:
+    ink, _, _, colour = analyse_frame(chalkboard())
+    assert colour[1] < 120  # green board, not the white wall
+    assert ink[90:200, 60:580].sum() > 500  # the chalk is read
+    assert ink[250:350, 460:530].sum() == 0  # the jeans are neither board nor ink
+
+
+def test_handheld_shake_keeps_elements() -> None:
+    rng = np.random.default_rng(3)
+    frames = [(float(t), chalkboard((int(rng.integers(-2, 3)), int(rng.integers(-2, 3))))) for t in range(20)]
+    scan = scan_board(iter(frames), [], 1.0)
+    assert scan.board_ratio == 1.0
+    assert len(scan.elements) >= 1
+    assert max(e.life for e in scan.elements) >= 15  # one element for the whole clip, not a new one every few seconds
+    assert max(e.track_id for e in scan.elements) < 8
+
+
+def test_long_strokes_do_not_chain_a_drawing_to_its_neighbours() -> None:
+    from loom.perception.board import group_elements
+
+    mem = np.zeros((H, W), bool)
+    canvas = np.zeros((H, W), np.uint8)
+    cv2.circle(canvas, (150, 120), 40, 1, 2)  # a drawing (the sun)
+    cv2.circle(canvas, (450, 120), 40, 1, 2)  # another drawing (a flower)
+    xs = np.arange(60, 580)
+    pts = np.stack([xs, 175 + (6 * np.sin(xs / 12)).astype(int)], 1)  # the wavy soil line touching both
+    cv2.polylines(canvas, [pts.reshape(-1, 1, 2).astype(np.int32)], False, 1, 2)
+    cv2.line(canvas, (150, 160), (150, 175), 1, 2)
+    cv2.line(canvas, (450, 160), (450, 175), 1, 2)
+    mem[:] = canvas > 0
+    boxes = [b for b, _, _ in group_elements(mem)]
+    wide = [b for b in boxes if b[2] > 400]
+    assert len(wide) == 1 and wide[0][3] < 30  # the line on its own
+    assert sum(1 for b in boxes if 60 <= b[2] <= 120) >= 2  # the two drawings apart
+
+
+def test_a_wide_caption_stays_one_line_not_letters() -> None:
+    from loom.perception.board import group_elements
+
+    h, w = 1138, 640  # a portrait Short at analysis width
+    canvas = np.zeros((h, w), np.uint8)
+    cv2.putText(canvas, "Bisect angle!", (40, 860), cv2.FONT_HERSHEY_DUPLEX, 2.4, 1, 5)  # big, widely spaced letters
+    cv2.putText(canvas, "D", (60, 300), cv2.FONT_HERSHEY_SIMPLEX, 1.2, 1, 2)  # a label far above: not the same line
+    boxes = [b for b, _, _ in group_elements(canvas > 0)]
+    caption = [b for b in boxes if 800 <= b[1] + b[3] / 2 <= 880]
+    assert len(caption) == 1 and caption[0][2] > 0.55 * w  # one element across the line
+    assert any(b[1] < 400 for b in boxes)  # the label is still its own element
+
+
+def test_ocr_boxes_on_the_picture_edge_are_kept_inside() -> None:
+    from loom.core.contracts.common import _check_bbox
+    from loom.perception.ocr import clamp_box
+
+    b = clamp_box((0.1595, 1.0, 0.0967, 0.04))  # the box that failed a batch short
+    assert _check_bbox(b) == b

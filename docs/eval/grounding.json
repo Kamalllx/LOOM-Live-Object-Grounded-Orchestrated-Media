@@ -1,0 +1,627 @@
+{
+  "suite": "grounding",
+  "measured_at": "2026-11-16T18:13:50.656643+00:00",
+  "machine": {
+    "platform": "Windows-11-10.0.26200-SP0",
+    "python": "3.12.16",
+    "loom": "2.0.0.dev0",
+    "gpu": "NVIDIA GeForce RTX 5070 Laptop GPU, 8151 MiB, 610.88",
+    "git_commit": "19455621802d919cecc6e3c4bfa43a88c382b405"
+  },
+  "video_id": "acid_base_neutralization_d752a6",
+  "tier": "boxes (T0)",
+  "vocab": "vocab.json (27 phrases)",
+  "hazard_truth": [
+    [
+      48.033,
+      58.333
+    ]
+  ],
+  "samples": {
+    "base": 138,
+    "hazard_window": 160,
+    "fps": 2.0
+  },
+  "proposals": 937,
+  "ablation": {
+    "detector_only": {
+      "tracks": 72,
+      "hazard_tracks": 30,
+      "hazard_labels": [
+        "broken glass",
+        "needle",
+        "open flame",
+        "syringe"
+      ],
+      "precision": 0.24,
+      "recall": 0.922,
+      "f1": 0.381,
+      "false_block_s": 30.1,
+      "missed_s": 0.8,
+      "hazard_intervals": [
+        [
+          13.9,
+          19.4
+        ],
+        [
+          21.9,
+          23.4
+        ],
+        [
+          24.9,
+          57.5
+        ]
+      ],
+      "object_recall_proxy": 0.5
+    },
+    "+siglip_generic": {
+      "tracks": 16,
+      "hazard_tracks": 3,
+      "hazard_labels": [
+        "broken glass"
+      ],
+      "precision": 1.0,
+      "recall": 0.583,
+      "f1": 0.736,
+      "false_block_s": 0.0,
+      "missed_s": 4.3,
+      "hazard_intervals": [
+        [
+          50.25,
+          53.0
+        ],
+        [
+          53.03,
+          56.25
+        ]
+      ],
+      "object_recall_proxy": 0.5
+    },
+    "+siglip_lookalikes": {
+      "tracks": 16,
+      "hazard_tracks": 3,
+      "hazard_labels": [
+        "broken glass"
+      ],
+      "precision": 1.0,
+      "recall": 0.583,
+      "f1": 0.736,
+      "false_block_s": 0.0,
+      "missed_s": 4.3,
+      "hazard_intervals": [
+        [
+          50.25,
+          53.0
+        ],
+        [
+          53.03,
+          56.25
+        ]
+      ],
+      "object_recall_proxy": 0.5
+    },
+    "+vlm (LOOM)": {
+      "tracks": 17,
+      "hazard_tracks": 4,
+      "hazard_labels": [
+        "broken glass"
+      ],
+      "precision": 0.943,
+      "recall": 0.796,
+      "f1": 0.863,
+      "false_block_s": 0.5,
+      "missed_s": 2.1,
+      "hazard_intervals": [
+        [
+          47.53,
+          53.0
+        ],
+        [
+          53.03,
+          56.25
+        ]
+      ],
+      "object_recall_proxy": 0.5
+    }
+  },
+  "targets": {
+    "precision": 0.95,
+    "recall": 0.9,
+    "false_block_s": 2.0,
+    "missed_s": 0.5
+  },
+  "pass": false,
+  "timings_s": {
+    "detect_base": 97.2,
+    "detect_hazard_windows": 72.3,
+    "crops": 42.7,
+    "siglip_generic": 11.7,
+    "siglip_lookalikes": 6.1,
+    "vlm_hazard_check": 151.6,
+    "total": 381.6
+  },
+  "unloaded_before_torch": [],
+  "note": "object_recall_proxy = label-level per segment; box/mask IoU waits for keyframe annotation",
+  "hazard_tracks": [
+    {
+      "phrase": "broken glass",
+      "shot": "sh_03",
+      "start": 14.4,
+      "end": 16.4,
+      "score": 0.3383,
+      "samples": 4,
+      "siglip_generic": -0.6762,
+      "siglip_lookalike": -0.6464,
+      "vlm": "rejected",
+      "better_label": "glass beaker",
+      "kept": [
+        false,
+        "verified"
+      ]
+    },
+    {
+      "phrase": "broken glass",
+      "shot": "sh_03",
+      "start": 16.9,
+      "end": 17.4,
+      "score": 0.3084,
+      "samples": 1,
+      "siglip_generic": -0.5515,
+      "siglip_lookalike": -0.4931,
+      "vlm": "rejected",
+      "better_label": "glass beaker with liquid being poured",
+      "kept": [
+        false,
+        "verified"
+      ]
+    },
+    {
+      "phrase": "broken glass",
+      "shot": "sh_03",
+      "start": 18.4,
+      "end": 18.9,
+      "score": 0.3184,
+      "samples": 1,
+      "siglip_generic": -0.4068,
+      "siglip_lookalike": -0.3677,
+      "vlm": "rejected",
+      "better_label": "glass beaker",
+      "kept": [
+        false,
+        "verified"
+      ]
+    },
+    {
+      "phrase": "broken glass",
+      "shot": "sh_03",
+      "start": 22.4,
+      "end": 22.9,
+      "score": 0.305,
+      "samples": 1,
+      "siglip_generic": -0.4339,
+      "siglip_lookalike": -0.4567,
+      "vlm": "rejected",
+      "better_label": "glass beaker",
+      "kept": [
+        false,
+        "verified"
+      ]
+    },
+    {
+      "phrase": "broken glass",
+      "shot": "sh_03",
+      "start": 25.4,
+      "end": 27.4,
+      "score": 0.3398,
+      "samples": 4,
+      "siglip_generic": -0.5795,
+      "siglip_lookalike": -0.5379,
+      "vlm": "rejected",
+      "better_label": "glass beaker",
+      "kept": [
+        false,
+        "verified"
+      ]
+    },
+    {
+      "phrase": "broken glass",
+      "shot": "sh_04",
+      "start": 27.53,
+      "end": 39.63,
+      "score": 0.5779,
+      "samples": 72,
+      "siglip_generic": -0.7142,
+      "siglip_lookalike": -0.7143,
+      "vlm": "rejected",
+      "better_label": "blue solid dissolving in liquid",
+      "kept": [
+        false,
+        "verified"
+      ]
+    },
+    {
+      "phrase": "broken glass",
+      "shot": "sh_04",
+      "start": 27.53,
+      "end": 39.63,
+      "score": 0.3829,
+      "samples": 48,
+      "siglip_generic": -0.3834,
+      "siglip_lookalike": -0.4382,
+      "vlm": "rejected",
+      "better_label": "glass beaker",
+      "kept": [
+        false,
+        "verified"
+      ]
+    },
+    {
+      "phrase": "needle",
+      "shot": "sh_04",
+      "start": 27.75,
+      "end": 28.25,
+      "score": 0.3251,
+      "samples": 1,
+      "siglip_generic": -0.3384,
+      "siglip_lookalike": -0.2781,
+      "vlm": "rejected",
+      "better_label": "pipette",
+      "kept": [
+        false,
+        "verified"
+      ]
+    },
+    {
+      "phrase": "needle",
+      "shot": "sh_04",
+      "start": 39.0,
+      "end": 39.53,
+      "score": 0.341,
+      "samples": 2,
+      "siglip_generic": -0.2841,
+      "siglip_lookalike": -0.797,
+      "vlm": "rejected",
+      "better_label": "pipette",
+      "kept": [
+        false,
+        "verified"
+      ]
+    },
+    {
+      "phrase": "open flame",
+      "shot": "sh_04",
+      "start": 27.53,
+      "end": 39.63,
+      "score": 0.36,
+      "samples": 48,
+      "siglip_generic": -0.8113,
+      "siglip_lookalike": -0.8438,
+      "vlm": "rejected",
+      "better_label": "blue liquid in beaker",
+      "kept": [
+        false,
+        "verified"
+      ]
+    },
+    {
+      "phrase": "open flame",
+      "shot": "sh_04",
+      "start": 30.25,
+      "end": 30.75,
+      "score": 0.322,
+      "samples": 1,
+      "siglip_generic": -0.2277,
+      "siglip_lookalike": -0.2586,
+      "vlm": "rejected",
+      "better_label": "blue object (possibly a liquid or gel in a container)",
+      "kept": [
+        false,
+        "verified"
+      ]
+    },
+    {
+      "phrase": "open flame",
+      "shot": "sh_04",
+      "start": 33.25,
+      "end": 33.75,
+      "score": 0.349,
+      "samples": 1,
+      "siglip_generic": -0.4362,
+      "siglip_lookalike": -0.4107,
+      "vlm": "rejected",
+      "better_label": "blue gelatinous object in container",
+      "kept": [
+        false,
+        "verified"
+      ]
+    },
+    {
+      "phrase": "open flame",
+      "shot": "sh_04",
+      "start": 34.5,
+      "end": 35.0,
+      "score": 0.3261,
+      "samples": 1,
+      "siglip_generic": -0.5254,
+      "siglip_lookalike": -0.3591,
+      "vlm": "rejected",
+      "better_label": "blue liquid surface with reflection or disturbance",
+      "kept": [
+        false,
+        "verified"
+      ]
+    },
+    {
+      "phrase": "syringe",
+      "shot": "sh_04",
+      "start": 27.53,
+      "end": 39.53,
+      "score": 0.4702,
+      "samples": 70,
+      "siglip_generic": -0.6662,
+      "siglip_lookalike": -0.6662,
+      "vlm": "rejected",
+      "better_label": "beaker with blue liquid and glass rod",
+      "kept": [
+        false,
+        "verified"
+      ]
+    },
+    {
+      "phrase": "syringe",
+      "shot": "sh_04",
+      "start": 27.53,
+      "end": 39.63,
+      "score": 0.4341,
+      "samples": 72,
+      "siglip_generic": -0.4051,
+      "siglip_lookalike": -0.4051,
+      "vlm": "rejected",
+      "better_label": "graduated cylinder",
+      "kept": [
+        false,
+        "verified"
+      ]
+    },
+    {
+      "phrase": "syringe",
+      "shot": "sh_04",
+      "start": 27.53,
+      "end": 29.03,
+      "score": 0.33,
+      "samples": 4,
+      "siglip_generic": -0.2581,
+      "siglip_lookalike": -0.2581,
+      "vlm": "rejected",
+      "better_label": "test tube",
+      "kept": [
+        false,
+        "verified"
+      ]
+    },
+    {
+      "phrase": "syringe",
+      "shot": "sh_04",
+      "start": 30.0,
+      "end": 31.03,
+      "score": 0.3483,
+      "samples": 4,
+      "siglip_generic": -0.287,
+      "siglip_lookalike": -0.287,
+      "vlm": "rejected",
+      "better_label": "test tube in a water bath",
+      "kept": [
+        false,
+        "verified"
+      ]
+    },
+    {
+      "phrase": "syringe",
+      "shot": "sh_04",
+      "start": 31.53,
+      "end": 32.03,
+      "score": 0.3115,
+      "samples": 1,
+      "siglip_generic": -0.3026,
+      "siglip_lookalike": -0.3026,
+      "vlm": "rejected",
+      "better_label": "glass pipette in liquid",
+      "kept": [
+        false,
+        "verified"
+      ]
+    },
+    {
+      "phrase": "syringe",
+      "shot": "sh_04",
+      "start": 35.0,
+      "end": 35.53,
+      "score": 0.3191,
+      "samples": 2,
+      "siglip_generic": -0.2257,
+      "siglip_lookalike": -0.2257,
+      "vlm": "rejected",
+      "better_label": "test tube in liquid",
+      "kept": [
+        false,
+        "verified"
+      ]
+    },
+    {
+      "phrase": "syringe",
+      "shot": "sh_04",
+      "start": 36.03,
+      "end": 37.0,
+      "score": 0.3608,
+      "samples": 3,
+      "siglip_generic": -0.2766,
+      "siglip_lookalike": -0.2766,
+      "vlm": "rejected",
+      "better_label": "test tube in beaker with blue liquid",
+      "kept": [
+        false,
+        "verified"
+      ]
+    },
+    {
+      "phrase": "syringe",
+      "shot": "sh_04",
+      "start": 38.53,
+      "end": 39.63,
+      "score": 0.4236,
+      "samples": 5,
+      "siglip_generic": -0.7469,
+      "siglip_lookalike": -0.7469,
+      "vlm": "rejected",
+      "better_label": "test tube",
+      "kept": [
+        false,
+        "verified"
+      ]
+    },
+    {
+      "phrase": "broken glass",
+      "shot": "sh_05",
+      "start": 39.63,
+      "end": 48.03,
+      "score": 0.386,
+      "samples": 51,
+      "siglip_generic": -0.6128,
+      "siglip_lookalike": -0.5749,
+      "vlm": "rejected",
+      "better_label": "glass beaker with liquid",
+      "kept": [
+        false,
+        "verified"
+      ]
+    },
+    {
+      "phrase": "broken glass",
+      "shot": "sh_05",
+      "start": 39.63,
+      "end": 48.03,
+      "score": 0.3531,
+      "samples": 51,
+      "siglip_generic": -0.4577,
+      "siglip_lookalike": -0.6806,
+      "vlm": "rejected",
+      "better_label": "glass beaker with blue liquid",
+      "kept": [
+        false,
+        "verified"
+      ]
+    },
+    {
+      "phrase": "broken glass",
+      "shot": "sh_05",
+      "start": 39.63,
+      "end": 48.03,
+      "score": 0.3179,
+      "samples": 24,
+      "siglip_generic": -0.5482,
+      "siglip_lookalike": -0.5593,
+      "vlm": "rejected",
+      "better_label": "glass flask with liquid and precipitate",
+      "kept": [
+        false,
+        "verified"
+      ]
+    },
+    {
+      "phrase": "broken glass",
+      "shot": "sh_05",
+      "start": 46.25,
+      "end": 48.03,
+      "score": 0.3457,
+      "samples": 10,
+      "siglip_generic": -0.866,
+      "siglip_lookalike": -0.3892,
+      "vlm": "rejected",
+      "better_label": "glass beaker with blue liquid",
+      "kept": [
+        false,
+        "verified"
+      ]
+    },
+    {
+      "phrase": "broken glass",
+      "shot": "sh_06",
+      "start": 48.03,
+      "end": 50.0,
+      "score": 0.3567,
+      "samples": 5,
+      "siglip_generic": -0.2172,
+      "siglip_lookalike": -0.5648,
+      "vlm": "confirmed",
+      "better_label": "glass bottle with liquid and shattered glass fragments",
+      "kept": [
+        true,
+        "verified"
+      ]
+    },
+    {
+      "phrase": "broken glass",
+      "shot": "sh_06",
+      "start": 50.75,
+      "end": 51.25,
+      "score": 0.3,
+      "samples": 1,
+      "siglip_generic": 0.9369,
+      "siglip_lookalike": 0.8905,
+      "vlm": "rejected",
+      "better_label": "glass bottle",
+      "kept": [
+        true,
+        "verified"
+      ]
+    },
+    {
+      "phrase": "broken glass",
+      "shot": "sh_06",
+      "start": 52.0,
+      "end": 52.5,
+      "score": 0.3103,
+      "samples": 1,
+      "siglip_generic": 0.543,
+      "siglip_lookalike": 0.4668,
+      "vlm": "confirmed",
+      "better_label": "liquid splash with glass fragments",
+      "kept": [
+        true,
+        "verified"
+      ]
+    },
+    {
+      "phrase": "broken glass",
+      "shot": "sh_06",
+      "start": 53.53,
+      "end": 55.75,
+      "score": 0.317,
+      "samples": 10,
+      "siglip_generic": 0.4124,
+      "siglip_lookalike": 0.355,
+      "vlm": "rejected",
+      "better_label": "splashing liquid with debris",
+      "kept": [
+        true,
+        "verified"
+      ]
+    },
+    {
+      "phrase": "open flame",
+      "shot": "sh_06",
+      "start": 48.03,
+      "end": 57.0,
+      "score": 0.3562,
+      "samples": 46,
+      "siglip_generic": -0.5554,
+      "siglip_lookalike": -0.7731,
+      "vlm": "rejected",
+      "better_label": "exploding glass bottle",
+      "kept": [
+        false,
+        "verified"
+      ]
+    }
+  ]
+}

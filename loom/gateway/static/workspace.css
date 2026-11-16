@@ -85,6 +85,15 @@
 .libitem em { font: 500 12px var(--display); color: var(--faint); font-style: normal; }
 .modal details.sb { margin-top: 10px; color: var(--dim); font-size: 14px; }
 .modal details.sb summary { cursor: pointer; color: var(--violet); font-family: var(--display); }
+.modal ol.checks { list-style: none; padding: 0; margin: 10px 0 0; display: grid; gap: 7px; }
+.modal ol.checks li { display: grid; grid-template-columns: 22px 1fr; gap: 8px; align-items: start; line-height: 1.45; }
+.modal ol.checks li i { font-style: normal; font-weight: 800; width: 20px; height: 20px; border-radius: 50%; display: grid; place-items: center; font-size: 12px; margin-top: 1px; }
+.modal ol.checks li.ok i { color: #04130e; background: var(--mint, #6ef2c4); }
+.modal ol.checks li.cut i { color: #23070c; background: var(--coral, #ff6b7d); }
+.modal ol.checks li.ok span { color: var(--text, #f3f6f4); }
+.modal ol.checks li.cut span { color: var(--dim); text-decoration: line-through; text-decoration-color: rgba(255,107,125,.5); }
+.modal ol.checks li em { display: block; font-style: normal; font-size: 12.5px; color: var(--dim); text-decoration: none; margin-top: 2px; }
+.modal ol.checks li.cut em { color: #ff9aa6; }
 
 /* ---------------------------------------------------------------- silk + glass layer */
 #threads { image-rendering: auto; filter: saturate(1.15); }
@@ -167,7 +176,24 @@
 .addlesson form { display: flex; gap: 10px; }
 .addlesson input { flex: 1; min-width: 0; font: 500 16px var(--text); color: var(--ink); background: rgba(3, 12, 18, .7); border: 1px solid var(--warp); border-radius: 999px; padding: 13px 20px; outline: none; }
 .addlesson input:focus { border-color: var(--peach); }
+.dropzone { display: grid; gap: 4px; place-items: center; text-align: center; padding: 26px 16px; margin-bottom: 12px; border-radius: 18px; border: 1.5px dashed var(--warp); background: rgba(3, 12, 18, .45); cursor: pointer; transition: border-color .2s, background .2s; }
+.dropzone b { font: 600 17px var(--display); }
+.dropzone span { color: var(--dim); font-size: 14px; }
+.dropzone u { color: var(--peach); text-decoration-thickness: 1px; text-underline-offset: 3px; }
+.dropzone:hover, .dropzone:focus-visible, .dropzone.over { border-color: var(--peach); background: rgba(255, 179, 138, .07); outline: none; }
+.resopt { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 10px; margin-top: 12px; color: var(--dim); font-size: 14px; }
+.resopt select { font: 500 14px var(--text); color: var(--ink); background: rgba(3, 12, 18, .7); border: 1px solid var(--warp); border-radius: 999px; padding: 7px 12px; }
+.resopt small { color: var(--faint); }
+.upl { margin-top: 18px; display: grid; gap: 10px; }
+.upl-name { display: flex; justify-content: space-between; gap: 12px; }
+.upl-name b { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.upl-name span, .upl-msg { color: var(--dim); font-size: 14px; }
+@media (max-width: 560px) { .addlesson form { flex-direction: column; } }
 .ing { margin-top: 18px; display: grid; gap: 14px; }
+.ing-head { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px 16px; align-items: baseline; }
+.ing-head b { font: 600 17px var(--display); }
+.ing-runlink { color: var(--peach); font: 500 14px var(--display); text-decoration: none; }
+.ing-runlink:hover { text-decoration: underline; }
 .ing-stages { display: flex; flex-wrap: wrap; gap: 8px; }
 .ing-stages span { font: 600 13px var(--display); padding: 7px 13px; border-radius: 99px; background: rgba(6, 20, 28, .7); border: 1px solid var(--warp); color: var(--faint); transition: all .35s var(--ease-out); }
 .ing-stages span.run { color: var(--ink); border-color: var(--amber); box-shadow: 0 0 22px -4px var(--amber); animation: lpbeat 1.2s infinite; }
@@ -194,3 +220,5 @@
 .ing-main .ing-log { max-height: 560px; }
 @media (max-width: 900px) { .ing-main { grid-template-columns: 1fr; } }
 @media (prefers-reduced-motion: reduce) { .ing-live img.in { animation: none; } }
+.countchip { position: absolute; left: 12px; bottom: 12px; display: none; padding: 6px 11px; border-radius: 999px; font: 600 12px var(--display); color: var(--ink); background: rgba(4, 14, 20, .78); border: 1px solid var(--warp); pointer-events: none; }
+#showall[aria-pressed="true"] { border-color: var(--peach); color: var(--peach); }

@@ -23,7 +23,7 @@ from loom.core.offline import apply_offline_env
 from loom.core.ollama import OllamaHttp
 from loom.core.store import Store
 from loom.gateway.readiness import ReadinessMonitor
-from loom.gateway.routes import app_api, events, health, media, models
+from loom.gateway.routes import app_api, events, health, media, models, runs
 from loom.gateway.state import GatewayState
 
 log = logging.getLogger(__name__)
@@ -91,7 +91,7 @@ def create_app(
         allow_headers=["Content-Type", "Last-Event-ID", "Range", "X-Loom-Token"],
         expose_headers=["Content-Range", "Accept-Ranges", "Content-Length"],
     )
-    for r in (health.router, models.router, events.router, media.router, app_api.router):
+    for r in (health.router, models.router, events.router, media.router, app_api.router, runs.router):
         app.include_router(r)
     from fastapi.staticfiles import StaticFiles
 

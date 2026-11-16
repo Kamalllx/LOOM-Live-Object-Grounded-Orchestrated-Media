@@ -1,0 +1,1658 @@
+{
+ "suite": "critic_faults",
+ "machine": {
+  "platform": "Windows-11-10.0.26200-SP0",
+  "python": "3.12.16",
+  "loom": "2.0.0.dev0",
+  "gpu": "NVIDIA GeForce RTX 5070 Laptop GPU, 8151 MiB, 610.88",
+  "git_commit": "19455621802d919cecc6e3c4bfa43a88c382b405"
+ },
+ "lessons": [
+  "acid_base_neutralization_d752a6",
+  "water_sciences_laboratory_tutorial_glass_a98109",
+  "sql_explained_in_100_seconds_4462e4"
+ ],
+ "viewers": [
+  "alex",
+  "priya",
+  "family"
+ ],
+ "controls": [
+  {
+   "lesson": "acid_base_neutralization_d752a6",
+   "viewer": "alex",
+   "passes_to_approval": 1,
+   "approved": true,
+   "issues": [],
+   "masks": 0,
+   "threads": 5,
+   "quiz": 3
+  },
+  {
+   "lesson": "acid_base_neutralization_d752a6",
+   "viewer": "priya",
+   "passes_to_approval": 1,
+   "approved": true,
+   "issues": [],
+   "masks": 0,
+   "threads": 7,
+   "quiz": 3
+  },
+  {
+   "lesson": "acid_base_neutralization_d752a6",
+   "viewer": "family",
+   "passes_to_approval": 1,
+   "approved": true,
+   "issues": [],
+   "masks": 1,
+   "threads": 7,
+   "quiz": 3
+  },
+  {
+   "lesson": "water_sciences_laboratory_tutorial_glass_a98109",
+   "viewer": "alex",
+   "passes_to_approval": 1,
+   "approved": true,
+   "issues": [],
+   "masks": 0,
+   "threads": 2,
+   "quiz": 3
+  },
+  {
+   "lesson": "water_sciences_laboratory_tutorial_glass_a98109",
+   "viewer": "priya",
+   "passes_to_approval": 1,
+   "approved": true,
+   "issues": [],
+   "masks": 0,
+   "threads": 3,
+   "quiz": 3
+  },
+  {
+   "lesson": "water_sciences_laboratory_tutorial_glass_a98109",
+   "viewer": "family",
+   "passes_to_approval": 1,
+   "approved": true,
+   "issues": [],
+   "masks": 8,
+   "threads": 3,
+   "quiz": 3
+  },
+  {
+   "lesson": "sql_explained_in_100_seconds_4462e4",
+   "viewer": "alex",
+   "passes_to_approval": 1,
+   "approved": true,
+   "issues": [],
+   "masks": 0,
+   "threads": 21,
+   "quiz": 1
+  },
+  {
+   "lesson": "sql_explained_in_100_seconds_4462e4",
+   "viewer": "priya",
+   "passes_to_approval": 1,
+   "approved": true,
+   "issues": [],
+   "masks": 0,
+   "threads": 22,
+   "quiz": 1
+  },
+  {
+   "lesson": "sql_explained_in_100_seconds_4462e4",
+   "viewer": "family",
+   "passes_to_approval": 1,
+   "approved": true,
+   "issues": [],
+   "masks": 2,
+   "threads": 22,
+   "quiz": 1
+  }
+ ],
+ "faults": [
+  {
+   "lesson": "acid_base_neutralization_d752a6",
+   "viewer": "alex",
+   "family": "F1 structure",
+   "fault": "overlapping threads",
+   "expected": "overlapping_threads",
+   "detected": true,
+   "codes": [
+    "overlapping_threads"
+   ],
+   "repaired": false,
+   "repair_rounds": 2,
+   "left_after_repair": [
+    "overlapping_threads"
+   ],
+   "delivered": "fallback"
+  },
+  {
+   "lesson": "acid_base_neutralization_d752a6",
+   "viewer": "alex",
+   "family": "F1 structure",
+   "fault": "out-of-order threads",
+   "expected": "overlapping_threads",
+   "detected": true,
+   "codes": [
+    "overlapping_threads"
+   ],
+   "repaired": true,
+   "repair_rounds": 1,
+   "left_after_repair": [],
+   "delivered": "repaired cut"
+  },
+  {
+   "lesson": "acid_base_neutralization_d752a6",
+   "viewer": "alex",
+   "family": "F1 structure",
+   "fault": "empty cut",
+   "expected": "empty_cut",
+   "detected": true,
+   "codes": [
+    "empty_cut"
+   ],
+   "repaired": true,
+   "repair_rounds": 1,
+   "left_after_repair": [],
+   "delivered": "repaired cut"
+  },
+  {
+   "lesson": "acid_base_neutralization_d752a6",
+   "viewer": "alex",
+   "family": "F2 sentence",
+   "fault": "ends mid-sentence (early)",
+   "expected": "cut_mid_sentence",
+   "detected": true,
+   "codes": [
+    "cut_mid_sentence"
+   ],
+   "repaired": true,
+   "repair_rounds": 1,
+   "left_after_repair": [],
+   "delivered": "repaired cut"
+  },
+  {
+   "lesson": "acid_base_neutralization_d752a6",
+   "viewer": "alex",
+   "family": "F2 sentence",
+   "fault": "ends mid-sentence (middle)",
+   "expected": "cut_mid_sentence",
+   "detected": true,
+   "codes": [
+    "cut_mid_sentence"
+   ],
+   "repaired": true,
+   "repair_rounds": 1,
+   "left_after_repair": [],
+   "delivered": "repaired cut"
+  },
+  {
+   "lesson": "acid_base_neutralization_d752a6",
+   "viewer": "alex",
+   "family": "F2 sentence",
+   "fault": "ends mid-sentence (late)",
+   "expected": "cut_mid_sentence",
+   "detected": true,
+   "codes": [
+    "cut_mid_sentence"
+   ],
+   "repaired": true,
+   "repair_rounds": 1,
+   "left_after_repair": [],
+   "delivered": "repaired cut"
+  },
+  {
+   "lesson": "acid_base_neutralization_d752a6",
+   "viewer": "alex",
+   "family": "F3 factuality",
+   "fault": "quiz question not in the verified bank",
+   "expected": "quiz_unsupported",
+   "detected": true,
+   "codes": [
+    "quiz_unsupported"
+   ],
+   "repaired": false,
+   "repair_rounds": 2,
+   "left_after_repair": [
+    "quiz_unsupported"
+   ],
+   "delivered": "fallback"
+  },
+  {
+   "lesson": "acid_base_neutralization_d752a6",
+   "viewer": "alex",
+   "family": "F8 completeness",
+   "fault": "empty quiz with a non-empty bank",
+   "expected": "quiz_missing",
+   "detected": true,
+   "codes": [
+    "quiz_missing"
+   ],
+   "repaired": false,
+   "repair_rounds": 2,
+   "left_after_repair": [
+    "quiz_missing"
+   ],
+   "delivered": "fallback"
+  },
+  {
+   "lesson": "acid_base_neutralization_d752a6",
+   "viewer": "priya",
+   "family": "F1 structure",
+   "fault": "overlapping threads",
+   "expected": "overlapping_threads",
+   "detected": true,
+   "codes": [
+    "overlapping_threads"
+   ],
+   "repaired": false,
+   "repair_rounds": 2,
+   "left_after_repair": [
+    "overlapping_threads"
+   ],
+   "delivered": "fallback"
+  },
+  {
+   "lesson": "acid_base_neutralization_d752a6",
+   "viewer": "priya",
+   "family": "F1 structure",
+   "fault": "out-of-order threads",
+   "expected": "overlapping_threads",
+   "detected": true,
+   "codes": [
+    "overlapping_threads"
+   ],
+   "repaired": true,
+   "repair_rounds": 1,
+   "left_after_repair": [],
+   "delivered": "repaired cut"
+  },
+  {
+   "lesson": "acid_base_neutralization_d752a6",
+   "viewer": "priya",
+   "family": "F1 structure",
+   "fault": "empty cut",
+   "expected": "empty_cut",
+   "detected": true,
+   "codes": [
+    "empty_cut"
+   ],
+   "repaired": true,
+   "repair_rounds": 1,
+   "left_after_repair": [],
+   "delivered": "repaired cut"
+  },
+  {
+   "lesson": "acid_base_neutralization_d752a6",
+   "viewer": "priya",
+   "family": "F2 sentence",
+   "fault": "ends mid-sentence (early)",
+   "expected": "cut_mid_sentence",
+   "detected": true,
+   "codes": [
+    "cut_mid_sentence"
+   ],
+   "repaired": true,
+   "repair_rounds": 1,
+   "left_after_repair": [],
+   "delivered": "repaired cut"
+  },
+  {
+   "lesson": "acid_base_neutralization_d752a6",
+   "viewer": "priya",
+   "family": "F2 sentence",
+   "fault": "ends mid-sentence (middle)",
+   "expected": "cut_mid_sentence",
+   "detected": true,
+   "codes": [
+    "cut_mid_sentence"
+   ],
+   "repaired": true,
+   "repair_rounds": 1,
+   "left_after_repair": [],
+   "delivered": "repaired cut"
+  },
+  {
+   "lesson": "acid_base_neutralization_d752a6",
+   "viewer": "priya",
+   "family": "F2 sentence",
+   "fault": "ends mid-sentence (late)",
+   "expected": "cut_mid_sentence",
+   "detected": true,
+   "codes": [
+    "cut_mid_sentence"
+   ],
+   "repaired": true,
+   "repair_rounds": 1,
+   "left_after_repair": [],
+   "delivered": "repaired cut"
+  },
+  {
+   "lesson": "acid_base_neutralization_d752a6",
+   "viewer": "priya",
+   "family": "F3 factuality",
+   "fault": "quiz question not in the verified bank",
+   "expected": "quiz_unsupported",
+   "detected": true,
+   "codes": [
+    "quiz_unsupported"
+   ],
+   "repaired": false,
+   "repair_rounds": 2,
+   "left_after_repair": [
+    "quiz_unsupported"
+   ],
+   "delivered": "fallback"
+  },
+  {
+   "lesson": "acid_base_neutralization_d752a6",
+   "viewer": "priya",
+   "family": "F4 prerequisite",
+   "fault": "prerequisite thread dropped",
+   "expected": "missing_prerequisite",
+   "detected": true,
+   "codes": [
+    "missing_prerequisite",
+    "missing_prerequisite",
+    "missing_prerequisite"
+   ],
+   "repaired": true,
+   "repair_rounds": 1,
+   "left_after_repair": [],
+   "delivered": "repaired cut"
+  },
+  {
+   "lesson": "acid_base_neutralization_d752a6",
+   "viewer": "priya",
+   "family": "F6 explainer",
+   "fault": "verified explainer missing",
+   "expected": "explainer_unavailable",
+   "detected": true,
+   "codes": [
+    "explainer_unavailable",
+    "explainer_unavailable",
+    "explainer_unavailable"
+   ],
+   "repaired": true,
+   "repair_rounds": 1,
+   "left_after_repair": [],
+   "delivered": "repaired cut"
+  },
+  {
+   "lesson": "acid_base_neutralization_d752a6",
+   "viewer": "priya",
+   "family": "F8 completeness",
+   "fault": "empty quiz with a non-empty bank",
+   "expected": "quiz_missing",
+   "detected": true,
+   "codes": [
+    "quiz_missing"
+   ],
+   "repaired": false,
+   "repair_rounds": 2,
+   "left_after_repair": [
+    "quiz_missing"
+   ],
+   "delivered": "fallback"
+  },
+  {
+   "lesson": "acid_base_neutralization_d752a6",
+   "viewer": "family",
+   "family": "F1 structure",
+   "fault": "overlapping threads",
+   "expected": "overlapping_threads",
+   "detected": true,
+   "codes": [
+    "overlapping_threads"
+   ],
+   "repaired": false,
+   "repair_rounds": 2,
+   "left_after_repair": [
+    "overlapping_threads"
+   ],
+   "delivered": "fallback"
+  },
+  {
+   "lesson": "acid_base_neutralization_d752a6",
+   "viewer": "family",
+   "family": "F1 structure",
+   "fault": "out-of-order threads",
+   "expected": "overlapping_threads",
+   "detected": true,
+   "codes": [
+    "overlapping_threads"
+   ],
+   "repaired": true,
+   "repair_rounds": 1,
+   "left_after_repair": [],
+   "delivered": "repaired cut"
+  },
+  {
+   "lesson": "acid_base_neutralization_d752a6",
+   "viewer": "family",
+   "family": "F1 structure",
+   "fault": "empty cut",
+   "expected": "empty_cut",
+   "detected": true,
+   "codes": [
+    "empty_cut"
+   ],
+   "repaired": true,
+   "repair_rounds": 1,
+   "left_after_repair": [],
+   "delivered": "repaired cut"
+  },
+  {
+   "lesson": "acid_base_neutralization_d752a6",
+   "viewer": "family",
+   "family": "F2 sentence",
+   "fault": "ends mid-sentence (early)",
+   "expected": "cut_mid_sentence",
+   "detected": true,
+   "codes": [
+    "cut_mid_sentence"
+   ],
+   "repaired": true,
+   "repair_rounds": 1,
+   "left_after_repair": [],
+   "delivered": "repaired cut"
+  },
+  {
+   "lesson": "acid_base_neutralization_d752a6",
+   "viewer": "family",
+   "family": "F2 sentence",
+   "fault": "ends mid-sentence (middle)",
+   "expected": "cut_mid_sentence",
+   "detected": true,
+   "codes": [
+    "cut_mid_sentence"
+   ],
+   "repaired": true,
+   "repair_rounds": 1,
+   "left_after_repair": [],
+   "delivered": "repaired cut"
+  },
+  {
+   "lesson": "acid_base_neutralization_d752a6",
+   "viewer": "family",
+   "family": "F2 sentence",
+   "fault": "ends mid-sentence (late)",
+   "expected": "cut_mid_sentence",
+   "detected": true,
+   "codes": [
+    "cut_mid_sentence"
+   ],
+   "repaired": true,
+   "repair_rounds": 1,
+   "left_after_repair": [],
+   "delivered": "repaired cut"
+  },
+  {
+   "lesson": "acid_base_neutralization_d752a6",
+   "viewer": "family",
+   "family": "F3 factuality",
+   "fault": "quiz question not in the verified bank",
+   "expected": "quiz_unsupported",
+   "detected": true,
+   "codes": [
+    "quiz_unsupported"
+   ],
+   "repaired": false,
+   "repair_rounds": 2,
+   "left_after_repair": [
+    "quiz_unsupported"
+   ],
+   "delivered": "fallback"
+  },
+  {
+   "lesson": "acid_base_neutralization_d752a6",
+   "viewer": "family",
+   "family": "F5 safety",
+   "fault": "Guardian returns no masks",
+   "expected": "unmasked_hazard",
+   "detected": true,
+   "codes": [
+    "unmasked_hazard"
+   ],
+   "repaired": true,
+   "repair_rounds": 1,
+   "left_after_repair": [],
+   "delivered": "repaired cut"
+  },
+  {
+   "lesson": "acid_base_neutralization_d752a6",
+   "viewer": "family",
+   "family": "F5 safety",
+   "fault": "masks end 1 s early",
+   "expected": "unmasked_hazard",
+   "detected": true,
+   "codes": [
+    "unmasked_hazard"
+   ],
+   "repaired": true,
+   "repair_rounds": 1,
+   "left_after_repair": [],
+   "delivered": "repaired cut"
+  },
+  {
+   "lesson": "acid_base_neutralization_d752a6",
+   "viewer": "family",
+   "family": "F5 safety",
+   "fault": "mask on the wrong object",
+   "expected": "unmasked_hazard",
+   "detected": true,
+   "codes": [
+    "unmasked_hazard"
+   ],
+   "repaired": true,
+   "repair_rounds": 1,
+   "left_after_repair": [],
+   "delivered": "repaired cut"
+  },
+  {
+   "lesson": "acid_base_neutralization_d752a6",
+   "viewer": "family",
+   "family": "F8 completeness",
+   "fault": "empty quiz with a non-empty bank",
+   "expected": "quiz_missing",
+   "detected": true,
+   "codes": [
+    "quiz_missing"
+   ],
+   "repaired": false,
+   "repair_rounds": 2,
+   "left_after_repair": [
+    "quiz_missing"
+   ],
+   "delivered": "fallback"
+  },
+  {
+   "lesson": "water_sciences_laboratory_tutorial_glass_a98109",
+   "viewer": "alex",
+   "family": "F1 structure",
+   "fault": "overlapping threads",
+   "expected": "overlapping_threads",
+   "detected": true,
+   "codes": [
+    "overlapping_threads"
+   ],
+   "repaired": false,
+   "repair_rounds": 2,
+   "left_after_repair": [
+    "overlapping_threads"
+   ],
+   "delivered": "fallback"
+  },
+  {
+   "lesson": "water_sciences_laboratory_tutorial_glass_a98109",
+   "viewer": "alex",
+   "family": "F1 structure",
+   "fault": "out-of-order threads",
+   "expected": "overlapping_threads",
+   "detected": true,
+   "codes": [
+    "overlapping_threads"
+   ],
+   "repaired": true,
+   "repair_rounds": 1,
+   "left_after_repair": [],
+   "delivered": "repaired cut"
+  },
+  {
+   "lesson": "water_sciences_laboratory_tutorial_glass_a98109",
+   "viewer": "alex",
+   "family": "F1 structure",
+   "fault": "empty cut",
+   "expected": "empty_cut",
+   "detected": true,
+   "codes": [
+    "empty_cut"
+   ],
+   "repaired": true,
+   "repair_rounds": 1,
+   "left_after_repair": [],
+   "delivered": "repaired cut"
+  },
+  {
+   "lesson": "water_sciences_laboratory_tutorial_glass_a98109",
+   "viewer": "alex",
+   "family": "F2 sentence",
+   "fault": "ends mid-sentence (early)",
+   "expected": "cut_mid_sentence",
+   "detected": true,
+   "codes": [
+    "cut_mid_sentence"
+   ],
+   "repaired": true,
+   "repair_rounds": 1,
+   "left_after_repair": [],
+   "delivered": "repaired cut"
+  },
+  {
+   "lesson": "water_sciences_laboratory_tutorial_glass_a98109",
+   "viewer": "alex",
+   "family": "F2 sentence",
+   "fault": "ends mid-sentence (middle)",
+   "expected": "cut_mid_sentence",
+   "detected": true,
+   "codes": [
+    "cut_mid_sentence"
+   ],
+   "repaired": true,
+   "repair_rounds": 1,
+   "left_after_repair": [],
+   "delivered": "repaired cut"
+  },
+  {
+   "lesson": "water_sciences_laboratory_tutorial_glass_a98109",
+   "viewer": "alex",
+   "family": "F2 sentence",
+   "fault": "ends mid-sentence (late)",
+   "expected": "cut_mid_sentence",
+   "detected": true,
+   "codes": [
+    "cut_mid_sentence"
+   ],
+   "repaired": true,
+   "repair_rounds": 1,
+   "left_after_repair": [],
+   "delivered": "repaired cut"
+  },
+  {
+   "lesson": "water_sciences_laboratory_tutorial_glass_a98109",
+   "viewer": "alex",
+   "family": "F3 factuality",
+   "fault": "quiz question not in the verified bank",
+   "expected": "quiz_unsupported",
+   "detected": true,
+   "codes": [
+    "quiz_unsupported"
+   ],
+   "repaired": false,
+   "repair_rounds": 2,
+   "left_after_repair": [
+    "quiz_unsupported"
+   ],
+   "delivered": "fallback"
+  },
+  {
+   "lesson": "water_sciences_laboratory_tutorial_glass_a98109",
+   "viewer": "alex",
+   "family": "F8 completeness",
+   "fault": "empty quiz with a non-empty bank",
+   "expected": "quiz_missing",
+   "detected": true,
+   "codes": [
+    "quiz_missing"
+   ],
+   "repaired": false,
+   "repair_rounds": 2,
+   "left_after_repair": [
+    "quiz_missing"
+   ],
+   "delivered": "fallback"
+  },
+  {
+   "lesson": "water_sciences_laboratory_tutorial_glass_a98109",
+   "viewer": "priya",
+   "family": "F1 structure",
+   "fault": "overlapping threads",
+   "expected": "overlapping_threads",
+   "detected": true,
+   "codes": [
+    "overlapping_threads"
+   ],
+   "repaired": false,
+   "repair_rounds": 2,
+   "left_after_repair": [
+    "overlapping_threads"
+   ],
+   "delivered": "fallback"
+  },
+  {
+   "lesson": "water_sciences_laboratory_tutorial_glass_a98109",
+   "viewer": "priya",
+   "family": "F1 structure",
+   "fault": "out-of-order threads",
+   "expected": "overlapping_threads",
+   "detected": true,
+   "codes": [
+    "overlapping_threads"
+   ],
+   "repaired": true,
+   "repair_rounds": 1,
+   "left_after_repair": [],
+   "delivered": "repaired cut"
+  },
+  {
+   "lesson": "water_sciences_laboratory_tutorial_glass_a98109",
+   "viewer": "priya",
+   "family": "F1 structure",
+   "fault": "empty cut",
+   "expected": "empty_cut",
+   "detected": true,
+   "codes": [
+    "empty_cut"
+   ],
+   "repaired": true,
+   "repair_rounds": 1,
+   "left_after_repair": [],
+   "delivered": "repaired cut"
+  },
+  {
+   "lesson": "water_sciences_laboratory_tutorial_glass_a98109",
+   "viewer": "priya",
+   "family": "F2 sentence",
+   "fault": "ends mid-sentence (early)",
+   "expected": "cut_mid_sentence",
+   "detected": true,
+   "codes": [
+    "cut_mid_sentence"
+   ],
+   "repaired": true,
+   "repair_rounds": 1,
+   "left_after_repair": [],
+   "delivered": "repaired cut"
+  },
+  {
+   "lesson": "water_sciences_laboratory_tutorial_glass_a98109",
+   "viewer": "priya",
+   "family": "F2 sentence",
+   "fault": "ends mid-sentence (middle)",
+   "expected": "cut_mid_sentence",
+   "detected": true,
+   "codes": [
+    "cut_mid_sentence"
+   ],
+   "repaired": true,
+   "repair_rounds": 1,
+   "left_after_repair": [],
+   "delivered": "repaired cut"
+  },
+  {
+   "lesson": "water_sciences_laboratory_tutorial_glass_a98109",
+   "viewer": "priya",
+   "family": "F2 sentence",
+   "fault": "ends mid-sentence (late)",
+   "expected": "cut_mid_sentence",
+   "detected": true,
+   "codes": [
+    "cut_mid_sentence"
+   ],
+   "repaired": true,
+   "repair_rounds": 1,
+   "left_after_repair": [],
+   "delivered": "repaired cut"
+  },
+  {
+   "lesson": "water_sciences_laboratory_tutorial_glass_a98109",
+   "viewer": "priya",
+   "family": "F3 factuality",
+   "fault": "quiz question not in the verified bank",
+   "expected": "quiz_unsupported",
+   "detected": true,
+   "codes": [
+    "quiz_unsupported"
+   ],
+   "repaired": false,
+   "repair_rounds": 2,
+   "left_after_repair": [
+    "quiz_unsupported"
+   ],
+   "delivered": "fallback"
+  },
+  {
+   "lesson": "water_sciences_laboratory_tutorial_glass_a98109",
+   "viewer": "priya",
+   "family": "F4 prerequisite",
+   "fault": "prerequisite thread dropped",
+   "expected": "missing_prerequisite",
+   "detected": true,
+   "codes": [
+    "missing_prerequisite"
+   ],
+   "repaired": true,
+   "repair_rounds": 1,
+   "left_after_repair": [],
+   "delivered": "repaired cut"
+  },
+  {
+   "lesson": "water_sciences_laboratory_tutorial_glass_a98109",
+   "viewer": "priya",
+   "family": "F6 explainer",
+   "fault": "verified explainer missing",
+   "expected": "explainer_unavailable",
+   "detected": true,
+   "codes": [
+    "explainer_unavailable",
+    "explainer_unavailable"
+   ],
+   "repaired": true,
+   "repair_rounds": 1,
+   "left_after_repair": [],
+   "delivered": "repaired cut"
+  },
+  {
+   "lesson": "water_sciences_laboratory_tutorial_glass_a98109",
+   "viewer": "priya",
+   "family": "F8 completeness",
+   "fault": "empty quiz with a non-empty bank",
+   "expected": "quiz_missing",
+   "detected": true,
+   "codes": [
+    "quiz_missing"
+   ],
+   "repaired": false,
+   "repair_rounds": 2,
+   "left_after_repair": [
+    "quiz_missing"
+   ],
+   "delivered": "fallback"
+  },
+  {
+   "lesson": "water_sciences_laboratory_tutorial_glass_a98109",
+   "viewer": "family",
+   "family": "F1 structure",
+   "fault": "overlapping threads",
+   "expected": "overlapping_threads",
+   "detected": true,
+   "codes": [
+    "overlapping_threads"
+   ],
+   "repaired": false,
+   "repair_rounds": 2,
+   "left_after_repair": [
+    "overlapping_threads"
+   ],
+   "delivered": "fallback"
+  },
+  {
+   "lesson": "water_sciences_laboratory_tutorial_glass_a98109",
+   "viewer": "family",
+   "family": "F1 structure",
+   "fault": "out-of-order threads",
+   "expected": "overlapping_threads",
+   "detected": true,
+   "codes": [
+    "overlapping_threads"
+   ],
+   "repaired": true,
+   "repair_rounds": 1,
+   "left_after_repair": [],
+   "delivered": "repaired cut"
+  },
+  {
+   "lesson": "water_sciences_laboratory_tutorial_glass_a98109",
+   "viewer": "family",
+   "family": "F1 structure",
+   "fault": "empty cut",
+   "expected": "empty_cut",
+   "detected": true,
+   "codes": [
+    "empty_cut"
+   ],
+   "repaired": true,
+   "repair_rounds": 1,
+   "left_after_repair": [],
+   "delivered": "repaired cut"
+  },
+  {
+   "lesson": "water_sciences_laboratory_tutorial_glass_a98109",
+   "viewer": "family",
+   "family": "F2 sentence",
+   "fault": "ends mid-sentence (early)",
+   "expected": "cut_mid_sentence",
+   "detected": true,
+   "codes": [
+    "cut_mid_sentence"
+   ],
+   "repaired": true,
+   "repair_rounds": 1,
+   "left_after_repair": [],
+   "delivered": "repaired cut"
+  },
+  {
+   "lesson": "water_sciences_laboratory_tutorial_glass_a98109",
+   "viewer": "family",
+   "family": "F2 sentence",
+   "fault": "ends mid-sentence (middle)",
+   "expected": "cut_mid_sentence",
+   "detected": true,
+   "codes": [
+    "cut_mid_sentence"
+   ],
+   "repaired": true,
+   "repair_rounds": 1,
+   "left_after_repair": [],
+   "delivered": "repaired cut"
+  },
+  {
+   "lesson": "water_sciences_laboratory_tutorial_glass_a98109",
+   "viewer": "family",
+   "family": "F2 sentence",
+   "fault": "ends mid-sentence (late)",
+   "expected": "cut_mid_sentence",
+   "detected": true,
+   "codes": [
+    "cut_mid_sentence"
+   ],
+   "repaired": true,
+   "repair_rounds": 1,
+   "left_after_repair": [],
+   "delivered": "repaired cut"
+  },
+  {
+   "lesson": "water_sciences_laboratory_tutorial_glass_a98109",
+   "viewer": "family",
+   "family": "F3 factuality",
+   "fault": "quiz question not in the verified bank",
+   "expected": "quiz_unsupported",
+   "detected": true,
+   "codes": [
+    "quiz_unsupported"
+   ],
+   "repaired": false,
+   "repair_rounds": 2,
+   "left_after_repair": [
+    "quiz_unsupported"
+   ],
+   "delivered": "fallback"
+  },
+  {
+   "lesson": "water_sciences_laboratory_tutorial_glass_a98109",
+   "viewer": "family",
+   "family": "F5 safety",
+   "fault": "Guardian returns no masks",
+   "expected": "unmasked_hazard",
+   "detected": true,
+   "codes": [
+    "unmasked_hazard",
+    "unmasked_hazard",
+    "unmasked_hazard",
+    "unmasked_hazard"
+   ],
+   "repaired": true,
+   "repair_rounds": 1,
+   "left_after_repair": [],
+   "delivered": "repaired cut"
+  },
+  {
+   "lesson": "water_sciences_laboratory_tutorial_glass_a98109",
+   "viewer": "family",
+   "family": "F5 safety",
+   "fault": "masks end 1 s early",
+   "expected": "unmasked_hazard",
+   "detected": true,
+   "codes": [
+    "unmasked_hazard",
+    "unmasked_hazard",
+    "unmasked_hazard",
+    "unmasked_hazard"
+   ],
+   "repaired": true,
+   "repair_rounds": 1,
+   "left_after_repair": [],
+   "delivered": "repaired cut"
+  },
+  {
+   "lesson": "water_sciences_laboratory_tutorial_glass_a98109",
+   "viewer": "family",
+   "family": "F5 safety",
+   "fault": "mask on the wrong object",
+   "expected": "unmasked_hazard",
+   "detected": true,
+   "codes": [
+    "unmasked_hazard",
+    "unmasked_hazard",
+    "unmasked_hazard",
+    "unmasked_hazard"
+   ],
+   "repaired": true,
+   "repair_rounds": 1,
+   "left_after_repair": [],
+   "delivered": "repaired cut"
+  },
+  {
+   "lesson": "water_sciences_laboratory_tutorial_glass_a98109",
+   "viewer": "family",
+   "family": "F8 completeness",
+   "fault": "empty quiz with a non-empty bank",
+   "expected": "quiz_missing",
+   "detected": true,
+   "codes": [
+    "quiz_missing"
+   ],
+   "repaired": false,
+   "repair_rounds": 2,
+   "left_after_repair": [
+    "quiz_missing"
+   ],
+   "delivered": "fallback"
+  },
+  {
+   "lesson": "sql_explained_in_100_seconds_4462e4",
+   "viewer": "alex",
+   "family": "F1 structure",
+   "fault": "overlapping threads",
+   "expected": "overlapping_threads",
+   "detected": true,
+   "codes": [
+    "overlapping_threads"
+   ],
+   "repaired": false,
+   "repair_rounds": 2,
+   "left_after_repair": [
+    "overlapping_threads"
+   ],
+   "delivered": "fallback"
+  },
+  {
+   "lesson": "sql_explained_in_100_seconds_4462e4",
+   "viewer": "alex",
+   "family": "F1 structure",
+   "fault": "out-of-order threads",
+   "expected": "overlapping_threads",
+   "detected": true,
+   "codes": [
+    "overlapping_threads"
+   ],
+   "repaired": true,
+   "repair_rounds": 1,
+   "left_after_repair": [],
+   "delivered": "repaired cut"
+  },
+  {
+   "lesson": "sql_explained_in_100_seconds_4462e4",
+   "viewer": "alex",
+   "family": "F1 structure",
+   "fault": "empty cut",
+   "expected": "empty_cut",
+   "detected": true,
+   "codes": [
+    "empty_cut"
+   ],
+   "repaired": true,
+   "repair_rounds": 1,
+   "left_after_repair": [],
+   "delivered": "repaired cut"
+  },
+  {
+   "lesson": "sql_explained_in_100_seconds_4462e4",
+   "viewer": "alex",
+   "family": "F3 factuality",
+   "fault": "quiz question not in the verified bank",
+   "expected": "quiz_unsupported",
+   "detected": true,
+   "codes": [
+    "quiz_unsupported"
+   ],
+   "repaired": false,
+   "repair_rounds": 2,
+   "left_after_repair": [
+    "quiz_unsupported"
+   ],
+   "delivered": "fallback"
+  },
+  {
+   "lesson": "sql_explained_in_100_seconds_4462e4",
+   "viewer": "alex",
+   "family": "F8 completeness",
+   "fault": "empty quiz with a non-empty bank",
+   "expected": "quiz_missing",
+   "detected": true,
+   "codes": [
+    "quiz_missing"
+   ],
+   "repaired": false,
+   "repair_rounds": 2,
+   "left_after_repair": [
+    "quiz_missing"
+   ],
+   "delivered": "fallback"
+  },
+  {
+   "lesson": "sql_explained_in_100_seconds_4462e4",
+   "viewer": "priya",
+   "family": "F1 structure",
+   "fault": "overlapping threads",
+   "expected": "overlapping_threads",
+   "detected": true,
+   "codes": [
+    "overlapping_threads"
+   ],
+   "repaired": false,
+   "repair_rounds": 2,
+   "left_after_repair": [
+    "overlapping_threads"
+   ],
+   "delivered": "fallback"
+  },
+  {
+   "lesson": "sql_explained_in_100_seconds_4462e4",
+   "viewer": "priya",
+   "family": "F1 structure",
+   "fault": "out-of-order threads",
+   "expected": "overlapping_threads",
+   "detected": true,
+   "codes": [
+    "overlapping_threads"
+   ],
+   "repaired": true,
+   "repair_rounds": 1,
+   "left_after_repair": [],
+   "delivered": "repaired cut"
+  },
+  {
+   "lesson": "sql_explained_in_100_seconds_4462e4",
+   "viewer": "priya",
+   "family": "F1 structure",
+   "fault": "empty cut",
+   "expected": "empty_cut",
+   "detected": true,
+   "codes": [
+    "empty_cut"
+   ],
+   "repaired": true,
+   "repair_rounds": 1,
+   "left_after_repair": [],
+   "delivered": "repaired cut"
+  },
+  {
+   "lesson": "sql_explained_in_100_seconds_4462e4",
+   "viewer": "priya",
+   "family": "F3 factuality",
+   "fault": "quiz question not in the verified bank",
+   "expected": "quiz_unsupported",
+   "detected": true,
+   "codes": [
+    "quiz_unsupported"
+   ],
+   "repaired": false,
+   "repair_rounds": 2,
+   "left_after_repair": [
+    "quiz_unsupported"
+   ],
+   "delivered": "fallback"
+  },
+  {
+   "lesson": "sql_explained_in_100_seconds_4462e4",
+   "viewer": "priya",
+   "family": "F6 explainer",
+   "fault": "verified explainer missing",
+   "expected": "explainer_unavailable",
+   "detected": true,
+   "codes": [
+    "explainer_unavailable",
+    "explainer_unavailable",
+    "explainer_unavailable",
+    "explainer_unavailable",
+    "explainer_unavailable",
+    "explainer_unavailable",
+    "explainer_unavailable",
+    "explainer_unavailable",
+    "explainer_unavailable",
+    "explainer_unavailable",
+    "explainer_unavailable",
+    "explainer_unavailable",
+    "explainer_unavailable",
+    "explainer_unavailable",
+    "explainer_unavailable",
+    "explainer_unavailable",
+    "explainer_unavailable",
+    "explainer_unavailable",
+    "explainer_unavailable",
+    "explainer_unavailable",
+    "explainer_unavailable"
+   ],
+   "repaired": true,
+   "repair_rounds": 1,
+   "left_after_repair": [],
+   "delivered": "repaired cut"
+  },
+  {
+   "lesson": "sql_explained_in_100_seconds_4462e4",
+   "viewer": "priya",
+   "family": "F8 completeness",
+   "fault": "empty quiz with a non-empty bank",
+   "expected": "quiz_missing",
+   "detected": true,
+   "codes": [
+    "quiz_missing"
+   ],
+   "repaired": false,
+   "repair_rounds": 2,
+   "left_after_repair": [
+    "quiz_missing"
+   ],
+   "delivered": "fallback"
+  },
+  {
+   "lesson": "sql_explained_in_100_seconds_4462e4",
+   "viewer": "family",
+   "family": "F1 structure",
+   "fault": "overlapping threads",
+   "expected": "overlapping_threads",
+   "detected": true,
+   "codes": [
+    "overlapping_threads"
+   ],
+   "repaired": false,
+   "repair_rounds": 2,
+   "left_after_repair": [
+    "overlapping_threads"
+   ],
+   "delivered": "fallback"
+  },
+  {
+   "lesson": "sql_explained_in_100_seconds_4462e4",
+   "viewer": "family",
+   "family": "F1 structure",
+   "fault": "out-of-order threads",
+   "expected": "overlapping_threads",
+   "detected": true,
+   "codes": [
+    "overlapping_threads"
+   ],
+   "repaired": true,
+   "repair_rounds": 1,
+   "left_after_repair": [],
+   "delivered": "repaired cut"
+  },
+  {
+   "lesson": "sql_explained_in_100_seconds_4462e4",
+   "viewer": "family",
+   "family": "F1 structure",
+   "fault": "empty cut",
+   "expected": "empty_cut",
+   "detected": true,
+   "codes": [
+    "empty_cut"
+   ],
+   "repaired": true,
+   "repair_rounds": 1,
+   "left_after_repair": [],
+   "delivered": "repaired cut"
+  },
+  {
+   "lesson": "sql_explained_in_100_seconds_4462e4",
+   "viewer": "family",
+   "family": "F3 factuality",
+   "fault": "quiz question not in the verified bank",
+   "expected": "quiz_unsupported",
+   "detected": true,
+   "codes": [
+    "quiz_unsupported"
+   ],
+   "repaired": false,
+   "repair_rounds": 2,
+   "left_after_repair": [
+    "quiz_unsupported"
+   ],
+   "delivered": "fallback"
+  },
+  {
+   "lesson": "sql_explained_in_100_seconds_4462e4",
+   "viewer": "family",
+   "family": "F5 safety",
+   "fault": "Guardian returns no masks",
+   "expected": "unmasked_hazard",
+   "detected": true,
+   "codes": [
+    "unmasked_hazard",
+    "unmasked_hazard"
+   ],
+   "repaired": true,
+   "repair_rounds": 1,
+   "left_after_repair": [],
+   "delivered": "repaired cut"
+  },
+  {
+   "lesson": "sql_explained_in_100_seconds_4462e4",
+   "viewer": "family",
+   "family": "F5 safety",
+   "fault": "masks end 1 s early",
+   "expected": "unmasked_hazard",
+   "detected": true,
+   "codes": [
+    "unmasked_hazard",
+    "unmasked_hazard"
+   ],
+   "repaired": true,
+   "repair_rounds": 1,
+   "left_after_repair": [],
+   "delivered": "repaired cut"
+  },
+  {
+   "lesson": "sql_explained_in_100_seconds_4462e4",
+   "viewer": "family",
+   "family": "F8 completeness",
+   "fault": "empty quiz with a non-empty bank",
+   "expected": "quiz_missing",
+   "detected": true,
+   "codes": [
+    "quiz_missing"
+   ],
+   "repaired": false,
+   "repair_rounds": 2,
+   "left_after_repair": [
+    "quiz_missing"
+   ],
+   "delivered": "fallback"
+  }
+ ],
+ "not_applicable": [
+  {
+   "lesson": "acid_base_neutralization_d752a6",
+   "viewer": "alex",
+   "fault": "prerequisite thread dropped",
+   "why": "not applicable to this state"
+  },
+  {
+   "lesson": "acid_base_neutralization_d752a6",
+   "viewer": "alex",
+   "fault": "Guardian returns no masks",
+   "why": "not applicable to this state"
+  },
+  {
+   "lesson": "acid_base_neutralization_d752a6",
+   "viewer": "alex",
+   "fault": "masks end 1 s early",
+   "why": "not applicable to this state"
+  },
+  {
+   "lesson": "acid_base_neutralization_d752a6",
+   "viewer": "alex",
+   "fault": "mask on the wrong object",
+   "why": "not applicable to this state"
+  },
+  {
+   "lesson": "acid_base_neutralization_d752a6",
+   "viewer": "alex",
+   "fault": "verified explainer missing",
+   "why": "not applicable to this state"
+  },
+  {
+   "lesson": "acid_base_neutralization_d752a6",
+   "viewer": "priya",
+   "fault": "Guardian returns no masks",
+   "why": "not applicable to this state"
+  },
+  {
+   "lesson": "acid_base_neutralization_d752a6",
+   "viewer": "priya",
+   "fault": "masks end 1 s early",
+   "why": "not applicable to this state"
+  },
+  {
+   "lesson": "acid_base_neutralization_d752a6",
+   "viewer": "priya",
+   "fault": "mask on the wrong object",
+   "why": "not applicable to this state"
+  },
+  {
+   "lesson": "acid_base_neutralization_d752a6",
+   "viewer": "family",
+   "fault": "prerequisite thread dropped",
+   "why": "not applicable to this state"
+  },
+  {
+   "lesson": "acid_base_neutralization_d752a6",
+   "viewer": "family",
+   "fault": "verified explainer missing",
+   "why": "not applicable to this state"
+  },
+  {
+   "lesson": "water_sciences_laboratory_tutorial_glass_a98109",
+   "viewer": "alex",
+   "fault": "prerequisite thread dropped",
+   "why": "not applicable to this state"
+  },
+  {
+   "lesson": "water_sciences_laboratory_tutorial_glass_a98109",
+   "viewer": "alex",
+   "fault": "Guardian returns no masks",
+   "why": "not applicable to this state"
+  },
+  {
+   "lesson": "water_sciences_laboratory_tutorial_glass_a98109",
+   "viewer": "alex",
+   "fault": "masks end 1 s early",
+   "why": "not applicable to this state"
+  },
+  {
+   "lesson": "water_sciences_laboratory_tutorial_glass_a98109",
+   "viewer": "alex",
+   "fault": "mask on the wrong object",
+   "why": "not applicable to this state"
+  },
+  {
+   "lesson": "water_sciences_laboratory_tutorial_glass_a98109",
+   "viewer": "alex",
+   "fault": "verified explainer missing",
+   "why": "not applicable to this state"
+  },
+  {
+   "lesson": "water_sciences_laboratory_tutorial_glass_a98109",
+   "viewer": "priya",
+   "fault": "Guardian returns no masks",
+   "why": "not applicable to this state"
+  },
+  {
+   "lesson": "water_sciences_laboratory_tutorial_glass_a98109",
+   "viewer": "priya",
+   "fault": "masks end 1 s early",
+   "why": "not applicable to this state"
+  },
+  {
+   "lesson": "water_sciences_laboratory_tutorial_glass_a98109",
+   "viewer": "priya",
+   "fault": "mask on the wrong object",
+   "why": "not applicable to this state"
+  },
+  {
+   "lesson": "water_sciences_laboratory_tutorial_glass_a98109",
+   "viewer": "family",
+   "fault": "prerequisite thread dropped",
+   "why": "not applicable to this state"
+  },
+  {
+   "lesson": "water_sciences_laboratory_tutorial_glass_a98109",
+   "viewer": "family",
+   "fault": "verified explainer missing",
+   "why": "not applicable to this state"
+  },
+  {
+   "lesson": "sql_explained_in_100_seconds_4462e4",
+   "viewer": "alex",
+   "fault": "ends mid-sentence (early)",
+   "why": "not applicable to this state"
+  },
+  {
+   "lesson": "sql_explained_in_100_seconds_4462e4",
+   "viewer": "alex",
+   "fault": "ends mid-sentence (middle)",
+   "why": "not applicable to this state"
+  },
+  {
+   "lesson": "sql_explained_in_100_seconds_4462e4",
+   "viewer": "alex",
+   "fault": "ends mid-sentence (late)",
+   "why": "not applicable to this state"
+  },
+  {
+   "lesson": "sql_explained_in_100_seconds_4462e4",
+   "viewer": "alex",
+   "fault": "prerequisite thread dropped",
+   "why": "not applicable to this state"
+  },
+  {
+   "lesson": "sql_explained_in_100_seconds_4462e4",
+   "viewer": "alex",
+   "fault": "Guardian returns no masks",
+   "why": "not applicable to this state"
+  },
+  {
+   "lesson": "sql_explained_in_100_seconds_4462e4",
+   "viewer": "alex",
+   "fault": "masks end 1 s early",
+   "why": "not applicable to this state"
+  },
+  {
+   "lesson": "sql_explained_in_100_seconds_4462e4",
+   "viewer": "alex",
+   "fault": "mask on the wrong object",
+   "why": "not applicable to this state"
+  },
+  {
+   "lesson": "sql_explained_in_100_seconds_4462e4",
+   "viewer": "alex",
+   "fault": "verified explainer missing",
+   "why": "not applicable to this state"
+  },
+  {
+   "lesson": "sql_explained_in_100_seconds_4462e4",
+   "viewer": "priya",
+   "fault": "ends mid-sentence (early)",
+   "why": "not applicable to this state"
+  },
+  {
+   "lesson": "sql_explained_in_100_seconds_4462e4",
+   "viewer": "priya",
+   "fault": "ends mid-sentence (middle)",
+   "why": "not applicable to this state"
+  },
+  {
+   "lesson": "sql_explained_in_100_seconds_4462e4",
+   "viewer": "priya",
+   "fault": "ends mid-sentence (late)",
+   "why": "not applicable to this state"
+  },
+  {
+   "lesson": "sql_explained_in_100_seconds_4462e4",
+   "viewer": "priya",
+   "fault": "prerequisite thread dropped",
+   "why": "not applicable to this state"
+  },
+  {
+   "lesson": "sql_explained_in_100_seconds_4462e4",
+   "viewer": "priya",
+   "fault": "Guardian returns no masks",
+   "why": "not applicable to this state"
+  },
+  {
+   "lesson": "sql_explained_in_100_seconds_4462e4",
+   "viewer": "priya",
+   "fault": "masks end 1 s early",
+   "why": "not applicable to this state"
+  },
+  {
+   "lesson": "sql_explained_in_100_seconds_4462e4",
+   "viewer": "priya",
+   "fault": "mask on the wrong object",
+   "why": "not applicable to this state"
+  },
+  {
+   "lesson": "sql_explained_in_100_seconds_4462e4",
+   "viewer": "family",
+   "fault": "ends mid-sentence (early)",
+   "why": "not applicable to this state"
+  },
+  {
+   "lesson": "sql_explained_in_100_seconds_4462e4",
+   "viewer": "family",
+   "fault": "ends mid-sentence (middle)",
+   "why": "not applicable to this state"
+  },
+  {
+   "lesson": "sql_explained_in_100_seconds_4462e4",
+   "viewer": "family",
+   "fault": "ends mid-sentence (late)",
+   "why": "not applicable to this state"
+  },
+  {
+   "lesson": "sql_explained_in_100_seconds_4462e4",
+   "viewer": "family",
+   "fault": "prerequisite thread dropped",
+   "why": "not applicable to this state"
+  },
+  {
+   "lesson": "sql_explained_in_100_seconds_4462e4",
+   "viewer": "family",
+   "fault": "mask on the wrong object",
+   "why": "not applicable to this state"
+  },
+  {
+   "lesson": "sql_explained_in_100_seconds_4462e4",
+   "viewer": "family",
+   "fault": "verified explainer missing",
+   "why": "not applicable to this state"
+  }
+ ],
+ "summary": {
+  "controls": 9,
+  "controls_approved": 9,
+  "false_rejections": 0,
+  "faults_injected": 76,
+  "detected": 76,
+  "detection_rate": 1.0,
+  "repaired": 49,
+  "repair_rate": 0.645,
+  "per_family": {
+   "F1 structure": {
+    "injected": 27,
+    "detected": 27,
+    "repaired": 18
+   },
+   "F2 sentence": {
+    "injected": 18,
+    "detected": 18,
+    "repaired": 18
+   },
+   "F3 factuality": {
+    "injected": 9,
+    "detected": 9,
+    "repaired": 0
+   },
+   "F8 completeness": {
+    "injected": 9,
+    "detected": 9,
+    "repaired": 0
+   },
+   "F4 prerequisite": {
+    "injected": 2,
+    "detected": 2,
+    "repaired": 2
+   },
+   "F6 explainer": {
+    "injected": 3,
+    "detected": 3,
+    "repaired": 3
+   },
+   "F5 safety": {
+    "injected": 8,
+    "detected": 8,
+    "repaired": 8
+   }
+  },
+  "delivered_with_fault": 0,
+  "fallbacks": 27,
+  "codes_seen": {
+   "overlapping_threads": 18,
+   "empty_cut": 9,
+   "cut_mid_sentence": 18,
+   "quiz_unsupported": 9,
+   "quiz_missing": 9,
+   "missing_prerequisite": 4,
+   "explainer_unavailable": 26,
+   "unmasked_hazard": 19
+  }
+ },
+ "targets": {
+  "detection_rate": 1.0,
+  "min_faults": 20,
+  "false_rejections": 0,
+  "min_controls": 8
+ },
+ "seconds": 0.56
+}

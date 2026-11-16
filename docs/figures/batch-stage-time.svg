@@ -1,0 +1,394 @@
+<svg xmlns='http://www.w3.org/2000/svg' width='900' height='624' viewBox='0 0 900 624' font-family='Segoe UI, Helvetica, Arial, sans-serif'>
+<rect x='0.5' y='0.5' width='899' height='623' rx='14' fill='#ffffff' stroke='#e3e8ee'/>
+<text x='24' y='34' font-size='17' font-weight='700' fill='#1f2933'>Where perception time goes, per lesson</text>
+<text x='24' y='54' font-size='12.5' fill='#66788a'>seconds per pipeline stage (one laptop GPU, RTX 5070 8 GB)</text>
+<rect x='24' y='66' width='11' height='11' rx='2' fill='#ff9f78'/>
+<text x='39' y='76' font-size='11.5' fill='#1f2933'>probe</text>
+<rect x='82.0' y='66' width='11' height='11' rx='2' fill='#8b6cf6'/>
+<text x='97.0' y='76' font-size='11.5' fill='#1f2933'>shots</text>
+<rect x='140.0' y='66' width='11' height='11' rx='2' fill='#2bb79a'/>
+<text x='155.0' y='76' font-size='11.5' fill='#1f2933'>asr</text>
+<rect x='183.6' y='66' width='11' height='11' rx='2' fill='#4ea8de'/>
+<text x='198.6' y='76' font-size='11.5' fill='#1f2933'>ocr</text>
+<rect x='227.2' y='66' width='11' height='11' rx='2' fill='#f2b33d'/>
+<text x='242.2' y='76' font-size='11.5' fill='#1f2933'>ocr_reread</text>
+<rect x='321.2' y='66' width='11' height='11' rx='2' fill='#ef5d7a'/>
+<text x='336.2' y='76' font-size='11.5' fill='#1f2933'>board</text>
+<rect x='379.2' y='66' width='11' height='11' rx='2' fill='#7a8a99'/>
+<text x='394.2' y='76' font-size='11.5' fill='#1f2933'>elements</text>
+<rect x='458.79999999999995' y='66' width='11' height='11' rx='2' fill='#c06ad8'/>
+<text x='473.79999999999995' y='76' font-size='11.5' fill='#1f2933'>board_read</text>
+<rect x='552.8' y='66' width='11' height='11' rx='2' fill='#5cc2c9'/>
+<text x='567.8' y='76' font-size='11.5' fill='#1f2933'>vocab</text>
+<rect x='610.8' y='66' width='11' height='11' rx='2' fill='#9bbf4b'/>
+<text x='625.8' y='76' font-size='11.5' fill='#1f2933'>detect</text>
+<rect x='676.0' y='66' width='11' height='11' rx='2' fill='#ff9f78'/>
+<text x='691.0' y='76' font-size='11.5' fill='#1f2933'>track</text>
+<rect x='734.0' y='66' width='11' height='11' rx='2' fill='#8b6cf6'/>
+<text x='749.0' y='76' font-size='11.5' fill='#1f2933'>verify</text>
+<rect x='799.2' y='66' width='11' height='11' rx='2' fill='#2bb79a'/>
+<text x='814.2' y='76' font-size='11.5' fill='#1f2933'>segment_sam2</text>
+<rect x='907.6' y='66' width='11' height='11' rx='2' fill='#4ea8de'/>
+<text x='922.6' y='76' font-size='11.5' fill='#1f2933'>fuse</text>
+<rect x='958.4' y='66' width='11' height='11' rx='2' fill='#f2b33d'/>
+<text x='973.4' y='76' font-size='11.5' fill='#1f2933'>safety</text>
+<rect x='1023.6' y='66' width='11' height='11' rx='2' fill='#ef5d7a'/>
+<text x='1038.6' y='76' font-size='11.5' fill='#1f2933'>quiz</text>
+<line x1='230.0' y1='98' x2='230.0' y2='596' stroke='#e3e8ee'/>
+<text x='230.0' y='612' font-size='11' fill='#66788a' text-anchor='middle'>0s</text>
+<line x1='350.0' y1='98' x2='350.0' y2='596' stroke='#e3e8ee'/>
+<text x='350.0' y='612' font-size='11' fill='#66788a' text-anchor='middle'>1000s</text>
+<line x1='470.0' y1='98' x2='470.0' y2='596' stroke='#e3e8ee'/>
+<text x='470.0' y='612' font-size='11' fill='#66788a' text-anchor='middle'>2000s</text>
+<line x1='590.0' y1='98' x2='590.0' y2='596' stroke='#e3e8ee'/>
+<text x='590.0' y='612' font-size='11' fill='#66788a' text-anchor='middle'>3000s</text>
+<line x1='710.0' y1='98' x2='710.0' y2='596' stroke='#e3e8ee'/>
+<text x='710.0' y='612' font-size='11' fill='#66788a' text-anchor='middle'>4000s</text>
+<line x1='830.0' y1='98' x2='830.0' y2='596' stroke='#e3e8ee'/>
+<text x='830.0' y='612' font-size='11' fill='#66788a' text-anchor='middle'>5000s</text>
+<text x='220' y='117' font-size='11.5' fill='#1f2933' text-anchor='end'>Work in Physics Animation #short</text>
+<rect x='230.0' y='106' width='0.5' height='16' fill='#ff9f78'/>
+<rect x='230.5' y='106' width='0.6' height='16' fill='#8b6cf6'/>
+<rect x='231.1' y='106' width='0.5' height='16' fill='#2bb79a'/>
+<rect x='231.6' y='106' width='1.4' height='16' fill='#4ea8de'/>
+<rect x='233.0' y='106' width='0.8' height='16' fill='#f2b33d'/>
+<rect x='233.8' y='106' width='1.2' height='16' fill='#ef5d7a'/>
+<rect x='235.0' y='106' width='5.9' height='16' fill='#7a8a99'/>
+<rect x='240.9' y='106' width='224.7' height='16' fill='#c06ad8'/>
+<rect x='465.6' y='106' width='1.9' height='16' fill='#5cc2c9'/>
+<rect x='467.5' y='106' width='2.3' height='16' fill='#9bbf4b'/>
+<rect x='469.9' y='106' width='0.4' height='16' fill='#8b6cf6'/>
+<rect x='470.3' y='106' width='1.8' height='16' fill='#2bb79a'/>
+<rect x='472.1' y='106' width='4.6' height='16' fill='#4ea8de'/>
+<rect x='476.7' y='106' width='19.2' height='16' fill='#f2b33d'/>
+<text x='501.9' y='117' font-size='11' fill='#66788a'>2216s</text>
+<text x='220' y='139' font-size='11.5' fill='#1f2933' text-anchor='end'>Merge Sort Explained in 60 Secon</text>
+<rect x='230.0' y='128' width='0.5' height='16' fill='#ff9f78'/>
+<rect x='230.5' y='128' width='0.2' height='16' fill='#8b6cf6'/>
+<rect x='230.8' y='128' width='1.9' height='16' fill='#2bb79a'/>
+<rect x='232.6' y='128' width='1.3' height='16' fill='#4ea8de'/>
+<rect x='233.9' y='128' width='1.2' height='16' fill='#f2b33d'/>
+<rect x='235.2' y='128' width='3.3' height='16' fill='#ef5d7a'/>
+<rect x='238.5' y='128' width='18.1' height='16' fill='#7a8a99'/>
+<rect x='256.5' y='128' width='88.7' height='16' fill='#c06ad8'/>
+<rect x='345.3' y='128' width='2.5' height='16' fill='#5cc2c9'/>
+<rect x='347.8' y='128' width='1.4' height='16' fill='#9bbf4b'/>
+<rect x='349.2' y='128' width='0.4' height='16' fill='#8b6cf6'/>
+<rect x='349.6' y='128' width='0.2' height='16' fill='#2bb79a'/>
+<rect x='349.8' y='128' width='24.9' height='16' fill='#4ea8de'/>
+<rect x='374.7' y='128' width='6.5' height='16' fill='#f2b33d'/>
+<rect x='381.1' y='128' width='31.4' height='16' fill='#ef5d7a'/>
+<text x='418.5' y='139' font-size='11' fill='#66788a'>1521s</text>
+<text x='220' y='161' font-size='11.5' fill='#1f2933' text-anchor='end'>Convex Lens - Can a magnifying g</text>
+<rect x='230.0' y='150' width='2.4' height='16' fill='#ff9f78'/>
+<rect x='232.4' y='150' width='0.9' height='16' fill='#8b6cf6'/>
+<rect x='233.3' y='150' width='3.0' height='16' fill='#2bb79a'/>
+<rect x='236.4' y='150' width='2.9' height='16' fill='#4ea8de'/>
+<rect x='239.2' y='150' width='1.4' height='16' fill='#f2b33d'/>
+<rect x='240.6' y='150' width='2.7' height='16' fill='#ef5d7a'/>
+<rect x='243.3' y='150' width='52.9' height='16' fill='#7a8a99'/>
+<rect x='296.2' y='150' width='58.6' height='16' fill='#c06ad8'/>
+<rect x='354.8' y='150' width='3.1' height='16' fill='#5cc2c9'/>
+<rect x='357.9' y='150' width='4.4' height='16' fill='#9bbf4b'/>
+<rect x='362.3' y='150' width='0.4' height='16' fill='#ff9f78'/>
+<rect x='362.6' y='150' width='3.0' height='16' fill='#8b6cf6'/>
+<rect x='365.7' y='150' width='5.9' height='16' fill='#2bb79a'/>
+<rect x='371.6' y='150' width='5.8' height='16' fill='#4ea8de'/>
+<rect x='377.4' y='150' width='4.3' height='16' fill='#f2b33d'/>
+<rect x='381.7' y='150' width='22.3' height='16' fill='#ef5d7a'/>
+<text x='410.0' y='161' font-size='11' fill='#66788a'>1450s</text>
+<text x='220' y='183' font-size='11.5' fill='#1f2933' text-anchor='end'>Learn Python in 59.001 seconds</text>
+<rect x='230.0' y='172' width='0.9' height='16' fill='#ff9f78'/>
+<rect x='230.9' y='172' width='0.6' height='16' fill='#8b6cf6'/>
+<rect x='231.5' y='172' width='0.7' height='16' fill='#2bb79a'/>
+<rect x='232.2' y='172' width='6.1' height='16' fill='#4ea8de'/>
+<rect x='238.2' y='172' width='1.5' height='16' fill='#f2b33d'/>
+<rect x='239.8' y='172' width='1.5' height='16' fill='#ef5d7a'/>
+<rect x='241.3' y='172' width='2.4' height='16' fill='#7a8a99'/>
+<rect x='243.7' y='172' width='29.7' height='16' fill='#c06ad8'/>
+<rect x='273.5' y='172' width='2.1' height='16' fill='#5cc2c9'/>
+<rect x='275.6' y='172' width='4.3' height='16' fill='#9bbf4b'/>
+<rect x='279.9' y='172' width='6.8' height='16' fill='#8b6cf6'/>
+<rect x='286.8' y='172' width='41.3' height='16' fill='#4ea8de'/>
+<rect x='328.1' y='172' width='18.4' height='16' fill='#f2b33d'/>
+<rect x='346.5' y='172' width='35.7' height='16' fill='#ef5d7a'/>
+<text x='388.2' y='183' font-size='11' fill='#66788a'>1268s</text>
+<text x='220' y='205' font-size='11.5' fill='#1f2933' text-anchor='end'>Graspable Math Whiteboard for Ri</text>
+<rect x='230.0' y='194' width='0.9' height='16' fill='#ff9f78'/>
+<rect x='230.9' y='194' width='0.3' height='16' fill='#8b6cf6'/>
+<rect x='231.3' y='194' width='0.7' height='16' fill='#2bb79a'/>
+<rect x='232.0' y='194' width='3.7' height='16' fill='#4ea8de'/>
+<rect x='235.7' y='194' width='1.8' height='16' fill='#f2b33d'/>
+<rect x='237.5' y='194' width='5.8' height='16' fill='#ef5d7a'/>
+<rect x='243.3' y='194' width='18.7' height='16' fill='#7a8a99'/>
+<rect x='262.0' y='194' width='46.3' height='16' fill='#c06ad8'/>
+<rect x='308.3' y='194' width='1.7' height='16' fill='#5cc2c9'/>
+<rect x='310.1' y='194' width='2.1' height='16' fill='#9bbf4b'/>
+<rect x='312.2' y='194' width='0.6' height='16' fill='#8b6cf6'/>
+<rect x='313.0' y='194' width='8.6' height='16' fill='#4ea8de'/>
+<rect x='321.6' y='194' width='25.2' height='16' fill='#f2b33d'/>
+<rect x='346.8' y='194' width='6.1' height='16' fill='#ef5d7a'/>
+<text x='358.9' y='205' font-size='11' fill='#66788a'>1024s</text>
+<text x='220' y='227' font-size='11.5' fill='#1f2933' text-anchor='end'>What Is Opportunity Cost? | 60-S</text>
+<rect x='230.0' y='216' width='1.0' height='16' fill='#ff9f78'/>
+<rect x='231.0' y='216' width='0.5' height='16' fill='#8b6cf6'/>
+<rect x='231.4' y='216' width='0.7' height='16' fill='#2bb79a'/>
+<rect x='232.1' y='216' width='1.4' height='16' fill='#4ea8de'/>
+<rect x='233.5' y='216' width='0.6' height='16' fill='#f2b33d'/>
+<rect x='234.2' y='216' width='0.6' height='16' fill='#ef5d7a'/>
+<rect x='234.8' y='216' width='3.3' height='16' fill='#7a8a99'/>
+<rect x='238.1' y='216' width='38.3' height='16' fill='#c06ad8'/>
+<rect x='276.5' y='216' width='2.6' height='16' fill='#5cc2c9'/>
+<rect x='279.1' y='216' width='2.3' height='16' fill='#9bbf4b'/>
+<rect x='281.4' y='216' width='2.2' height='16' fill='#8b6cf6'/>
+<rect x='283.6' y='216' width='0.3' height='16' fill='#2bb79a'/>
+<rect x='283.8' y='216' width='10.3' height='16' fill='#4ea8de'/>
+<rect x='294.1' y='216' width='17.2' height='16' fill='#f2b33d'/>
+<rect x='311.3' y='216' width='36.6' height='16' fill='#ef5d7a'/>
+<text x='354.0' y='227' font-size='11' fill='#66788a'>983s</text>
+<text x='220' y='249' font-size='11.5' fill='#1f2933' text-anchor='end'>Mathematical Tools Handwritten S</text>
+<rect x='230.0' y='238' width='0.6' height='16' fill='#ff9f78'/>
+<rect x='230.6' y='238' width='1.0' height='16' fill='#8b6cf6'/>
+<rect x='231.6' y='238' width='0.7' height='16' fill='#2bb79a'/>
+<rect x='232.3' y='238' width='4.2' height='16' fill='#4ea8de'/>
+<rect x='236.5' y='238' width='2.3' height='16' fill='#f2b33d'/>
+<rect x='238.7' y='238' width='1.1' height='16' fill='#ef5d7a'/>
+<rect x='239.8' y='238' width='10.8' height='16' fill='#7a8a99'/>
+<rect x='250.5' y='238' width='50.1' height='16' fill='#c06ad8'/>
+<rect x='300.6' y='238' width='2.3' height='16' fill='#5cc2c9'/>
+<rect x='302.9' y='238' width='5.3' height='16' fill='#9bbf4b'/>
+<rect x='308.1' y='238' width='0.7' height='16' fill='#ff9f78'/>
+<rect x='308.9' y='238' width='8.2' height='16' fill='#8b6cf6'/>
+<rect x='317.1' y='238' width='0.2' height='16' fill='#2bb79a'/>
+<rect x='317.3' y='238' width='5.1' height='16' fill='#4ea8de'/>
+<rect x='322.4' y='238' width='4.8' height='16' fill='#f2b33d'/>
+<text x='333.1' y='249' font-size='11' fill='#66788a'>809s</text>
+<text x='220' y='271' font-size='11.5' fill='#1f2933' text-anchor='end'>Folding the AM-GM Inequality V (</text>
+<rect x='230.0' y='260' width='0.5' height='16' fill='#ff9f78'/>
+<rect x='230.5' y='260' width='0.6' height='16' fill='#8b6cf6'/>
+<rect x='231.2' y='260' width='0.6' height='16' fill='#2bb79a'/>
+<rect x='231.7' y='260' width='1.5' height='16' fill='#4ea8de'/>
+<rect x='233.2' y='260' width='0.6' height='16' fill='#f2b33d'/>
+<rect x='233.9' y='260' width='1.1' height='16' fill='#ef5d7a'/>
+<rect x='234.9' y='260' width='24.5' height='16' fill='#7a8a99'/>
+<rect x='259.5' y='260' width='36.7' height='16' fill='#c06ad8'/>
+<rect x='296.1' y='260' width='2.0' height='16' fill='#5cc2c9'/>
+<rect x='298.1' y='260' width='2.2' height='16' fill='#9bbf4b'/>
+<rect x='300.4' y='260' width='2.3' height='16' fill='#8b6cf6'/>
+<rect x='302.8' y='260' width='3.5' height='16' fill='#4ea8de'/>
+<rect x='306.3' y='260' width='16.9' height='16' fill='#f2b33d'/>
+<text x='329.2' y='271' font-size='11' fill='#66788a'>777s</text>
+<text x='220' y='293' font-size='11.5' fill='#1f2933' text-anchor='end'>Linear Regression Animation || M</text>
+<rect x='230.0' y='282' width='0.6' height='16' fill='#ff9f78'/>
+<rect x='230.6' y='282' width='1.2' height='16' fill='#8b6cf6'/>
+<rect x='231.8' y='282' width='0.7' height='16' fill='#2bb79a'/>
+<rect x='232.5' y='282' width='1.9' height='16' fill='#4ea8de'/>
+<rect x='234.4' y='282' width='0.6' height='16' fill='#f2b33d'/>
+<rect x='235.0' y='282' width='0.9' height='16' fill='#ef5d7a'/>
+<rect x='235.9' y='282' width='5.0' height='16' fill='#7a8a99'/>
+<rect x='240.8' y='282' width='19.7' height='16' fill='#c06ad8'/>
+<rect x='260.5' y='282' width='1.6' height='16' fill='#5cc2c9'/>
+<rect x='262.1' y='282' width='7.5' height='16' fill='#9bbf4b'/>
+<rect x='269.8' y='282' width='2.9' height='16' fill='#8b6cf6'/>
+<rect x='272.7' y='282' width='0.2' height='16' fill='#2bb79a'/>
+<rect x='272.9' y='282' width='5.8' height='16' fill='#4ea8de'/>
+<rect x='278.7' y='282' width='3.6' height='16' fill='#f2b33d'/>
+<rect x='282.3' y='282' width='32.4' height='16' fill='#ef5d7a'/>
+<text x='320.7' y='293' font-size='11' fill='#66788a'>706s</text>
+<text x='220' y='315' font-size='11.5' fill='#1f2933' text-anchor='end'>Chalkboard Geometry: Bisect Angl</text>
+<rect x='230.0' y='304' width='0.5' height='16' fill='#ff9f78'/>
+<rect x='230.7' y='304' width='0.7' height='16' fill='#2bb79a'/>
+<rect x='231.5' y='304' width='0.5' height='16' fill='#4ea8de'/>
+<rect x='231.9' y='304' width='1.3' height='16' fill='#ef5d7a'/>
+<rect x='233.2' y='304' width='6.2' height='16' fill='#7a8a99'/>
+<rect x='239.4' y='304' width='44.9' height='16' fill='#c06ad8'/>
+<rect x='284.3' y='304' width='3.9' height='16' fill='#5cc2c9'/>
+<rect x='288.3' y='304' width='1.5' height='16' fill='#9bbf4b'/>
+<rect x='289.9' y='304' width='2.9' height='16' fill='#8b6cf6'/>
+<rect x='292.8' y='304' width='0.3' height='16' fill='#2bb79a'/>
+<rect x='293.1' y='304' width='4.0' height='16' fill='#4ea8de'/>
+<rect x='297.0' y='304' width='3.3' height='16' fill='#f2b33d'/>
+<rect x='300.3' y='304' width='10.4' height='16' fill='#ef5d7a'/>
+<text x='316.7' y='315' font-size='11' fill='#66788a'>672s</text>
+<text x='220' y='337' font-size='11.5' fill='#1f2933' text-anchor='end'>Sample of one of my Lightboard C</text>
+<rect x='230.0' y='326' width='0.8' height='16' fill='#ff9f78'/>
+<rect x='230.8' y='326' width='0.6' height='16' fill='#8b6cf6'/>
+<rect x='231.3' y='326' width='0.6' height='16' fill='#2bb79a'/>
+<rect x='232.0' y='326' width='2.3' height='16' fill='#4ea8de'/>
+<rect x='234.2' y='326' width='2.1' height='16' fill='#f2b33d'/>
+<rect x='236.3' y='326' width='1.0' height='16' fill='#ef5d7a'/>
+<rect x='237.3' y='326' width='1.2' height='16' fill='#7a8a99'/>
+<rect x='238.5' y='326' width='9.7' height='16' fill='#c06ad8'/>
+<rect x='248.2' y='326' width='2.0' height='16' fill='#5cc2c9'/>
+<rect x='250.2' y='326' width='1.5' height='16' fill='#9bbf4b'/>
+<rect x='251.7' y='326' width='0.6' height='16' fill='#8b6cf6'/>
+<rect x='252.4' y='326' width='4.2' height='16' fill='#4ea8de'/>
+<rect x='256.6' y='326' width='6.4' height='16' fill='#f2b33d'/>
+<rect x='263.0' y='326' width='15.6' height='16' fill='#ef5d7a'/>
+<text x='284.5' y='337' font-size='11' fill='#66788a'>404s</text>
+<text x='220' y='359' font-size='11.5' fill='#1f2933' text-anchor='end'>Demonstration: Precipitation Rea</text>
+<rect x='230.0' y='348' width='1.0' height='16' fill='#ff9f78'/>
+<rect x='231.0' y='348' width='0.5' height='16' fill='#8b6cf6'/>
+<rect x='231.5' y='348' width='0.4' height='16' fill='#2bb79a'/>
+<rect x='231.9' y='348' width='1.0' height='16' fill='#4ea8de'/>
+<rect x='232.9' y='348' width='1.7' height='16' fill='#f2b33d'/>
+<rect x='234.6' y='348' width='0.7' height='16' fill='#ef5d7a'/>
+<rect x='235.3' y='348' width='2.2' height='16' fill='#7a8a99'/>
+<rect x='237.5' y='348' width='14.9' height='16' fill='#c06ad8'/>
+<rect x='252.4' y='348' width='1.6' height='16' fill='#5cc2c9'/>
+<rect x='254.0' y='348' width='4.7' height='16' fill='#9bbf4b'/>
+<rect x='258.6' y='348' width='0.5' height='16' fill='#ff9f78'/>
+<rect x='259.1' y='348' width='2.7' height='16' fill='#8b6cf6'/>
+<rect x='261.9' y='348' width='5.6' height='16' fill='#2bb79a'/>
+<rect x='267.5' y='348' width='4.9' height='16' fill='#4ea8de'/>
+<rect x='272.4' y='348' width='3.1' height='16' fill='#f2b33d'/>
+<text x='281.5' y='359' font-size='11' fill='#66788a'>379s</text>
+<text x='220' y='381' font-size='11.5' fill='#1f2933' text-anchor='end'>The Chain Fountain</text>
+<rect x='230.0' y='370' width='0.9' height='16' fill='#ff9f78'/>
+<rect x='230.9' y='370' width='0.4' height='16' fill='#8b6cf6'/>
+<rect x='231.3' y='370' width='0.6' height='16' fill='#2bb79a'/>
+<rect x='231.9' y='370' width='0.8' height='16' fill='#4ea8de'/>
+<rect x='232.7' y='370' width='0.5' height='16' fill='#ef5d7a'/>
+<rect x='233.2' y='370' width='1.0' height='16' fill='#7a8a99'/>
+<rect x='234.1' y='370' width='8.5' height='16' fill='#c06ad8'/>
+<rect x='242.6' y='370' width='5.1' height='16' fill='#5cc2c9'/>
+<rect x='247.7' y='370' width='1.3' height='16' fill='#9bbf4b'/>
+<rect x='249.1' y='370' width='0.5' height='16' fill='#8b6cf6'/>
+<rect x='249.7' y='370' width='4.0' height='16' fill='#2bb79a'/>
+<rect x='253.7' y='370' width='2.4' height='16' fill='#4ea8de'/>
+<rect x='256.1' y='370' width='2.7' height='16' fill='#f2b33d'/>
+<rect x='258.8' y='370' width='13.6' height='16' fill='#ef5d7a'/>
+<text x='278.4' y='381' font-size='11' fill='#66788a'>354s</text>
+<text x='220' y='403' font-size='11.5' fill='#1f2933' text-anchor='end'>Insertion Sort Visualization</text>
+<rect x='230.0' y='392' width='0.6' height='16' fill='#ff9f78'/>
+<rect x='230.6' y='392' width='0.6' height='16' fill='#8b6cf6'/>
+<rect x='231.2' y='392' width='0.6' height='16' fill='#2bb79a'/>
+<rect x='231.8' y='392' width='1.0' height='16' fill='#4ea8de'/>
+<rect x='232.9' y='392' width='0.3' height='16' fill='#ef5d7a'/>
+<rect x='233.1' y='392' width='2.1' height='16' fill='#7a8a99'/>
+<rect x='235.3' y='392' width='16.4' height='16' fill='#c06ad8'/>
+<rect x='251.6' y='392' width='1.5' height='16' fill='#5cc2c9'/>
+<rect x='253.1' y='392' width='1.2' height='16' fill='#9bbf4b'/>
+<rect x='254.4' y='392' width='0.5' height='16' fill='#8b6cf6'/>
+<rect x='254.8' y='392' width='0.2' height='16' fill='#2bb79a'/>
+<rect x='255.0' y='392' width='2.8' height='16' fill='#4ea8de'/>
+<rect x='257.8' y='392' width='9.2' height='16' fill='#f2b33d'/>
+<text x='273.0' y='403' font-size='11' fill='#66788a'>309s</text>
+<text x='220' y='425' font-size='11.5' fill='#1f2933' text-anchor='end'>A 30 second short proof of the P</text>
+<rect x='230.0' y='414' width='0.4' height='16' fill='#ff9f78'/>
+<rect x='230.4' y='414' width='0.5' height='16' fill='#8b6cf6'/>
+<rect x='230.9' y='414' width='0.5' height='16' fill='#2bb79a'/>
+<rect x='231.4' y='414' width='1.0' height='16' fill='#4ea8de'/>
+<rect x='232.4' y='414' width='1.0' height='16' fill='#f2b33d'/>
+<rect x='233.4' y='414' width='0.7' height='16' fill='#ef5d7a'/>
+<rect x='234.1' y='414' width='4.2' height='16' fill='#7a8a99'/>
+<rect x='238.2' y='414' width='12.6' height='16' fill='#c06ad8'/>
+<rect x='250.9' y='414' width='1.6' height='16' fill='#5cc2c9'/>
+<rect x='252.4' y='414' width='2.1' height='16' fill='#9bbf4b'/>
+<rect x='254.6' y='414' width='3.5' height='16' fill='#8b6cf6'/>
+<rect x='258.1' y='414' width='1.6' height='16' fill='#2bb79a'/>
+<rect x='259.8' y='414' width='4.7' height='16' fill='#4ea8de'/>
+<rect x='264.5' y='414' width='3.1' height='16' fill='#f2b33d'/>
+<text x='273.6' y='425' font-size='11' fill='#66788a'>313s</text>
+<text x='220' y='447' font-size='11.5' fill='#1f2933' text-anchor='end'>Queue Data Structure Animation</text>
+<rect x='230.0' y='436' width='0.3' height='16' fill='#ff9f78'/>
+<rect x='230.3' y='436' width='0.5' height='16' fill='#8b6cf6'/>
+<rect x='230.9' y='436' width='0.3' height='16' fill='#2bb79a'/>
+<rect x='231.2' y='436' width='1.1' height='16' fill='#4ea8de'/>
+<rect x='232.3' y='436' width='0.9' height='16' fill='#f2b33d'/>
+<rect x='233.2' y='436' width='0.4' height='16' fill='#ef5d7a'/>
+<rect x='233.6' y='436' width='2.0' height='16' fill='#7a8a99'/>
+<rect x='235.6' y='436' width='19.2' height='16' fill='#c06ad8'/>
+<rect x='254.8' y='436' width='1.6' height='16' fill='#5cc2c9'/>
+<rect x='256.4' y='436' width='1.2' height='16' fill='#9bbf4b'/>
+<rect x='257.5' y='436' width='0.5' height='16' fill='#8b6cf6'/>
+<rect x='258.0' y='436' width='0.2' height='16' fill='#2bb79a'/>
+<rect x='258.2' y='436' width='4.2' height='16' fill='#4ea8de'/>
+<rect x='262.4' y='436' width='3.3' height='16' fill='#f2b33d'/>
+<text x='271.7' y='447' font-size='11' fill='#66788a'>298s</text>
+<text x='220' y='469' font-size='11.5' fill='#1f2933' text-anchor='end'>Chalkboard Geometry: Perpendicul</text>
+<rect x='230.0' y='458' width='0.3' height='16' fill='#ff9f78'/>
+<rect x='230.5' y='458' width='0.7' height='16' fill='#2bb79a'/>
+<rect x='231.2' y='458' width='0.3' height='16' fill='#4ea8de'/>
+<rect x='231.5' y='458' width='0.6' height='16' fill='#f2b33d'/>
+<rect x='232.1' y='458' width='0.6' height='16' fill='#ef5d7a'/>
+<rect x='232.7' y='458' width='1.2' height='16' fill='#7a8a99'/>
+<rect x='233.8' y='458' width='7.3' height='16' fill='#c06ad8'/>
+<rect x='241.1' y='458' width='5.2' height='16' fill='#5cc2c9'/>
+<rect x='246.3' y='458' width='1.2' height='16' fill='#9bbf4b'/>
+<rect x='247.5' y='458' width='3.1' height='16' fill='#8b6cf6'/>
+<rect x='250.8' y='458' width='1.7' height='16' fill='#4ea8de'/>
+<rect x='252.6' y='458' width='5.6' height='16' fill='#f2b33d'/>
+<rect x='258.2' y='458' width='6.3' height='16' fill='#ef5d7a'/>
+<text x='270.5' y='469' font-size='11' fill='#66788a'>288s</text>
+<text x='220' y='491' font-size='11.5' fill='#1f2933' text-anchor='end'>Chalkboard Geometry: Construct P</text>
+<rect x='230.0' y='480' width='0.3' height='16' fill='#ff9f78'/>
+<rect x='230.5' y='480' width='0.5' height='16' fill='#2bb79a'/>
+<rect x='231.0' y='480' width='0.4' height='16' fill='#4ea8de'/>
+<rect x='231.4' y='480' width='0.9' height='16' fill='#ef5d7a'/>
+<rect x='232.3' y='480' width='2.1' height='16' fill='#7a8a99'/>
+<rect x='234.4' y='480' width='15.2' height='16' fill='#c06ad8'/>
+<rect x='249.5' y='480' width='2.2' height='16' fill='#5cc2c9'/>
+<rect x='251.8' y='480' width='1.8' height='16' fill='#9bbf4b'/>
+<rect x='253.6' y='480' width='3.1' height='16' fill='#8b6cf6'/>
+<rect x='257.0' y='480' width='1.7' height='16' fill='#4ea8de'/>
+<rect x='258.6' y='480' width='1.8' height='16' fill='#f2b33d'/>
+<text x='266.4' y='491' font-size='11' fill='#66788a'>254s</text>
+<text x='220' y='513' font-size='11.5' fill='#1f2933' text-anchor='end'>Parts of Circle | Easy to Rememb</text>
+<rect x='230.0' y='502' width='0.5' height='16' fill='#ff9f78'/>
+<rect x='230.5' y='502' width='0.8' height='16' fill='#8b6cf6'/>
+<rect x='231.3' y='502' width='0.6' height='16' fill='#2bb79a'/>
+<rect x='231.9' y='502' width='1.1' height='16' fill='#4ea8de'/>
+<rect x='233.0' y='502' width='0.5' height='16' fill='#f2b33d'/>
+<rect x='233.5' y='502' width='0.9' height='16' fill='#ef5d7a'/>
+<rect x='234.4' y='502' width='3.3' height='16' fill='#7a8a99'/>
+<rect x='237.6' y='502' width='8.1' height='16' fill='#c06ad8'/>
+<rect x='245.7' y='502' width='1.6' height='16' fill='#5cc2c9'/>
+<rect x='247.4' y='502' width='3.7' height='16' fill='#9bbf4b'/>
+<rect x='251.1' y='502' width='0.3' height='16' fill='#ff9f78'/>
+<rect x='251.4' y='502' width='3.1' height='16' fill='#8b6cf6'/>
+<rect x='254.5' y='502' width='0.2' height='16' fill='#2bb79a'/>
+<rect x='254.7' y='502' width='3.3' height='16' fill='#4ea8de'/>
+<rect x='257.9' y='502' width='2.2' height='16' fill='#f2b33d'/>
+<text x='266.2' y='513' font-size='11' fill='#66788a'>252s</text>
+<text x='220' y='535' font-size='11.5' fill='#1f2933' text-anchor='end'>Stack Animations | Data Structur</text>
+<rect x='230.0' y='524' width='0.4' height='16' fill='#ff9f78'/>
+<rect x='230.4' y='524' width='0.5' height='16' fill='#8b6cf6'/>
+<rect x='230.9' y='524' width='0.5' height='16' fill='#2bb79a'/>
+<rect x='231.4' y='524' width='0.9' height='16' fill='#4ea8de'/>
+<rect x='232.2' y='524' width='0.4' height='16' fill='#ef5d7a'/>
+<rect x='232.6' y='524' width='2.9' height='16' fill='#7a8a99'/>
+<rect x='235.6' y='524' width='9.5' height='16' fill='#c06ad8'/>
+<rect x='245.1' y='524' width='1.0' height='16' fill='#5cc2c9'/>
+<rect x='246.1' y='524' width='1.5' height='16' fill='#9bbf4b'/>
+<rect x='247.7' y='524' width='1.6' height='16' fill='#8b6cf6'/>
+<rect x='249.4' y='524' width='2.7' height='16' fill='#4ea8de'/>
+<rect x='252.1' y='524' width='2.2' height='16' fill='#f2b33d'/>
+<text x='260.3' y='535' font-size='11' fill='#66788a'>202s</text>
+<text x='220' y='557' font-size='11.5' fill='#1f2933' text-anchor='end'>Diaphragm - 3D Medical Animation</text>
+<rect x='230.0' y='546' width='0.3' height='16' fill='#ff9f78'/>
+<rect x='230.4' y='546' width='0.7' height='16' fill='#2bb79a'/>
+<rect x='231.1' y='546' width='0.3' height='16' fill='#4ea8de'/>
+<rect x='231.3' y='546' width='0.5' height='16' fill='#ef5d7a'/>
+<rect x='231.8' y='546' width='0.6' height='16' fill='#7a8a99'/>
+<rect x='232.4' y='546' width='5.7' height='16' fill='#c06ad8'/>
+<rect x='238.2' y='546' width='1.8' height='16' fill='#5cc2c9'/>
+<rect x='240.0' y='546' width='1.1' height='16' fill='#9bbf4b'/>
+<rect x='241.2' y='546' width='3.0' height='16' fill='#8b6cf6'/>
+<rect x='244.1' y='546' width='0.2' height='16' fill='#2bb79a'/>
+<rect x='244.4' y='546' width='0.3' height='16' fill='#4ea8de'/>
+<text x='250.7' y='557' font-size='11' fill='#66788a'>122s</text>
+<text x='220' y='579' font-size='11.5' fill='#1f2933' text-anchor='end'>How the Ear Works -  3D Medical </text>
+<rect x='230.0' y='568' width='0.4' height='16' fill='#ff9f78'/>
+<rect x='230.6' y='568' width='0.5' height='16' fill='#2bb79a'/>
+<rect x='231.1' y='568' width='0.3' height='16' fill='#4ea8de'/>
+<rect x='231.4' y='568' width='0.8' height='16' fill='#f2b33d'/>
+<rect x='232.2' y='568' width='0.3' height='16' fill='#ef5d7a'/>
+<rect x='232.5' y='568' width='0.3' height='16' fill='#7a8a99'/>
+<rect x='232.7' y='568' width='1.8' height='16' fill='#5cc2c9'/>
+<rect x='234.5' y='568' width='2.1' height='16' fill='#9bbf4b'/>
+<rect x='236.7' y='568' width='5.6' height='16' fill='#8b6cf6'/>
+<rect x='242.3' y='568' width='0.2' height='16' fill='#2bb79a'/>
+<rect x='242.5' y='568' width='2.0' height='16' fill='#4ea8de'/>
+<text x='250.5' y='579' font-size='11' fill='#66788a'>121s</text>
+</svg>

@@ -1061,6 +1061,14 @@
           "pattern": "^o_\\d{3,}$",
           "type": "string"
         },
+        "parts": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/ObjectPart"
+          },
+          "maxItems": 16,
+          "type": "array"
+        },
         "phrase_source": {
           "enum": [
             "hazard_class",
@@ -1878,6 +1886,76 @@
         "verification"
       ],
       "title": "ObjectInstance",
+      "type": "object"
+    },
+    "ObjectPart": {
+      "additionalProperties": false,
+      "description": "A named part of a diagram or drawing (petals, roots, one arrow, a table row), segmented at `t`. Its mask and\nbox are picture-relative at that moment; the player maps them onto the element's current box.",
+      "properties": {
+        "bbox": {
+          "maxItems": 4,
+          "minItems": 4,
+          "prefixItems": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "number"
+            },
+            {
+              "type": "number"
+            },
+            {
+              "type": "number"
+            }
+          ],
+          "type": "array"
+        },
+        "description": {
+          "anyOf": [
+            {
+              "maxLength": 300,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "label": {
+          "maxLength": 80,
+          "minLength": 1,
+          "type": "string"
+        },
+        "mask": {
+          "anyOf": [
+            {
+              "pattern": "^rle:\\d+x\\d+:\\S+$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "part_id": {
+          "pattern": "^p_\\d{2}$",
+          "type": "string"
+        },
+        "t": {
+          "minimum": 0.0,
+          "type": "number"
+        }
+      },
+      "required": [
+        "part_id",
+        "label",
+        "t",
+        "bbox"
+      ],
+      "title": "ObjectPart",
       "type": "object"
     },
     "ObjectSummary": {

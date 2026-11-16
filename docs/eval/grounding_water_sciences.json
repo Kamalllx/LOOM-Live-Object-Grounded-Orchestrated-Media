@@ -1,0 +1,337 @@
+{
+ "suite": "grounding",
+ "lesson": "water_sciences",
+ "machine": {
+  "platform": "Windows-11-10.0.26200-SP0",
+  "python": "3.12.16",
+  "loom": "2.0.0.dev0",
+  "gpu": "NVIDIA GeForce RTX 5070 Laptop GPU, 8151 MiB, 610.88",
+  "git_commit": "19455621802d919cecc6e3c4bfa43a88c382b405"
+ },
+ "video_id": "water_sciences_laboratory_tutorial_glass_a98109",
+ "tier": "boxes (T0)",
+ "vocab": "given (22 phrases incl. hazard classes)",
+ "hazard_truth": [
+  [
+   61.9,
+   66.77
+  ],
+  [
+   71.46,
+   74.0
+  ]
+ ],
+ "samples": {
+  "base": 195,
+  "hazard_window": 60,
+  "fps": 2.0
+ },
+ "proposals": 236,
+ "ablation": {
+  "detector_only": {
+   "tracks": 33,
+   "hazard_tracks": 13,
+   "hazard_labels": [
+    "broken glass",
+    "cigarette",
+    "needle",
+    "open flame",
+    "syringe"
+   ],
+   "precision": 0.392,
+   "recall": 1.0,
+   "f1": 0.563,
+   "false_block_s": 11.5,
+   "missed_s": 0.0,
+   "hazard_intervals": [
+    [
+     4.0,
+     10.0
+    ],
+    [
+     61.25,
+     67.25
+    ],
+    [
+     70.95,
+     74.5
+    ],
+    [
+     92.12,
+     93.38
+    ],
+    [
+     95.38,
+     97.38
+    ]
+   ],
+   "object_recall_proxy": 1.0
+  },
+  "+siglip_generic": {
+   "tracks": 10,
+   "hazard_tracks": 0,
+   "hazard_labels": [],
+   "precision": 0.0,
+   "recall": 0.0,
+   "f1": 0.0,
+   "false_block_s": 0.0,
+   "missed_s": 7.4,
+   "hazard_intervals": [],
+   "object_recall_proxy": 1.0
+  },
+  "+siglip_lookalikes": {
+   "tracks": 10,
+   "hazard_tracks": 0,
+   "hazard_labels": [],
+   "precision": 0.0,
+   "recall": 0.0,
+   "f1": 0.0,
+   "false_block_s": 0.0,
+   "missed_s": 7.4,
+   "hazard_intervals": [],
+   "object_recall_proxy": 1.0
+  },
+  "+vlm (LOOM)": {
+   "tracks": 10,
+   "hazard_tracks": 0,
+   "hazard_labels": [],
+   "precision": 0.0,
+   "recall": 0.0,
+   "f1": 0.0,
+   "false_block_s": 0.0,
+   "missed_s": 7.4,
+   "hazard_intervals": [],
+   "object_recall_proxy": 1.0
+  }
+ },
+ "targets": {
+  "precision": 0.95,
+  "recall": 0.9,
+  "false_block_s": 2.0,
+  "missed_s": 0.5
+ },
+ "pass": false,
+ "timings_s": {
+  "detect_base": 87.3,
+  "detect_hazard_windows": 20.3,
+  "crops": 15.3,
+  "siglip_generic": 6.8,
+  "siglip_lookalikes": 2.9,
+  "vlm_hazard_check": 53.1,
+  "total": 185.7
+ },
+ "unloaded_before_torch": [
+  "gemma4:e4b"
+ ],
+ "note": "object_recall_proxy = label-level per segment; box/mask IoU waits for keyframe annotation",
+ "hazard_tracks": [
+  {
+   "phrase": "broken glass",
+   "shot": "sh_01",
+   "start": 4.5,
+   "end": 5.5,
+   "score": 0.3787,
+   "samples": 3,
+   "siglip_generic": -0.5926,
+   "siglip_lookalike": -0.5066,
+   "vlm": "rejected",
+   "better_label": "text overlay on a blurred laboratory background",
+   "kept": [
+    false,
+    "verified"
+   ]
+  },
+  {
+   "phrase": "broken glass",
+   "shot": "sh_01",
+   "start": 9.0,
+   "end": 9.5,
+   "score": 0.3986,
+   "samples": 1,
+   "siglip_generic": -0.9178,
+   "siglip_lookalike": -0.9502,
+   "vlm": "rejected",
+   "better_label": "blurry background scene",
+   "kept": [
+    false,
+    "verified"
+   ]
+  },
+  {
+   "phrase": "open flame",
+   "shot": "sh_01",
+   "start": 4.75,
+   "end": 9.25,
+   "score": 0.4354,
+   "samples": 17,
+   "siglip_generic": -0.151,
+   "siglip_lookalike": -0.1402,
+   "vlm": "rejected",
+   "better_label": "water drop with leaf",
+   "kept": [
+    false,
+    "verified"
+   ]
+  },
+  {
+   "phrase": "cigarette",
+   "shot": "sh_03",
+   "start": 61.75,
+   "end": 66.75,
+   "score": 0.3525,
+   "samples": 28,
+   "siglip_generic": -0.9737,
+   "siglip_lookalike": -0.9737,
+   "vlm": "rejected",
+   "better_label": "clear plastic tube or casing",
+   "kept": [
+    false,
+    "verified"
+   ]
+  },
+  {
+   "phrase": "needle",
+   "shot": "sh_03",
+   "start": 62.02,
+   "end": 65.02,
+   "score": 0.3671,
+   "samples": 6,
+   "siglip_generic": -0.8287,
+   "siglip_lookalike": -0.639,
+   "vlm": "rejected",
+   "better_label": "pipette",
+   "kept": [
+    false,
+    "verified"
+   ]
+  },
+  {
+   "phrase": "open flame",
+   "shot": "sh_03",
+   "start": 61.75,
+   "end": 66.75,
+   "score": 0.3876,
+   "samples": 19,
+   "siglip_generic": -0.9931,
+   "siglip_lookalike": -0.995,
+   "vlm": "rejected",
+   "better_label": "glass test tube",
+   "kept": [
+    false,
+    "verified"
+   ]
+  },
+  {
+   "phrase": "cigarette",
+   "shot": "sh_05",
+   "start": 71.45,
+   "end": 71.95,
+   "score": 0.3272,
+   "samples": 1,
+   "siglip_generic": -0.9846,
+   "siglip_lookalike": -0.9846,
+   "vlm": "rejected",
+   "better_label": "transparent plastic tube or pipette tip",
+   "kept": [
+    false,
+    "verified"
+   ]
+  },
+  {
+   "phrase": "needle",
+   "shot": "sh_05",
+   "start": 71.95,
+   "end": 72.45,
+   "score": 0.3339,
+   "samples": 1,
+   "siglip_generic": -0.9169,
+   "siglip_lookalike": -0.7821,
+   "vlm": "rejected",
+   "better_label": "pipette",
+   "kept": [
+    false,
+    "verified"
+   ]
+  },
+  {
+   "phrase": "open flame",
+   "shot": "sh_05",
+   "start": 71.45,
+   "end": 72.75,
+   "score": 0.3722,
+   "samples": 6,
+   "siglip_generic": -0.9875,
+   "siglip_lookalike": -0.9935,
+   "vlm": "rejected",
+   "better_label": "glass pipette",
+   "kept": [
+    false,
+    "verified"
+   ]
+  },
+  {
+   "phrase": "open flame",
+   "shot": "sh_05",
+   "start": 73.5,
+   "end": 74.0,
+   "score": 0.325,
+   "samples": 1,
+   "siglip_generic": -0.295,
+   "siglip_lookalike": -0.3995,
+   "vlm": "rejected",
+   "better_label": "motion blur or light streaks",
+   "kept": [
+    false,
+    "verified"
+   ]
+  },
+  {
+   "phrase": "syringe",
+   "shot": "sh_05",
+   "start": 72.45,
+   "end": 73.5,
+   "score": 0.3632,
+   "samples": 4,
+   "siglip_generic": -0.9064,
+   "siglip_lookalike": -0.9064,
+   "vlm": "rejected",
+   "better_label": "pipette",
+   "kept": [
+    false,
+    "verified"
+   ]
+  },
+  {
+   "phrase": "broken glass",
+   "shot": "sh_09",
+   "start": 92.62,
+   "end": 92.88,
+   "score": 0.3083,
+   "samples": 1,
+   "siglip_generic": -0.915,
+   "siglip_lookalike": -0.7467,
+   "vlm": "rejected",
+   "better_label": "hole in surface",
+   "kept": [
+    false,
+    "verified"
+   ]
+  },
+  {
+   "phrase": "broken glass",
+   "shot": "sh_10",
+   "start": 95.88,
+   "end": 96.88,
+   "score": 0.3063,
+   "samples": 2,
+   "siglip_generic": -0.7385,
+   "siglip_lookalike": -0.7755,
+   "vlm": "rejected",
+   "better_label": "hole in cardboard box",
+   "kept": [
+    false,
+    "verified"
+   ]
+  }
+ ]
+}

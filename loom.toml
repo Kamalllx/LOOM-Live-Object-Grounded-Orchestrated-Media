@@ -121,6 +121,7 @@ sandbox_memory_mb = 2048
 max_source_lines = 250
 tts = ["kokoro", "piper", "sapi"]
 voice = "af_heart"
+web_images = true                   # Wikimedia Commons pictures in explainers (the one network exception; off when LOOM_OFFLINE=1)
 
 [a2a]
 default_timeout_s = 30.0

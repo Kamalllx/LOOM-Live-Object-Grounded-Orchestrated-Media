@@ -10,11 +10,12 @@ An unverified clip is never served (fail closed).
 from __future__ import annotations
 
 import ast
-import logging
 import asyncio
 import hashlib
 import json
+import logging
 import os
+import re
 import shutil
 import subprocess
 import sys
@@ -92,6 +93,49 @@ class Verdict(Contract):
 
 class Verdicts(Contract):
     verdicts: list[Verdict]
+
+
+_META = re.compile(
+    r"\b(the|this) (video|clip|board|blackboard|whiteboard|screen|slide|teacher|presenter|narrator"
+    r"|lesson video)\b[^.]*?"
+    r"\b(shows?|showing|displays?|writes?|wrote|written|says|presents?|introduces|continues|mentions|appears|reads)\b"
+    r"|\bon (the )?(screen|board)\b|\bthe word\b|\bin (this|the) (video|clip)\b",
+    re.IGNORECASE,
+)
+
+
+_ABSENT = re.compile(r"(does ?n[o']t|do not|did not|never) (mention|describe|state|say|include|specify|show|discuss|"
+                     r"cover|provide|support|address|explain)|"
+                     r"not (mentioned|described|stated|in the evidence|covered|found)|"
+                     r"no (evidence|mention)|evidence (lacks|is silent)|absent from|"
+                     r"(describes|mentions|covers) [^.]{0,60}\bbut not\b", re.I)
+_WRONG = re.compile(r"incorrect|wrong|false|contradict|inaccura|invent|mislead|unsafe|not true|untrue|error|mistak|"
+                    r"hallucin|made up|fabricat|confus", re.I)
+
+
+def absence_only(reason: str) -> bool:
+    """A rejection whose only ground is that the lesson did not say it. The judge prompt forbids that ("NEVER mark a
+    claim false only because the evidence does not mention it"), but a mid-size judge still does it, most of all for
+    standard procedures (each step of a textbook construction); such verdicts are overruled, never ones that say the
+    claim is wrong."""
+    return bool(_ABSENT.search(reason or "")) and not _WRONG.search(reason or "")
+
+
+def not_teaching(lines: list[str]) -> dict[int, str]:
+    """Lines that do not teach, by index -> reason: narrating the video ("the video shows the word Photosynthesis")
+    instead of the topic, or saying an earlier line again. Checked before the judge (deterministic and free)."""
+    from difflib import SequenceMatcher
+
+    out: dict[int, str] = {}
+    seen: list[str] = []
+    for i, line in enumerate(lines):
+        norm = re.sub(r"[^a-z0-9 ]+", "", line.lower()).strip()
+        if _META.search(line):
+            out[i] = "describes the video instead of teaching the topic"
+        elif any(SequenceMatcher(None, norm, s).ratio() >= 0.75 for s in seen):
+            out[i] = "repeats an earlier line"
+        seen.append(norm)
+    return out
 
 
 class UnsafeCode(ValueError):
@@ -298,7 +342,7 @@ async def make_explainer(
                     payload,
                     ScenePlan,
                     params={"question": f"Explain {params['label']} step by step", "about": params["label"],
-                            "level": params["level"]},
+                            "level": params["level"], "length": "medium: 6 to 8 beats"},
                     priority="tap_explainer",
                     use_cache=attempt == 1 and not feedback,
                     timeout_s=240,
@@ -307,6 +351,12 @@ async def make_explainer(
             draft = Draft.model_construct(storyboard=plan.storyboard, code=compile_plan(plan))
         except LLMError as e:
             raise RuntimeError(f"brain unavailable: {e}") from e
+        meta = not_teaching(draft.storyboard)
+        if meta:
+            feedback = [f"'{draft.storyboard[i]}': {why}" for i, why in meta.items()]
+            log.warning("animator %s attempt %d: lines that do not teach: %s", cid, attempt, feedback)
+            error = ""
+            continue
         progress("gate", attempt)
         try:
             check_code(draft.code, 400)
@@ -329,7 +379,7 @@ async def make_explainer(
                     await llm.call(
                         "judge",
                         "claims_verify",
-                        {"evidence": ev, "claims": claims},
+                        {"lesson_topic": params["label"], "evidence": ev, "claims": claims},
                         Verdicts,
                         priority="tap_explainer",
                         timeout_s=120,
