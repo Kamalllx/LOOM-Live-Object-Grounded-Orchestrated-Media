@@ -1,6 +1,6 @@
 # LOOM Remake — Specification Pack
 
-**LOOM — Live, Object-grounded, Orchestrated Media.** One source video, a different *verified* cut for every viewer.
+**LOOM — Live, Object-Grounded, Orchestrated Media.** One source video, a different *verified* cut for every viewer.
 
 This folder is the blueprint for rebuilding LOOM from scratch, **fully local** (no GCP, no Groq, no Gemini, no
 cloud TTS). Every model runs on the developer laptop through **Ollama** (language + vision + safety + embeddings)

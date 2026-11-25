@@ -1,7 +1,7 @@
 [project]
 name = "loom"
 version = "2.0.0.dev0"
-description = "LOOM - Live, Object-grounded, Orchestrated Media (local-only remake)"
+description = "LOOM: Live, Object-Grounded, Orchestrated Media (local-only remake)"
 readme = "README.md"
 requires-python = ">=3.12,<3.13"
 dependencies = [

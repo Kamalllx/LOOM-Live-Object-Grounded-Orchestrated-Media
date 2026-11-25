@@ -22,7 +22,7 @@ from typing import Any
 log = logging.getLogger(__name__)
 
 COMMONS = "https://commons.wikimedia.org/w/api.php"
-USER_AGENT = "LOOM-explainer/1.0 (local educational video tool; https://github.com/Kamalllx/GenAI_7thSem)"
+USER_AGENT = "LOOM-explainer/1.0 (local educational video tool; https://github.com/Kamalllx/LOOM-Live-Object-Grounded-Orchestrated-Media)"
 FREE = re.compile(r"(cc[- ]by|cc0|public domain|pd|gfdl|cc[- ]by[- ]sa)", re.IGNORECASE)
 MAX_LESSON, MAX_WEB = 4, 3
 

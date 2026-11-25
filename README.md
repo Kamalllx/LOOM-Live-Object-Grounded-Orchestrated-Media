@@ -4,7 +4,7 @@
 
 # L O O M
 
-### **L**ive · **O**bject-grounded · **O**rchestrated **M**edia
+### **L**ive · **O**bject-Grounded · **O**rchestrated **M**edia
 
 **One source video. A different, *verified* cut for every viewer. Every object in it is clickable, askable and explainable. Every model runs on your own laptop.**
 
@@ -47,7 +47,7 @@ Educational video is one-size-fits-all. A chemistry teacher records one lesson, 
 * a **parent watching with a child** must not see the broken-glass close-up,
 * nobody can **point at the thing on screen** and ask "what is that, and why does it matter?".
 
-**LOOM** (*Live, Object-grounded, Orchestrated Media*) watches a video **once**, builds a machine-readable understanding of it, and then
+**LOOM** (*Live, Object-Grounded, Orchestrated Media*) watches a video **once**, builds a machine-readable understanding of it, and then
 **weaves a personal, verified cut for each viewer**:
 
 | Idea | What LOOM does |
@@ -952,8 +952,8 @@ Screenshots of every video, the concepts and names LOOM built for each, and fail
 ### 13.2 Install
 
 ```powershell
-git clone https://github.com/Kamalllx/GenAI_7thSem.git
-cd GenAI_7thSem
+git clone https://github.com/Kamalllx/LOOM-Live-Object-Grounded-Orchestrated-Media.git
+cd LOOM-Live-Object-Grounded-Orchestrated-Media
 
 # 1. Python environment (all groups: dev, setup, demo, perception)
 uv sync --all-groups

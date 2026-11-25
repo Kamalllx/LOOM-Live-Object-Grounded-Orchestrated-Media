@@ -1,3 +1,3 @@
-"""LOOM - Live, Object-grounded, Orchestrated Media (local-only remake)."""
+"""LOOM: Live, Object-Grounded, Orchestrated Media (local-only remake)."""
 
 __version__ = "2.0.0.dev0"

@@ -1,6 +1,6 @@
 # LOOM remake — instructions for Claude Code
 
-LOOM (Live, Object-grounded, Orchestrated Media): one source video, a different **verified** cut per viewer.
+LOOM (Live, Object-Grounded, Orchestrated Media): one source video, a different **verified** cut per viewer.
 This folder is a ground-up rebuild. The spec pack in `spec/` is the source of truth — read the relevant spec file
 before working on any component, and keep code and spec in agreement (update the spec in the same change when
 reality differs, e.g. after the Stage 0 model spike).
