@@ -1,0 +1,20 @@
+\begin{tikzpicture}[scale=0.92, line cap=round, font=\small]
+\tikzset{ray/.style={thick, -{Stealth[length=2.2mm]}}, arc/.style={thick, dashed, black!60}, pt/.style={circle, fill=black, inner sep=1.15pt}}
+\draw[ray] (-2.367,-1.106) -- (-0.592,2.700);
+\draw[ray] (-2.367,-1.106) -- (1.817,-0.740);
+\draw[ray, very thick] (-2.367,-1.106) -- (2.367,2.209);
+\draw[arc] (0.687,-1.700) arc[start angle=-11.00, end angle=81.00, radius=3.111];
+\draw[arc] (0.955,0.759) arc[start angle=334.57, end angle=366.57, radius=2.222];
+\draw[arc] (1.726,1.152) arc[start angle=63.43, end angle=95.43, radius=2.222];
+\draw[thin] (-1.620,-1.041) arc[start angle=5.00, end angle=34.99, radius=0.75];
+\node[font=\scriptsize] at (-1.145,-0.661) {$29.99^\circ$};
+\draw[thin] (-1.507,-0.504) arc[start angle=34.99, end angle=65.00, radius=1.05];
+\node[font=\scriptsize] at (-1.338,0.120) {$30.00^\circ$};
+\node[pt, label={[font=\small]below left:$B$}] at (-2.367,-1.106) {};
+\node[pt, label={[font=\small]below right:$D$}] at (-1.052,1.713) {};
+\node[pt, label={[font=\small]above left:$E$}] at (0.732,-0.835) {};
+\node[pt, label={[font=\small]below right:$F$}] at (1.140,1.349) {};
+\node[font=\small, above] at (-0.592,2.700) {$A$};
+\node[font=\small, right] at (1.817,-0.740) {$C$};
+\node[font=\small, right] at (2.367,2.209) {bisector $BF$};
+\end{tikzpicture}

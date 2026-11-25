@@ -12,7 +12,7 @@
 ![no cloud](https://img.shields.io/badge/cloud%20APIs-none-ff5c7a?style=for-the-badge)
 ![python](https://img.shields.io/badge/python-3.12-7cc7ff?style=for-the-badge)
 ![gpu](https://img.shields.io/badge/GPU-RTX%205070%20·%208%20GB-c3a6ff?style=for-the-badge)
-![tests](https://img.shields.io/badge/tests-263%20passing-6ef2c4?style=for-the-badge)
+![tests](https://img.shields.io/badge/tests-265%20passing-6ef2c4?style=for-the-badge)
 ![critic](https://img.shields.io/badge/Critic%20fault%20detection-76%2F76-8b6cf6?style=for-the-badge)
 ![evaluated](https://img.shields.io/badge/evaluated%20on-30%20short%20lessons-ffd479?style=for-the-badge)
 ![protocol](https://img.shields.io/badge/agents-A2A%20JSON--RPC-ffb38a?style=for-the-badge)
@@ -812,7 +812,7 @@ Every request below asks a *different* question, so no answer comes from the cac
 
 ### 10.8 Software quality
 
-* **263 automated tests** (unit + contract + gateway + A2A), all passing; 
+* **265 automated tests** (unit + contract + gateway + A2A), all passing; 
 * data contracts exported as JSON Schema (24 schemas) and as TypeScript types;
 * path-traversal tests on the media route; determinism tests on embedding; regression tests for cut-boundary rounding;
 * `loom doctor` checks Python, CUDA, FFmpeg, NVENC, LaTeX, Ollama settings, every model (with a smoke call), weights, ports and disk.
@@ -954,7 +954,6 @@ Screenshots of every video, the concepts and names LOOM built for each, and fail
 ```powershell
 git clone https://github.com/Kamalllx/GenAI_7thSem.git
 cd GenAI_7thSem
-git checkout master
 
 # 1. Python environment (all groups: dev, setup, demo, perception)
 uv sync --all-groups
@@ -1002,22 +1001,45 @@ You can also paste a link into **Add a lesson** in the player and watch the stag
 3. Use **Ask** (grounded answer + jump), **Quiz me** (any topic), and the **Loom / Graph / Map / Library** tabs.
 4. Finish a quiz → **Save to my mastery graph** → **Watch again** to see the cut change.
 
-### 13.6 YouTube extension
+### 13.6 YouTube extension (v3.2.0)
 
-1. `uv run loom gateway` (must answer on `127.0.0.1:8000`).
-2. Chrome → `chrome://extensions` → **Developer mode** → **Load unpacked** → select the `extension/` folder.
-3. Open a processed lesson on YouTube (e.g. `https://www.youtube.com/watch?v=ZZO-v10h8tc`). After editing the extension, reload it **and refresh the YouTube tab**.
+The extension plays the **same** explainer player as the web app (3-D scenes and exact constructions, with the
+fact-checked narration panel). Its copy of the player is generated:
+
+```powershell
+uv run loom sync-extension     # copies static/scene.js + three.js + GSAP into extension/ (scene3d.js, vendor/)
+```
+
+**First install:** Chrome or Edge → `chrome://extensions` (`edge://extensions`) → **Developer mode** on →
+**Load unpacked** → pick the `extension/` folder.
+
+**Update after a `git pull` or an edit:** run `uv run loom sync-extension` (only needed when `static/scene.js` or the
+vendored libraries changed; harmless otherwise) → on the extensions page press the **reload** arrow on the LOOM card
+(or **Remove** + **Load unpacked** if the version shown is not 3.2.0) → **refresh the YouTube tab** (open tabs keep the
+old code until refreshed).
+
+**Use:** with `uv run loom gateway` running, open a processed lesson on YouTube (e.g.
+`https://www.youtube.com/watch?v=ZZO-v10h8tc`). The LOOM panel docks on the right (it takes the recommendations
+column's place; collapse it with the arrow to get them back). Pick a viewer → **Weave my cut**; hover / click objects;
+**Library** lists explainers with *3-D scene* / *Exact construction* badges.
 
 ### 13.7 Tests, evaluation and CLI reference
 
 ```powershell
-uv run pytest -q                       # 212 tests
+uv run pytest -q                       # 265 tests
 
 uv run loom eval spike                 # model spike (structured output, thinking, vision, latency, VRAM)
 uv run loom eval asr                   # WER on the demo lesson
 uv run loom eval ocr                   # recall / temporal IoU / formula exactness
 uv run loom eval vocab                 # object vocabulary recall
 uv run loom eval grounding             # detector → SigLIP2 → VLM ablation (hazard precision/recall in seconds)
+uv run python -m loom.eval.grounding_second   # the same on the Water Sciences lesson
+uv run python -m loom.eval.critic_faults      # Critic fault injection (3 lessons x 3 viewers)
+uv run python -m loom.eval.redaction_eval     # per-viewer redaction, time pads, ablation per decision rule
+uv run python -m loom.eval.latency_eval       # repeated-run latency (gateway must be running)
+uv run python -m loom.eval.factcheck_history  # explainer fact-check history + labelling sheet
+uv run python -m loom.eval.batch tests\eval_data\shorts_batch.txt   # batch over the 30 shorts (gateway running)
+uv run python -m loom.eval.report             # charts, docs/TESTING_REPORT.md, docs/PAPER_EVIDENCE.md, README blocks
 uv run loom contracts export           # regenerate JSON Schemas from the Pydantic contracts
 uv run loom prompts                    # validate every prompt file, list id@version
 ```
@@ -1030,6 +1052,7 @@ uv run loom prompts                    # validate every prompt file, list id@ver
 | `loom masks <video_id>…` | SAM 2.1 pixel masks |
 | `loom explain` | Render and store explainers |
 | `loom eval <suite>` | Reproducible evaluation suites |
+| `loom sync-extension` | Give the YouTube extension the current explainer player |
 
 ### 13.8 Key HTTP endpoints
 

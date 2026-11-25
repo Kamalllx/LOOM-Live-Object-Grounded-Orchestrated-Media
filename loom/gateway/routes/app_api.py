@@ -419,7 +419,7 @@ def explainers(video_id: str, state: GatewayState = Depends(get_state)) -> list[
     from loom.agents import knowledge as K
 
     g = S.load_graph(state.cfg.data_dir, video_id)
-    out = K.list_custom(state.store, video_id)
+    out = K.list_custom(state.store, video_id, state.cfg.data_dir)
     for cid, levels in S.verified_clips(state.store, g).items():
         c = next(iter(levels.values()))
         out.append({"key": f"concept_{cid}", "title": c.title, "question": f"Explain {c.title}", "clip_url": c.clip_url,

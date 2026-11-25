@@ -1,0 +1,15 @@
+*.aux
+*.log
+*.out
+build*.log
+hr*.log
+main.pdf
+main_hr.pdf
+standalone_build/
+docx_check/
+# generated paper outputs (kept outside git; build from main.tex / main_hr.tex)
+LOOM_*.pdf
+LOOM_*.docx
+~$*
+fig/docx-*.png
+fig/docx-ieee/

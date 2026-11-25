@@ -7,6 +7,7 @@ Items = spoken sentences, on-screen text, concepts, tracked objects (each with a
 
 from __future__ import annotations
 
+import contextlib
 import hashlib
 import json
 import logging
@@ -476,9 +477,25 @@ def _clip_row(row: Any, cached: bool) -> dict[str, Any]:
             "evidence": json.loads(row["evidence"]), "object_id": row["object_id"], "cached": cached}
 
 
-def list_custom(store: Store, video_id: str) -> list[dict[str, Any]]:
+def list_custom(store: Store, video_id: str, data: Path | None = None) -> list[dict[str, Any]]:
+    """The lesson's explainers, newest first. When the planner improves (EXPLAINER_VERSION), asking again makes a new
+    explainer for the same question; the library shows only the newest per question, object and length, so an older
+    version (say, a construction drawn as orbs) is not offered next to the one that replaced it. Rows are kept."""
     rows = store.query("SELECT * FROM custom_explainers WHERE video_id = ? ORDER BY created_at DESC", (video_id,))
-    return [_clip_row(r, cached=True) for r in rows]
+    out, seen = [], set()
+    for r in rows:
+        length, mode = "", ""
+        if data is not None and r["scene_ref"]:
+            p = data / r["scene_ref"].removeprefix("/")
+            with contextlib.suppress(OSError, ValueError):
+                sc = json.loads(p.read_text(encoding="utf-8"))
+                length, mode = sc.get("length", ""), sc.get("mode", "scene")
+        key = (re.sub(r"\W+", " ", (r["question"] or "").lower()).strip(), r["object_id"], length)
+        if key in seen:
+            continue
+        seen.add(key)
+        out.append({**_clip_row(r, cached=True), "length": length, "mode": mode})
+    return out
 
 
 # ---------------------------------------------------------------- quiz on any topic

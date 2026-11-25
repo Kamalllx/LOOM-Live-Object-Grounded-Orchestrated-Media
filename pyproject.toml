@@ -105,7 +105,7 @@ extend-immutable-calls = [
 "tests/**" = ["S", "PT011", "PT018"]
 "loom/eval/**" = ["ASYNC240"]  # CLI-only harness: blocking report I/O between model runs is fine
 # report prose, SVG and in-page JS templates: long literal strings read better unbroken
-"loom/eval/{report,charts,paper_figures,readme_shots,batch,batch_report}.py" = ["ASYNC240", "E501"]
+"loom/eval/{report,charts,paper_figures,readme_shots,batch,batch_report,extension_check}.py" = ["ASYNC240", "E501"]
 
 [tool.mypy]
 python_version = "3.12"

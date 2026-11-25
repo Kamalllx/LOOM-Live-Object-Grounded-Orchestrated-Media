@@ -2,18 +2,46 @@
   "manifest_version": 3,
   "name": "LOOM for YouTube",
   "short_name": "LOOM",
-  "version": "3.1.0",
-  "description": "Your verified cut of this lesson: exact-shape masks, tap any object to ask about it, fact-checked Manim explainers and quizzes, from your local LOOM gateway.",
+  "version": "3.2.0",
+  "description": "Your verified cut of this lesson: pixel masks, tap any object to ask about it, fact-checked 3-D explainers and exact geometry constructions, and quizzes, from your local LOOM gateway.",
   "minimum_chrome_version": "116",
-  "background": { "service_worker": "background.js" },
-  "permissions": ["storage"],
-  "host_permissions": ["http://127.0.0.1:8000/*"],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "permissions": [
+    "storage"
+  ],
+  "host_permissions": [
+    "http://127.0.0.1:8000/*"
+  ],
   "content_scripts": [
     {
-      "matches": ["https://www.youtube.com/*"],
-      "js": ["rle.js", "scene.js", "views.js", "content.js"],
-      "css": ["content.css"],
+      "matches": [
+        "https://www.youtube.com/*"
+      ],
+      "js": [
+        "rle.js",
+        "vendor/gsap.min.js",
+        "scene.js",
+        "views.js",
+        "content.js"
+      ],
+      "css": [
+        "content.css"
+      ],
       "run_at": "document_idle"
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "scene3d.js",
+        "vendor/three/*",
+        "vendor/three/addons/*/*"
+      ],
+      "matches": [
+        "https://www.youtube.com/*"
+      ]
     }
   ]
 }

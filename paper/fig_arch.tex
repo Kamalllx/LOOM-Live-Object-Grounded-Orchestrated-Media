@@ -1,0 +1,42 @@
+% LOOM architecture: layers as rows, layer names in a left column, arrows away from the labels.
+\begin{tikzpicture}[font=\scriptsize,
+  box/.style={draw=#1, fill=#1!8, rounded corners=2pt, align=center, minimum height=6.2mm, inner sep=1.5pt},
+  arr/.style={-{Stealth[length=1.5mm]}, lgrey, thick},
+  layer/.style={draw=lgrey!45, fill=lgrey!3, rounded corners=4pt},
+  lname/.style={font=\scriptsize\bfseries, text=lgrey, align=right, text width=1.9cm, anchor=east}]
+% layer frames (drawn first)
+\foreach \y/\h/\name in {0/0.95/{Clients}, -1.25/0.95/{Gateway\\(FastAPI, loopback)}, -2.95/1.85/{Agent mesh and\\A2A services}, -4.75/1.05/{Local models\\and data}} {
+  \draw[layer] (0,\y-\h/2) rectangle (17.9,\y+\h/2);
+  \node[lname] at (2.15,\y) {\name};
+}
+% clients
+\node[box=lsky, text width=3.1cm] (web) at (6.2,0) {Web player\\(masks, graph, map, runs)};
+\node[box=lsky, text width=3.1cm] (ext) at (10.0,0) {YouTube extension\\(Manifest V3)};
+\node[box=lsky, text width=3.1cm] (cli) at (13.8,0) {CLI\\(ingest, eval, sync)};
+% gateway
+\node[box=lmint, text width=3.0cm] (rest) at (4.3,-1.25) {REST + server-sent events};
+\node[box=lmint, text width=3.0cm] (a2a) at (8.0,-1.25) {A2A host\\(JSON-RPC)};
+\node[box=lmint, text width=3.0cm] (log) at (11.7,-1.25) {Event log (SQLite)};
+\node[box=lmint, text width=3.0cm] (gpu) at (15.4,-1.25) {GPU lease arbiter};
+% mesh
+\foreach \n/\x/\c in {cur/3.25/Curator, ped/4.95/Pedagogy, per/6.65/Personalizer, ass/8.35/Assessment, gua/10.05/Guardian} {
+  \node[box=lpeach, text width=1.45cm] (\n) at (\x,-2.65) {\c};
+}
+\node[box=lcoral, text width=1.45cm] (cri) at (11.75,-2.65) {\textbf{Critic}};
+\draw[arr] (cur) -- (ped); \draw[arr] (ped) -- (per); \draw[arr] (per) -- (ass); \draw[arr] (ass) -- (gua); \draw[arr] (gua) -- (cri);
+\draw[arr, lcoral] (cri.south) -- ++(0,-0.32) -| node[pos=0.25, below, text=lcoral, font=\tiny] {issues: force a mask or revise (3 passes), else fail-closed fallback} (per.south);
+% A2A services
+\node[box=llilac, text width=3.6cm] (ret) at (15.65,-2.3) {loom-retriever: grounded answers};
+\node[box=llilac, text width=3.6cm] (ani) at (15.65,-2.95) {loom-animator: scenes, fact-check};
+\node[box=llilac, text width=3.6cm] (qz) at (15.65,-3.6) {loom-assessment: topic quizzes};
+% models and data
+\node[box=lgrey, text width=4.6cm] (oll) at (5.0,-4.75) {Ollama roles: brain Qwen3.5 9B, judge Gemma 4 e4b, safety Granite Guardian, embed, OCR};
+\node[box=lgrey, text width=4.6cm] (torch) at (10.0,-4.75) {Torch worker: Whisper, Grounding DINO, SigLIP\,2, SAM\,2.1, board scanner};
+\node[box=lgrey, text width=4.6cm] (db) at (15.1,-4.75) {Lesson graphs, mask tracks (RLE), media, vector index, mastery};
+% between layers
+\draw[arr] (10.0,-0.48) -- (10.0,-0.77);
+\draw[arr] (7.0,-1.73) -- (7.0,-2.02);
+\draw[arr] (15.65,-1.73) -- (15.65,-1.95);
+\draw[arr] (8.35,-3.88) -- (8.35,-4.22);
+\draw[arr] (15.65,-3.88) -- (15.65,-4.22);
+\end{tikzpicture}

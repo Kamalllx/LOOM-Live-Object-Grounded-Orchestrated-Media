@@ -1,0 +1,46 @@
+\begin{tikzpicture}[font=\scriptsize]
+\tikzset{keep/.style={fill=black!30, draw=black!70}, condense/.style={pattern=north east lines, draw=black!70}, expand/.style={fill=black!65, draw=black}, skipped/.style={draw=black!45, dashed}, mask/.style={pattern=crosshatch, pattern color=black!80, draw=black}}
+\draw[black!15] (0.000,0.35) -- (0.000,-2.02); \node[black!60] at (0.000,-2.2) {0\,s};
+\draw[black!15] (1.833,0.35) -- (1.833,-2.02); \node[black!60] at (1.833,-2.2) {10\,s};
+\draw[black!15] (3.666,0.35) -- (3.666,-2.02); \node[black!60] at (3.666,-2.2) {20\,s};
+\draw[black!15] (5.500,0.35) -- (5.500,-2.02); \node[black!60] at (5.500,-2.2) {30\,s};
+\draw[black!15] (7.333,0.35) -- (7.333,-2.02); \node[black!60] at (7.333,-2.2) {40\,s};
+\draw[black!15] (9.166,0.35) -- (9.166,-2.02); \node[black!60] at (9.166,-2.2) {50\,s};
+\draw[black!15] (10.999,0.35) -- (10.999,-2.02); \node[black!60] at (10.999,-2.2) {60\,s};
+\node[anchor=east, align=right, font=\scriptsize\bfseries] at (-0.15,0.00) {Alex};
+\node[anchor=west, font=\tiny, black!70] at (12.75,0.00) {67\% of source, 0 explainers, 0 masks};
+\draw[skipped] (0.000,-0.17) rectangle (1.155,0.17);
+\draw[skipped] (2.713,-0.17) rectangle (5.120,0.17);
+\draw[condense] (1.155,-0.17) rectangle (2.510,0.17);
+\draw[condense] (5.120,-0.17) rectangle (7.338,0.17);
+\draw[condense] (7.338,-0.17) rectangle (8.675,0.17);
+\draw[condense] (8.878,-0.17) rectangle (10.766,0.17);
+\draw[condense] (10.766,-0.17) rectangle (12.469,0.17);
+\node[anchor=east, align=right, font=\scriptsize\bfseries] at (-0.15,-0.90) {Priya};
+\node[anchor=west, font=\tiny, black!70] at (12.75,-0.90) {100\% of source, 2 explainers, 0 masks};
+\draw[keep] (0.000,-1.07) rectangle (1.155,-0.73);
+\draw[keep] (1.155,-1.07) rectangle (2.713,-0.73);
+\draw[keep] (2.713,-1.07) rectangle (5.120,-0.73);
+\draw[expand] (5.120,-1.07) rectangle (7.338,-0.73);
+\draw[expand] (7.338,-1.07) rectangle (8.878,-0.73);
+\draw[keep] (8.878,-1.07) rectangle (10.766,-0.73);
+\draw[keep] (10.766,-1.07) rectangle (12.600,-0.73);
+\node[draw, fill=white, diamond, inner sep=1.4pt] at (7.338,-0.64) {};
+\node[draw, fill=white, diamond, inner sep=1.4pt] at (8.878,-0.64) {};
+\node[anchor=east, align=right, font=\scriptsize\bfseries] at (-0.15,-1.80) {Parent + child};
+\node[anchor=west, font=\tiny, black!70] at (12.75,-1.80) {98\% of source, 0 explainers, 1 mask};
+\draw[keep] (0.000,-1.97) rectangle (1.155,-1.63);
+\draw[condense] (1.155,-1.97) rectangle (2.510,-1.63);
+\draw[condense] (2.713,-1.97) rectangle (5.120,-1.63);
+\draw[keep] (5.120,-1.97) rectangle (7.338,-1.63);
+\draw[keep] (7.338,-1.97) rectangle (8.878,-1.63);
+\draw[keep] (8.878,-1.97) rectangle (10.766,-1.63);
+\draw[keep] (10.766,-1.97) rectangle (12.600,-1.63);
+\draw[mask] (8.713,-1.60) rectangle (10.785,-1.48);
+\draw[keep] (0.00,-2.85) rectangle (0.45,-2.65); \node[anchor=west] at (0.50,-2.75) {kept};
+\draw[condense] (2.00,-2.85) rectangle (2.45,-2.65); \node[anchor=west] at (2.50,-2.75) {condensed};
+\draw[expand] (4.00,-2.85) rectangle (4.45,-2.65); \node[anchor=west] at (4.50,-2.75) {expanded};
+\draw[skipped] (6.00,-2.85) rectangle (6.45,-2.65); \node[anchor=west] at (6.50,-2.75) {skipped};
+\draw[mask] (8.00,-2.85) rectangle (8.45,-2.65); \node[anchor=west] at (8.50,-2.75) {masked object};
+\node[draw, fill=white, diamond, inner sep=1.4pt] at (10.20,-2.75) {}; \node[anchor=west] at (10.40,-2.75) {explainer};
+\end{tikzpicture}

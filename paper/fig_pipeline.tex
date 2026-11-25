@@ -1,0 +1,35 @@
+% Perception pipeline (left to right, two rows) and the hazard-verification branch; black-and-white friendly.
+\begin{tikzpicture}[font=\scriptsize,
+  st/.style={draw, rounded corners=1.5pt, align=center, minimum height=7mm, text width=1.55cm, inner sep=1.5pt},
+  gpu/.style={st, fill=black!12},
+  llm/.style={st, fill=white, double},
+  arr/.style={-{Stealth[length=1.4mm]}, thick}]
+\node[st]  (probe) at (0,0)    {probe, shots};
+\node[gpu] (asr)   at (2.05,0) {ASR\\(Whisper)};
+\node[st]  (ocr)   at (4.1,0)  {OCR\\(RapidOCR)};
+\node[llm] (rer)   at (6.15,0) {OCR re-read\\(GLM-OCR)};
+\node[st]  (board) at (8.2,0)  {board memory\\(OpenCV)};
+\node[gpu] (elem)  at (10.25,0) {elements\\(SAM 2.1 grid)};
+\node[llm] (bread) at (12.3,0) {element reading\\(set-of-marks)};
+\node[llm] (voc)   at (0,-1.45)   {vocabulary\\(+12 hazards)};
+\node[gpu] (det)   at (2.05,-1.45) {detect\\(Grounding DINO)};
+\node[st]  (trk)   at (4.1,-1.45)  {track\\(IoU linker)};
+\node[gpu] (ver)   at (6.15,-1.45) {verify\\(SigLIP 2 / VLM)};
+\node[llm] (fuse)  at (8.2,-1.45)  {fuse concepts\\(brain)};
+\node[llm] (safe)  at (10.25,-1.45) {safety review\\(Guardian)};
+\node[llm] (quiz)  at (12.3,-1.45) {quiz bank\\(write + judge)};
+\node[gpu, text width=3.6cm] (sam) at (12.3,-2.95) {pixel masks (SAM 2.1, 20\,s windows)};
+\node[draw, thick, rounded corners=2pt, text width=3.3cm, align=center, minimum height=8mm] (graph) at (7.2,-2.95) {lesson graph + vector index};
+\foreach \a/\b in {probe/asr, asr/ocr, ocr/rer, rer/board, board/elem, elem/bread, voc/det, det/trk, trk/ver, ver/fuse, fuse/safe, safe/quiz} \draw[arr] (\a) -- (\b);
+\draw[arr] (bread.south) -- ++(0,-0.36) -| ($(voc.west)+(-0.35,0)$) -- (voc.west);
+\draw[arr] (quiz) -- (sam);
+\draw[arr] (sam) -- (graph);
+% verification detail
+\node[draw, dashed, rounded corners=2pt, align=left, text width=4.6cm, inner sep=3pt] (vd) at (2.3,-3.05)
+  {\textbf{Hazard verification:} a proposed hazard track is kept if SigLIP\,2 prefers it over look-alikes by 0.10 \textbf{or} the vision-language check confirms it; rejected tracks never get masks.};
+\draw[dashed] (ver.south) -- (vd.north -| ver.south);
+% legend
+\node[st, text width=0.5cm, minimum height=3mm] at (0.3,-4.25) {}; \node[anchor=west] at (0.65,-4.25) {CPU};
+\node[gpu, text width=0.5cm, minimum height=3mm] at (2.0,-4.25) {}; \node[anchor=west] at (2.35,-4.25) {GPU (torch)};
+\node[llm, text width=0.5cm, minimum height=3mm] at (4.3,-4.25) {}; \node[anchor=west] at (4.65,-4.25) {local language model (Ollama)};
+\end{tikzpicture}

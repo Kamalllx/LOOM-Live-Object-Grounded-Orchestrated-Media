@@ -6,7 +6,7 @@
 
 | Area | Result | Source |
 |---|---|---|
-| Automated tests | **263 passed**, 0 failed (263 collected) | `pytest` |
+| Automated tests | **265 passed**, 0 failed (265 collected) | `pytest` |
 | Short lessons through the full pipeline | **22 of 30** (15.0 min of video, 12 styles) | `eval/batch/summary.json` |
 | Elements tracked / named parts | 850 / 203 | batch |
 | Answer agent grounded in the video | 21 of 21 | batch |
@@ -21,7 +21,7 @@
 
 ## 1. Automated tests
 
-263 tests in 27 modules (3 files in `tests/contract`, 24 files in `tests/unit`); 263 pass. They run without models or a GPU (fakes for Ollama and the vision models).
+265 tests in 28 modules (3 files in `tests/contract`, 25 files in `tests/unit`); 265 pass. They run without models or a GPU (fakes for Ollama and the vision models).
 
 | Module | Tests |
 |---|---:|
@@ -52,6 +52,7 @@
 | `tests/unit/test_visuals.py` | 5 |
 | `tests/unit/test_runs.py` | 4 |
 | `tests/unit/test_spike.py` | 3 |
+| `tests/unit/test_extension_sync.py` | 2 |
 
 Added in this round (each one a regression found while testing): caption letters joined into one line, board elements re-identified across restarts, burned-in caption overlays, OCR boxes on the frame edge, concepts without text evidence, the exact-construction solver (angle bisector, perpendicular bisector, straight given angle, arcs too narrow to meet), and the fact-checker's absence-only overrule.
 

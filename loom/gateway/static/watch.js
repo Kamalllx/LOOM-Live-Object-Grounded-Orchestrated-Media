@@ -361,7 +361,7 @@ export function makeWatch(ctx) {
       const L = $("#lib");
       try {
         const items = await api(`/api/videos/${videoId}/explainers`);
-        L.innerHTML = items.length ? items.map((c, i) => `<button class="libitem" data-i="${i}"><b>${esc(c.title)}</b><span>${esc(c.question)}</span><em>${Math.round(c.duration_seconds)} s, fact-checked</em></button>`).join("") : `<p class="muted">No explainers yet. Ask for one with "Animate it".</p>`;
+        L.innerHTML = items.length ? items.map((c, i) => `<button class="libitem" data-i="${i}"><b>${esc(c.title)}</b><span>${esc(c.question)}</span><em>${Math.round(c.duration_seconds)} s, fact-checked${c.mode === "construction" ? " · exact construction" : c.scene_url ? " · 3-D scene" : ""}${c.length ? ` · ${{ short: "short", medium: "medium", deep: "in-depth" }[c.length] || c.length}` : ""}</em></button>`).join("") : `<p class="muted">No explainers yet. Ask for one with "Animate it".</p>`;
         $$(".libitem", L).forEach((b) => b.onclick = () => openClip(items[+b.dataset.i]));
       } catch (e) { L.textContent = e.message; }
     }

@@ -5,7 +5,8 @@ A Manifest V3 extension with plain JS and no build step. On a YouTube watch page
 - the LOOM panel (docked on the right, collapsible to a slim tab)
 - exact-shape masks drawn over the video
 - tracked objects you can click while the video plays
-- Ask, Animate it, Quiz me and a Library, with the same scene player as the web workspace
+- Ask, Animate it, Quiz me and a Library, with **the same 3-D explainer player as the web workspace** (scenes and
+  exact compass-and-straightedge constructions) and the fact-checked narration panel (a check or cross per line)
 - Loom agent activity and Critic scores, a concept Graph, and a similarity Map that highlights retrieved evidence
 - session quiz grading and a **Save to my mastery** action for the next cut
 
@@ -19,6 +20,8 @@ All data comes from your local LOOM gateway at `http://127.0.0.1:8000`.
 | `background.js` | Service worker. It is the only place that calls the gateway: content scripts send `{path, method, body}` and get back `{ok, status, data}`. Clips are returned as base64 when `as: "base64"` is set. It never caches responses. |
 | `rle.js` | Mask decoder (`rle:<h>x<w>:<counts>`). It exposes `self.LoomRle` to `content.js`. |
 | `views.js` | Renders the concept graph and similarity map for the YouTube panel. |
+| `scene3d.js`, `vendor/` | **Generated** by `uv run loom sync-extension`: the web player (`loom/gateway/static/scene.js`) with relative imports, three.js + addons, GSAP. Loaded on first use with `import(chrome.runtime.getURL("scene3d.js"))`. Do not edit by hand. |
+| `scene.js` | The older 2-D player, kept as a fallback when WebGL or the module cannot load. |
 | `content.js` | The panel, the overlay over the video, the click popover, the explainer modal and the YouTube SPA navigation handling. |
 | `content.css` | All styles, scoped to `#loom-root`, `#loom-modal`, `.loom-pop` and `.loom-layer`. |
 
@@ -29,12 +32,13 @@ All data comes from your local LOOM gateway at `http://127.0.0.1:8000`.
 3. Click **Load unpacked** and pick this `extension/` folder.
 4. Open a processed lesson, e.g. https://www.youtube.com/watch?v=ZZO-v10h8tc
 
-## Reload after edits
+## Update / reload after edits
 
-1. On `chrome://extensions`, click the circular **Reload** arrow on the LOOM card.
+0. If `loom/gateway/static/scene.js` or the vendored libraries changed (e.g. after a `git pull`): `uv run loom sync-extension`.
+1. On `chrome://extensions`, click the circular **Reload** arrow on the LOOM card (it should show version 3.2.0).
 2. **Refresh the YouTube tab.** Content scripts in tabs that were already open keep running the old code; until you refresh, LOOM shows "LOOM was reloaded".
 
-The web player and extension use the same gateway and lesson data, but the extension keeps its own YouTube-focused interface. The current extension is version 3.1.0; confirm that Chrome loaded the `remake/extension` folder rather than the older extension in the parent project.
+The web player and extension use the same gateway and lesson data, but the extension keeps its own YouTube-focused interface. The current extension is version 3.2.0; confirm that Chrome loaded the `remake/extension` folder rather than the older extension in the parent project.
 
 To debug the service worker, click "service worker" on the LOOM card. To debug the page, use the YouTube tab's DevTools console; LOOM only logs overlay warnings there.
 

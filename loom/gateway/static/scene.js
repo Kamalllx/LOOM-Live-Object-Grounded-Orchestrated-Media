@@ -1,8 +1,8 @@
 // LOOM explainer player: a scene plan + per-beat narration played as a cinematic 3-D scene (three.js + bloom).
 // Glossy orbs, glass cards and pictures appear, move, merge and light up while the narration plays; the camera
 // follows each beat. Geometry questions ("mode": "construction") are drawn instead as an exact compass-and-
-// straightedge construction on a slate. Exposes window.LoomScene.mount(host, scene) -> { stop }. (The YouTube extension keeps its own
-// 2-D copy in extension/scene.js.)
+// straightedge construction on a slate. Exposes window.LoomScene.mount(host, scene) -> { stop }. The YouTube extension
+// plays a generated copy of this file (`uv run loom sync-extension` -> extension/scene3d.js).
 import * as THREE from "three";
 import { EffectComposer } from "three/addons/postprocessing/EffectComposer.js";
 import { RenderPass } from "three/addons/postprocessing/RenderPass.js";

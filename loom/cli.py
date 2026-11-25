@@ -35,6 +35,15 @@ def version() -> None:
     typer.echo(__version__)
 
 
+@app.command("sync-extension")
+def sync_extension() -> None:
+    """Copy the web explainer player (3-D scenes, constructions) and its libraries into the YouTube extension."""
+    from loom.extension_sync import sync
+
+    files = sync()
+    typer.echo(f"extension updated: {len(files)} files (scene3d.js, vendor/). Reload it in chrome://extensions.")
+
+
 @app.command()
 def doctor(
     config: Path | None = ConfigOpt,
